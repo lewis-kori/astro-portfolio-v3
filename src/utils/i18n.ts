@@ -1,13 +1,13 @@
 /**
  * i18n (Internationalization) using Astro's built-in system
- * 
+ *
  * Astro handles routing automatically with the i18n config.
  * This file just provides translations for your content.
  */
 
 export const languages = {
   en: 'English',
-  es: 'Español', 
+  es: 'Español',
   fr: 'Français',
   de: 'Deutsch',
 };
@@ -20,7 +20,7 @@ export const ui = {
     'nav.about': 'About',
     'nav.projects': 'Projects',
     'nav.contact': 'Contact',
-    'hero.title': 'Hi, I\'m Lewis Kori',
+    'hero.title': "Hi, I'm Lewis Kori",
     'hero.subtitle': 'Full-stack Developer & Tech Enthusiast',
     'hero.cta': 'View My Work',
     'about.title': 'About Me',
@@ -72,7 +72,7 @@ export function getLangFromUrl(url: URL) {
 }
 
 export function useTranslations(lang: keyof typeof ui) {
-  return function t(key: keyof typeof ui[typeof defaultLang]) {
+  return function t(key: keyof (typeof ui)[typeof defaultLang]) {
     return ui[lang][key] || ui[defaultLang][key];
-  }
+  };
 }

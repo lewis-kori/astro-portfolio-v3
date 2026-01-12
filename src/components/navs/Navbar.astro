@@ -1,6 +1,5 @@
 ---
-import ThemeSwitcher from '../ThemeSwitcher.astro';
-import LanguageSwitcher from '../LanguageSwitcher.astro';
+import ThemeSwitcher from '@/components/shared/ThemeSwitcher.astro';
 
 const navLinks = [
   { name: 'Home', href: '/' },
@@ -10,17 +9,31 @@ const navLinks = [
 ];
 ---
 
-<header>
-  <nav class='flex items-center justify-between p-6 bg-background border-b border-border'>
-    <div class='text-2xl font-bold'>
-      <a href='/' class='text-foreground hover:text-primary transition-colors'>Lewis Astro Portfolio</a>
+<header class='sticky top-0 z-50 py-6'>
+  <nav class='flex items-center justify-between container-fluid'>
+    <div class='font-bold'>
+      <a
+        href='/'
+        class='text-foreground flex items-center justify-center hover:text-primary transition-colors'
+      >
+        <img
+          src='/logo.svg'
+          alt='/'
+          class='size-14 border inline-block rounded-full'
+        />
+      </a>
     </div>
-    <div class='flex items-center gap-6'>
+    <div
+      class='flex items-center backdrop-blur-2xl supports-backdrop-filter:bg-background/50 px-6 rounded-full gap-6'
+    >
       <ul class='flex space-x-6'>
         {
           navLinks.map((link) => (
             <li>
-              <a href={link.href} class='text-foreground hover:text-primary transition-colors'>
+              <a
+                href={link.href}
+                class='text-foreground hover:text-primary transition-colors'
+              >
                 {link.name}
               </a>
             </li>
@@ -28,7 +41,7 @@ const navLinks = [
         }
       </ul>
       <div class='flex items-center gap-2 border-l border-border pl-4'>
-        <LanguageSwitcher />
+        <!-- <LanguageSwitcher /> -->
         <ThemeSwitcher />
       </div>
     </div>

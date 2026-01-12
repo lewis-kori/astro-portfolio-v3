@@ -1,6 +1,8 @@
 ---
 import Navbar from '@/components/navs/Navbar.astro';
 import '../styles/global.css';
+import BackgroundArt from '@/components/shared/BackgroundArt.astro';
+
 const siteName = 'Lewis Astro Portfolio';
 const { title = `Home | ${siteName}` } = Astro.props;
 ---
@@ -13,7 +15,7 @@ const { title = `Home | ${siteName}` } = Astro.props;
     <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
     <meta name='generator' content={Astro.generator} />
     <title>{title}</title>
-    
+
     <!-- Initialize theme before page renders to prevent flash -->
     <script is:inline>
       const getStoredTheme = () => {
@@ -26,14 +28,17 @@ const { title = `Home | ${siteName}` } = Astro.props;
         }
         return 'light';
       };
-      
+
       const theme = getStoredTheme();
       document.documentElement.classList.remove('light', 'dark', 'retro');
       document.documentElement.classList.add(theme);
     </script>
   </head>
   <body>
+    <BackgroundArt />
     <Navbar />
-    <slot />
+    <main class='min-h-screen overflow-x-clip'>
+      <slot />
+    </main>
   </body>
 </html>
