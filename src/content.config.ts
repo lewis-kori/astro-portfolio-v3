@@ -1,9 +1,10 @@
 import { defineCollection, z } from 'astro:content';
-import { glob, file } from 'astro/loaders';
+import { file } from 'astro/loaders';
 
 const socials = defineCollection({
   loader: file('src/data/socials.json'),
   schema: z.object({
+    id: z.string(),
     name: z.string(),
     url: z.string().url(),
     icon: z.string(),
@@ -11,4 +12,20 @@ const socials = defineCollection({
   }),
 });
 
-export const collections = { socials };
+const about = defineCollection({
+  type: 'content',
+});
+
+const experience = defineCollection({
+  loader: file('src/data/experience.json'),
+  schema: z.object({
+    id: z.string(),
+    company: z.string(),
+    role: z.string(),
+    period: z.string(),
+    responsibilities: z.array(z.string()),
+    order: z.number(),
+  }),
+});
+
+export const collections = { socials, about, experience };
