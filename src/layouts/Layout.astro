@@ -6,13 +6,31 @@ const { title = `Home | ${siteName}` } = Astro.props;
 ---
 
 <!doctype html>
-<html lang='en'>
+<html lang='en' class='light'>
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width' />
     <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
     <meta name='generator' content={Astro.generator} />
     <title>{title}</title>
+    
+    <!-- Initialize theme before page renders to prevent flash -->
+    <script is:inline>
+      const getStoredTheme = () => {
+        if (typeof localStorage !== 'undefined') {
+          const stored = localStorage.getItem('theme');
+          if (stored) return stored;
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      };
+      
+      const theme = getStoredTheme();
+      document.documentElement.classList.remove('light', 'dark', 'retro');
+      document.documentElement.classList.add(theme);
+    </script>
   </head>
   <body>
     <Navbar />

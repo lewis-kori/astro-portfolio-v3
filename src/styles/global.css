@@ -2,6 +2,7 @@
 @import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant retro (&:is(.retro *));
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -115,6 +116,42 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
+.retro {
+  /* Warm coffee/retro color palette */
+  --background: oklch(0.95 0.02 80); /* Warm cream */
+  --foreground: oklch(0.25 0.03 40); /* Deep brown */
+  --card: oklch(0.93 0.03 75); /* Light coffee cream */
+  --card-foreground: oklch(0.25 0.03 40);
+  --popover: oklch(0.93 0.03 75);
+  --popover-foreground: oklch(0.25 0.03 40);
+  --primary: oklch(0.45 0.08 50); /* Rich coffee brown */
+  --primary-foreground: oklch(0.98 0.02 80);
+  --secondary: oklch(0.75 0.05 60); /* Soft tan */
+  --secondary-foreground: oklch(0.25 0.03 40);
+  --muted: oklch(0.85 0.03 70); /* Muted beige */
+  --muted-foreground: oklch(0.50 0.04 45);
+  --accent: oklch(0.65 0.12 45); /* Warm terracotta */
+  --accent-foreground: oklch(0.98 0.02 80);
+  --destructive: oklch(0.55 0.20 35); /* Burnt orange-red */
+  --destructive-foreground: oklch(0.98 0.02 80);
+  --border: oklch(0.80 0.04 65);
+  --input: oklch(0.88 0.03 70);
+  --ring: oklch(0.60 0.08 50);
+  --chart-1: oklch(0.55 0.12 45); /* Coffee brown */
+  --chart-2: oklch(0.65 0.10 55); /* Caramel */
+  --chart-3: oklch(0.70 0.08 40); /* Latte */
+  --chart-4: oklch(0.60 0.15 35); /* Espresso */
+  --chart-5: oklch(0.75 0.06 50); /* Cream */
+  --sidebar: oklch(0.90 0.03 75);
+  --sidebar-foreground: oklch(0.25 0.03 40);
+  --sidebar-primary: oklch(0.45 0.08 50);
+  --sidebar-primary-foreground: oklch(0.98 0.02 80);
+  --sidebar-accent: oklch(0.85 0.04 70);
+  --sidebar-accent-foreground: oklch(0.25 0.03 40);
+  --sidebar-border: oklch(0.80 0.04 65);
+  --sidebar-ring: oklch(0.60 0.08 50);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -123,3 +160,108 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom Animations */
+@keyframes slide-in-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-top {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes blur-fade-in {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes scale-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Animation utility classes */
+.animate-slide-in-bottom {
+  animation: slide-in-bottom 0.6s ease-out;
+}
+
+.animate-slide-in-top {
+  animation: slide-in-top 0.6s ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.6s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.6s ease-out;
+}
+
+.animate-blur-fade-in {
+  animation: blur-fade-in 0.8s ease-out;
+}
+
+.animate-scale-fade-in {
+  animation: scale-fade-in 0.5s ease-out;
+}
+
+/* Staggered animation delays for child elements */
+.animate-stagger > * {
+  opacity: 0;
+  animation: slide-in-bottom 0.6s ease-out forwards;
+}
+
+.animate-stagger > *:nth-child(1) { animation-delay: 0.1s; }
+.animate-stagger > *:nth-child(2) { animation-delay: 0.2s; }
+.animate-stagger > *:nth-child(3) { animation-delay: 0.3s; }
+.animate-stagger > *:nth-child(4) { animation-delay: 0.4s; }
+.animate-stagger > *:nth-child(5) { animation-delay: 0.5s; }
+.animate-stagger > *:nth-child(6) { animation-delay: 0.6s; }

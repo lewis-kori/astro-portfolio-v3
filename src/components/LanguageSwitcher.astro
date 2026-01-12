@@ -1,0 +1,41 @@
+---
+import { languages, getLangFromUrl } from '../utils/i18n';
+
+const currentLang = getLangFromUrl(Astro.url);
+const currentPath =
+  Astro.url.pathname.replace(`/${currentLang}`, '').replace(/^\//, '') || '/';
+---
+
+<div class='relative group'>
+  <button
+    class='p-2 rounded-lg hover:bg-accent transition-colors'
+    aria-label='Change language'
+  >
+    <svg class='w-5 h-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+      <path
+        stroke-linecap='round'
+        stroke-linejoin='round'
+        stroke-width='2'
+        d='M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129'
+      ></path>
+    </svg>
+  </button>
+
+  <div
+    class='hidden group-hover:block absolute right-0 mt-2 bg-card border border-border rounded-lg shadow-lg overflow-hidden min-w-30 z-10'
+  >
+    {
+      Object.entries(languages).map(([lang, name]) => (
+        <a
+          href={lang === 'en' ? `/${currentPath}` : `/${lang}/${currentPath}`}
+          class:list={[
+            'block w-full px-4 py-2 text-left hover:bg-accent transition-colors text-sm',
+            { 'bg-accent': currentLang === lang },
+          ]}
+        >
+          {name}
+        </a>
+      ))
+    }
+  </div>
+</div>

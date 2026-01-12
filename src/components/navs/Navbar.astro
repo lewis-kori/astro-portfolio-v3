@@ -1,4 +1,7 @@
 ---
+import ThemeSwitcher from '../ThemeSwitcher.astro';
+import LanguageSwitcher from '../LanguageSwitcher.astro';
+
 const navLinks = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
@@ -8,20 +11,26 @@ const navLinks = [
 ---
 
 <header>
-  <nav class='flex items-center justify-between p-6 bg-gray-800 text-white'>
+  <nav class='flex items-center justify-between p-6 bg-background border-b border-border'>
     <div class='text-2xl font-bold'>
-      <a href='/'>Lewis Astro Portfolio</a>
+      <a href='/' class='text-foreground hover:text-primary transition-colors'>Lewis Astro Portfolio</a>
     </div>
-    <ul class='flex space-x-6'>
-      {
-        navLinks.map((link) => (
-          <li>
-            <a href={link.href} class='hover:underline'>
-              {link.name}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <div class='flex items-center gap-6'>
+      <ul class='flex space-x-6'>
+        {
+          navLinks.map((link) => (
+            <li>
+              <a href={link.href} class='text-foreground hover:text-primary transition-colors'>
+                {link.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class='flex items-center gap-2 border-l border-border pl-4'>
+        <LanguageSwitcher />
+        <ThemeSwitcher />
+      </div>
+    </div>
   </nav>
 </header>
