@@ -1,0 +1,27 @@
+---
+const navLinks = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'Contact', href: '/contact' },
+];
+---
+
+<header>
+  <nav class='flex items-center justify-between p-6 bg-gray-800 text-white'>
+    <div class='text-2xl font-bold'>
+      <a href='/'>Lewis Astro Portfolio</a>
+    </div>
+    <ul class='flex space-x-6'>
+      {
+        navLinks.map((link) => (
+          <li>
+            <a href={link.href} class='hover:underline'>
+              {link.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
