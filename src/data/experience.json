@@ -2,6 +2,7 @@
   {
     "id": "teya",
     "company": "Teya",
+    "website": "https://www.teya.com",
     "role": "Software Engineer",
     "period": "January 2023 - Present",
     "responsibilities": [
@@ -16,6 +17,7 @@
   {
     "id": "yoyo",
     "company": "Yoyo Group",
+    "website": "https://www.yoyowallet.com",
     "role": "Platform Engineer",
     "period": "October 2021 - March 2023",
     "responsibilities": [
@@ -29,6 +31,7 @@
   {
     "id": "acquicent",
     "company": "Acquicent",
+    "website": "https://www.acquicent.com",
     "role": "Founding Senior Software Engineer",
     "period": "April 2021 - July 2023",
     "responsibilities": [
@@ -41,6 +44,7 @@
   {
     "id": "skye",
     "company": "Skye Tech Group",
+    "website": "https://www.skyetel.com",
     "role": "Software Engineer",
     "period": "October 2019 - October 2021",
     "responsibilities": [

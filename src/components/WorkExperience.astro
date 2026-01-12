@@ -54,7 +54,27 @@ const sortedExperiences = experiences.sort(
                 <div>
                   <h3 class='text-3xl font-bold text-foreground mb-2'>
                     {exp.data.role}
-                    <span class='text-primary'> @ {exp.data.company}</span>
+                    <a
+                      href={exp.data.website}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      class='text-primary hover:underline inline-flex items-center gap-1'
+                    >
+                      @ {exp.data.company}
+                      <svg
+                        class='w-5 h-5'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                      >
+                        <path
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'
+                        />
+                      </svg>
+                    </a>
                   </h3>
                   <p class='text-muted-foreground font-medium'>
                     {exp.data.period}
@@ -63,9 +83,9 @@ const sortedExperiences = experiences.sort(
 
                 <ul class='space-y-4'>
                   {exp.data.responsibilities.map((responsibility) => (
-                    <li class='flex gap-3 text-muted-foreground leading-relaxed'>
+                    <li class='flex gap-3 text-muted-foreground leading-relaxed items-baseline'>
                       <svg
-                        class='w-6 h-6 text-primary flex-shrink-0 mt-0.5'
+                        class='w-4 h-4  text-secondary shrink-0 mt-1.5'
                         fill='none'
                         viewBox='0 0 24 24'
                         stroke='currentColor'
