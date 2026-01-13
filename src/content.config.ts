@@ -29,4 +29,20 @@ const experience = defineCollection({
   }),
 });
 
-export const collections = { socials, about, experience };
+const projects = defineCollection({
+  loader: file('src/data/projects.json'),
+  schema: z.object({
+    id: z.string(),
+    title: z.string(),
+    shortDescription: z.string(),
+    fullDescription: z.string(),
+    techStack: z.array(z.string()),
+    image: z.string(),
+    websiteUrl: z.string().url().optional(),
+    appStoreUrl: z.string().url().optional(),
+    playStoreUrl: z.string().url().optional(),
+    order: z.number(),
+  }),
+});
+
+export const collections = { socials, about, experience, projects };
