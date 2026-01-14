@@ -1,0 +1,196 @@
+---
+import { getCollection } from 'astro:content';
+
+const socials = await getCollection('socials');
+const currentYear = new Date().getFullYear();
+---
+
+<footer class='relative border-t-[0.25px] border-border/40 backdrop-blur'>
+  <div class='container-fluid pt-16 pb-8'>
+    <div class='grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16'>
+      <div class='space-y-8'>
+        <div class='space-y-4'>
+          <div class='flex items-center gap-3'>
+            <div class='h-px w-12 bg-gradient-to-r from-primary to-transparent'>
+            </div>
+            <span
+              class='text-xs uppercase tracking-wider text-muted-foreground font-medium'
+            >
+              About Me
+            </span>
+          </div>
+          <p
+            class='text-lg text-foreground font-medium leading-relaxed max-w-md'
+          >
+            Entrepreneur and technologist building trusted platforms and
+            scalable digital products.
+          </p>
+        </div>
+
+        <div class='space-y-4'>
+          <p class='text-sm text-muted-foreground'>Connect with me</p>
+          <div class='flex gap-3'>
+            {
+              socials.map((social) => (
+                <a
+                  href={social.data.url}
+                  target={social.data.name !== 'email' ? '_blank' : undefined}
+                  rel={
+                    social.data.name !== 'email'
+                      ? 'noopener noreferrer'
+                      : undefined
+                  }
+                  class='p-3 rounded-lg bg-background border border-border hover:border-primary hover:bg-primary/5 transition-all duration-300 group'
+                  aria-label={social.data.ariaLabel}
+                >
+                  {social.data.icon === 'stroke' ? (
+                    <svg
+                      class='w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'
+                    >
+                      <path
+                        stroke-linecap='round'
+                        stroke-linejoin='round'
+                        stroke-width='2'
+                        d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      class='w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors'
+                      fill='currentColor'
+                      viewBox='0 0 24 24'
+                    >
+                      <path d={social.data.icon} />
+                    </svg>
+                  )}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class='space-y-6'>
+        <div class='space-y-4'>
+          <div class='flex items-center gap-3'>
+            <div class='h-px w-12 bg-gradient-to-r from-primary to-transparent'>
+            </div>
+            <span
+              class='text-xs uppercase tracking-wider text-muted-foreground font-medium'
+            >
+              Stay Updated
+            </span>
+          </div>
+          <div class='space-y-2'>
+            <h3 class='text-2xl font-bold text-foreground'>
+              Join My Newsletter
+            </h3>
+            <p class='text-muted-foreground'>
+              Get insights on software engineering, startups, and tech trends
+              delivered to your inbox.
+            </p>
+          </div>
+        </div>
+
+        <form class='space-y-4' id='newsletter-form'>
+          <div class='flex flex-col sm:flex-row gap-3'>
+            <input
+              type='email'
+              name='email'
+              placeholder='your@email.com'
+              required
+              class='flex-1 px-4 py-3 rounded-lg border border-border bg-background focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all placeholder:text-muted-foreground'
+            />
+            <button
+              type='submit'
+              class='px-6 py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all font-medium inline-flex items-center justify-center gap-2 group whitespace-nowrap'
+            >
+              Subscribe
+              <svg
+                class='w-4 h-4 group-hover:translate-x-1 transition-transform'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+              >
+                <path
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                  stroke-width='2'
+                  d='M14 5l7 7m0 0l-7 7m7-7H3'></path>
+              </svg>
+            </button>
+          </div>
+          <p class='text-xs text-muted-foreground italic'>
+            No spam, unsubscribe anytime. Your data is safe with me.
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class='mt-16 pt-8 border-t border-border'>
+      <div
+        class='flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground'
+      >
+        <p>
+          &copy; {currentYear} Lewis Kori. Built with
+          <span class='text-primary'>
+            <svg
+              class='w-4 h-4 inline-block animate-pulse mb-0.5'
+              viewBox='0 0 24 24'
+              stroke='red'
+              fill='red'
+            >
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z'
+              ></path>
+            </svg>
+          </span> using Astro.
+        </p>
+        <div class='flex items-center gap-1'>
+          <span>Designed & Developed by</span>
+          <a
+            href='/'
+            class='text-foreground hover:text-primary transition-colors font-medium'
+          >
+            Lewis Kori
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script is:inline>
+  function initNewsletterForm() {
+    const form = document.getElementById('newsletter-form');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const email = formData.get('email');
+
+      // Add your newsletter signup logic here
+      // console.log('Newsletter signup:', email);
+
+      // Show success message (you can customize this)
+      alert('Thanks for subscribing! 🎉');
+      form.reset();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNewsletterForm);
+  } else {
+    initNewsletterForm();
+  }
+
+  document.addEventListener('astro:page-load', initNewsletterForm);
+</script>

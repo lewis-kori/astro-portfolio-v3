@@ -1,5 +1,6 @@
 ---
 import Navbar from '@/components/navs/Navbar.astro';
+import Footer from '@/components/Footer.astro';
 import '../styles/global.css';
 import BackgroundArt from '@/components/shared/BackgroundArt.astro';
 
@@ -40,5 +41,6 @@ const { title = `Home | ${siteName}` } = Astro.props;
     <main class='min-h-screen overflow-x-clip'>
       <slot />
     </main>
+    <Footer />
   </body>
 </html>
