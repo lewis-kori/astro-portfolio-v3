@@ -1,0 +1,170 @@
+---
+import { getCollection } from 'astro:content';
+
+const experiences = await getCollection('experience');
+const sortedExperiences = experiences.sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<section class='py-20 px-4 relative'>
+  <div class='container-fluid'>
+    <div>
+      <h2 class='text-4xl font-semibold text-foreground mb-3 text-center'>
+        Where I've Worked
+      </h2>
+      <div
+        class='h-1 w-20 bg-linear-to-r from-primary to-secondary rounded-full mx-auto mb-16'
+      >
+      </div>
+    </div>
+
+    <div class='grid md:grid-cols-[250px_1fr] gap-8'>
+      <!-- Sidebar Navigation -->
+      <div class='space-y-2'>
+        {
+          sortedExperiences.map((exp, index) => (
+            <button
+              data-tab={exp.data.id}
+              class={`w-full text-left px-6 py-4 rounded-lg border-l-4 transition-all duration-300 hover:bg-primary/5 ${
+                index === 0
+                  ? 'bg-primary/10 border-primary text-primary font-medium'
+                  : 'border-transparent text-muted-foreground hover:border-primary/30'
+              }`}
+            >
+              {exp.data.company}
+            </button>
+          ))
+        }
+      </div>
+
+      <!-- Content Area -->
+      <div class='relative min-h-100'>
+        {
+          sortedExperiences.map((exp, index) => (
+            <div
+              data-content={exp.data.id}
+              class={`absolute inset-0 transition-all duration-500 ${
+                index === 0
+                  ? 'opacity-100 translate-x-0'
+                  : 'opacity-0 translate-x-4 pointer-events-none'
+              }`}
+            >
+              <div class='space-y-6'>
+                <div>
+                  <h3 class='text-3xl font-bold text-foreground mb-2'>
+                    {exp.data.role}
+                    <a
+                      href={exp.data.website}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      class='text-primary hover:underline inline-flex items-center gap-1'
+                    >
+                      @ {exp.data.company}
+                      <svg
+                        class='w-5 h-5'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                      >
+                        <path
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'
+                        />
+                      </svg>
+                    </a>
+                  </h3>
+                  <p class='text-muted-foreground font-medium'>
+                    {exp.data.period}
+                  </p>
+                </div>
+
+                <ul class='space-y-4'>
+                  {exp.data.responsibilities.map((responsibility) => (
+                    <li class='flex gap-3 text-muted-foreground leading-relaxed items-baseline'>
+                      <svg
+                        class='w-4 h-4  text-secondary shrink-0 mt-1.5'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                      >
+                        <path
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          d='M9 5l7 7-7 7'
+                        />
+                      </svg>
+                      <span>{responsibility}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initExperienceTabs() {
+    const tabs = document.querySelectorAll('[data-tab]');
+    const contents = document.querySelectorAll('[data-content]');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const targetId = tab.getAttribute('data-tab');
+
+        // Update tab styles
+        tabs.forEach((t) => {
+          if (t.getAttribute('data-tab') === targetId) {
+            t.classList.add(
+              'bg-primary/10',
+              'border-primary',
+              'text-primary',
+              'font-medium'
+            );
+            t.classList.remove('border-transparent', 'text-muted-foreground');
+          } else {
+            t.classList.remove(
+              'bg-primary/10',
+              'border-primary',
+              'text-primary',
+              'font-medium'
+            );
+            t.classList.add('border-transparent', 'text-muted-foreground');
+          }
+        });
+
+        // Update content visibility with transitions
+        contents.forEach((content) => {
+          if (content.getAttribute('data-content') === targetId) {
+            content.classList.remove(
+              'opacity-0',
+              'translate-x-4',
+              'pointer-events-none'
+            );
+            content.classList.add('opacity-100', 'translate-x-0');
+          } else {
+            content.classList.add(
+              'opacity-0',
+              'translate-x-4',
+              'pointer-events-none'
+            );
+            content.classList.remove('opacity-100', 'translate-x-0');
+          }
+        });
+      });
+    });
+  }
+
+  // Initialize on page load
+  initExperienceTabs();
+
+  // Reinitialize after view transitions
+  document.addEventListener('astro:page-load', initExperienceTabs);
+</script>

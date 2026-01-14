@@ -1,5 +1,6 @@
 ---
 import ThemeSwitcher from '@/components/shared/ThemeSwitcher.astro';
+import { siteConfig } from '@/config';
 
 const navLinks = [
   { name: 'Home', href: '/' },
@@ -17,8 +18,8 @@ const navLinks = [
         class='text-foreground flex items-center justify-center hover:text-primary transition-colors'
       >
         <img
-          src='/logo.svg'
-          alt='/'
+          src={siteConfig.avatar}
+          alt={siteConfig.name}
           class='size-14 border inline-block rounded-full'
         />
       </a>

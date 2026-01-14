@@ -1,0 +1,158 @@
+---
+import { getEntry } from 'astro:content';
+import profileImage from '@/assets/about-image.webp';
+
+const about = await getEntry('about', 'about');
+const { Content } = await about.render();
+
+const techStack = {
+  frontend: ['React', 'Vue', 'Javascript (ES6+)', 'HTML & CSS'],
+  backend: ['Python', 'Django', 'Strapi.js', 'Solidity'],
+  devops: ['Docker & Kubernetes', 'AWS'],
+};
+---
+
+<section class='py-20 px-4 relative'>
+  <div
+    class='absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none'
+  >
+  </div>
+
+  <div class='container-fluid relative'>
+    <div>
+      <h2 class='text-4xl font-semibold text-foreground mb-3 text-center'>
+        About me
+      </h2>
+      <div
+        class='h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mb-16'
+      >
+      </div>
+    </div>
+
+    <div class='grid md:grid-cols-2 gap-16 items-start'>
+      <div class='animate-slide-in-left sticky top-24'>
+        <img
+          src={profileImage.src}
+          alt='About Lewis Kori'
+          class='w-full rounded-lg border border-border/50'
+        />
+      </div>
+
+      <div class='animate-slide-in-right space-y-8'>
+        <div class='space-y-5 text-muted-foreground leading-relaxed text-base'>
+          <p class='text-xl font-medium text-foreground'>Hi there! 👋</p>
+
+          <p>
+            Welcome to my corner of the internet! This site is where I showcase
+            a curated selection of projects, from cutting-edge fintech platforms
+            to scalable multitenant systems. It's also home to my personal blog,
+            where I share insights into software engineering, startups, and life
+            as a developer.
+          </p>
+
+          <p>
+            I specialize in helping startups and non-technical founders
+            transform ambitious ideas into functional, scalable online
+            platforms. With deep experience in the fintech space, I craft
+            solutions that integrate smart contracts, seamless payment
+            processing, and APIs from providers like
+            <span class='text-primary font-medium'>Stripe</span>, <span
+              class='text-primary font-medium'>Google Pay</span
+            >, and <span class='text-primary font-medium'>M-Pesa</span>.
+          </p>
+
+          <p>
+            When I'm not coding, you'll likely find me in the gym or exploring
+            the outdoors through runs and hikes. I'm also an avid reader,
+            constantly seeking new perspectives and ideas.
+          </p>
+
+          <p class='text-lg text-foreground font-medium'>
+            Let's create something extraordinary together! 🚀
+          </p>
+        </div>
+
+        <div class='space-y-6 pt-4'>
+          <h3 class='text-2xl font-bold text-foreground'>Tech Stack</h3>
+
+          <div class='space-y-4'>
+            <div>
+              <p class='text-sm font-medium text-primary mb-2'>Frontend</p>
+              <div class='flex flex-wrap gap-2'>
+                {
+                  techStack.frontend.map((tech, i) => (
+                    <span
+                      class='px-4 py-2 bg-primary/10 text-primary rounded-lg text-sm font-medium border border-primary/20 hover:bg-primary/20 hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-blur-fade'
+                      style={`animation-delay: ${i * 0.1}s`}
+                    >
+                      {tech}
+                    </span>
+                  ))
+                }
+              </div>
+            </div>
+
+            <div>
+              <p class='text-sm font-medium text-secondary mb-2'>Backend</p>
+              <div class='flex flex-wrap gap-2'>
+                {
+                  techStack.backend.map((tech, i) => (
+                    <span
+                      class='px-4 py-2 bg-secondary/10 text-secondary rounded-lg text-sm font-medium border border-secondary/20 hover:bg-secondary/20 hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-blur-fade'
+                      style={`animation-delay: ${i * 0.1}s`}
+                    >
+                      {tech}
+                    </span>
+                  ))
+                }
+              </div>
+            </div>
+
+            <div>
+              <p class='text-sm font-medium text-accent mb-2'>DevOps & Cloud</p>
+              <div class='flex flex-wrap gap-2'>
+                {
+                  techStack.devops.map((tech, i) => (
+                    <span
+                      class='px-4 py-2 bg-accent/10 text-accent rounded-lg text-sm font-medium border border-accent/20 hover:bg-accent/20 hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-blur-fade'
+                      style={`animation-delay: ${i * 0.1}s`}
+                    >
+                      {tech}
+                    </span>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class='flex gap-4 pt-4'>
+          <a
+            href='#contact'
+            class='inline-flex items-center gap-2 px-6 py-3 bg-primary text-background rounded-lg font-medium hover:bg-primary/90 hover:scale-105 transition-all shadow-lg hover:shadow-xl'
+          >
+            Let's Work Together
+            <svg
+              class='w-5 h-5'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
+            >
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M17 8l4 4m0 0l-4 4m4-4H3'></path>
+            </svg>
+          </a>
+          <a
+            href='#projects'
+            class='inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-lg font-medium hover:bg-primary hover:text-background transition-all'
+          >
+            View Projects
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

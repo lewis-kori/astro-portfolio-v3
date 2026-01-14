@@ -126,8 +126,8 @@
   --popover-foreground: oklch(44% 0.011 73.639);
   --primary: oklch(80% 0.114 19.571); /* Primary */
   --primary-foreground: oklch(20% 0.011 73.639);
-  --secondary: oklch(92% 0.084 155.995); /* Secondary */
-  --secondary-foreground: oklch(44% 0.011 73.639);
+  --secondary: oklch(52% 0.08 45); /* Coffee brown */
+  --secondary-foreground: oklch(98% 0.01 90);
   --muted: oklch(84.133% 0.065 90.856); /* Base 300 */
   --muted-foreground: oklch(54% 0.011 73.639);
   --accent: oklch(68% 0.162 75.834); /* Accent */
@@ -167,7 +167,7 @@
 }
 @layer utilities {
   .container-fluid {
-    @apply px-4 sm:px-6 md:px-10 lg:px-16 w-full mx-auto max-w-450;
+    @apply px-4 sm:px-6  w-full mx-auto max-w-6xl;
   }
 }
 

@@ -1,10 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import HeroText from '../components/hero/HeroText.astro';
+import HeroImage from '../components/hero/HeroImage.astro';
+import About from '../components/About.astro';
+import WorkExperience from '../components/WorkExperience.astro';
+import Projects from '../components/Projects.astro';
 ---
 
 <Layout>
-  <div class='container-fluid'>
-    <h1>Welcome to My Astro Portfolio</h1>
-    <p>This is the home page of my Astro portfolio.</p>
-  </div>
+  <section class='min-h-screen flex items-center justify-center px-4 py-20'>
+    <div class='container-fluid'>
+      <div class='flex flex-row gap-8 items-center'>
+        <HeroText />
+        <HeroImage />
+      </div>
+    </div>
+  </section>
+
+  <About />
+  <WorkExperience />
+  <Projects />
 </Layout>
