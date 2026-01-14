@@ -1,9 +1,5 @@
 ---
-import { getEntry } from 'astro:content';
 import SideNav from './SideNav.astro';
-
-const about = await getEntry('about', 'about');
-const { Content } = await about.render();
 
 const techStack = {
   frontend: ['React', 'Vue', 'Javascript (ES6+)', 'HTML & CSS'],
