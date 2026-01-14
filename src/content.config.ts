@@ -16,6 +16,20 @@ const about = defineCollection({
   type: 'content',
 });
 
+const blog = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    author: z.string(),
+    tags: z.array(z.string()),
+    description: z.string(),
+    dateCreated: z.coerce.date(),
+    cover_image: z.string().optional(),
+    series: z.string().optional(),
+    sponsors: z.array(z.string()).optional(),
+  }),
+});
+
 const experience = defineCollection({
   loader: file('src/data/experience.json'),
   schema: z.object({
@@ -45,4 +59,4 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { socials, about, experience, projects };
+export const collections = { socials, about, experience, projects, blog };

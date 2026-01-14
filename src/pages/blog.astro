@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import ArticleCard from '../components/ArticleCard.astro';
+
+// Get all blog posts and sort by date (newest first)
+const allBlogs = await getCollection('blog');
+const sortedBlogs = allBlogs.sort(
+  (a, b) => b.data.dateCreated.getTime() - a.data.dateCreated.getTime()
+);
+---
+
+<Layout>
+  <section class='py-20 px-4 min-h-screen'>
+    <div class='container-fluid'>
+      <div class='mb-12'>
+        <h1 class='text-4xl md:text-5xl font-bold mb-4'>All Articles</h1>
+        <p class='text-muted-foreground text-lg'>
+          Explore all {sortedBlogs.length} articles about software development, technology,
+          and personal growth
+        </p>
+      </div>
+
+      <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+        {
+          sortedBlogs.map((blog) => (
+            <ArticleCard
+              title={blog.data.title}
+              description={blog.data.description}
+              dateCreated={blog.data.dateCreated}
+              tags={blog.data.tags}
+              slug={blog.slug}
+              cover_image={blog.data.cover_image}
+            />
+          ))
+        }
+      </div>
+
+      {
+        sortedBlogs.length === 0 && (
+          <div class='text-center py-12'>
+            <p class='text-muted-foreground text-lg'>No articles found.</p>
+          </div>
+        )
+      }
+    </div>
+  </section>
+</Layout>

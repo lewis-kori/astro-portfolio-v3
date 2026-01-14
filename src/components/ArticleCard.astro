@@ -1,0 +1,86 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  dateCreated: Date;
+  tags: string[];
+  slug: string;
+  cover_image?: string;
+}
+
+const { title, description, dateCreated, tags, slug, cover_image } =
+  Astro.props;
+
+// Format date
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(dateCreated);
+---
+
+<article
+  class='group rounded-lg border border-border bg-card hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col h-full'
+>
+  {
+    cover_image && (
+      <div class='aspect-video overflow-hidden'>
+        <img
+          src={cover_image}
+          alt={title}
+          class='w-full h-full object-cover group-hover:scale-105 transition-transform duration-300'
+        />
+      </div>
+    )
+  }
+  <div class='p-6 flex flex-col flex-grow'>
+    <div class='flex flex-wrap gap-2 mb-3'>
+      {
+        tags
+          .slice(0, 3)
+          .map((tag) => (
+            <span class='text-xs px-2 py-1 rounded-full bg-primary/10 text-primary'>
+              {tag}
+            </span>
+          ))
+      }
+    </div>
+    <h3
+      class='text-xl font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2'
+    >
+      {title}
+    </h3>
+    <p class='text-sm text-muted-foreground mb-4 line-clamp-3 flex-grow'>
+      {description}
+    </p>
+    <div
+      class='flex items-center justify-between mt-auto pt-4 border-t border-border'
+    >
+      <time
+        class='text-sm text-muted-foreground'
+        datetime={dateCreated.toISOString()}
+      >
+        {formattedDate}
+      </time>
+      <a
+        href={`/blog/${slug}`}
+        class='text-sm font-medium text-primary hover:underline flex items-center gap-1'
+      >
+        Read more
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          class='h-4 w-4'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
+        >
+          <path
+            stroke-linecap='round'
+            stroke-linejoin='round'
+            stroke-width='2'
+            d='M9 5l7 7-7 7'></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</article>
