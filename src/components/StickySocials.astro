@@ -1,0 +1,79 @@
+---
+import { getCollection } from 'astro:content';
+
+const socials = await getCollection('socials');
+---
+
+<aside
+  id='sticky-socials'
+  class='fixed left-6 top-1/2 -translate-y-1/2 z-40 opacity-0 transition-opacity duration-300 hidden lg:block'
+>
+  <div class='flex flex-col gap-4'>
+    {
+      socials.map((social) => (
+        <a
+          href={social.data.url}
+          target={social.data.name !== 'email' ? '_blank' : undefined}
+          rel={social.data.name !== 'email' ? 'noopener noreferrer' : undefined}
+          class='p-3 rounded-full bg-card border border-border hover:bg-accent hover:scale-110 transition-all shadow-sm hover:shadow-md group'
+          aria-label={social.data.ariaLabel}
+        >
+          {social.data.icon === 'stroke' ? (
+            <svg
+              class='w-5 h-5'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
+            >
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
+              />
+            </svg>
+          ) : (
+            <svg class='w-5 h-5' fill='currentColor' viewBox='0 0 24 24'>
+              <path d={social.data.icon} />
+            </svg>
+          )}
+        </a>
+      ))
+    }
+  </div>
+</aside>
+
+<script is:inline>
+  function initStickySocials() {
+    const stickySocials = document.getElementById('sticky-socials');
+    if (!stickySocials) return;
+
+    function handleScroll() {
+      // Get the height of the viewport
+      const viewportHeight = window.innerHeight;
+
+      // Show socials after scrolling past 80% of the viewport (hero section)
+      if (window.scrollY > viewportHeight * 0.8) {
+        stickySocials.style.opacity = '1';
+      } else {
+        stickySocials.style.opacity = '0';
+      }
+    }
+
+    // Listen for scroll events
+    window.addEventListener('scroll', handleScroll);
+
+    // Check initial state
+    handleScroll();
+  }
+
+  // Initialize on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStickySocials);
+  } else {
+    initStickySocials();
+  }
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener('astro:page-load', initStickySocials);
+</script>
