@@ -1,0 +1,494 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import ArticleCard from '../components/ArticleCard.astro';
+import NewsletterForm from '../components/NewsletterForm.astro';
+
+// Get all blog posts and sort by date (newest first)
+const allBlogs = await getCollection('blog');
+const sortedBlogs = allBlogs.sort(
+  (a, b) => b.data.dateCreated.getTime() - a.data.dateCreated.getTime()
+);
+
+// Extract unique tags and series
+const allTags = [...new Set(allBlogs.flatMap((blog) => blog.data.tags))].sort();
+const allSeries = [
+  ...new Set(allBlogs.map((blog) => blog.data.series).filter(Boolean)),
+].sort();
+
+// Pagination
+const blogsPerPage = 9;
+const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
+---
+
+<Layout>
+  <section class='py-20 px-4 min-h-screen'>
+    <div class='container-fluid'>
+      <!-- Hero Section with Newsletter -->
+      <div class='mb-16 space-y-8'>
+        <div class='text-center space-y-4'>
+          <h1 class='text-2xl md:text-3xl lg:text-4xl font-semibold'>
+            What the Edge?
+          </h1>
+          <p
+            class='text-muted-foreground text-sm md:text-base max-w-xl mx-auto'
+          >
+            A personal newsletter exploring edge cases in code, business, and
+            being human. I write about what I am building, what I am learning,
+            and where conventional thinking breaks down.
+          </p>
+        </div>
+
+        <!-- Newsletter Form -->
+        <div class='max-w-2xl mx-auto'>
+          <NewsletterForm
+            id='blog-newsletter-form'
+            showTitle={false}
+            description='Subscribe to get the latest articles delivered straight to your inbox.'
+          />
+        </div>
+      </div>
+
+      <!-- Filters Section -->
+      <div class='mb-12 space-y-6'>
+        <div class='flex flex-wrap items-center gap-4'>
+          <div class='flex items-center gap-2'>
+            <span class='text-sm font-medium text-muted-foreground'>
+              Filter by:
+            </span>
+          </div>
+
+          <!-- All button -->
+          <button
+            data-filter='all'
+            class='filter-btn active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 bg-primary text-primary-foreground'
+          >
+            All ({sortedBlogs.length})
+          </button>
+
+          <!-- Series filter -->
+          {
+            allSeries.length > 0 && (
+              <div class='relative group'>
+                <button class='px-4 py-2 rounded-lg border border-border hover:border-primary hover:bg-primary/5 text-sm font-medium transition-all inline-flex items-center gap-2'>
+                  Series
+                  <svg
+                    class='w-4 h-4'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke='currentColor'
+                  >
+                    <path
+                      stroke-linecap='round'
+                      stroke-linejoin='round'
+                      stroke-width='2'
+                      d='M19 9l-7 7-7-7'
+                    />
+                  </svg>
+                </button>
+                <div class='absolute top-full left-0 mt-2 w-64 bg-card border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10'>
+                  <div class='p-2 space-y-1 max-h-64 overflow-y-auto'>
+                    {allSeries.map((series) => (
+                      <button
+                        data-filter='series'
+                        data-series={series}
+                        class='filter-btn w-full text-left px-3 py-2 rounded-md hover:bg-primary/5 text-sm transition-colors'
+                      >
+                        {series}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )
+          }
+
+          <!-- Tags filter -->
+          <div class='relative group'>
+            <button
+              class='px-4 py-2 rounded-lg border border-border hover:border-primary hover:bg-primary/5 text-sm font-medium transition-all inline-flex items-center gap-2'
+            >
+              Tags
+              <svg
+                class='w-4 h-4'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+              >
+                <path
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                  stroke-width='2'
+                  d='M19 9l-7 7-7-7'></path>
+              </svg>
+            </button>
+            <div
+              class='absolute top-full left-0 mt-2 w-64 bg-card border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10'
+            >
+              <div class='p-2 space-y-1 max-h-64 overflow-y-auto'>
+                {
+                  allTags.map((tag) => (
+                    <button
+                      data-filter='tag'
+                      data-tag={tag}
+                      class='filter-btn w-full text-left px-3 py-2 rounded-md hover:bg-primary/5 text-sm transition-colors'
+                    >
+                      {tag}
+                    </button>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active filter display -->
+        <div id='active-filter' class='hidden'>
+          <div
+            class='inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 border border-primary/20'
+          >
+            <span class='text-sm font-medium text-primary' id='filter-text'
+            ></span>
+            <button
+              id='clear-filter'
+              class='text-primary hover:text-primary/80 transition-colors'
+            >
+              <svg
+                class='w-4 h-4'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+              >
+                <path
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                  stroke-width='2'
+                  d='M6 18L18 6M6 6l12 12'></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blog Grid -->
+      <div
+        id='blog-grid'
+        class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12'
+      >
+        {
+          sortedBlogs.map((blog, index) => (
+            <div
+              class='blog-item'
+              data-index={index}
+              data-tags={JSON.stringify(blog.data.tags)}
+              data-series={blog.data.series || ''}
+            >
+              <ArticleCard
+                title={blog.data.title}
+                description={blog.data.description}
+                dateCreated={blog.data.dateCreated}
+                tags={blog.data.tags}
+                slug={blog.slug}
+                cover_image={blog.data.cover_image}
+              />
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Pagination -->
+      <div class='flex justify-center items-center gap-2' id='pagination'>
+        <button
+          id='prev-page'
+          disabled
+          class='px-4 py-2 rounded-lg border border-border hover:border-primary hover:bg-primary/5 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
+        >
+          <svg
+            class='w-5 h-5'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+          >
+            <path
+              stroke-linecap='round'
+              stroke-linejoin='round'
+              stroke-width='2'
+              d='M15 19l-7-7 7-7'></path>
+          </svg>
+        </button>
+
+        <div class='flex gap-2' id='page-numbers'>
+          {
+            Array.from({ length: totalPages }, (_, i) => (
+              <button
+                class={`page-btn px-4 py-2 rounded-lg border transition-all ${
+                  i === 0
+                    ? 'border-primary bg-primary text-primary-foreground'
+                    : 'border-border hover:border-primary hover:bg-primary/5'
+                }`}
+                data-page={i + 1}
+              >
+                {i + 1}
+              </button>
+            ))
+          }
+        </div>
+
+        <button
+          id='next-page'
+          class='px-4 py-2 rounded-lg border border-border hover:border-primary hover:bg-primary/5 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
+        >
+          <svg
+            class='w-5 h-5'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+          >
+            <path
+              stroke-linecap='round'
+              stroke-linejoin='round'
+              stroke-width='2'
+              d='M9 5l7 7-7 7'></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- No results message -->
+      <div id='no-results' class='hidden text-center py-12'>
+        <p class='text-muted-foreground text-lg'>
+          No articles found for this filter.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script is:inline define:vars={{ sortedBlogs, blogsPerPage }}>
+  let currentPage = 1;
+  let currentFilter = 'all';
+  let currentFilterValue = '';
+  let filteredBlogs = sortedBlogs;
+
+  function getUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      page: parseInt(params.get('page')) || 1,
+      series: params.get('series') || '',
+      tag: params.get('tag') || '',
+    };
+  }
+
+  function updateUrl() {
+    const params = new URLSearchParams();
+
+    if (currentPage > 1) {
+      params.set('page', currentPage);
+    }
+
+    if (currentFilter === 'series' && currentFilterValue) {
+      params.set('series', currentFilterValue);
+    } else if (currentFilter === 'tag' && currentFilterValue) {
+      params.set('tag', currentFilterValue);
+    }
+
+    const newUrl = params.toString()
+      ? `${window.location.pathname}?${params.toString()}`
+      : window.location.pathname;
+
+    window.history.pushState({}, '', newUrl);
+  }
+
+  function filterBlogs(filterType, filterValue, updateHistory = true) {
+    if (filterType === 'all') {
+      filteredBlogs = sortedBlogs;
+      currentFilter = 'all';
+      currentFilterValue = '';
+    } else if (filterType === 'series') {
+      filteredBlogs = sortedBlogs.filter(
+        (blog) => blog.data.series === filterValue
+      );
+      currentFilter = 'series';
+      currentFilterValue = filterValue;
+    } else if (filterType === 'tag') {
+      filteredBlogs = sortedBlogs.filter((blog) =>
+        blog.data.tags.includes(filterValue)
+      );
+      currentFilter = 'tag';
+      currentFilterValue = filterValue;
+    }
+
+    currentPage = 1;
+    renderBlogs();
+    updateFilterDisplay(filterType, filterValue);
+
+    if (updateHistory) {
+      updateUrl();
+    }
+  }
+
+  function renderBlogs() {
+    const grid = document.getElementById('blog-grid');
+    const noResults = document.getElementById('no-results');
+
+    const start = (currentPage - 1) * blogsPerPage;
+    const end = start + blogsPerPage;
+
+    // Get indices of filtered blogs
+    const filteredIndices = filteredBlogs.map((blog) => {
+      return sortedBlogs.findIndex(
+        (b) => b.slug === blog.slug && b.data.title === blog.data.title
+      );
+    });
+
+    // Get indices for current page
+    const pageIndices = filteredIndices.slice(start, end);
+
+    if (pageIndices.length === 0) {
+      grid.classList.add('hidden');
+      noResults.classList.remove('hidden');
+    } else {
+      grid.classList.remove('hidden');
+      noResults.classList.add('hidden');
+    }
+
+    // Show/hide items based on whether they're in the current page
+    const allItems = document.querySelectorAll('.blog-item');
+    allItems.forEach((item) => {
+      const itemIndex = parseInt(item.dataset.index);
+
+      if (pageIndices.includes(itemIndex)) {
+        item.classList.remove('hidden');
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+
+    updatePagination();
+
+    // Scroll to top of blog grid
+    grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function updatePagination() {
+    const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
+    const pageNumbers = document.getElementById('page-numbers');
+    const prevBtn = document.getElementById('prev-page');
+    const nextBtn = document.getElementById('next-page');
+
+    // Update prev/next buttons
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+
+    // Update page numbers
+    pageNumbers.innerHTML = '';
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement('button');
+      btn.className = `page-btn px-4 py-2 rounded-lg border transition-all ${
+        i === currentPage
+          ? 'border-primary bg-primary text-primary-foreground'
+          : 'border-border hover:border-primary hover:bg-primary/5'
+      }`;
+      btn.textContent = i;
+      btn.dataset.page = i;
+      btn.addEventListener('click', () => {
+        currentPage = i;
+        renderBlogs();
+        updateUrl();
+      });
+      pageNumbers.appendChild(btn);
+    }
+  }
+
+  function updateFilterDisplay(filterType, filterValue) {
+    const activeFilter = document.getElementById('active-filter');
+    const filterText = document.getElementById('filter-text');
+
+    if (filterType === 'all') {
+      activeFilter.classList.add('hidden');
+    } else {
+      activeFilter.classList.remove('hidden');
+      if (filterType === 'series') {
+        filterText.textContent = `Series: ${filterValue}`;
+      } else if (filterType === 'tag') {
+        filterText.textContent = `Tag: ${filterValue}`;
+      }
+    }
+
+    // Update filter button states
+    document.querySelectorAll('.filter-btn').forEach((btn) => {
+      if (btn.dataset.filter === 'all' && filterType === 'all') {
+        btn.classList.add('active', 'bg-primary', 'text-primary-foreground');
+        btn.classList.remove('border', 'border-border');
+      } else {
+        btn.classList.remove('active', 'bg-primary', 'text-primary-foreground');
+      }
+    });
+  }
+
+  function initFromUrl() {
+    const urlParams = getUrlParams();
+
+    // Apply filters from URL
+    if (urlParams.series) {
+      filterBlogs('series', urlParams.series, false);
+    } else if (urlParams.tag) {
+      filterBlogs('tag', urlParams.tag, false);
+    }
+
+    // Apply page from URL
+    if (urlParams.page) {
+      currentPage = urlParams.page;
+      renderBlogs();
+    }
+  }
+
+  function initBlogFilters() {
+    // Initialize from URL params
+    initFromUrl();
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filterType = btn.dataset.filter;
+        const filterValue = btn.dataset.series || btn.dataset.tag || '';
+        filterBlogs(filterType, filterValue);
+      });
+    });
+
+    // Clear filter
+    document.getElementById('clear-filter')?.addEventListener('click', () => {
+      filterBlogs('all', '');
+    });
+
+    // Pagination
+    document.getElementById('prev-page')?.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderBlogs();
+        updateUrl();
+      }
+    });
+
+    document.getElementById('next-page')?.addEventListener('click', () => {
+      const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderBlogs();
+        updateUrl();
+      }
+    });
+
+    // Handle browser back/forward
+    window.addEventListener('popstate', () => {
+      initFromUrl();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBlogFilters);
+  } else {
+    initBlogFilters();
+  }
+
+  document.addEventListener('astro:page-load', initBlogFilters);
+</script>

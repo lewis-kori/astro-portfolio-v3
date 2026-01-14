@@ -1,0 +1,112 @@
+---
+const navItems = [
+  {
+    id: 'about',
+    label: 'About',
+    icon: 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    id: 'work',
+    label: 'Work',
+    icon: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+  },
+  {
+    id: 'projects',
+    label: 'Projects',
+    icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
+  },
+  {
+    id: 'blogs',
+    label: 'Blogs',
+    icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+  },
+];
+---
+
+<div class='h-fit space-y-6'>
+  <div class='space-y-2'>
+    <p class='text-sm text-muted-foreground'>
+      👋 <span class='italic'>Quick navigation</span>
+    </p>
+    <div class='h-px w-12 bg-gradient-to-r from-primary/50 to-transparent'>
+    </div>
+  </div>
+
+  <nav class='space-y-2'>
+    {
+      navItems.map((item, index) => (
+        <button
+          data-section={item.id}
+          class='side-nav-btn w-full text-left px-4 py-3 rounded-lg border-l-4 border-transparent transition-all duration-300 hover:bg-primary/5 hover:border-primary/30'
+          style={`animation-delay: ${index * 0.1}s`}
+        >
+          <p class='text-sm font-medium text-muted-foreground transition-colors duration-300'>
+            {item.label}
+          </p>
+        </button>
+      ))
+    }
+  </nav>
+
+  <div class='pt-4 space-y-2'>
+    <div class='flex items-center gap-2 text-xs text-muted-foreground'>
+      <div class='w-1.5 h-1.5 rounded-full bg-primary animate-pulse'></div>
+      <span class='italic'>Scroll or click to explore</span>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  function initSideNav() {
+    const navButtons = document.querySelectorAll('.side-nav-btn');
+
+    navButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const sectionId = button.getAttribute('data-section');
+        const section = document.getElementById(sectionId);
+
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Highlight active section on scroll
+    function updateActiveNav() {
+      const sections = ['about', 'work', 'projects', 'blogs'];
+
+      sections.forEach((sectionId) => {
+        const section = document.getElementById(sectionId);
+        const button = document.querySelector(`[data-section="${sectionId}"]`);
+
+        if (section && button) {
+          const rect = section.getBoundingClientRect();
+          const isInView = rect.top <= 200 && rect.bottom >= 200;
+
+          if (isInView) {
+            button.classList.add('!bg-primary/10', '!border-primary');
+            button
+              .querySelector('p')
+              .classList.add('!text-primary', '!font-medium');
+          } else {
+            button.classList.remove('!bg-primary/10', '!border-primary');
+            button
+              .querySelector('p')
+              .classList.remove('!text-primary', '!font-medium');
+          }
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSideNav);
+  } else {
+    initSideNav();
+  }
+
+  document.addEventListener('astro:page-load', initSideNav);
+</script>

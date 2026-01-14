@@ -5,9 +5,12 @@ import HeroImage from '../components/hero/HeroImage.astro';
 import About from '../components/About.astro';
 import WorkExperience from '../components/WorkExperience.astro';
 import Projects from '../components/Projects.astro';
+import Blogs from '../components/Blogs.astro';
+import StickySocials from '../components/StickySocials.astro';
 ---
 
 <Layout>
+  <StickySocials />
   <section class='min-h-screen flex items-center justify-center px-4 py-20'>
     <div class='container-fluid'>
       <div class='flex flex-row gap-8 items-center'>
@@ -20,4 +23,5 @@ import Projects from '../components/Projects.astro';
   <About />
   <WorkExperience />
   <Projects />
+  <Blogs />
 </Layout>

@@ -1,0 +1,164 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  dateCreated: Date;
+  tags: string[];
+  slug: string;
+  cover_image?: string;
+}
+
+const { title, description, dateCreated, tags, slug, cover_image } =
+  Astro.props;
+
+// Format date
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(dateCreated);
+---
+
+<a
+  href={`/blog/${slug}`}
+  class='article-card group relative rounded-lg border border-border bg-card overflow-hidden flex flex-col h-full transition-all duration-300 hover:shadow-lg dark:hover:shadow-secondary/20'
+  data-glow
+>
+  <div
+    class='glow-effect absolute inset-0 pointer-events-none'
+    style='opacity: 0;'
+  >
+  </div>
+  {
+    cover_image && (
+      <div class='aspect-video overflow-hidden'>
+        <img
+          src={cover_image}
+          alt={title}
+          class='w-full h-full object-cover group-hover:scale-105 transition-transform duration-300'
+        />
+      </div>
+    )
+  }
+  <div class='p-6 flex flex-col flex-grow'>
+    <div class='flex flex-wrap gap-2 mb-3'>
+      {
+        tags
+          .slice(0, 3)
+          .map((tag) => (
+            <span class='text-xs px-2 py-1 rounded-full bg-primary/10 text-primary'>
+              {tag}
+            </span>
+          ))
+      }
+    </div>
+    <h3
+      class='text-xl font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2'
+    >
+      {title}
+    </h3>
+    <p class='text-sm text-muted-foreground mb-4 line-clamp-3 grow'>
+      {description}
+    </p>
+    <div
+      class='flex items-center justify-between mt-auto pt-4 border-t border-border'
+    >
+      <time
+        class='text-sm text-muted-foreground'
+        datetime={dateCreated.toISOString()}
+      >
+        {formattedDate}
+      </time>
+      <span class='text-sm font-medium text-primary flex items-center gap-1'>
+        Read more
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          class='h-4 w-4'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
+        >
+          <path
+            stroke-linecap='round'
+            stroke-linejoin='round'
+            stroke-width='2'
+            d='M9 5l7 7-7 7'></path>
+        </svg>
+      </span>
+    </div>
+  </div>
+</a>
+
+<script is:inline>
+  function initGlowEffect() {
+    const cards = document.querySelectorAll('[data-glow]');
+
+    cards.forEach((card) => {
+      const glowEffect = card.querySelector('.glow-effect');
+
+      const handleMouseMove = (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        // Check theme and set appropriate glow color
+        const isRetro = document.documentElement.classList.contains('retro');
+        const isDark = document.documentElement.classList.contains('dark');
+
+        let glowColor;
+        if (isRetro) {
+          glowColor = 'rgba(255, 215, 0, 0.25)'; // Gold glow for retro
+        } else if (isDark) {
+          glowColor = 'rgba(255, 255, 255, 0.12)';
+        } else {
+          glowColor = 'rgba(0, 0, 0, 0.08)';
+        }
+
+        if (glowEffect) {
+          glowEffect.style.opacity = '1';
+          glowEffect.style.background = `radial-gradient(600px circle at ${x}px ${y}px, ${glowColor}, transparent 40%)`;
+        }
+      };
+
+      const handleMouseLeave = () => {
+        if (glowEffect) {
+          glowEffect.style.opacity = '0';
+        }
+      };
+
+      card.addEventListener('mousemove', handleMouseMove);
+      card.addEventListener('mouseleave', handleMouseLeave);
+    });
+  }
+
+  // Initialize on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGlowEffect);
+  } else {
+    initGlowEffect();
+  }
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener('astro:page-load', initGlowEffect);
+</script>
+
+<style>
+  .article-card {
+    position: relative;
+  }
+
+  .glow-effect {
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .article-card > *:not(.glow-effect) {
+    position: relative;
+    z-index: 1;
+    pointer-events: auto;
+  }
+
+  .article-card a {
+    pointer-events: auto;
+  }
+</style>
