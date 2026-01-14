@@ -19,9 +19,16 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 }).format(dateCreated);
 ---
 
-<article
-  class='group rounded-lg border border-border bg-card hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col h-full'
+<a
+  href={`/blog/${slug}`}
+  class='article-card group relative rounded-lg border border-border bg-card overflow-hidden flex flex-col h-full transition-all duration-300 hover:shadow-lg dark:hover:shadow-secondary/20'
+  data-glow
 >
+  <div
+    class='glow-effect absolute inset-0 pointer-events-none'
+    style='opacity: 0;'
+  >
+  </div>
   {
     cover_image && (
       <div class='aspect-video overflow-hidden'>
@@ -50,7 +57,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     >
       {title}
     </h3>
-    <p class='text-sm text-muted-foreground mb-4 line-clamp-3 flex-grow'>
+    <p class='text-sm text-muted-foreground mb-4 line-clamp-3 grow'>
       {description}
     </p>
     <div
@@ -62,10 +69,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
       >
         {formattedDate}
       </time>
-      <a
-        href={`/blog/${slug}`}
-        class='text-sm font-medium text-primary hover:underline flex items-center gap-1'
-      >
+      <span class='text-sm font-medium text-primary flex items-center gap-1'>
         Read more
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -80,7 +84,81 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
             stroke-width='2'
             d='M9 5l7 7-7 7'></path>
         </svg>
-      </a>
+      </span>
     </div>
   </div>
-</article>
+</a>
+
+<script is:inline>
+  function initGlowEffect() {
+    const cards = document.querySelectorAll('[data-glow]');
+
+    cards.forEach((card) => {
+      const glowEffect = card.querySelector('.glow-effect');
+
+      const handleMouseMove = (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        // Check theme and set appropriate glow color
+        const isRetro = document.documentElement.classList.contains('retro');
+        const isDark = document.documentElement.classList.contains('dark');
+
+        let glowColor;
+        if (isRetro) {
+          glowColor = 'rgba(255, 215, 0, 0.25)'; // Gold glow for retro
+        } else if (isDark) {
+          glowColor = 'rgba(255, 255, 255, 0.12)';
+        } else {
+          glowColor = 'rgba(0, 0, 0, 0.08)';
+        }
+
+        if (glowEffect) {
+          glowEffect.style.opacity = '1';
+          glowEffect.style.background = `radial-gradient(600px circle at ${x}px ${y}px, ${glowColor}, transparent 40%)`;
+        }
+      };
+
+      const handleMouseLeave = () => {
+        if (glowEffect) {
+          glowEffect.style.opacity = '0';
+        }
+      };
+
+      card.addEventListener('mousemove', handleMouseMove);
+      card.addEventListener('mouseleave', handleMouseLeave);
+    });
+  }
+
+  // Initialize on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGlowEffect);
+  } else {
+    initGlowEffect();
+  }
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener('astro:page-load', initGlowEffect);
+</script>
+
+<style>
+  .article-card {
+    position: relative;
+  }
+
+  .glow-effect {
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .article-card > *:not(.glow-effect) {
+    position: relative;
+    z-index: 1;
+    pointer-events: auto;
+  }
+
+  .article-card a {
+    pointer-events: auto;
+  }
+</style>
