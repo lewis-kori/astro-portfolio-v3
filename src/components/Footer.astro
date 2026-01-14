@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import NewsletterForm from './NewsletterForm.astro';
 
 const socials = await getCollection('socials');
 const currentYear = new Date().getFullYear();
@@ -73,61 +74,8 @@ const currentYear = new Date().getFullYear();
         </div>
       </div>
 
-      <div class='space-y-6'>
-        <div class='space-y-4'>
-          <div class='flex items-center gap-3'>
-            <div class='h-px w-12 bg-gradient-to-r from-primary to-transparent'>
-            </div>
-            <span
-              class='text-xs uppercase tracking-wider text-muted-foreground font-medium'
-            >
-              Stay Updated
-            </span>
-          </div>
-          <div class='space-y-2'>
-            <h3 class='text-2xl font-bold text-foreground'>
-              Join My Newsletter
-            </h3>
-            <p class='text-muted-foreground'>
-              Get insights on software engineering, startups, and tech trends
-              delivered to your inbox.
-            </p>
-          </div>
-        </div>
-
-        <form class='space-y-4' id='newsletter-form'>
-          <div class='flex flex-col sm:flex-row gap-3'>
-            <input
-              type='email'
-              name='email'
-              placeholder='your@email.com'
-              required
-              class='flex-1 px-4 py-3 rounded-lg border border-border bg-background focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all placeholder:text-muted-foreground'
-            />
-            <button
-              type='submit'
-              class='px-6 py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all font-medium inline-flex items-center justify-center gap-2 group whitespace-nowrap'
-            >
-              Subscribe
-              <svg
-                class='w-4 h-4 group-hover:translate-x-1 transition-transform'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-              >
-                <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  stroke-width='2'
-                  d='M14 5l7 7m0 0l-7 7m7-7H3'></path>
-              </svg>
-            </button>
-          </div>
-          <p class='text-xs text-muted-foreground italic'>
-            No spam, unsubscribe anytime. Your data is safe with me.
-          </p>
-        </form>
-      </div>
+      <!-- Right Section: Newsletter -->
+      <NewsletterForm id='footer-newsletter-form' />
     </div>
 
     <!-- Bottom Bar -->

@@ -1,12 +1,12 @@
 ---
 title: User authentication with JWTS in a Django and vue.js multi-tenant app
 author: Lewis Kori
-tags: ["python", "django", "vue", "tutorial"]
+tags: ['python', 'django', 'vue', 'tutorial']
 series: Intro to multi-tenant apps with django
 description: How to connect a django backend to a vue.js frontend and authenticate with JSON Web Tokens
 dateCreated: 2020-12-28
-sponsors: ["Scraper API", "Digital Ocean"]
-cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--7SgQOA_K--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/ut9klyik0yzcrsswdzhj.jpg
+sponsors: ['Scraper API', 'Digital Ocean']
+cover_image: https://dev-to-uploads.s3.amazonaws.com/i/ut9klyik0yzcrsswdzhj.jpg
 ---
 
 On the last post of the [Django multi-tenant series](/series/intro-to-multi-tenant-apps-with-django/), we set up a Django project from scratch.
@@ -63,7 +63,7 @@ class Tenant(CommonInfo):
 # organizational departments db table
 class Department(CommonInfo):
     name = models.CharField(max_length=255, unique=True)
-    
+
     def __str__(self):
         self.name
 ```
@@ -161,12 +161,12 @@ urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 This essentially registers Djoser URLs in our app.
 The beauty of it all is that the URLs come shipped with Djoser. We'll only modify our serializer to accept some extra custom fields.
 
-|**Endpoint** | **Description**|
-|---|---|
-|/auth/users/| Register a new user |
-| /auth/users/me/ | retrieve/update the currently logged in user |
-| /auth/jwt/create/| create a JWT by passing a valid user in the post request to this endpoint|
-|/auth/jwt/refresh/ | get a new JWT once the lifetime of the previously generated one expires |
+| **Endpoint**       | **Description**                                                           |
+| ------------------ | ------------------------------------------------------------------------- |
+| /auth/users/       | Register a new user                                                       |
+| /auth/users/me/    | retrieve/update the currently logged in user                              |
+| /auth/jwt/create/  | create a JWT by passing a valid user in the post request to this endpoint |
+| /auth/jwt/refresh/ | get a new JWT once the lifetime of the previously generated one expires   |
 
 This is a lot of configuration, but we're almost done.
 We'll need to change Django settings.py to reflect the changes.

@@ -1,8 +1,8 @@
 ---
 title: How working out has influenced me as a developer
 author: Lewis Kori
-tags: ["career","productivity","psychology"]
-cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--u_69avF7--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://res.cloudinary.com/practicaldev/image/fetch/s--GjyFBfuC--/c_imagga_scale%2Cf_auto%2Cfl_progressive%2Ch_420%2Cq_auto%2Cw_1000/https://thepracticaldev.s3.amazonaws.com/i/e9lyg282f6wxcu8rmd3y.jpg
+tags: ['career', 'productivity', 'psychology']
+cover_image: https://thepracticaldev.s3.amazonaws.com/i/e9lyg282f6wxcu8rmd3y.jpg
 description: How keeping fit can positively influence you and grow your career
 series: soft skills
 dateCreated: 2019-08-14
@@ -16,15 +16,16 @@ Of all those, working out has been among the most influential to my life. Starti
 
 ### 1.Building consistency
 
->Success isn’t always about greatness. It’s about consistency. Consistent hard work leads to success. Greatness will come. – Dwayne Johnson
+> Success isn’t always about greatness. It’s about consistency. Consistent hard work leads to success. Greatness will come. – Dwayne Johnson
 
 Nothing is as difficult as getting up and going to do a run or workout especially in the morning. However, with consistent hard work, you find that even on the rough days, most times your body will just push you to do some bit of workout.
 
- This rings true to my development psyche as well. The only way to be better at programming and any skill , is through consistent practice. With time, just as in physical workout, everything starts to become muscle memory. Problems that were initially a huge task to solve become simply, trivial and you start solving them without flinching.
+This rings true to my development psyche as well. The only way to be better at programming and any skill , is through consistent practice. With time, just as in physical workout, everything starts to become muscle memory. Problems that were initially a huge task to solve become simply, trivial and you start solving them without flinching.
 
 ### 2. Identifying my goals
 
 I had a conversation with one of my friends where we were talking about the work out process. He then congratulated me on my consistency but then posed this question,
+
 > What do you want to achieve by doing all this workout?
 
 That got me evaluating my goals as previously, I had no clear structure to my workout routine. It's then that I decided to make a clear plan on the areas of my physique I especially wanted to work on. It then became so much easier for me whenever I hit the gym as I already Knew what my goals were and therefore avoided wasting time thinking about what I'd do for the day.
@@ -35,7 +36,7 @@ As a young developer, this lesson is handy. Especially when confronted with so m
 
 Burnout in the tech industry is nothing new. Countless articles have been written on the subject. I for one, I'm not immune to this scourge.
 I would sometimes work myself out for hours just trying to achieve certain features of a project I was interested in completing.
-However, great results are not achieved in a day as my gym instructor keeps saying. You have to  put in small efforts everyday, and eventually, something great will come off it. 
+However, great results are not achieved in a day as my gym instructor keeps saying. You have to put in small efforts everyday, and eventually, something great will come off it.
 With this in mind, I am learning to structure my work into small achievable goals. Honestly, it's very rewarding whenever I end up completing a task in time.
 
 <https://www.youtube.com/watch?v=Kh-MnBlSrTM&feature>

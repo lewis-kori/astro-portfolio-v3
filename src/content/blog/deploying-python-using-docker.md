@@ -1,11 +1,11 @@
 ---
 title: Deploying a python/django app using docker
 author: Lewis Kori
-tags: ["django", "python", "docker"]
-cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--cg6jWyUt--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://res.cloudinary.com/practicaldev/image/fetch/s--VPjJbZ8D--/c_imagga_scale%2Cf_auto%2Cfl_progressive%2Ch_420%2Cq_auto%2Cw_1000/https://thepracticaldev.s3.amazonaws.com/i/9cvwld7xetx11mfzvx41.jpg
+tags: ['django', 'python', 'docker']
+cover_image: https://thepracticaldev.s3.amazonaws.com/i/9cvwld7xetx11mfzvx41.jpg
 description: Introduction to docker and django
 dateCreated: 2019-08-04
-sponsors: ["Webisoft", "Scraper API", "Digital Ocean"]
+sponsors: ['Webisoft', 'Scraper API', 'Digital Ocean']
 ---
 
 Hey there I was inspired to write this post based on my experience trying to move my deployments to use docker, particularly for django applications and couldn't get a comprehensive place/article that covered what I needed.Hopefully this article will help anyone out there who is feeling as stuck as I was.
@@ -54,12 +54,12 @@ COPY . .
 
 1. The first line has to start with the **FROM** keyword. It tells docker, from which base image you want to base your image from. In this case, we are creating an image from the python 3.6 image.
 
-2. The second line is the command **RUN** is used to run instructions on the image, in this case we are creating a directory by the name ***code.*** After this the ***WORKDIR*** sets the code directory as the working directory so that any further instructions on the dockerfile occur within this directory.
-3. ***COPY*** command copies specific files from the host machine to the image we are creating. The requirements.txt file will be copied into the working directory set previously. After this RUN the pip install command to install the python packages needed for your project.
+2. The second line is the command **RUN** is used to run instructions on the image, in this case we are creating a directory by the name **_code._** After this the **_WORKDIR_** sets the code directory as the working directory so that any further instructions on the dockerfile occur within this directory.
+3. **_COPY_** command copies specific files from the host machine to the image we are creating. The requirements.txt file will be copied into the working directory set previously. After this RUN the pip install command to install the python packages needed for your project.
 4. Finally COPY your current working directory's project files from the host machine onto the docker image.
 
 In order to build this image run the simple command
-```docker build .``` on the current dockerfile location directory.
+`docker build .` on the current dockerfile location directory.
 For our use case we'll be having multiple images and running this command for every image will be tiresome. Hence the need for docker-compose, More on that as we finalize.
 
 #### 2. Nginx image
@@ -129,15 +129,16 @@ FROM postgres:latest
 COPY ./init/01-db_setup.sh /docker-entrypoint-initdb.d/01-db-setup.sh
 ```
 
- and now you're thinking
->But Lewis, what's this init file?
+and now you're thinking
+
+> But Lewis, what's this init file?
 
 for context let's take a look at the postgres directory within our project
 
 postgres
 ├── postgres/Dockerfile
 └── postgres/init
-    └── postgres/init/01-db_setup.sh
+└── postgres/init/01-db_setup.sh
 
 this is a shell script(docker entry point) specifying what commands to run on the database container, things like creating the database, users and granting privileges to the said user.
 
@@ -150,63 +151,61 @@ psql -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE $POSTGRES_DB TO $POSTGRES_
 ```
 
 note: when you create this file, don't forget to make it executable by running
-```sudo chmod u+x filename.sh```
+`sudo chmod u+x filename.sh`
 
 #### 4. wrapping things up with docker-compose
 
 at this point, you've probably noticed that we have a lot of dockerfiles,
-with docker-compose, we can conveniently build all this images using 
+with docker-compose, we can conveniently build all this images using
 the command
-``` docker-compose build . ```
+`docker-compose build .`
 First off, we'll need to create a docker-compose.yml file within our project directory. we'll specify the services needed for our webapp to run within this file.
 
 ```yaml
 version: '3'
 services:
-
   web:
-
-      build: .
-      container_name: great
-      volumes: 
+    build: .
+    container_name: great
+    volumes:
       - .:/code
       - static:/code/static_cdn
       - media:/code/media_cdn
-      depends_on: 
-          - postgres
-      expose: 
-        - 8080
-      command: bash -c "python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && gunicorn --workers=3 projectname.wsgi -b 0.0.0.0:8080"
+    depends_on:
+      - postgres
+    expose:
+      - 8080
+    command: bash -c "python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && gunicorn --workers=3 projectname.wsgi -b 0.0.0.0:8080"
 
   postgres:
-      build: ./postgres
-      restart: unless-stopped
-      expose:
-        - "5432"
-      environment:   # will be used by the init script
-            LC_ALL: C.UTF-8
-            POSTGRES_USER: myuser
-            POSTGRES_PASSWORD: mypassowrd.
-            POSTGRES_DB: mydb
-      volumes:
-          - pgdata:/var/lib/postgresql/data/  
+    build: ./postgres
+    restart: unless-stopped
+    expose:
+      - '5432'
+    environment: # will be used by the init script
+      LC_ALL: C.UTF-8
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassowrd.
+      POSTGRES_DB: mydb
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
 
   nginx:
-      restart: always
-      build: ./nginx/
-      volumes: 
-        - ./nginx/:/etc/nginx/conf.d
-        - ./logs/:/code/logs
-        - static:/code/static_cdn
-        - media:/code/media_cdn
-      ports: 
-        - "1221:80"
-      links:
-        - web  
+    restart: always
+    build: ./nginx/
+    volumes:
+      - ./nginx/:/etc/nginx/conf.d
+      - ./logs/:/code/logs
+      - static:/code/static_cdn
+      - media:/code/media_cdn
+    ports:
+      - '1221:80'
+    links:
+      - web
 volumes:
   pgdata:
   media:
-  static:  
+  static:
 ```
 
 Going through this commands line by line:
@@ -224,16 +223,16 @@ Going through this commands line by line:
 #### 5. final steps
 
 To build the images, it's now a matter of simply running
-```docker-compose build```
+`docker-compose build`
 This might take a few minutes to build as the base images are downloading in case you didn't have them locally,
 
 To start the various service containers, simply run
-```docker-compose up```
+`docker-compose up`
 
 or if you want to specify which compose file to run in case of multiple docker-compose files within one directory
-```docker-compose -f filename.yml up```
+`docker-compose -f filename.yml up`
 
-***DISCLAIMER***: Don't forget to set the Debug = False and allowed hosts, in the settings.py file of django to reflect the domain name or ip-address you'll be using.
+**_DISCLAIMER_**: Don't forget to set the Debug = False and allowed hosts, in the settings.py file of django to reflect the domain name or ip-address you'll be using.
 In addition to this, change the database from the default sqlite3 that comes with django to reflect the database and usernames we specified
 in the environment section of the postgres service like so
 
@@ -257,16 +256,16 @@ To view the running site, run
 2. virtual-box-machine-ip:1221(for those using docker-toolbox)
 
 in case you want to stop the containers
-```docker-compose stop```
+`docker-compose stop`
 
 to start the stopped containers
-```docker-compose start```
+`docker-compose start`
 
 to destroy the containers
-```docker-compose down```
+`docker-compose down`
 
 you made changes to the docker-files and need those changes applied
-```docker-compose down && docker-compose build && docker-compose up```
+`docker-compose down && docker-compose build && docker-compose up`
 
 Now to get the site up and running on the web, simply create a configuration file for your local machines nginx(or apache) on the web server and simply point it to the docker-container running your django app. In this case you'll point it to the nginx container.
 127.0.0.1:1221

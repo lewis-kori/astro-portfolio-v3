@@ -1,12 +1,12 @@
 ---
 title: User registration and authorization on a django API with djoser and JSON web tokens.
 author: Lewis Kori
-tags: ["python", "django", "tutorial"]
+tags: ['python', 'django', 'tutorial']
 series: REST APIs with django
-cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--LMRJS1Sq--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://res.cloudinary.com/practicaldev/image/fetch/s--k8um9boO--/c_imagga_scale%2Cf_auto%2Cfl_progressive%2Ch_420%2Cq_auto%2Cw_1000/https://thepracticaldev.s3.amazonaws.com/i/joznyhq1xf1yg8gj44g9.jpg
+cover_image: https://thepracticaldev.s3.amazonaws.com/i/joznyhq1xf1yg8gj44g9.jpg
 description: user authentication using django restframework,djoser and json web token authorization
 dateCreated: 2019-11-17
-sponsors: ["Scraper API", "Digital Ocean"]
+sponsors: ['Scraper API', 'Digital Ocean']
 ---
 
 In the [first part](https://dev.to/lewiskori/building-web-apis-with-django-lb4) of the intro django rest framework, we set up the project and did an overview of what the project is all about. Check it out if you haven't yet.
@@ -37,7 +37,7 @@ Before proceeding, let's take a look at some of the endpoints we'll be utilizing
 | /api/accounts/all-profiles/ | get all user profiles and create a new one                                |
 | /api/accounts/profile/id/   | detail view of a user's profile                                           |
 
-Those may seem like a handful but the good news is that djoser has done most of the heavy lifting for us. All the endpoints starting with *auth* are djoser generated.
+Those may seem like a handful but the good news is that djoser has done most of the heavy lifting for us. All the endpoints starting with _auth_ are djoser generated.
 
 Getting back to the first part of the series, we installed some python packages. We'll need to add those packages to the project's settings.py file so as to utilize them in our django project.
 
@@ -126,7 +126,7 @@ class userProfileSerializer(serializers.ModelSerializer):
         fields='__all__'
 ```
 
-Going line by line, what we did is import the *serializers* class from rest_framework as well as the model we want to serialize. In this case, it's the userProfile model.
+Going line by line, what we did is import the _serializers_ class from rest_framework as well as the model we want to serialize. In this case, it's the userProfile model.
 
 Our first serializer is userProfileSerializer. This will inherit from the ModelSerializer class in django. As you noted before, the userProfile model was linked to the default user model in django. We'll indicate this field as read_only. This means that the field will be included in the APIs output but won't be included during Create or Update operations on the endpoint. To populate this field, we'll create a method to automatically fill the field with the request user.
 
@@ -168,7 +168,7 @@ class userProfileDetailView(RetrieveUpdateDestroyAPIView):
 ```
 
 Each API view is linked to the serializer class we had previously created.
-One thing we notice is the `perform_create` method in the *UserProfileListCreateView* class. This is how we indicate how we want to create the serializer. In this case, we wanted to populate the read_only user field with the requesting user then populate the serializer with this value.
+One thing we notice is the `perform_create` method in the _UserProfileListCreateView_ class. This is how we indicate how we want to create the serializer. In this case, we wanted to populate the read_only user field with the requesting user then populate the serializer with this value.
 
 The views are then linked to a URL endpoint in the app's urls.py file:
 
@@ -190,7 +190,7 @@ urlpatterns = [
 ### Permissions
 
 Permissions determine whether a request should be granted or denied access.
-Django rest framework ships with several. I won't get into those as it's [documentation](https://www.django-rest-framework.org/api-guide/permissions/) is quite comprehensive about them. However, let's draw our attention to the ``` IsOwnerProfileOrReadOnly ``` permission class.
+Django rest framework ships with several. I won't get into those as it's [documentation](https://www.django-rest-framework.org/api-guide/permissions/) is quite comprehensive about them. However, let's draw our attention to the `IsOwnerProfileOrReadOnly` permission class.
 
 This is a custom permission implementation. We'll initialize a permission.py file and populate it with the code below:
 
@@ -262,7 +262,7 @@ To run the tests, run the command `python manage.py test` in your terminal.
 If you are feeling a bit confused, here's the project structure up to this point.
 
 ```bash
-eventScheduler  
+eventScheduler
 ├── accounts
 │   ├── admin.py
 │   ├── apps.py
@@ -294,7 +294,7 @@ eventScheduler
 
 ### Get access token
 
- ![AccessToken](https://thepracticaldev.s3.amazonaws.com/i/6ylvefv3kcgjji4fd8vw.PNG)
+![AccessToken](https://thepracticaldev.s3.amazonaws.com/i/6ylvefv3kcgjji4fd8vw.PNG)
 
 ### Retrieve/update the authenticated user
 
