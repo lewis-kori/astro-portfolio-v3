@@ -6,7 +6,7 @@ google_play: https://play.google.com/store/apps/details?id=com.skyetechgroup.psc
 external_link: https://www.parklandssportsclub.org/
 year: 2021
 made_at: skyetech
-cover_image: ./images/psc.png
+cover_image: /projects/psc.png
 featured: true
 ---
 

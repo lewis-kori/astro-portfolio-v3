@@ -2,7 +2,7 @@
 title: Hoteles & Hogares Travel
 tech: ["ShadCN", "Next.js", "Directus"]
 external_link: https://hoteleshogares.com
-cover_image: ./images/hh.png
+cover_image: /projects/hh.png
 featured: true
 year: 2024
 made_at: Inflection Studio

@@ -2,7 +2,7 @@
 title: Private Cloud
 tech: ["nuxt", "vercel", "django","aws"]
 external_link: https://cloud.myner.co.ke/
-cover_image: ./images/cloud.png
+cover_image: /projects/cloud.png
 year: 2020
 featured: false
 made_at: skyetech

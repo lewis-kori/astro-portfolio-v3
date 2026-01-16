@@ -1,7 +1,7 @@
 ---
 title: Law Blog
 tech: ["django","html","css"]
-cover_image: ./images/muthuri.png
+cover_image: /projects/muthuri.png
 external_link: https://muthurikathure.com
 featured: false
 year: 2018

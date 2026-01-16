@@ -2,7 +2,7 @@
 title: Eleven Motors Kenya
 tech: ["Django", "Next.js", "Docker"]
 external_link: https://elevenmotors.ke
-cover_image: ./images/eleven-motors.png
+cover_image: /projects/eleven-motors.png
 featured: true
 year: 2024
 made_at: Inflection Studio

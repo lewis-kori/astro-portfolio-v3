@@ -2,7 +2,7 @@
 title: Kimani and Michuki Advocates
 tech: ["Django", "ShadCN", "Figma", "Next.js"]
 external_link: https://kmichuki.co.ke/
-cover_image: ./images/kimani-michuki.png
+cover_image: /projects/kimani-michuki.png
 featured: true
 year: 2024
 made_at: Inflection Studio
