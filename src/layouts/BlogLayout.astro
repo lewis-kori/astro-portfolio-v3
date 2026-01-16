@@ -168,7 +168,7 @@ const publishedTime = dateCreated.toISOString();
                     alt={authorBio.name}
                     width={80}
                     height={80}
-                    class='rounded-full size-16 border-2 border-primary'
+                    class='rounded-full size-16 border-2 border-primary object-cover'
                   />
                   <div>
                     <h3 class='font-semibold text-lg'>{authorBio.name}</h3>
@@ -207,7 +207,6 @@ const publishedTime = dateCreated.toISOString();
           <slot />
         </div>
 
-        <!-- Sponsors Sidebar -->
         {hasSponsors && <SponsorsSidebar sponsors={sponsors} />}
       </div>
 
@@ -219,7 +218,6 @@ const publishedTime = dateCreated.toISOString();
         />
       </div>
 
-      <!-- Related Blogs Section -->
       {
         relatedBlogs.length > 0 && (
           <section class='mt-16 pt-16 border-t border-border'>
