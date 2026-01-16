@@ -1,15 +1,11 @@
 ---
-import aboutImage from '@/assets/about-image.webp';
 import ArticleCard from '@/components/ArticleCard.astro';
-import SocialLink from '@/components/SocialLink.astro';
+import AuthorSidebar from '@/components/AuthorSidebar.astro';
 import SocialShare from '@/components/SocialShare.astro';
 import SponsorsSidebar from '@/components/SponsorsSidebar.astro';
-import { authorBio } from '@/config';
 import { Image } from 'astro:assets';
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { type CollectionEntry } from 'astro:content';
 import Layout from './Layout.astro';
-
-const socials = await getCollection('socials');
 
 interface Props {
   title: string;
@@ -159,34 +155,7 @@ const publishedTime = dateCreated.toISOString();
             </div>
           </div>
 
-          <aside class='lg:col-span-2'>
-            <div class='sticky top-24 space-y-6'>
-              <div class='space-y-4'>
-                <div class='flex items-center gap-4'>
-                  <Image
-                    src={aboutImage}
-                    alt={authorBio.name}
-                    width={80}
-                    height={80}
-                    class='rounded-full size-16 border-2 border-primary object-cover'
-                  />
-                  <div>
-                    <h3 class='font-semibold text-lg'>{authorBio.name}</h3>
-                    <p class='text-sm text-muted-foreground'>
-                      {authorBio.tagline}
-                    </p>
-                  </div>
-                </div>
-                <p class='text-sm text-muted-foreground leading-relaxed'>
-                  {authorBio.description}
-                </p>
-
-                <div class='flex gap-3 pt-2'>
-                  {socials.map((social) => <SocialLink {...social.data} />)}
-                </div>
-              </div>
-            </div>
-          </aside>
+          <AuthorSidebar />
         </div>
       </header>
 
