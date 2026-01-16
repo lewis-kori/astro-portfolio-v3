@@ -3,12 +3,15 @@ import ThemeSwitcher from '@/components/shared/ThemeSwitcher.astro';
 import { siteConfig } from '@/config';
 import { Image } from 'astro:assets';
 
+const pathname = Astro.url.pathname;
+const isHomePage = pathname === '/';
+
 const navLinks = [
   { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Projects', href: '/projects' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'About', href: isHomePage ? '#about' : '/#about' },
+  { name: 'Work', href: isHomePage ? '#work' : '/#work' },
+  { name: 'Projects', href: isHomePage ? '#projects' : '/#projects' },
+  { name: 'Blog', href: isHomePage ? '#blogs' : '/blog' },
 ];
 ---
 
