@@ -1,0 +1,308 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { render } from 'astro:content';
+import { getEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection('blog');
+  return blogPosts.map((post) => {
+    // Remove .md extension if present in the id
+    const slug = post.id.replace(/\.md$/, '');
+    return {
+      params: { slug },
+      props: { post },
+    };
+  });
+}
+const { slug } = Astro.params;
+
+console.log({ slug });
+const post = await getEntry('blog', slug as string);
+if (!post) {
+  return Astro.redirect('/404');
+}
+const { Content } = await render(post);
+// Get sponsors if they exist
+let sponsors: CollectionEntry<'sponsors'>[] = [];
+if (post.data.sponsors && post.data.sponsors.length > 0) {
+  const allSponsors = await getCollection('sponsors');
+  sponsors = allSponsors.filter((sponsor) =>
+    post.data.sponsors?.some(
+      (sponsorName) =>
+        sponsorName.toLowerCase().replace(/\s+/g, '-') === sponsor.id
+    )
+  );
+}
+
+const hasSponsors = sponsors.length > 0;
+
+// Format date
+const formattedDate = post.data.dateCreated.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Layout title={`${post.data.title} | Lewis Kori`}>
+  <article class='py-20 px-4 min-h-screen'>
+    <div class='container mx-auto max-w-7xl'>
+      <!-- Blog Header -->
+      <header class='mb-12 max-w-4xl mx-auto'>
+        <div class='space-y-4'>
+          <h1
+            class='text-3xl md:text-4xl font-semibold dark:first-letter:text-secondary first-letter:text-destructive retro:first-letter:text-primary'
+          >
+            {post.data.title}
+          </h1>
+          <div class='flex flex-wrap items-center gap-4 text-muted-foreground'>
+            <time datetime={post.data.dateCreated.toISOString()}>
+              {formattedDate}
+            </time>
+            <span>•</span>
+            <span>By {post.data.author}</span>
+          </div>
+          {
+            post.data.tags && post.data.tags.length > 0 && (
+              <div class='flex flex-wrap gap-2'>
+                {post.data.tags.map((tag) => (
+                  <span class='px-3 py-1 text-xs rounded-full bg-primary/10 text-primary'>
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            )
+          }
+          {
+            post.data.cover_image && (
+              <img
+                src={post.data.cover_image}
+                alt={post.data.title}
+                class='w-full rounded-lg shadow-lg mt-6'
+              />
+            )
+          }
+        </div>
+      </header>
+
+      <!-- Main Content Grid -->
+      <div
+        class:list={[
+          'grid gap-8',
+          hasSponsors ? 'lg:grid-cols-5' : 'grid-cols-1 max-w-4xl mx-auto',
+        ]}
+      >
+        <!-- Blog Content -->
+        <div
+          class:list={[
+            'max-w-none leading-7 [&_h1]:text-4xl [&_h1]:font-bold [&_h1]:mt-8 [&_h1]:mb-4 [&_h2]:text-3xl [&_p]:text-primary [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:mt-8 [&_h3]:mb-4 [&_h4]:text-xl [&_h4]:font-bold [&_h4]:mt-8 [&_h4]:mb-4 [&_h5]:text-lg [&_h5]:font-bold [&_h5]:mt-8 [&_h5]:mb-4 [&_h6]:text-base [&_h6]:font-bold [&_h6]:mt-8 [&_h6]:mb-4 [&_p]:mb-4 [&_a]:underline dark:[&_a]:text-secondary retro:[&_a]:text-secondary  [&_a]:text-destructive [&_ul]:mb-4 [&_ul]:ml-6 [&_ul]:list-disc [&_ul]:list-outside [&_ol]:mb-4 [&_ol]:ml-6 [&_ol]:list-decimal [&_ol]:list-outside [&_li]:mb-2 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_code]:font-mono [&_code]:bg-base-200 [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_pre]:mb-4 [&_pre]:bg-base-200 [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_blockquote]:border-l-4 [&_blockquote]:border-secondary [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:my-4 [&_img]:rounded-lg [&_img]:my-6',
+            hasSponsors ? 'lg:col-span-3' : '',
+          ]}
+        >
+          <Content />
+        </div>
+
+        <!-- Sponsors Sidebar -->
+        {
+          hasSponsors && (
+            <aside class='lg:col-span-2'>
+              <div class='sticky top-24 space-y-6'>
+                {/* Affiliate Disclaimer */}
+                <div class='p-6 rounded-lg border bg-card'>
+                  <p class='text-sm text-muted-foreground leading-relaxed'>
+                    Some of the links below are affiliate links, which means I
+                    may earn a small commission — at no extra cost to you. I
+                    only recommend tools, products, and services I've personally
+                    used and found genuinely helpful in my work or learning
+                    journey. These sponsors quietly help keep the lights on
+                    around here — and I'm grateful for that. Please don't buy
+                    anything you can't afford or aren't ready to put to use.
+                  </p>
+                </div>
+
+                {/* Sponsors List */}
+                <div class='space-y-4'>
+                  <h3 class='text-xl font-semibold'>Sponsors</h3>
+                  {sponsors.map(async (sponsor) => {
+                    const { Content: SponsorContent } = await sponsor.render();
+                    return (
+                      <div class='p-6 rounded-lg border bg-card space-y-4'>
+                        <div class='flex items-start justify-between'>
+                          <h4 class='text-lg font-semibold'>
+                            {sponsor.data.name}
+                          </h4>
+                          {sponsor.data.twitter && (
+                            <a
+                              href={sponsor.data.twitter}
+                              target='_blank'
+                              rel='noopener noreferrer'
+                              class='text-muted-foreground hover:text-primary transition-colors'
+                              aria-label={`${sponsor.data.name} on Twitter`}
+                            >
+                              <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                width='20'
+                                height='20'
+                                viewBox='0 0 24 24'
+                                fill='none'
+                                stroke='currentColor'
+                                stroke-width='2'
+                                stroke-linecap='round'
+                                stroke-linejoin='round'
+                              >
+                                <path d='M4 4l11.733 16h4.267l-11.733 -16z' />
+                                <path d='M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772' />
+                              </svg>
+                            </a>
+                          )}
+                        </div>
+                        <div class='prose prose-sm max-w-none text-muted-foreground'>
+                          <SponsorContent />
+                        </div>
+                        <a
+                          href={sponsor.data.url}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          class='inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline'
+                        >
+                          Visit {sponsor.data.name}
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            width='16'
+                            height='16'
+                            viewBox='0 0 24 24'
+                            fill='none'
+                            stroke='currentColor'
+                            stroke-width='2'
+                            stroke-linecap='round'
+                            stroke-linejoin='round'
+                          >
+                            <path d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6' />
+                            <polyline points='15 3 21 3 21 9' />
+                            <line x1='10' x2='21' y1='14' y2='3' />
+                          </svg>
+                        </a>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </aside>
+          )
+        }
+      </div>
+
+      <!-- Back to Blog -->
+      <div class='mt-12 max-w-4xl mx-auto'>
+        <a
+          href='/blog'
+          class='inline-flex items-center gap-2 text-primary hover:underline'
+        >
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='20'
+            height='20'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            stroke-width='2'
+            stroke-linecap='round'
+            stroke-linejoin='round'
+          >
+            <path d='m15 18-6-6 6-6'></path>
+          </svg>
+          Back to all posts
+        </a>
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  /* Custom prose styling for blog content */
+  .prose {
+    color: hsl(var(--foreground));
+  }
+
+  .prose :where(h1, h2, h3, h4, h5, h6):not(:where([class~='not-prose'] *)) {
+    color: hsl(var(--foreground));
+    font-weight: 600;
+    margin-top: 2em;
+    margin-bottom: 1em;
+  }
+
+  .prose :where(a):not(:where([class~='not-prose'] *)) {
+    color: hsl(var(--primary));
+    text-decoration: underline;
+  }
+
+  .prose :where(a):not(:where([class~='not-prose'] *)):hover {
+    opacity: 0.8;
+  }
+
+  .prose :where(code):not(:where([class~='not-prose'] *)) {
+    background: hsl(var(--muted));
+    padding: 0.2em 0.4em;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+  }
+
+  .prose :where(pre):not(:where([class~='not-prose'] *)) {
+    background: hsl(var(--muted));
+    border-radius: 0.5rem;
+    padding: 1rem;
+    overflow-x: auto;
+  }
+
+  .prose :where(pre code):not(:where([class~='not-prose'] *)) {
+    background: transparent;
+    padding: 0;
+  }
+
+  .prose :where(blockquote):not(:where([class~='not-prose'] *)) {
+    border-left: 4px solid hsl(var(--primary));
+    padding-left: 1rem;
+    font-style: italic;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .prose :where(img):not(:where([class~='not-prose'] *)) {
+    border-radius: 0.5rem;
+    margin: 2rem 0;
+  }
+
+  .prose :where(hr):not(:where([class~='not-prose'] *)) {
+    border-color: hsl(var(--border));
+    margin: 3rem 0;
+  }
+
+  .prose :where(ul, ol):not(:where([class~='not-prose'] *)) {
+    padding-left: 1.5rem;
+  }
+
+  .prose :where(li):not(:where([class~='not-prose'] *)) {
+    margin: 0.5rem 0;
+  }
+
+  .prose :where(strong):not(:where([class~='not-prose'] *)) {
+    color: hsl(var(--foreground));
+    font-weight: 600;
+  }
+
+  .prose :where(table):not(:where([class~='not-prose'] *)) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+  }
+
+  .prose :where(th, td):not(:where([class~='not-prose'] *)) {
+    border: 1px solid hsl(var(--border));
+    padding: 0.5rem 1rem;
+  }
+
+  .prose :where(th):not(:where([class~='not-prose'] *)) {
+    background: hsl(var(--muted));
+    font-weight: 600;
+  }
+</style>

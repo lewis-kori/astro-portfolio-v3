@@ -1,8 +1,8 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import ArticleCard from '@/components/ArticleCard.astro';
+import NewsletterForm from '@/components/NewsletterForm.astro';
+import Layout from '@/layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import ArticleCard from '../components/ArticleCard.astro';
-import NewsletterForm from '../components/NewsletterForm.astro';
 
 // Get all blog posts and sort by date (newest first)
 const allBlogs = await getCollection('blog');
@@ -21,7 +21,7 @@ const blogsPerPage = 9;
 const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
 ---
 
-<Layout>
+<Layout title='Blog'>
   <section class='py-20 px-4 min-h-screen'>
     <div class='container-fluid'>
       <!-- Hero Section with Newsletter -->

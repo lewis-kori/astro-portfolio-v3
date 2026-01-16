@@ -59,4 +59,13 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { socials, about, experience, projects, blog };
+const sponsors = defineCollection({
+  type: 'content',
+  schema: z.object({
+    name: z.string(),
+    url: z.string().url(),
+    twitter: z.string().url().optional(),
+  }),
+});
+
+export const collections = { socials, about, experience, projects, blog, sponsors };
