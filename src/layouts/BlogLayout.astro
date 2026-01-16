@@ -2,6 +2,7 @@
 import Layout from './Layout.astro';
 import { Image } from 'astro:assets';
 import SponsorsSidebar from '@/components/SponsorsSidebar.astro';
+import ArticleCard from '@/components/ArticleCard.astro';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -14,6 +15,7 @@ interface Props {
   series?: string;
   readingTime: number;
   sponsors?: CollectionEntry<'sponsors'>[];
+  relatedBlogs?: CollectionEntry<'blog'>[];
 }
 
 const {
@@ -26,6 +28,7 @@ const {
   series,
   readingTime,
   sponsors = [],
+  relatedBlogs = [],
 } = Astro.props;
 
 const hasSponsors = sponsors.length > 0;
@@ -165,6 +168,37 @@ const publishedTime = dateCreated.toISOString();
         <!-- Sponsors Sidebar -->
         {hasSponsors && <SponsorsSidebar sponsors={sponsors} />}
       </div>
+
+      <!-- Related Blogs Section -->
+      {
+        relatedBlogs.length > 0 && (
+          <section class='mt-16 pt-16 border-t border-border'>
+            <div class='mb-8'>
+              <h2 class='text-2xl md:text-3xl font-semibold mb-2'>
+                More from this series
+              </h2>
+              <p class='text-muted-foreground'>
+                Continue reading the {series} series
+              </p>
+            </div>
+            <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+              {relatedBlogs.map((blog) => {
+                const blogSlug = blog.id.replace(/\.md$/, '');
+                return (
+                  <ArticleCard
+                    title={blog.data.title}
+                    description={blog.data.description}
+                    dateCreated={blog.data.dateCreated}
+                    tags={blog.data.tags}
+                    slug={blogSlug}
+                    cover_image={blog.data.cover_image}
+                  />
+                );
+              })}
+            </div>
+          </section>
+        )
+      }
     </div>
   </article>
 </Layout>

@@ -7,7 +7,6 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blog');
   return blogPosts.map((post) => {
-    // Remove .md extension if present in the id
     const slug = post.id.replace(/\.md$/, '');
     return {
       params: { slug },
@@ -17,7 +16,6 @@ export async function getStaticPaths() {
 }
 const { slug } = Astro.params;
 
-console.log({ slug });
 const post = await getEntry('blog', slug as string);
 if (!post) {
   return Astro.redirect('/404');
@@ -40,6 +38,18 @@ if (post.data.sponsors && post.data.sponsors.length > 0) {
     )
   );
 }
+
+// Get related blogs from the same series
+let relatedBlogs: CollectionEntry<'blog'>[] = [];
+if (post.data.series) {
+  const allBlogs = await getCollection('blog');
+  relatedBlogs = allBlogs
+    .filter(
+      (blog) => blog.data.series === post.data.series && blog.id !== post.id
+    )
+    .sort((a, b) => b.data.dateCreated.getTime() - a.data.dateCreated.getTime())
+    .slice(0, 3); // Limit to 3 related posts
+}
 ---
 
 <BlogLayout
@@ -52,6 +62,7 @@ if (post.data.sponsors && post.data.sponsors.length > 0) {
   series={post.data.series}
   readingTime={readingTime}
   sponsors={sponsors}
+  relatedBlogs={relatedBlogs}
 >
   <Content />
 </BlogLayout>
