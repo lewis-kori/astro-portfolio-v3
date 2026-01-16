@@ -1,0 +1,94 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  sponsors: CollectionEntry<'sponsors'>[];
+}
+
+const { sponsors } = Astro.props;
+---
+
+<aside class='lg:col-span-2'>
+  <div class='sticky top-24 space-y-6'>
+    <!-- Section Title -->
+    <h3 class='text-xl font-semibold'>Sponsors</h3>
+
+    <!-- Affiliate Disclaimer -->
+    <div class='p-6 rounded-lg border bg-card'>
+      <p class='text-sm text-muted-foreground leading-relaxed'>
+        Some of the links below are affiliate links, which means I may earn a
+        small commission — at no extra cost to you. I only recommend tools,
+        products, and services I've personally used and found genuinely helpful
+        in my work or learning journey. These sponsors quietly help keep the
+        lights on around here — and I'm grateful for that. Please don't buy
+        anything you can't afford or aren't ready to put to use.
+      </p>
+    </div>
+
+    <!-- Sponsors List -->
+    <div class='space-y-4'>
+      {
+        sponsors.map(async (sponsor) => {
+          const { Content: SponsorContent } = await sponsor.render();
+          return (
+            <div class='p-6 rounded-lg border bg-card space-y-4'>
+              <div class='flex items-start justify-between'>
+                <h4 class='text-lg font-semibold'>{sponsor.data.name}</h4>
+                {sponsor.data.twitter && (
+                  <a
+                    href={sponsor.data.twitter}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    class='text-muted-foreground hover:text-primary transition-colors'
+                    aria-label={`${sponsor.data.name} on Twitter`}
+                  >
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      width='20'
+                      height='20'
+                      viewBox='0 0 24 24'
+                      fill='none'
+                      stroke='currentColor'
+                      stroke-width='2'
+                      stroke-linecap='round'
+                      stroke-linejoin='round'
+                    >
+                      <path d='M4 4l11.733 16h4.267l-11.733 -16z' />
+                      <path d='M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772' />
+                    </svg>
+                  </a>
+                )}
+              </div>
+              <div class='prose prose-sm max-w-none text-muted-foreground'>
+                <SponsorContent />
+              </div>
+              <a
+                href={sponsor.data.url}
+                target='_blank'
+                rel='noopener noreferrer'
+                class='inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline'
+              >
+                Visit {sponsor.data.name}
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='16'
+                  height='16'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  stroke-width='2'
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                >
+                  <path d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6' />
+                  <polyline points='15 3 21 3 21 9' />
+                  <line x1='10' x2='21' y1='14' y2='3' />
+                </svg>
+              </a>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</aside>
