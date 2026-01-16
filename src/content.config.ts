@@ -49,6 +49,7 @@ const projects = defineCollection({
     title: z.string(),
     tech: z.array(z.string()),
     external_link: z.string().url().optional(),
+    github_link: z.string().url().optional(),
     app_store: z.string().url().optional(),
     google_play: z.string().url().optional(),
     cover_image: z.string().optional(),
