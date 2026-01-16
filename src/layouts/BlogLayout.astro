@@ -3,6 +3,7 @@ import Layout from './Layout.astro';
 import { Image } from 'astro:assets';
 import SponsorsSidebar from '@/components/SponsorsSidebar.astro';
 import ArticleCard from '@/components/ArticleCard.astro';
+import SocialShare from '@/components/SocialShare.astro';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -56,11 +57,10 @@ const publishedTime = dateCreated.toISOString();
 >
   <article class='py-20 px-4 min-h-screen'>
     <div class='container-fluid'>
-      <!-- Back to Blog -->
       <div class='mb-8'>
         <a
           href='/blog'
-          class='inline-flex items-center gap-2 text-primary hover:underline'
+          class='inline-flex items-center gap-2 text-secondary hover:underline'
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -79,7 +79,6 @@ const publishedTime = dateCreated.toISOString();
         </a>
       </div>
 
-      <!-- Blog Header -->
       <header class='mb-12'>
         <div class='space-y-4'>
           <h1
@@ -152,7 +151,7 @@ const publishedTime = dateCreated.toISOString();
       <div
         class:list={[
           'grid gap-8',
-          hasSponsors ? 'lg:grid-cols-5' : 'grid-cols-1 max-w-4xl mx-auto',
+          hasSponsors ? 'lg:grid-cols-5' : 'grid-cols-1  mx-auto',
         ]}
       >
         <!-- Blog Content -->
@@ -167,6 +166,14 @@ const publishedTime = dateCreated.toISOString();
 
         <!-- Sponsors Sidebar -->
         {hasSponsors && <SponsorsSidebar sponsors={sponsors} />}
+      </div>
+
+      <div class='mt-12 pt-12 border-t border-border'>
+        <SocialShare
+          url={Astro.url.href}
+          title={title}
+          description={description}
+        />
       </div>
 
       <!-- Related Blogs Section -->
