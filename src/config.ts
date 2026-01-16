@@ -24,3 +24,10 @@ export const siteConfig: SiteConfig = {
   email: 'hello@lewiskori.com',
   phone: '+254 712 345678',
 };
+
+export const authorBio = {
+  name: 'Lewis Kori',
+  tagline: 'Turning ideas into scalable web solutions',
+  description:
+    "I'm a software engineer specializing in SaaS applications and MVP development for non-technical founders, indiehackers and startups.",
+};

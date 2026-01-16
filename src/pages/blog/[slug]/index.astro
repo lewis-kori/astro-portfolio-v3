@@ -1,0 +1,68 @@
+---
+import BlogLayout from '@/layouts/BlogLayout.astro';
+import { render } from 'astro:content';
+import { getEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection('blog');
+  return blogPosts.map((post) => {
+    const slug = post.id.replace(/\.md$/, '');
+    return {
+      params: { slug },
+      props: { post },
+    };
+  });
+}
+const { slug } = Astro.params;
+
+const post = await getEntry('blog', slug as string);
+if (!post) {
+  return Astro.redirect('/404');
+}
+const { Content } = await render(post);
+
+// Calculate word count and reading time
+const content = post.body;
+const wordCount = content.split(/\s+/).length;
+const readingTime = Math.ceil(wordCount / 200); // Average reading speed: 200 words/min
+
+// Get sponsors if they exist
+let sponsors: CollectionEntry<'sponsors'>[] = [];
+if (post.data.sponsors && post.data.sponsors.length > 0) {
+  const allSponsors = await getCollection('sponsors');
+  sponsors = allSponsors.filter((sponsor) =>
+    post.data.sponsors?.some(
+      (sponsorName) =>
+        sponsorName.toLowerCase() === sponsor.data.name.toLowerCase()
+    )
+  );
+}
+
+// Get related blogs from the same series
+let relatedBlogs: CollectionEntry<'blog'>[] = [];
+if (post.data.series) {
+  const allBlogs = await getCollection('blog');
+  relatedBlogs = allBlogs
+    .filter(
+      (blog) => blog.data.series === post.data.series && blog.id !== post.id
+    )
+    .sort((a, b) => b.data.dateCreated.getTime() - a.data.dateCreated.getTime())
+    .slice(0, 3); // Limit to 3 related posts
+}
+---
+
+<BlogLayout
+  title={post.data.title}
+  description={post.data.description}
+  author={post.data.author}
+  dateCreated={post.data.dateCreated}
+  tags={post.data.tags}
+  coverImage={post.data.cover_image}
+  series={post.data.series}
+  readingTime={readingTime}
+  sponsors={sponsors}
+  relatedBlogs={relatedBlogs}
+>
+  <Content />
+</BlogLayout>

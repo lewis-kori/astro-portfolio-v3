@@ -48,32 +48,30 @@ const socials = await getCollection('socials');
     const stickySocials = document.getElementById('sticky-socials');
     if (!stickySocials) return;
 
-    function handleScroll() {
-      // Get the height of the viewport
-      const viewportHeight = window.innerHeight;
+    const isHomePage = window.location.pathname === '/';
 
-      // Show socials after scrolling past 80% of the viewport (hero section)
-      if (window.scrollY > viewportHeight * 0.8) {
-        stickySocials.style.opacity = '1';
-      } else {
-        stickySocials.style.opacity = '0';
+    if (isHomePage) {
+      function handleScroll() {
+        const viewportHeight = window.innerHeight;
+        if (window.scrollY > viewportHeight * 0.7) {
+          stickySocials.style.opacity = '1';
+        } else {
+          stickySocials.style.opacity = '0';
+        }
       }
+
+      window.addEventListener('scroll', handleScroll);
+      handleScroll();
+    } else {
+      stickySocials.style.opacity = '1';
     }
-
-    // Listen for scroll events
-    window.addEventListener('scroll', handleScroll);
-
-    // Check initial state
-    handleScroll();
   }
 
-  // Initialize on load
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initStickySocials);
   } else {
     initStickySocials();
   }
 
-  // Re-initialize on Astro page transitions
   document.addEventListener('astro:page-load', initStickySocials);
 </script>

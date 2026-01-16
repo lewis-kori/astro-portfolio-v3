@@ -1,8 +1,8 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import ArticleCard from '@/components/ArticleCard.astro';
+import NewsletterForm from '@/components/NewsletterForm.astro';
+import Layout from '@/layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import ArticleCard from '../components/ArticleCard.astro';
-import NewsletterForm from '../components/NewsletterForm.astro';
 
 // Get all blog posts and sort by date (newest first)
 const allBlogs = await getCollection('blog');
@@ -21,13 +21,15 @@ const blogsPerPage = 9;
 const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
 ---
 
-<Layout>
+<Layout title='Blog'>
   <section class='py-20 px-4 min-h-screen'>
     <div class='container-fluid'>
       <!-- Hero Section with Newsletter -->
       <div class='mb-16 space-y-8'>
         <div class='text-center space-y-4'>
-          <h1 class='text-2xl md:text-3xl lg:text-4xl font-semibold'>
+          <h1
+            class='text-2xl md:text-3xl lg:text-4xl first-letter-color font-semibold'
+          >
             What the Edge?
           </h1>
           <p
@@ -286,7 +288,9 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
     }
 
     if (currentFilter === 'series' && currentFilterValue) {
-      params.set('series', currentFilterValue);
+      // Normalize series name to slug format for URL
+      const seriesSlug = currentFilterValue.toLowerCase().replace(/\s+/g, '-');
+      params.set('series', seriesSlug);
     } else if (currentFilter === 'tag' && currentFilterValue) {
       params.set('tag', currentFilterValue);
     }
@@ -304,9 +308,13 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
       currentFilter = 'all';
       currentFilterValue = '';
     } else if (filterType === 'series') {
-      filteredBlogs = sortedBlogs.filter(
-        (blog) => blog.data.series === filterValue
-      );
+      // Normalize series names for comparison (convert to lowercase and replace spaces with hyphens)
+      const normalizedFilterValue = filterValue.toLowerCase().replace(/\s+/g, '-');
+      filteredBlogs = sortedBlogs.filter((blog) => {
+        if (!blog.data.series) return false;
+        const normalizedSeries = blog.data.series.toLowerCase().replace(/\s+/g, '-');
+        return normalizedSeries === normalizedFilterValue;
+      });
       currentFilter = 'series';
       currentFilterValue = filterValue;
     } else if (filterType === 'tag') {
