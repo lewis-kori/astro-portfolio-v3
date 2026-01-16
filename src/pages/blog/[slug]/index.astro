@@ -1,10 +1,8 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import { Image } from 'astro:assets';
+import BlogLayout from '@/layouts/BlogLayout.astro';
 import { render } from 'astro:content';
 import { getEntry } from 'astro:content';
 import { getCollection, type CollectionEntry } from 'astro:content';
-import SponsorsSidebar from '@/components/SponsorsSidebar.astro';
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blog');
@@ -42,138 +40,18 @@ if (post.data.sponsors && post.data.sponsors.length > 0) {
     )
   );
 }
-
-const hasSponsors = sponsors.length > 0;
-
-// Format date
-const formattedDate = post.data.dateCreated.toLocaleDateString('en-US', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
-
-// Format series name for URL
-const seriesSlug = post.data.series
-  ? post.data.series.toLowerCase().replace(/\s+/g, '-')
-  : null;
 ---
 
-<Layout title={`${post.data.title} | Lewis Kori`}>
-  <article class='py-20 px-4 min-h-screen'>
-    <div class='container-fluid'>
-      <!-- Back to Blog -->
-      <div class='mb-8'>
-        <a
-          href='/blog'
-          class='inline-flex items-center gap-2 text-primary hover:underline'
-        >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='20'
-            height='20'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-          >
-            <path d='m15 18-6-6 6-6'></path>
-          </svg>
-          Back to all posts
-        </a>
-      </div>
-
-      <!-- Blog Header -->
-      <header class='mb-12'>
-        <div class='space-y-4'>
-          <h1
-            class='text-3xl md:text-4xl font-semibold dark:first-letter:text-secondary first-letter:text-destructive retro:first-letter:text-primary'
-          >
-            {post.data.title}
-          </h1>
-          <div
-            class='flex flex-wrap items-center gap-4 text-muted-foreground text-sm'
-          >
-            <time datetime={post.data.dateCreated.toISOString()}>
-              Posted {formattedDate}
-            </time>
-            <span>•</span>
-            <span>By {post.data.author}</span>
-
-            <span>•</span>
-            <span>{readingTime} min read</span>
-          </div>
-          {
-            post.data.series && (
-              <div class='mt-2'>
-                <a
-                  href={`/blog?series=${seriesSlug}`}
-                  class='inline-flex items-center gap-2 text-sm font-medium text-secondary hover:underline'
-                >
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='16'
-                    height='16'
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    stroke-width='2'
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                  >
-                    <path d='M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20' />
-                  </svg>
-                  Part of series: {post.data.series}
-                </a>
-              </div>
-            )
-          }
-          {
-            post.data.tags && post.data.tags.length > 0 && (
-              <div class='flex flex-wrap gap-2'>
-                {post.data.tags.map((tag) => (
-                  <span class='px-3 py-1 text-xs rounded-full bg-primary/10 text-primary'>
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-            )
-          }
-          {
-            post.data.cover_image && (
-              <Image
-                src={post.data.cover_image}
-                width={1000}
-                height={500}
-                alt={post.data.title}
-                class='w-full rounded-lg shadow-lg mt-6'
-              />
-            )
-          }
-        </div>
-      </header>
-
-      <!-- Main Content Grid -->
-      <div
-        class:list={[
-          'grid gap-8',
-          hasSponsors ? 'lg:grid-cols-5' : 'grid-cols-1 max-w-4xl mx-auto',
-        ]}
-      >
-        <!-- Blog Content -->
-        <div
-          class:list={[
-            'max-w-none leading-7 [&_h1]:text-4xl [&_h1]:font-bold [&_h1]:mt-8 [&_h1]:mb-4 [&_h2]:text-3xl [&_p]:text-primary [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:mt-8 [&_h3]:mb-4 [&_h4]:text-xl [&_h4]:font-bold [&_h4]:mt-8 [&_h4]:mb-4 [&_h5]:text-lg [&_h5]:font-bold [&_h5]:mt-8 [&_h5]:mb-4 [&_h6]:text-base [&_h6]:font-bold [&_h6]:mt-8 [&_h6]:mb-4 [&_p]:mb-4 [&_a]:underline dark:[&_a]:text-secondary retro:[&_a]:text-secondary  [&_a]:text-destructive [&_ul]:mb-4 [&_ul]:ml-6 [&_ul]:list-disc [&_ul]:list-outside [&_ol]:mb-4 [&_ol]:ml-6 [&_ol]:list-decimal [&_ol]:list-outside [&_li]:mb-2 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_code]:font-mono [&_code]:bg-base-200 [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_pre]:mb-4 [&_pre]:bg-base-200 [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_blockquote]:border-l-4 [&_blockquote]:border-secondary [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:my-4 [&_img]:rounded-lg [&_img]:my-6',
-            hasSponsors ? 'lg:col-span-3' : '',
-          ]}
-        >
-          <Content />
-        </div>
-
-        <!-- Sponsors Sidebar -->
-        {hasSponsors && <SponsorsSidebar sponsors={sponsors} />}
-      </div>
-    </div>
-  </article>
-</Layout>
+<BlogLayout
+  title={post.data.title}
+  description={post.data.description}
+  author={post.data.author}
+  dateCreated={post.data.dateCreated}
+  tags={post.data.tags}
+  coverImage={post.data.cover_image}
+  series={post.data.series}
+  readingTime={readingTime}
+  sponsors={sponsors}
+>
+  <Content />
+</BlogLayout>
