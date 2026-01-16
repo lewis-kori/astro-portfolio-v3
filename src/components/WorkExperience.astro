@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 
 const experiences = await getCollection('experience');
 const sortedExperiences = experiences.sort(
-  (a, b) => a.data.order - b.data.order
+  (a, b) => a.data.order - b.data.order,
 );
 ---
 
@@ -28,7 +28,7 @@ const sortedExperiences = experiences.sort(
           sortedExperiences.map((exp, index) => (
             <button
               data-tab={exp.data.id}
-              class={`w-full text-left px-6 py-4 rounded-lg border-l-4 transition-all duration-300 hover:bg-primary/5 ${
+              class={`w-full text-left px-6 py-4 rounded-md border-l-4 transition-all duration-300 hover:bg-primary/5 ${
                 index === 0
                   ? 'bg-primary/10 border-primary text-primary font-medium'
                   : 'border-transparent text-muted-foreground hover:border-primary/30'
@@ -128,7 +128,7 @@ const sortedExperiences = experiences.sort(
               'bg-primary/10',
               'border-primary',
               'text-primary',
-              'font-medium'
+              'font-medium',
             );
             t.classList.remove('border-transparent', 'text-muted-foreground');
           } else {
@@ -136,7 +136,7 @@ const sortedExperiences = experiences.sort(
               'bg-primary/10',
               'border-primary',
               'text-primary',
-              'font-medium'
+              'font-medium',
             );
             t.classList.add('border-transparent', 'text-muted-foreground');
           }
@@ -148,14 +148,14 @@ const sortedExperiences = experiences.sort(
             content.classList.remove(
               'opacity-0',
               'translate-x-4',
-              'pointer-events-none'
+              'pointer-events-none',
             );
             content.classList.add('opacity-100', 'translate-x-0');
           } else {
             content.classList.add(
               'opacity-0',
               'translate-x-4',
-              'pointer-events-none'
+              'pointer-events-none',
             );
             content.classList.remove('opacity-100', 'translate-x-0');
           }

@@ -14,7 +14,7 @@ const { sponsors } = Astro.props;
     <h3 class='text-xl font-semibold'>Sponsors</h3>
 
     <!-- Affiliate Disclaimer -->
-    <div class='p-6 rounded-lg border bg-card'>
+    <div class='p-6 rounded-md border bg-card'>
       <p class='text-sm text-muted-foreground leading-relaxed'>
         Some of the links below are affiliate links, which means I may earn a
         small commission — at no extra cost to you. I only recommend tools,
@@ -31,7 +31,7 @@ const { sponsors } = Astro.props;
         sponsors.map(async (sponsor) => {
           const { Content: SponsorContent } = await sponsor.render();
           return (
-            <div class='p-6 rounded-lg border bg-card space-y-4'>
+            <div class='p-6 rounded-md border bg-card space-y-4'>
               <div class='flex items-start justify-between'>
                 <h4 class='text-lg  first-letter-color font-semibold'>
                   {sponsor.data.name}
