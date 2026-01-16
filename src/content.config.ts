@@ -44,18 +44,17 @@ const experience = defineCollection({
 });
 
 const projects = defineCollection({
-  loader: file('src/data/projects.json'),
+  type: 'content',
   schema: z.object({
-    id: z.string(),
     title: z.string(),
-    shortDescription: z.string(),
-    fullDescription: z.string(),
-    techStack: z.array(z.string()),
-    image: z.string(),
-    websiteUrl: z.string().url().optional(),
-    appStoreUrl: z.string().url().optional(),
-    playStoreUrl: z.string().url().optional(),
-    order: z.number(),
+    tech: z.array(z.string()),
+    external_link: z.string().url().optional(),
+    app_store: z.string().url().optional(),
+    google_play: z.string().url().optional(),
+    cover_image: z.string().optional(),
+    featured: z.boolean().optional(),
+    year: z.number(),
+    made_at: z.string().optional(),
   }),
 });
 
