@@ -169,6 +169,9 @@
   .container-fluid {
     @apply px-4 sm:px-6  w-full mx-auto max-w-6xl;
   }
+  .first-letter-color {
+    @apply dark:first-letter:text-secondary first-letter:text-destructive retro:first-letter:text-primary;
+  }
 }
 
 /* Custom Animations */

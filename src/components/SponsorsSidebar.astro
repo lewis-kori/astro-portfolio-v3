@@ -33,7 +33,9 @@ const { sponsors } = Astro.props;
           return (
             <div class='p-6 rounded-lg border bg-card space-y-4'>
               <div class='flex items-start justify-between'>
-                <h4 class='text-lg font-semibold'>{sponsor.data.name}</h4>
+                <h4 class='text-lg  first-letter-color font-semibold'>
+                  {sponsor.data.name}
+                </h4>
                 {sponsor.data.twitter && (
                   <a
                     href={sponsor.data.twitter}
