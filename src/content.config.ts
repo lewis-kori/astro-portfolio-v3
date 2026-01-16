@@ -68,4 +68,11 @@ const sponsors = defineCollection({
   }),
 });
 
-export const collections = { socials, about, experience, projects, blog, sponsors };
+export const collections = {
+  socials,
+  about,
+  experience,
+  projects,
+  blog,
+  sponsors,
+};

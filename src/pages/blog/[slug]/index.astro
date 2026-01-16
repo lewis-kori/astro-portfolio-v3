@@ -1,5 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro';
+import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import { getEntry } from 'astro:content';
 import { getCollection, type CollectionEntry } from 'astro:content';
@@ -23,6 +24,12 @@ if (!post) {
   return Astro.redirect('/404');
 }
 const { Content } = await render(post);
+
+// Calculate word count and reading time
+const content = post.body;
+const wordCount = content.split(/\s+/).length;
+const readingTime = Math.ceil(wordCount / 200); // Average reading speed: 200 words/min
+
 // Get sponsors if they exist
 let sponsors: CollectionEntry<'sponsors'>[] = [];
 if (post.data.sponsors && post.data.sponsors.length > 0) {
@@ -30,7 +37,7 @@ if (post.data.sponsors && post.data.sponsors.length > 0) {
   sponsors = allSponsors.filter((sponsor) =>
     post.data.sponsors?.some(
       (sponsorName) =>
-        sponsorName.toLowerCase().replace(/\s+/g, '-') === sponsor.id
+        sponsorName.toLowerCase() === sponsor.data.name.toLowerCase()
     )
   );
 }
@@ -43,26 +50,83 @@ const formattedDate = post.data.dateCreated.toLocaleDateString('en-US', {
   month: 'long',
   day: 'numeric',
 });
+
+// Format series name for URL
+const seriesSlug = post.data.series
+  ? post.data.series.toLowerCase().replace(/\s+/g, '-')
+  : null;
 ---
 
 <Layout title={`${post.data.title} | Lewis Kori`}>
   <article class='py-20 px-4 min-h-screen'>
-    <div class='container mx-auto max-w-7xl'>
+    <div class='container-fluid'>
+      <!-- Back to Blog -->
+      <div class='mb-8'>
+        <a
+          href='/blog'
+          class='inline-flex items-center gap-2 text-primary hover:underline'
+        >
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='20'
+            height='20'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            stroke-width='2'
+            stroke-linecap='round'
+            stroke-linejoin='round'
+          >
+            <path d='m15 18-6-6 6-6'></path>
+          </svg>
+          Back to all posts
+        </a>
+      </div>
+
       <!-- Blog Header -->
-      <header class='mb-12 max-w-4xl mx-auto'>
+      <header class='mb-12'>
         <div class='space-y-4'>
           <h1
             class='text-3xl md:text-4xl font-semibold dark:first-letter:text-secondary first-letter:text-destructive retro:first-letter:text-primary'
           >
             {post.data.title}
           </h1>
-          <div class='flex flex-wrap items-center gap-4 text-muted-foreground'>
+          <div class='flex flex-wrap items-center gap-4 text-muted-foreground text-sm'>
             <time datetime={post.data.dateCreated.toISOString()}>
               {formattedDate}
             </time>
             <span>•</span>
             <span>By {post.data.author}</span>
+            <span>•</span>
+            <span>{wordCount.toLocaleString()} words</span>
+            <span>•</span>
+            <span>{readingTime} min read</span>
           </div>
+          {
+            post.data.series && (
+              <div class='mt-2'>
+                <a
+                  href={`/blog?series=${seriesSlug}`}
+                  class='inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline'
+                >
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='16'
+                    height='16'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    stroke-width='2'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                  >
+                    <path d='M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20' />
+                  </svg>
+                  Part of series: {post.data.series}
+                </a>
+              </div>
+            )
+          }
           {
             post.data.tags && post.data.tags.length > 0 && (
               <div class='flex flex-wrap gap-2'>
@@ -76,8 +140,10 @@ const formattedDate = post.data.dateCreated.toLocaleDateString('en-US', {
           }
           {
             post.data.cover_image && (
-              <img
+              <Image
                 src={post.data.cover_image}
+                width={1000}
+                height={500}
                 alt={post.data.title}
                 class='w-full rounded-lg shadow-lg mt-6'
               />
@@ -109,6 +175,7 @@ const formattedDate = post.data.dateCreated.toLocaleDateString('en-US', {
             <aside class='lg:col-span-2'>
               <div class='sticky top-24 space-y-6'>
                 {/* Affiliate Disclaimer */}
+                <h3 class='text-xl font-semibold'>Sponsors</h3>
                 <div class='p-6 rounded-lg border bg-card'>
                   <p class='text-sm text-muted-foreground leading-relaxed'>
                     Some of the links below are affiliate links, which means I
@@ -123,7 +190,6 @@ const formattedDate = post.data.dateCreated.toLocaleDateString('en-US', {
 
                 {/* Sponsors List */}
                 <div class='space-y-4'>
-                  <h3 class='text-xl font-semibold'>Sponsors</h3>
                   {sponsors.map(async (sponsor) => {
                     const { Content: SponsorContent } = await sponsor.render();
                     return (
@@ -192,117 +258,6 @@ const formattedDate = post.data.dateCreated.toLocaleDateString('en-US', {
           )
         }
       </div>
-
-      <!-- Back to Blog -->
-      <div class='mt-12 max-w-4xl mx-auto'>
-        <a
-          href='/blog'
-          class='inline-flex items-center gap-2 text-primary hover:underline'
-        >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='20'
-            height='20'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-          >
-            <path d='m15 18-6-6 6-6'></path>
-          </svg>
-          Back to all posts
-        </a>
-      </div>
     </div>
   </article>
 </Layout>
-
-<style>
-  /* Custom prose styling for blog content */
-  .prose {
-    color: hsl(var(--foreground));
-  }
-
-  .prose :where(h1, h2, h3, h4, h5, h6):not(:where([class~='not-prose'] *)) {
-    color: hsl(var(--foreground));
-    font-weight: 600;
-    margin-top: 2em;
-    margin-bottom: 1em;
-  }
-
-  .prose :where(a):not(:where([class~='not-prose'] *)) {
-    color: hsl(var(--primary));
-    text-decoration: underline;
-  }
-
-  .prose :where(a):not(:where([class~='not-prose'] *)):hover {
-    opacity: 0.8;
-  }
-
-  .prose :where(code):not(:where([class~='not-prose'] *)) {
-    background: hsl(var(--muted));
-    padding: 0.2em 0.4em;
-    border-radius: 0.25rem;
-    font-size: 0.875em;
-  }
-
-  .prose :where(pre):not(:where([class~='not-prose'] *)) {
-    background: hsl(var(--muted));
-    border-radius: 0.5rem;
-    padding: 1rem;
-    overflow-x: auto;
-  }
-
-  .prose :where(pre code):not(:where([class~='not-prose'] *)) {
-    background: transparent;
-    padding: 0;
-  }
-
-  .prose :where(blockquote):not(:where([class~='not-prose'] *)) {
-    border-left: 4px solid hsl(var(--primary));
-    padding-left: 1rem;
-    font-style: italic;
-    color: hsl(var(--muted-foreground));
-  }
-
-  .prose :where(img):not(:where([class~='not-prose'] *)) {
-    border-radius: 0.5rem;
-    margin: 2rem 0;
-  }
-
-  .prose :where(hr):not(:where([class~='not-prose'] *)) {
-    border-color: hsl(var(--border));
-    margin: 3rem 0;
-  }
-
-  .prose :where(ul, ol):not(:where([class~='not-prose'] *)) {
-    padding-left: 1.5rem;
-  }
-
-  .prose :where(li):not(:where([class~='not-prose'] *)) {
-    margin: 0.5rem 0;
-  }
-
-  .prose :where(strong):not(:where([class~='not-prose'] *)) {
-    color: hsl(var(--foreground));
-    font-weight: 600;
-  }
-
-  .prose :where(table):not(:where([class~='not-prose'] *)) {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 2rem 0;
-  }
-
-  .prose :where(th, td):not(:where([class~='not-prose'] *)) {
-    border: 1px solid hsl(var(--border));
-    padding: 0.5rem 1rem;
-  }
-
-  .prose :where(th):not(:where([class~='not-prose'] *)) {
-    background: hsl(var(--muted));
-    font-weight: 600;
-  }
-</style>
