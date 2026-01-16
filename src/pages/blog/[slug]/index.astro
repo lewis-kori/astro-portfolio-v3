@@ -91,14 +91,15 @@ const seriesSlug = post.data.series
           >
             {post.data.title}
           </h1>
-          <div class='flex flex-wrap items-center gap-4 text-muted-foreground text-sm'>
+          <div
+            class='flex flex-wrap items-center gap-4 text-muted-foreground text-sm'
+          >
             <time datetime={post.data.dateCreated.toISOString()}>
-              {formattedDate}
+              Posted {formattedDate}
             </time>
             <span>•</span>
             <span>By {post.data.author}</span>
-            <span>•</span>
-            <span>{wordCount.toLocaleString()} words</span>
+
             <span>•</span>
             <span>{readingTime} min read</span>
           </div>
@@ -107,7 +108,7 @@ const seriesSlug = post.data.series
               <div class='mt-2'>
                 <a
                   href={`/blog?series=${seriesSlug}`}
-                  class='inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline'
+                  class='inline-flex items-center gap-2 text-sm font-medium text-secondary hover:underline'
                 >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
