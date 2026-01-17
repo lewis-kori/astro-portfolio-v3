@@ -127,7 +127,7 @@ const publishedTime = dateCreated.toISOString();
             }
             {
               tags && tags.length > 0 && (
-                <div class='flex flex-wrap gap-2'>
+                <div class='hidden lg:flex flex-wrap gap-2'>
                   {tags.map((tag) => (
                     <span class='px-3 py-1 text-xs rounded-full bg-primary/10 text-primary'>
                       #{tag}
@@ -154,7 +154,9 @@ const publishedTime = dateCreated.toISOString();
             />
           </div>
 
-          <AuthorSidebar />
+          <div class='hidden lg:inline-flex w-full col-span-2'>
+            <AuthorSidebar />
+          </div>
         </div>
       </header>
       <!-- Main Content Grid -->
@@ -175,6 +177,25 @@ const publishedTime = dateCreated.toISOString();
         </div>
 
         {hasSponsors && <SponsorsSidebar sponsors={sponsors} />}
+      </div>
+
+      <!-- Mobile: Tags and Author after content -->
+      <div class='lg:hidden mt-12 space-y-8'>
+        {
+          tags && tags.length > 0 && (
+            <div>
+              <h3 class='text-lg font-semibold mb-3'>Tags</h3>
+              <div class='flex flex-wrap gap-2'>
+                {tags.map((tag) => (
+                  <span class='px-3 py-1 text-xs rounded-full bg-primary/10 text-primary'>
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )
+        }
+        <AuthorSidebar />
       </div>
 
       <div class='mt-12 pt-12 border-t border-border'>
