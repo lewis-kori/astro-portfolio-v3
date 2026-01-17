@@ -7,7 +7,7 @@ const sortedExperiences = experiences.sort(
 );
 ---
 
-<section class='py-20 px-4 relative' id='work'>
+<section class='py-20 relative' id='work'>
   <div class='container-fluid'>
     <div>
       <h2
@@ -22,7 +22,6 @@ const sortedExperiences = experiences.sort(
     </div>
 
     <div class='grid md:grid-cols-[250px_1fr] gap-8'>
-      <!-- Sidebar Navigation -->
       <div class='space-y-2'>
         {
           sortedExperiences.map((exp, index) => (
@@ -40,16 +39,15 @@ const sortedExperiences = experiences.sort(
         }
       </div>
 
-      <!-- Content Area -->
       <div class='relative min-h-100'>
         {
           sortedExperiences.map((exp, index) => (
             <div
               data-content={exp.data.id}
-              class={`absolute inset-0 transition-all duration-500 ${
+              class={`transition-all duration-500 ${
                 index === 0
-                  ? 'opacity-100 translate-x-0'
-                  : 'opacity-0 translate-x-4 pointer-events-none'
+                  ? 'opacity-100 translate-x-0 relative'
+                  : 'opacity-0 translate-x-4 pointer-events-none absolute inset-0'
               }`}
             >
               <div class='space-y-6'>
@@ -149,24 +147,30 @@ const sortedExperiences = experiences.sort(
               'opacity-0',
               'translate-x-4',
               'pointer-events-none',
+              'absolute',
+              'inset-0',
             );
-            content.classList.add('opacity-100', 'translate-x-0');
+            content.classList.add('opacity-100', 'translate-x-0', 'relative');
           } else {
             content.classList.add(
               'opacity-0',
               'translate-x-4',
               'pointer-events-none',
+              'absolute',
+              'inset-0',
             );
-            content.classList.remove('opacity-100', 'translate-x-0');
+            content.classList.remove(
+              'opacity-100',
+              'translate-x-0',
+              'relative',
+            );
           }
         });
       });
     });
   }
 
-  // Initialize on page load
   initExperienceTabs();
 
-  // Reinitialize after view transitions
   document.addEventListener('astro:page-load', initExperienceTabs);
 </script>

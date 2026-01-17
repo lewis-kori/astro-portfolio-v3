@@ -22,7 +22,7 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
 ---
 
 <Layout title='Blog'>
-  <section class='py-20 px-4 min-h-screen'>
+  <section class='py-16 md:py-20 min-h-screen'>
     <div class='container-fluid'>
       <!-- Hero Section with Newsletter -->
       <div class='mb-16 space-y-8'>
@@ -175,7 +175,7 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
       <!-- Blog Grid -->
       <div
         id='blog-grid'
-        class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12'
+        class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-12'
       >
         {
           sortedBlogs.map((blog, index) => (
