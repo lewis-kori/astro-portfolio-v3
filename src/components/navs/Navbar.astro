@@ -1,4 +1,5 @@
 ---
+import MobileNav from '@/components/navs/MobileNav.astro';
 import ThemeSwitcher from '@/components/shared/ThemeSwitcher.astro';
 import { siteConfig } from '@/config';
 import { Image } from 'astro:assets';
@@ -31,8 +32,9 @@ const navLinks = [
         />
       </a>
     </div>
+
     <div
-      class='flex items-center backdrop-blur-2xl px-6 py-2 rounded-full gap-6 bg-secondary/20'
+      class='hidden md:flex items-center backdrop-blur-2xl px-6 py-2 rounded-full gap-6 bg-secondary/20'
     >
       <ul class='flex space-x-6'>
         {
@@ -53,5 +55,7 @@ const navLinks = [
         <ThemeSwitcher />
       </div>
     </div>
+
+    <MobileNav navLinks={navLinks} />
   </nav>
 </header>
