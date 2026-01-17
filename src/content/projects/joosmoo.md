@@ -4,7 +4,7 @@ tech: ["Django", "Vue.js", "flutter"]
 app_store: https://apps.apple.com/be/app/joosmoo/id1531832031
 google_play: https://play.google.com/store/apps/details?id=com.joosmoo.app
 external_link: https://joosmoo.com/
-cover_image: ./images/joosmoo.png
+cover_image: /projects/joosmoo.png
 year: 2019
 featured: false
 made_at: skyetech

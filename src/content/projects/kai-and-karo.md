@@ -1,7 +1,7 @@
 ---
 title: Kai and Karo
 tech: ["django","nextjs","docker"]
-cover_image: ./images/KaiandKaro.png
+cover_image: /projects/KaiandKaro.png
 external_link: https://kaiandkaro.com
 featured: true
 year: 2023

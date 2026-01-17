@@ -3,7 +3,7 @@ title: Online Community platform frontend
 tech: ["react.js", "chakra-ui"]
 external_link: https://circle-so.netlify.app/
 github_link: https://github.com/lewis-kori/circle-so-clone-react
-cover_image: ./images/circle.png
+cover_image: /projects/circle.png
 year: 2021
 featured: false
 ---

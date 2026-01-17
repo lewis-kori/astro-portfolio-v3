@@ -7,7 +7,7 @@ import { getCollection } from 'astro:content';
 // Get all blog posts and sort by date (newest first)
 const allBlogs = await getCollection('blog');
 const sortedBlogs = allBlogs.sort(
-  (a, b) => b.data.dateCreated.getTime() - a.data.dateCreated.getTime()
+  (a, b) => b.data.dateCreated.getTime() - a.data.dateCreated.getTime(),
 );
 
 // Extract unique tags and series
@@ -22,7 +22,7 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
 ---
 
 <Layout title='Blog'>
-  <section class='py-20 px-4 min-h-screen'>
+  <section class='py-16 md:py-20 min-h-screen'>
     <div class='container-fluid'>
       <!-- Hero Section with Newsletter -->
       <div class='mb-16 space-y-8'>
@@ -63,7 +63,7 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
           <!-- All button -->
           <button
             data-filter='all'
-            class='filter-btn active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 bg-primary text-primary-foreground'
+            class='filter-btn active px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 bg-primary text-primary-foreground'
           >
             All ({sortedBlogs.length})
           </button>
@@ -72,7 +72,7 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
           {
             allSeries.length > 0 && (
               <div class='relative group'>
-                <button class='px-4 py-2 rounded-lg border border-border hover:border-primary hover:bg-primary/5 text-sm font-medium transition-all inline-flex items-center gap-2'>
+                <button class='px-4 py-2 rounded-md border border-border hover:border-primary hover:bg-primary/5 text-sm font-medium transition-all inline-flex items-center gap-2'>
                   Series
                   <svg
                     class='w-4 h-4'
@@ -88,7 +88,7 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
                     />
                   </svg>
                 </button>
-                <div class='absolute top-full left-0 mt-2 w-64 bg-card border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10'>
+                <div class='absolute top-full left-0 mt-2 w-64 bg-card border border-border rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10'>
                   <div class='p-2 space-y-1 max-h-64 overflow-y-auto'>
                     {allSeries.map((series) => (
                       <button
@@ -108,7 +108,7 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
           <!-- Tags filter -->
           <div class='relative group'>
             <button
-              class='px-4 py-2 rounded-lg border border-border hover:border-primary hover:bg-primary/5 text-sm font-medium transition-all inline-flex items-center gap-2'
+              class='px-4 py-2 rounded-md border border-border hover:border-primary hover:bg-primary/5 text-sm font-medium transition-all inline-flex items-center gap-2'
             >
               Tags
               <svg
@@ -125,7 +125,7 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
               </svg>
             </button>
             <div
-              class='absolute top-full left-0 mt-2 w-64 bg-card border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10'
+              class='absolute top-full left-0 mt-2 w-64 bg-card border border-border rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10'
             >
               <div class='p-2 space-y-1 max-h-64 overflow-y-auto'>
                 {
@@ -147,7 +147,7 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
         <!-- Active filter display -->
         <div id='active-filter' class='hidden'>
           <div
-            class='inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 border border-primary/20'
+            class='inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary/10 border border-primary/20'
           >
             <span class='text-sm font-medium text-primary' id='filter-text'
             ></span>
@@ -175,7 +175,7 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
       <!-- Blog Grid -->
       <div
         id='blog-grid'
-        class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12'
+        class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-12'
       >
         {
           sortedBlogs.map((blog, index) => (
@@ -203,7 +203,7 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
         <button
           id='prev-page'
           disabled
-          class='px-4 py-2 rounded-lg border border-border hover:border-primary hover:bg-primary/5 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
+          class='px-4 py-2 rounded-md border border-border hover:border-primary hover:bg-primary/5 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
         >
           <svg
             class='w-5 h-5'
@@ -223,7 +223,7 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
           {
             Array.from({ length: totalPages }, (_, i) => (
               <button
-                class={`page-btn px-4 py-2 rounded-lg border transition-all ${
+                class={`page-btn px-4 py-2 rounded-md border transition-all ${
                   i === 0
                     ? 'border-primary bg-primary text-primary-foreground'
                     : 'border-border hover:border-primary hover:bg-primary/5'
@@ -238,7 +238,7 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
 
         <button
           id='next-page'
-          class='px-4 py-2 rounded-lg border border-border hover:border-primary hover:bg-primary/5 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
+          class='px-4 py-2 rounded-md border border-border hover:border-primary hover:bg-primary/5 disabled:opacity-50 disabled:cursor-not-allowed transition-all'
         >
           <svg
             class='w-5 h-5'
@@ -309,17 +309,21 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
       currentFilterValue = '';
     } else if (filterType === 'series') {
       // Normalize series names for comparison (convert to lowercase and replace spaces with hyphens)
-      const normalizedFilterValue = filterValue.toLowerCase().replace(/\s+/g, '-');
+      const normalizedFilterValue = filterValue
+        .toLowerCase()
+        .replace(/\s+/g, '-');
       filteredBlogs = sortedBlogs.filter((blog) => {
         if (!blog.data.series) return false;
-        const normalizedSeries = blog.data.series.toLowerCase().replace(/\s+/g, '-');
+        const normalizedSeries = blog.data.series
+          .toLowerCase()
+          .replace(/\s+/g, '-');
         return normalizedSeries === normalizedFilterValue;
       });
       currentFilter = 'series';
       currentFilterValue = filterValue;
     } else if (filterType === 'tag') {
       filteredBlogs = sortedBlogs.filter((blog) =>
-        blog.data.tags.includes(filterValue)
+        blog.data.tags.includes(filterValue),
       );
       currentFilter = 'tag';
       currentFilterValue = filterValue;
@@ -344,7 +348,7 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
     // Get indices of filtered blogs
     const filteredIndices = filteredBlogs.map((blog) => {
       return sortedBlogs.findIndex(
-        (b) => b.slug === blog.slug && b.data.title === blog.data.title
+        (b) => b.slug === blog.slug && b.data.title === blog.data.title,
       );
     });
 
@@ -391,7 +395,7 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
     pageNumbers.innerHTML = '';
     for (let i = 1; i <= totalPages; i++) {
       const btn = document.createElement('button');
-      btn.className = `page-btn px-4 py-2 rounded-lg border transition-all ${
+      btn.className = `page-btn px-4 py-2 rounded-md border transition-all ${
         i === currentPage
           ? 'border-primary bg-primary text-primary-foreground'
           : 'border-border hover:border-primary hover:bg-primary/5'

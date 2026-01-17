@@ -8,7 +8,7 @@ const techStack = {
 };
 ---
 
-<section class='py-20 px-4 relative' id='about'>
+<section class='py-20 relative' id='about'>
   <div
     class='absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none'
   >
@@ -28,7 +28,7 @@ const techStack = {
     </div>
 
     <div class='grid md:grid-cols-3 gap-16 items-start'>
-      <div class='animate-slide-in-left md:sticky md:top-24'>
+      <div class='animate-slide-in-left hidden md:block md:sticky md:top-24'>
         <SideNav />
       </div>
 
@@ -76,7 +76,7 @@ const techStack = {
                 {
                   techStack.frontend.map((tech, i) => (
                     <span
-                      class='px-4 py-2 bg-primary/10 text-primary rounded-lg text-sm font-medium border border-primary/20 hover:bg-primary/20 hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-blur-fade'
+                      class='px-3.5 py-1.5 bg-primary/10 text-primary rounded-full text-xs font-medium border border-primary/20 hover:bg-primary/20 hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-blur-fade'
                       style={`animation-delay: ${i * 0.1}s`}
                     >
                       {tech}
@@ -92,7 +92,7 @@ const techStack = {
                 {
                   techStack.backend.map((tech, i) => (
                     <span
-                      class='px-4 py-2 bg-secondary/10 text-secondary rounded-lg text-sm font-medium border border-secondary/20 hover:bg-secondary/20 hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-blur-fade'
+                      class='px-3.5 py-1.5 bg-secondary/10 text-secondary rounded-full text-xs font-medium border border-secondary/20 hover:bg-secondary/20 hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-blur-fade'
                       style={`animation-delay: ${i * 0.1}s`}
                     >
                       {tech}
@@ -108,7 +108,7 @@ const techStack = {
                 {
                   techStack.devops.map((tech, i) => (
                     <span
-                      class='px-4 py-2 bg-accent/10 text-accent rounded-lg text-sm font-medium border border-accent/20 hover:bg-accent/20 hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-blur-fade'
+                      class='px-3.5 py-1.5 bg-accent/10 text-accent rounded-full text-xs font-medium border border-accent/20 hover:bg-accent/20 hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-blur-fade'
                       style={`animation-delay: ${i * 0.1}s`}
                     >
                       {tech}
@@ -120,10 +120,10 @@ const techStack = {
           </div>
         </div>
 
-        <div class='flex gap-4 pt-4'>
+        <div class='flex flex-col md:flex-row gap-y-2 gap-x-4 pt-4'>
           <a
             href='#contact'
-            class='inline-flex items-center gap-2 px-6 py-3 bg-primary text-background rounded-lg font-medium hover:bg-primary/90 hover:scale-105 transition-all shadow-lg hover:shadow-xl'
+            class='inline-flex items-center gap-2 px-5 text-sm py-2.5 bg-primary text-background rounded-md font-medium hover:bg-primary/90 hover:scale-105 transition-all shadow-lg hover:shadow-xl'
           >
             Let's Work Together
             <svg
@@ -141,7 +141,7 @@ const techStack = {
           </a>
           <a
             href='#projects'
-            class='inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-lg font-medium hover:bg-primary hover:text-background transition-all'
+            class='inline-flex items-center gap-2 px-5 text-sm py-2.5 border border-primary text-primary rounded-md font-medium hover:bg-primary hover:text-background transition-all'
           >
             View Projects
           </a>

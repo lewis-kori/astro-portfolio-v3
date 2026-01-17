@@ -1,7 +1,7 @@
 ---
 title: Digital marketing Site
 tech: ["django","html","css","docker"]
-cover_image: ./images/rikan.png
+cover_image: /projects/rikan.png
 external_link: https://rikandigitalworld.com
 featured: false
 year: 2019

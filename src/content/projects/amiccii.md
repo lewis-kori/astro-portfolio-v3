@@ -1,8 +1,8 @@
 ---
 title: Amiccii
-tech: ["Next.js", "Tailwind CSS", "Beehiv"]
+tech: ['Next.js', 'Tailwind CSS', 'Beehiv']
 external_link: https://amiccii.com
-cover_image: ./images/amiccii.png
+cover_image: /projects/amiccii.png
 featured: true
 year: 2025
 made_at: Inflection Studio

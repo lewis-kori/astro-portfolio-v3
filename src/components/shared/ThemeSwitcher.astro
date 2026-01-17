@@ -1,6 +1,5 @@
 <button
-  id='theme-toggle'
-  class='p-2 rounded-lg flex items-center justify-center hover:bg-accent transition-colors relative'
+  class='theme-toggle p-2 rounded-md flex items-center justify-center hover:bg-accent transition-colors relative'
   aria-label='Toggle theme'
 >
   <svg
@@ -69,9 +68,17 @@
     setTheme(next);
   };
 
-  document
-    .getElementById('theme-toggle')
-    ?.addEventListener('click', cycleTheme);
+  function initThemeToggle() {
+    const themeToggles = document.querySelectorAll('.theme-toggle');
+    themeToggles.forEach((toggle) => {
+      toggle.addEventListener('click', cycleTheme);
+    });
+    setTheme(getTheme());
+  }
 
-  setTheme(getTheme());
+  // Initialize on page load
+  initThemeToggle();
+
+  // Reinitialize after view transitions
+  document.addEventListener('astro:after-swap', initThemeToggle);
 </script>

@@ -6,7 +6,7 @@ google_play: https://play.google.com/store/apps/details?id=com.muthaigagolfclub.
 external_link: https://teebooking.muthaigagolfclub.com/
 year: 2020
 made_at: skyetech
-cover_image: ./images/mgc.jpg
+cover_image: /projects/mgc.jpg
 featured: true
 ---
 

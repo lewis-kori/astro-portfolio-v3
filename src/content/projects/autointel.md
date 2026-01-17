@@ -3,7 +3,7 @@ title: Automobile spare parts procurement market place
 tech: ["Django", "react.js", "flutter"]
 google_play: https://play.google.com/store/apps/details?id=com.autointelparts.autointelparts&hl=en&gl=US
 external_link: https://autointelparts.com/
-cover_image: ./images/autointel.jpg
+cover_image: /projects/autointel.jpg
 year: 2019
 featured: false
 made_at: skyetech

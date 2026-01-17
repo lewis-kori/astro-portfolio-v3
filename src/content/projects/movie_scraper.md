@@ -1,7 +1,7 @@
 ---
 title: Robust Web Scraper
 tech: ["python", "scraper api"]
-cover_image: ./images/Scraper-API.png
+cover_image: /projects/Scraper-API.png
 external_link: https://www.scraperapi.com?_go=korilewis
 github_link: https://github.com/lewis-kori/movies_scraper
 featured: false

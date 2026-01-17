@@ -2,7 +2,7 @@
 title: Cikl Kenya
 tech: ["Django", "Next.js", "Docker"]
 external_link: https://cikl.co.ke
-cover_image: ./images/cikl.png
+cover_image: /projects/cikl.png
 featured: false
 year: 2024
 made_at: Inflection Studio

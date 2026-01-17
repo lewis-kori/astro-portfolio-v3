@@ -8,7 +8,7 @@ const currentPath =
 
 <div class='relative group'>
   <button
-    class='p-2 rounded-lg hover:bg-accent transition-colors'
+    class='p-2 rounded-md hover:bg-accent transition-colors'
     aria-label='Change language'
   >
     <svg class='w-5 h-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
@@ -22,7 +22,7 @@ const currentPath =
   </button>
 
   <div
-    class='hidden group-hover:block absolute right-0 mt-2 bg-card border border-border rounded-lg shadow-lg overflow-hidden min-w-30 z-10'
+    class='hidden group-hover:block absolute right-0 mt-2 bg-card border border-border rounded-md shadow-lg overflow-hidden min-w-30 z-10'
   >
     {
       Object.entries(languages).map(([lang, name]) => (

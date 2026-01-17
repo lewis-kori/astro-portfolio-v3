@@ -313,7 +313,6 @@ const shareLinks = {
         try {
           await navigator.clipboard.writeText(url);
 
-          
           const copyIcon = button.querySelector('.copy-icon');
           const checkIcon = button.querySelector('.check-icon');
 
@@ -321,7 +320,6 @@ const shareLinks = {
             copyIcon.classList.add('hidden');
             checkIcon.classList.remove('hidden');
 
-           
             setTimeout(() => {
               copyIcon.classList.remove('hidden');
               checkIcon.classList.add('hidden');
@@ -334,13 +332,11 @@ const shareLinks = {
     });
   }
 
-
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initSocialShare);
   } else {
     initSocialShare();
   }
-
 
   document.addEventListener('astro:page-load', initSocialShare);
 </script>
