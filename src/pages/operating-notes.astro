@@ -1,4 +1,5 @@
 ---
+import NewsletterForm from '@/components/NewsletterForm.astro';
 import Layout from '@/layouts/Layout.astro';
 import { getEntry } from 'astro:content';
 
@@ -40,25 +41,59 @@ const formattedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
       </p>
     </div>
 
-    <article
-      class='max-w-4xl mx-auto
-        [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:text-foreground 
-        [&_h2]:mt-16 [&_h2]:mb-6
-        [&_p]:text-base md:[&_p]:text-lg [&_p]:text-foreground/90 
+    <div class='relative max-w-7xl mx-auto flex gap-8'>
+      <!-- Main Content -->
+      <article
+        id='content-article'
+        class='flex-1 max-w-4xl
+        [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-foreground
+        [&_h2]:mt-16 [&_h2]:mb-6 [&_h2]:scroll-mt-24
+        [&_p]:text-base md:[&_p]:text-lg [&_p]:text-foreground/90
         [&_p]:leading-relaxed [&_p]:mb-4
         [&_ul]:space-y-3 [&_ul]:my-6 [&_ul]:list-disc [&_ul]:ml-6
-        [&_li]:text-base md:[&_li]:text-lg [&_li]:text-foreground/90 
+        [&_li]:text-base md:[&_li]:text-lg [&_li]:text-foreground/90
         [&_li]:leading-relaxed [&_li]:pl-2
         [&_li::marker]:text-primary
-        [&_strong]:text-foreground [&_strong]:font-semibold
+        [&_strong]:text-secondary [&_strong]:font-semibold
         [&_hr]:my-12 [&_hr]:border-border/50
         [&_em]:text-muted-foreground [&_em]:italic'
-    >
-      <Content />
-    </article>
-    <div
-      class='max-w-4xl mx-auto mt-20 p-8 md:p-12 rounded-2xl bg-secondary/30 border border-border'
-    >
+      >
+        <Content />
+      </article>
+
+      <aside class='hidden xl:block w-64 shrink-0' id='table-of-contents'>
+        <div class='sticky top-32'>
+          <div
+            class='rounded-lg bg-secondary/20 border border-border p-6 backdrop-blur-sm'
+          >
+            <h3
+              class='text-sm font-semibold text-foreground mb-4 uppercase tracking-wider'
+            >
+              On This Page
+            </h3>
+            <nav class='space-y-2' id='toc-nav'>
+              <!-- TOC items will be populated by JavaScript -->
+            </nav>
+          </div>
+
+          <!-- Newsletter Form -->
+          <div class='mt-6'>
+            <h3
+              class='text-sm font-semibold text-foreground mb-3 uppercase tracking-wider'
+            >
+              Stay Updated
+            </h3>
+            <NewsletterForm
+              id='operating-notes-newsletter-form'
+              showTitle={false}
+              description='Get notified when this page updates.'
+              layout='vertical'
+            />
+          </div>
+        </div>
+      </aside>
+    </div>
+    <div class='mt-20 p-8 md:p-12 rounded-lg border-[0.15px] border-border'>
       <div class='text-center space-y-4'>
         <h3 class='text-2xl font-semibold text-foreground'>
           Want to collaborate?
@@ -77,7 +112,7 @@ const formattedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
           </a>
           <a
             href='/projects'
-            class='px-6 py-3 bg-secondary text-foreground rounded-lg font-medium hover:bg-secondary/80 transition-colors border border-border'
+            class='px-6 py-3 bg-secondary text-primary-foreground retro:text-primary-foreground rounded-lg font-medium hover:bg-secondary/80 transition-colors border border-border'
           >
             View My Work
           </a>
@@ -93,3 +128,78 @@ const formattedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
     </div>
   </div>
 </Layout>
+
+<script>
+  // Generate Table of Contents and handle active section highlighting
+  document.addEventListener('DOMContentLoaded', () => {
+    const article = document.getElementById('content-article');
+    const tocNav = document.getElementById('toc-nav');
+
+    if (!article || !tocNav) return;
+
+    const headings = article.querySelectorAll('h2');
+
+    headings.forEach((heading, index) => {
+      const id = heading.id || `section-${index}`;
+      heading.id = id;
+      const link = document.createElement('a');
+      link.href = `#${id}`;
+      link.textContent = heading.textContent;
+      link.className =
+        'toc-link block text-sm text-muted-foreground hover:text-primary transition-colors py-1.5 border-l-2 border-transparent hover:border-primary pl-3';
+      link.dataset.target = id;
+
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.pushState(null, '', `#${id}`);
+      });
+
+      tocNav.appendChild(link);
+    });
+
+    const observerOptions = {
+      rootMargin: '-100px 0px -66%',
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const tocLinks = tocNav.querySelectorAll('.toc-link');
+          tocLinks.forEach((link) => {
+            link.classList.remove(
+              'text-primary',
+              'border-primary',
+              'font-medium',
+            );
+            link.classList.add('text-muted-foreground', 'border-transparent');
+          });
+
+          const activeLink = tocNav.querySelector(
+            `[data-target="${entry.target.id}"]`,
+          );
+          if (activeLink) {
+            activeLink.classList.remove(
+              'text-muted-foreground',
+              'border-transparent',
+            );
+            activeLink.classList.add(
+              'text-primary',
+              'border-primary',
+              'font-medium',
+            );
+          }
+        }
+      });
+    }, observerOptions);
+
+    headings.forEach((heading) => observer.observe(heading));
+  });
+</script>
+
+<style>
+  .toc-link {
+    transition: all 0.2s ease;
+  }
+</style>

@@ -4,6 +4,7 @@ interface Props {
   showTitle?: boolean;
   title?: string;
   description?: string;
+  layout?: 'horizontal' | 'vertical';
 }
 
 const {
@@ -11,7 +12,12 @@ const {
   showTitle = true,
   title = 'Join My Newsletter',
   description = 'Get insights on software engineering, startups, and tech trends delivered to your inbox.',
+  layout = 'horizontal',
 } = Astro.props;
+
+const layoutClasses = layout === 'vertical' 
+  ? 'flex-col' 
+  : 'flex-col sm:flex-row';
 ---
 
 <div class='space-y-6'>
@@ -35,7 +41,7 @@ const {
   }
 
   <form class='space-y-4 newsletter-form' data-form-id={id}>
-    <div class='flex flex-col sm:flex-row gap-3'>
+    <div class={`flex gap-3 ${layoutClasses}`}>
       <input
         type='email'
         name='email'
