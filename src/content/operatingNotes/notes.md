@@ -1,7 +1,7 @@
 ---
-title: "Operating Notes"
+title: 'Welcome to my mind garden'
 subtitle: "How I'm Thinking and Working Right Now"
-description: "A living snapshot of what I am focused on, how I am making decisions, and what I am prioritizing."
+description: 'A living snapshot of what I am focused on, how I am making decisions, and what I am prioritizing.'
 lastUpdated: 2026-01-18
 ---
 
