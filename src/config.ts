@@ -16,9 +16,10 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  name: 'Lewis Astro Portfolio',
-  title: 'Lewis Astro Portfolio',
-  description: 'A personal portfolio website built with Astro.',
+  name: 'Lewis Kori – Entrepreneur, Product Builder, Operator',
+  title: 'Lewis Kori – Building Products, Systems, and Leverage',
+  description:
+    'Entrepreneur and product builder working at the intersection of technology, capital, and trust. Building platforms, advising institutions, and exploring how systems scale.',
   avatar: '/src/assets/about-image.webp',
   location: '  Kenya',
   email: 'hello@lewiskori.com',
