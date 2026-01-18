@@ -1,7 +1,7 @@
 ---
+import { ArrowIcon } from '@/components/ui/icons';
 import Layout from '@/layouts/Layout.astro';
 import { getEntry } from 'astro:content';
-import ArrowIcon from '../components/ui/ArrowIcon.astro';
 const entry = await getEntry('advisory', 'advisory');
 
 if (!entry) {
