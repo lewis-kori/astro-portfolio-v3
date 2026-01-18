@@ -1,0 +1,233 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('advisory', 'advisory');
+
+if (!entry) {
+  return Astro.redirect('/404');
+}
+
+const { Content } = await entry.render();
+const { title, subtitle, description, lastUpdated, featuredImage } = entry.data;
+
+const formattedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<Layout title={`${title} | Lewis Kori`} description={description}>
+  <div class='container-fluid py-16 md:py-20'>
+    <div class='mb-16 text-center space-y-4'>
+      <div class='inline-block'>
+        <span
+          class='text-xs uppercase tracking-wider text-primary font-semibold px-4 py-2 rounded-full bg-primary/10 border border-primary/20'
+        >
+          Advisory Services
+        </span>
+      </div>
+      <h1
+        class='text-3xl md:text-4xl font-semibold text-foreground leading-tight first-letter-color tracking-tight'
+      >
+        {title}
+      </h1>
+      <p class='text-lg text-muted-foreground font-light max-w-2xl mx-auto'>
+        {subtitle}
+      </p>
+      <p class='text-sm text-muted-foreground/80 pt-4'>
+        Last updated: {formattedDate}
+      </p>
+    </div>
+
+    <div class='relative max-w-7xl mx-auto flex gap-8'>
+      <article
+        id='content-article'
+        class='flex-1 max-w-4xl
+        [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-foreground
+        [&_h2]:mt-16 [&_h2]:mb-6 [&_h2]:scroll-mt-24
+        [&_p]:text-base md:[&_p]:text-lg [&_p]:text-foreground/90
+        [&_p]:leading-relaxed [&_p]:mb-4
+        [&_ul]:space-y-3 [&_ul]:my-6 [&_ul]:list-none [&_ul]:ml-0
+        [&_li]:text-base md:[&_li]:text-lg [&_li]:text-foreground/90
+        [&_li]:leading-relaxed [&_li]:pl-0 [&_li]:mb-4
+        [&_strong]:text-secondary [&_strong]:font-semibold
+        [&_hr]:my-12 [&_hr]:border-border/50
+        [&_em]:text-muted-foreground [&_em]:italic
+        [&_img]:rounded-xl [&_img]:my-8 [&_img]:shadow-lg [&_img]:border [&_img]:border-border'
+      >
+        <Content />
+      </article>
+
+      <aside class='hidden xl:block w-64 shrink-0' id='table-of-contents'>
+        <div class='sticky top-32 space-y-6'>
+          <div
+            class='rounded-lg bg-secondary/20 border border-border p-6 backdrop-blur-sm'
+          >
+            <h3
+              class='text-sm font-semibold text-foreground mb-4 uppercase tracking-wider'
+            >
+              On This Page
+            </h3>
+            <nav class='space-y-2' id='toc-nav'></nav>
+          </div>
+
+          <div
+            class='rounded-lg bg-linear-to-br from-primary/5 to-secondary/10 border border-border p-6'
+          >
+            <h3 class='text-sm font-semibold text-foreground mb-3'>
+              Interested in Working Together?
+            </h3>
+            <p class='text-xs text-muted-foreground mb-4'>
+              If this resonates with how you think about platform value, let's
+              have a conversation.
+            </p>
+            <a
+              href='/contact'
+              class='block w-full px-4 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium text-sm text-center hover:bg-primary/90 transition-colors'
+            >
+              Get in Touch
+            </a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div
+      class='mt-20 p-8 md:p-12 rounded-lg bg-linear-to-br from-primary/5 to-secondary/10 border border-border'
+    >
+      <div class='space-y-6'>
+        <div class='flex items-start gap-6'>
+          <div
+            class='w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center shrink-0'
+          >
+            <svg
+              class='w-8 h-8 text-primary'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
+            >
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z'
+              ></path>
+            </svg>
+          </div>
+          <div class='flex-1'>
+            <h3 class='text-xl font-semibold text-foreground mb-2'>
+              Let's Talk Strategy
+            </h3>
+            <p class='text-muted-foreground mb-4'>
+              If you're a fund looking to strengthen technical capabilities,
+              improve portfolio support, or refine positioning—reach out.
+              Conversations start simple.
+            </p>
+            <div class='flex flex-wrap gap-3'>
+              <a
+                href='/contact'
+                class='px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors inline-flex items-center gap-2'
+              >
+                Start a Conversation
+                <svg
+                  class='w-4 h-4'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                >
+                  <path
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    stroke-width='2'
+                    d='M7 17L17 7M17 7H7M17 7V17'></path>
+                </svg>
+              </a>
+              <a
+                href='/operating-notes'
+                class='px-6 py-3 bg-secondary/20 text-foreground rounded-lg font-medium hover:bg-secondary/30 transition-colors border border-border'
+              >
+                Read Operating Notes
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const article = document.getElementById('content-article');
+    const tocNav = document.getElementById('toc-nav');
+
+    if (!article || !tocNav) return;
+
+    const headings = article.querySelectorAll('h2');
+
+    headings.forEach((heading, index) => {
+      const id = heading.id || `section-${index}`;
+      heading.id = id;
+
+      const link = document.createElement('a');
+      link.href = `#${id}`;
+      link.textContent = heading.textContent;
+      link.className =
+        'toc-link block text-sm text-muted-foreground hover:text-primary transition-colors py-1.5 border-l-2 border-transparent hover:border-primary pl-3';
+      link.dataset.target = id;
+
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.pushState(null, '', `#${id}`);
+      });
+
+      tocNav.appendChild(link);
+    });
+
+    const observerOptions = {
+      rootMargin: '-100px 0px -66%',
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const tocLinks = tocNav.querySelectorAll('.toc-link');
+          tocLinks.forEach((link) => {
+            link.classList.remove(
+              'text-primary',
+              'border-primary',
+              'font-medium',
+            );
+            link.classList.add('text-muted-foreground', 'border-transparent');
+          });
+
+          const activeLink = tocNav.querySelector(
+            `[data-target="${entry.target.id}"]`,
+          );
+          if (activeLink) {
+            activeLink.classList.remove(
+              'text-muted-foreground',
+              'border-transparent',
+            );
+            activeLink.classList.add(
+              'text-primary',
+              'border-primary',
+              'font-medium',
+            );
+          }
+        }
+      });
+    }, observerOptions);
+
+    headings.forEach((heading) => observer.observe(heading));
+  });
+</script>
+
+<style>
+  .toc-link {
+    transition: all 0.2s ease;
+  }
+</style>
