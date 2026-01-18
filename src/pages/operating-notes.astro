@@ -20,7 +20,7 @@ const formattedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
 
 <Layout title={`${title} | Lewis Kori`} description={description}>
   <div class='container-fluid py-16 md:py-24'>
-    <div class='mb-16 text-center space-y-4'>
+    <div class='mb-2 md:mb-16 text-center space-y-4'>
       <div class='inline-block'>
         <span
           class='text-xs uppercase tracking-wider text-primary font-semibold px-4 py-2 rounded-full bg-primary/10 border border-primary/20'
@@ -41,7 +41,7 @@ const formattedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
       </p>
     </div>
 
-    <div class='relative max-w-7xl mx-auto flex gap-8'>
+    <div class='relative flex flex-col md:flex-row gap-8'>
       <!-- Main Content -->
       <article
         id='content-article'
@@ -61,10 +61,10 @@ const formattedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
         <Content />
       </article>
 
-      <aside class='hidden xl:block w-64 shrink-0' id='table-of-contents'>
+      <aside class='w-full md:w-64 shrink-0' id='table-of-contents'>
         <div class='sticky top-32'>
           <div
-            class='rounded-lg bg-secondary/20 border border-border p-6 backdrop-blur-sm'
+            class='rounded-lg hidden xl:block bg-secondary/20 border border-border p-6 backdrop-blur-sm'
           >
             <h3
               class='text-sm font-semibold text-foreground mb-4 uppercase tracking-wider'
@@ -93,7 +93,9 @@ const formattedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
         </div>
       </aside>
     </div>
-    <div class='mt-20 p-8 md:p-12 rounded-lg border-[0.15px] border-border'>
+    <div
+      class='mt-20 p-4 py-8 md:p-8 lg:p-12 rounded-lg border-[0.15px] border-border'
+    >
       <div class='text-center space-y-4'>
         <h3 class='text-2xl font-semibold text-foreground'>
           Want to collaborate?

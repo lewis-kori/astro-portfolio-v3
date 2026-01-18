@@ -15,9 +15,8 @@ const {
   layout = 'horizontal',
 } = Astro.props;
 
-const layoutClasses = layout === 'vertical' 
-  ? 'flex-col' 
-  : 'flex-col sm:flex-row';
+const layoutClasses =
+  layout === 'vertical' ? 'flex-col' : 'flex-col sm:flex-row';
 ---
 
 <div class='space-y-6'>
