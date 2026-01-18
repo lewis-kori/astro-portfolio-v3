@@ -1,4 +1,6 @@
 ---
+import ArrowIcon from './ui/ArrowIcon.astro';
+
 interface Props {
   id?: string;
   showTitle?: boolean;
@@ -53,18 +55,9 @@ const layoutClasses =
         class='px-6 py-3 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-all font-medium inline-flex items-center justify-center gap-2 group whitespace-nowrap'
       >
         Subscribe
-        <svg
+        <ArrowIcon
           class='w-4 h-4 group-hover:translate-x-1 transition-transform'
-          fill='none'
-          viewBox='0 0 24 24'
-          stroke='currentColor'
-        >
-          <path
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            stroke-width='2'
-            d='M14 5l7 7m0 0l-7 7m7-7H3'></path>
-        </svg>
+        />
       </button>
     </div>
     <p class='text-xs text-muted-foreground italic'>
@@ -83,7 +76,7 @@ const layoutClasses =
         const formData = new FormData(form);
         const email = formData.get('email');
 
-        // Add your newsletter signup logic here
+        // Add  newsletter signup logic here
         // Example: await fetch('/api/newsletter', { method: 'POST', body: JSON.stringify({ email }) })
 
         alert('Thanks for subscribing! 🎉');

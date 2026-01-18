@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import { getEntry } from 'astro:content';
-
+import ArrowIcon from '../components/ui/ArrowIcon.astro';
 const entry = await getEntry('advisory', 'advisory');
 
 if (!entry) {
@@ -130,18 +130,7 @@ const formattedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
                 class='px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors inline-flex items-center gap-2'
               >
                 Start a Conversation
-                <svg
-                  class='w-4 h-4'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'
-                >
-                  <path
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
-                    d='M7 17L17 7M17 7H7M17 7V17'></path>
-                </svg>
+                <ArrowIcon class='w-4 h-4' />
               </a>
               <a
                 href='/operating-notes'
