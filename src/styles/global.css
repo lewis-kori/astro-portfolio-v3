@@ -59,8 +59,8 @@ html {
   --popover-foreground: oklch(0.145 0 0);
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.145 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.55 0.15 250);
+  --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.556 0 0);
@@ -174,7 +174,7 @@ html {
     @apply px-4 sm:px-6  w-full mx-auto max-w-6xl;
   }
   .first-letter-color {
-    @apply dark:first-letter:text-secondary first-letter:text-destructive retro:first-letter:text-primary;
+    @apply first-letter:text-secondary  retro:first-letter:text-primary;
   }
 }
 
