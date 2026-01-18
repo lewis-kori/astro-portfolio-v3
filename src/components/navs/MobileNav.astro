@@ -54,13 +54,13 @@ const { navLinks } = Astro.props;
     <div class='flex flex-col h-full'>
       <!-- Header -->
       <div class='flex items-center justify-between p-6 border-b border-border'>
-        <div class='flex items-center gap-3'>
+        <div class='flex flex-col md:items-center gap-3'>
           <Image
             src={siteConfig.avatar}
             alt={siteConfig.name}
             width={40}
             height={40}
-            class='size-10 border rounded-full object-cover'
+            class='size-10 border rounded-full shrink-0 object-cover'
           />
           <span class='font-bold text-lg'>{siteConfig.name}</span>
         </div>

@@ -22,12 +22,14 @@ const sortedExperiences = experiences.sort(
     </div>
 
     <div class='grid md:grid-cols-[250px_1fr] gap-8'>
-      <div class='space-y-2'>
+      <div
+        class='flex md:flex-col overflow-x-auto md:overflow-x-visible space-x-1 md:space-x-0 md:space-y-2 pb-4 md:pb-0'
+      >
         {
           sortedExperiences.map((exp, index) => (
             <button
               data-tab={exp.data.id}
-              class={`w-full text-left px-6 py-4 rounded-md border-l-4 transition-all duration-300 hover:bg-primary/5 ${
+              class={`shrink-0 md:w-full text-left text-sm md:text-base px-4 md:px-6 py-1.5 md:py-4 rounded-md md:border-l-4 border-b-4 md:border-b-0 transition-all duration-300 hover:bg-primary/5 ${
                 index === 0
                   ? 'bg-primary/10 border-primary text-primary font-medium'
                   : 'border-transparent text-muted-foreground hover:border-primary/30'
