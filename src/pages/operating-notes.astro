@@ -1,0 +1,95 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('operatingNotes', 'notes');
+
+if (!entry) {
+  return Astro.redirect('/404');
+}
+
+const { Content } = await entry.render();
+const { title, subtitle, description, lastUpdated } = entry.data;
+
+const formattedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<Layout title={`${title} | Lewis Kori`} description={description}>
+  <div class='container-fluid py-16 md:py-24'>
+    <div class='mb-16 text-center space-y-4'>
+      <div class='inline-block'>
+        <span
+          class='text-xs uppercase tracking-wider text-primary font-semibold px-4 py-2 rounded-full bg-primary/10 border border-primary/20'
+        >
+          Living Document
+        </span>
+      </div>
+      <h1
+        class='text-3xl md:text-4xl font-semibold text-foreground leading-tight tracking-tight first-letter-color'
+      >
+        {title}
+      </h1>
+      <p class='text-lg text-muted-foreground font-light'>
+        {subtitle}
+      </p>
+      <p class='text-sm text-muted-foreground/80 pt-4'>
+        Last updated: {formattedDate}
+      </p>
+    </div>
+
+    <article
+      class='max-w-4xl mx-auto
+        [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:text-foreground 
+        [&_h2]:mt-16 [&_h2]:mb-6
+        [&_p]:text-base md:[&_p]:text-lg [&_p]:text-foreground/90 
+        [&_p]:leading-relaxed [&_p]:mb-4
+        [&_ul]:space-y-3 [&_ul]:my-6 [&_ul]:list-disc [&_ul]:ml-6
+        [&_li]:text-base md:[&_li]:text-lg [&_li]:text-foreground/90 
+        [&_li]:leading-relaxed [&_li]:pl-2
+        [&_li::marker]:text-primary
+        [&_strong]:text-foreground [&_strong]:font-semibold
+        [&_hr]:my-12 [&_hr]:border-border/50
+        [&_em]:text-muted-foreground [&_em]:italic'
+    >
+      <Content />
+    </article>
+    <div
+      class='max-w-4xl mx-auto mt-20 p-8 md:p-12 rounded-2xl bg-secondary/30 border border-border'
+    >
+      <div class='text-center space-y-4'>
+        <h3 class='text-2xl font-semibold text-foreground'>
+          Want to collaborate?
+        </h3>
+        <p class='text-muted-foreground max-w-2xl mx-auto'>
+          If what I'm working on resonates with you, let's talk. I'm always open
+          to meaningful conversations about building, advising, or collaborating
+          on the right projects.
+        </p>
+        <div class='flex flex-wrap gap-4 justify-center pt-4'>
+          <a
+            href='/#contact'
+            class='px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors'
+          >
+            Get in Touch
+          </a>
+          <a
+            href='/projects'
+            class='px-6 py-3 bg-secondary text-foreground rounded-lg font-medium hover:bg-secondary/80 transition-colors border border-border'
+          >
+            View My Work
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class='max-w-4xl mx-auto mt-16 text-center'>
+      <div class='inline-flex items-center gap-2 text-sm text-muted-foreground'>
+        <span class='animate-pulse'>●</span>
+        <span>This page evolves as my work evolves</span>
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -16,6 +16,16 @@ const about = defineCollection({
   type: 'content',
 });
 
+const operatingNotes = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string(),
+    description: z.string(),
+    lastUpdated: z.coerce.date(),
+  }),
+});
+
 const blog = defineCollection({
   type: 'content',
   schema: z.object({
@@ -71,6 +81,7 @@ const sponsors = defineCollection({
 export const collections = {
   socials,
   about,
+  operatingNotes,
   experience,
   projects,
   blog,
