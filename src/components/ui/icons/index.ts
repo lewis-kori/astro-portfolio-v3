@@ -1,5 +1,5 @@
 export { default as ArrowIcon } from './ArrowIcon.astro';
-export { default as GithubIcon } from './GitHubIcon.astro';
+export { default as GitHubIcon } from './GitHubIcon.astro';
 export { default as XIcon } from './XIcon.astro';
 export { default as LinkedInIcon } from './LinkedInIcon.astro';
 export { default as DevToIcon } from './DevToIcon.astro';

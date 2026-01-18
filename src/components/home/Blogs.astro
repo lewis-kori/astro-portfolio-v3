@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import ArticleCard from './ArticleCard.astro';
+import { ArticleCard } from '../shared';
 
 // Get all blog posts and sort by date (newest first)
 const allBlogs = await getCollection('blog');

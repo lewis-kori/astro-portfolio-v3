@@ -1,11 +1,11 @@
 ---
 import {
-  GithubIcon,
+  GitHubIcon,
   XIcon,
   LinkedInIcon,
   DevToIcon,
   EmailIcon,
-} from './ui/icons';
+} from '../ui/icons';
 
 interface Props {
   name: string;
@@ -17,7 +17,7 @@ interface Props {
 const { name, url, icon, ariaLabel } = Astro.props;
 
 const iconMap = {
-  github: GithubIcon,
+  github: GitHubIcon,
   twitter: XIcon,
   linkedin: LinkedInIcon,
   devto: DevToIcon,
