@@ -1,5 +1,6 @@
 ---
 import SideNav from '../SideNav.astro';
+import { ArrowIcon } from '../ui/icons';
 
 const techStack = {
   frontend: ['React', 'Vue', 'Javascript (ES6+)', 'HTML & CSS'],
@@ -122,22 +123,11 @@ const techStack = {
 
         <div class='flex flex-col md:flex-row gap-y-2 gap-x-4 pt-4'>
           <a
-            href='#contact'
+            href='/contact'
             class='inline-flex items-center gap-2 px-5 text-sm py-2.5 bg-primary text-background rounded-md font-medium hover:bg-primary/90 hover:scale-105 transition-all shadow-lg hover:shadow-xl'
           >
             Let's Work Together
-            <svg
-              class='w-5 h-5'
-              fill='none'
-              viewBox='0 0 24 24'
-              stroke='currentColor'
-            >
-              <path
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                stroke-width='2'
-                d='M17 8l4 4m0 0l-4 4m4-4H3'></path>
-            </svg>
+            <ArrowIcon />
           </a>
           <a
             href='#projects'

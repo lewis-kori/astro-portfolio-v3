@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import SocialLink from '../SocialLink.astro';
+import { SocialLink } from '../shared';
+import { ArrowIcon } from '../ui/icons';
 
 const socials = await getCollection('socials');
 ---
@@ -37,23 +38,12 @@ const socials = await getCollection('socials');
       class='inline-flex items-center gap-3 px-5 text-sm py-2.5 bg-secondary text-primary-foreground rounded-md hover:bg-primary/90 transition-all hover:scale-105 shadow-lg hover:shadow-xl font-medium'
     >
       View My Work
-      <svg
-        class='w-5 h-5'
-        fill='none'
-        viewBox='0 0 24 24'
-        stroke='currentColor'
-      >
-        <path
-          stroke-linecap='round'
-          stroke-linejoin='round'
-          stroke-width='2'
-          d='M17 8l4 4m0 0l-4 4m4-4H3'></path>
-      </svg>
+      <ArrowIcon class='w-4 h-4' />
     </a>
 
     <a
       href='/contact'
-      class='inline-flex items-center gap-3 px-5 text-sm py-2.5 border-2 border-secondary text-secondary rounded-md hover:bg-secondary hover:text-primary-foreground transition-all hover:scale-105 font-medium'
+      class='inline-flex items-center gap-3 px-5 text-sm py-2.5 border border-secondary text-secondary rounded-md hover:bg-secondary hover:text-primary-foreground transition-all hover:scale-105 font-medium'
     >
       Get In Touch
     </a>
