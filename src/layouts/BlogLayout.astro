@@ -83,7 +83,10 @@ const publishedTime = dateCreated.toISOString();
       <header class='mb-12'>
         <div class='grid lg:grid-cols-5 gap-8'>
           <div class='lg:col-span-3 space-y-4'>
-            <h1 class='text-3xl md:text-4xl font-semibold first-letter-color'>
+            <h1
+              class='text-3xl md:text-4xl font-semibold first-letter-color'
+              transition:name={`blog-title-${Astro.params.slug}`}
+            >
               {title}
             </h1>
             <div
@@ -131,6 +134,7 @@ const publishedTime = dateCreated.toISOString();
                   height={500}
                   alt={title}
                   class='w-full rounded-md shadow-lg mt-6'
+                  transition:name={`blog-image-${Astro.params.slug}`}
                 />
               )
             }

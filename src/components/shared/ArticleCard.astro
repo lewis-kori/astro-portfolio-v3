@@ -23,6 +23,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
   href={`/blog/${slug}`}
   class='article-card group relative rounded-md border border-border bg-card overflow-hidden flex flex-col h-full transition-all duration-300 hover:shadow-lg dark:hover:shadow-secondary/20'
   data-glow
+  transition:name={`blog-card-${slug}`}
 >
   <div
     class='glow-effect absolute inset-0 pointer-events-none'
@@ -36,6 +37,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
           src={cover_image}
           alt={title}
           class='w-full h-full object-cover group-hover:scale-105 transition-transform duration-300'
+          transition:name={`blog-image-${slug}`}
         />
       </div>
     )
@@ -54,6 +56,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     </div>
     <h3
       class='text-xl font-bold first-letter-color mb-2 group-hover:text-primary transition-colors line-clamp-2'
+      transition:name={`blog-title-${slug}`}
     >
       {title}
     </h3>
