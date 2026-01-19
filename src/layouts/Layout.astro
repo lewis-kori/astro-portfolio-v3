@@ -4,7 +4,7 @@ import Footer from '@/components/navs/Footer.astro';
 import '../styles/global.css';
 import BackgroundArt from '@/components/shared/BackgroundArt.astro';
 import StickySocials from '@/components/shared/StickySocials.astro';
-import { ClientRouter } from 'astro:transitions';
+import { ClientRouter, fade } from 'astro:transitions';
 
 interface Props {
   title?: string;
@@ -33,7 +33,7 @@ const pageTitle = title;
 ---
 
 <!doctype html>
-<html lang='en' class='light'>
+<html transition:name='root' transition:animate='none' lang='en' class='light'>
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width' />
@@ -108,7 +108,10 @@ const pageTitle = title;
   <body>
     <BackgroundArt />
     <Navbar />
-    <main class='min-h-screen overflow-x-clip' transition:animate='fade'>
+    <main
+      class='min-h-screen overflow-x-clip'
+      transition:animate={fade({ duration: '0.5s' })}
+    >
       <slot />
     </main>
     <div transition:persist='footer'>

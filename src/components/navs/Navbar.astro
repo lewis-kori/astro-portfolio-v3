@@ -38,6 +38,7 @@ const isActive = (href: string) => {
     <div class='font-bold'>
       <a
         href='/'
+        data-astro-history='auto | push | replace'
         class='text-foreground flex items-center justify-center hover:text-primary transition-colors'
       >
         <Image
@@ -59,6 +60,7 @@ const isActive = (href: string) => {
             <li>
               <a
                 href={link.href}
+                data-astro-history='auto | push | replace'
                 class={`text-foreground hover:text-primary transition-colors text-sm ${isActive(link.href) ? 'text-primary font-semibold border-b-2 border-primary' : ''}`}
               >
                 {link.name}
