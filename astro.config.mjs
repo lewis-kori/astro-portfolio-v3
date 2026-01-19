@@ -19,5 +19,9 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [expressiveCode()],
+  integrations: [
+    expressiveCode({
+      themes: ['gruvbox-dark-medium', 'solarized-light'],
+    }),
+  ],
 });
