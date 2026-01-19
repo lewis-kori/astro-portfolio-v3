@@ -12,14 +12,14 @@ const navLinks = [
   { name: 'About', href: isHomePage ? '#about' : '/#about' },
   { name: 'Work', href: isHomePage ? '#work' : '/#work' },
   { name: 'Projects', href: isHomePage ? '#projects' : '/projects' },
-  { name: 'Blog', href: isHomePage ? '#blogs' : '/blog' },
+  { name: 'Advisory', href: '/advisory' },
   { name: 'Contact', href: '/contact' },
 ];
 
 const moreLinks = [
   { name: 'Resources', href: '/resources' },
   { name: 'Operating Notes', href: '/operating-notes' },
-  { name: 'Advisory', href: '/advisory' },
+  { name: 'Blog', href: isHomePage ? '#blogs' : '/blog' },
 ];
 ---
 
@@ -61,10 +61,10 @@ const moreLinks = [
             class='text-foreground hover:text-primary transition-colors flex items-center gap-1'
             aria-label='More menu'
           >
-            More
+            Writing
             <svg
               xmlns='http://www.w3.org/2000/svg'
-              class='h-4 w-4'
+              class='size-3.5'
               fill='none'
               viewBox='0 0 24 24'
               stroke='currentColor'
