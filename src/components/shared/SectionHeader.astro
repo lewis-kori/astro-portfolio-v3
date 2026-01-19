@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+  accentColor?: 'primary' | 'secondary';
+}
+
+const { title, subtitle, accentColor = 'primary' } = Astro.props;
+---
+
+<div class='mb-16 space-y-3'>
+  <div class='flex items-center gap-3'>
+    <div class={`h-8 w-1 bg-${accentColor} rounded-full`}></div>
+    <h2 class='text-3xl md:text-4xl font-bold text-foreground'>
+      {title}
+    </h2>
+  </div>
+  <p class='text-muted-foreground text-lg pl-7'>
+    {subtitle}
+  </p>
+</div>

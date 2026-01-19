@@ -1,5 +1,5 @@
+import { file } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
-import { file, glob } from 'astro/loaders';
 
 const socials = defineCollection({
   loader: file('src/data/socials.json'),
@@ -9,6 +9,40 @@ const socials = defineCollection({
     url: z.string().url(),
     icon: z.string(),
     ariaLabel: z.string(),
+  }),
+});
+
+const books = defineCollection({
+  loader: file('src/data/books.json'),
+  schema: z.object({
+    id: z.string(),
+    title: z.string(),
+    author: z.string(),
+    image: z.string(),
+    description: z.string(),
+    link: z.string(),
+  }),
+});
+
+const techStack = defineCollection({
+  loader: file('src/data/tech-stack.json'),
+  schema: z.object({
+    id: z.string(),
+    name: z.string(),
+    image: z.string(),
+    description: z.string(),
+    link: z.string().url(),
+  }),
+});
+
+const desktopSetup = defineCollection({
+  loader: file('src/data/desktop-setup.json'),
+  schema: z.object({
+    id: z.string(),
+    name: z.string(),
+    image: z.string(),
+    description: z.string(),
+    link: z.string(),
   }),
 });
 
@@ -92,6 +126,9 @@ const sponsors = defineCollection({
 
 export const collections = {
   socials,
+  books,
+  techStack,
+  desktopSetup,
   about,
   operatingNotes,
   advisory,
