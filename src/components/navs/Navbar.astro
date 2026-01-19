@@ -21,6 +21,16 @@ const moreLinks = [
   { name: 'Operating Notes', href: '/operating-notes' },
   { name: 'Blog', href: isHomePage ? '#blogs' : '/blog' },
 ];
+
+// Helper function to check if a link is active
+const isActive = (href: string) => {
+  if (href === '/' && pathname === '/') return true;
+  if (href.startsWith('#') && pathname === '/') return false;
+  if (href.startsWith('/') && !href.includes('#')) {
+    return pathname.startsWith(href) && href !== '/';
+  }
+  return false;
+};
 ---
 
 <header class='sticky top-0 z-50 py-6'>
@@ -49,7 +59,7 @@ const moreLinks = [
             <li>
               <a
                 href={link.href}
-                class='text-foreground hover:text-primary transition-colors'
+                class={`text-foreground hover:text-primary transition-colors text-sm ${isActive(link.href) ? 'text-primary font-semibold border-b-2 border-primary' : ''}`}
               >
                 {link.name}
               </a>
@@ -77,14 +87,14 @@ const moreLinks = [
             </svg>
           </button>
           <ul
-            class='absolute top-full right-0 mt-2 w-48 bg-background border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200'
+            class='absolute top-full right-0 mt-2 p-1.5 w-48 bg-background border border-border rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200'
           >
             {
               moreLinks.map((link) => (
                 <li>
                   <a
                     href={link.href}
-                    class='block px-4 py-2 text-foreground hover:text-primary hover:bg-secondary/50 transition-colors first:rounded-t-lg last:rounded-b-lg'
+                    class={`block px-4 py-2 text-foreground hover:text-primary hover:bg-secondary/50 transition-colors first:rounded-t-lg last:rounded-b-lg ${isActive(link.href) ? 'text-primary font-semibold bg-secondary/50' : ''}`}
                   >
                     {link.name}
                   </a>
