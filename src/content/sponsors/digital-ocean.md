@@ -2,6 +2,7 @@
 name: Digital Ocean
 url: https://m.do.co/c/2282403be01f
 twitter: https://twitter.com/digitalocean
+logo: https://www.vectorlogo.zone/logos/digitalocean/digitalocean-ar21.svg
 ---
 
 DigitalOcean makes it easy to launch, scale, and manage your cloud infrastructure — without the overwhelm.

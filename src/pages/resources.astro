@@ -1,0 +1,396 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const sponsors = await getCollection('sponsors');
+
+const currentBooks = [
+  {
+    title: 'The Pragmatic Programmer',
+    author: 'David Thomas & Andrew Hunt',
+    image: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop',
+    link: '#',
+  },
+  {
+    title: 'Clean Code',
+    author: 'Robert C. Martin',
+    image: 'https://images.unsplash.com/photo-1589998059171-988d887df646?w=400&h=600&fit=crop',
+    link: '#',
+  },
+  {
+    title: 'Designing Data-Intensive Applications',
+    author: 'Martin Kleppmann',
+    image: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=600&fit=crop',
+    link: '#',
+  },
+  {
+    title: 'System Design Interview',
+    author: 'Alex Xu',
+    image: 'https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=400&h=600&fit=crop',
+    link: '#',
+  },
+];
+
+const techStack = [
+  {
+    name: 'Python',
+    image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+    description: 'My primary backend language. Versatile, powerful, and perfect for everything from web APIs to data processing and automation scripts.',
+    link: 'https://www.python.org/',
+  },
+  {
+    name: 'TypeScript',
+    image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+    description: 'JavaScript with superpowers. Type safety makes building complex frontend applications much more maintainable and less error-prone.',
+    link: 'https://www.typescriptlang.org/',
+  },
+  {
+    name: 'Django',
+    image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg',
+    description: 'The web framework for perfectionists with deadlines. Batteries-included approach means I can focus on building features, not boilerplate.',
+    link: 'https://www.djangoproject.com/',
+  },
+  {
+    name: 'React',
+    image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+    description: 'My go-to library for building interactive UIs. Component-based architecture makes code reusable and maintainable at scale.',
+    link: 'https://react.dev/',
+  },
+  {
+    name: 'Astro',
+    image: 'https://astro.build/assets/press/astro-icon-light.svg',
+    description: 'The modern static site builder. Ships zero JS by default for blazing-fast performance. This site is built with Astro!',
+    link: 'https://astro.build/',
+  },
+  {
+    name: 'PostgreSQL',
+    image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+    description: 'My database of choice. Robust, reliable, and feature-rich. Handles everything from simple queries to complex data relationships.',
+    link: 'https://www.postgresql.org/',
+  },
+  {
+    name: 'Docker',
+    image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
+    description: 'Containerization made simple. Ensures my applications run consistently across development, testing, and production environments.',
+    link: 'https://www.docker.com/',
+  },
+  {
+    name: 'Git',
+    image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+    description: 'Version control is non-negotiable. Git keeps my code history organized and enables seamless collaboration with teams.',
+    link: 'https://git-scm.com/',
+  },
+];
+
+const desktopSetup = [
+  {
+    name: 'MacBook Pro 16"',
+    image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=300&fit=crop',
+    description: 'M2 Max chip with 32GB RAM. The powerhouse that handles everything from development to video editing without breaking a sweat.',
+    link: '#',
+  },
+  {
+    name: 'Dell Ultrasharp 27" 4K Monitor',
+    image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&h=300&fit=crop',
+    description: 'Super satisfied with the quality. 27", 4K resolution with excellent color accuracy. Perfect for long coding sessions.',
+    link: '#',
+  },
+  {
+    name: 'Custom Mechanical Keyboard',
+    image: 'https://images.unsplash.com/photo-1595225476474-87563907a212?w=400&h=300&fit=crop',
+    description: 'Custom build with Cherry MX Brown switches. Tactile feedback that makes typing a pleasure. Hot-swappable keys for endless customization.',
+    link: '#',
+  },
+  {
+    name: 'Logitech MX Master 3',
+    image: 'https://images.unsplash.com/photo-1527814050087-3793815479db?w=400&h=300&fit=crop',
+    description: 'Ergonomic mouse that fits perfectly in hand. Customizable buttons and smooth scrolling make navigation effortless during long work sessions.',
+    link: '#',
+  },
+  {
+    name: 'Adjustable LED Desk Lamp',
+    image: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400&h=300&fit=crop',
+    description: 'Smart LED lamp with adjustable brightness and color temperature. Includes wireless charging pad for my phone. Can be used as a fill light during calls too.',
+    link: '#',
+  },
+  {
+    name: 'Electric Standing Desk',
+    image: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=400&h=300&fit=crop',
+    description: 'Height-adjustable standing desk with memory presets. Switching between sitting and standing throughout the day keeps me energized and focused.',
+    link: '#',
+  },
+];
+
+
+---
+
+<Layout
+  title='Resources | Lewis Kori'
+  description='Tools, books, and resources I use for software development'
+>
+  <div class='relative'>
+    <div
+      class='absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none'
+    >
+    </div>
+
+    <div class='container-fluid py-16 md:py-24 relative'>
+      <div class='mb-20 text-center space-y-6'>
+        <div class='inline-block'>
+          <span
+            class='text-xs uppercase tracking-widest text-primary font-bold px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm'
+          >
+            My Arsenal
+          </span>
+        </div>
+        <h1
+          class='text-4xl md:text-6xl font-bold text-foreground leading-tight tracking-tight'
+        >
+          Tools & Resources<br />
+          <span class='text-primary'>I Use Daily</span>
+        </h1>
+        <p
+          class='text-lg md:text-xl text-muted-foreground font-light max-w-3xl mx-auto leading-relaxed'
+        >
+          A peek into the books, tech, and gear that fuel my work and keep me
+          productive
+        </p>
+      </div>
+
+      <section class='mb-32'>
+        <div class='mb-16 space-y-3'>
+          <div class='flex items-center gap-3'>
+            <div class='h-8 w-1 bg-primary rounded-full'></div>
+            <h2 class='text-3xl md:text-4xl font-bold text-foreground'>
+              Current Reading
+            </h2>
+          </div>
+          <p class='text-muted-foreground text-lg pl-7'>
+            Expanding my mind one page at a time
+          </p>
+        </div>
+        <div class='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8'>
+          {
+            currentBooks.map((book, index) => (
+              <a
+                href={book.link}
+                class='group'
+                style={`animation-delay: ${index * 100}ms`}
+              >
+                <div class='relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1'>
+                  <div class='h-48 overflow-hidden bg-secondary/10'>
+                    <img
+                      src={book.image}
+                      alt={book.title}
+                      class='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500'
+                    />
+                  </div>
+                </div>
+                <div class='mt-3'>
+                  <h3 class='font-semibold text-foreground text-sm group-hover:text-primary transition-colors line-clamp-2'>
+                    {book.title}
+                  </h3>
+                  <p class='text-xs text-muted-foreground mt-1'>
+                    {book.author}
+                  </p>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class='mb-32'>
+        <div class='mb-16 space-y-3'>
+          <div class='flex items-center gap-3'>
+            <div class='h-8 w-1 bg-secondary rounded-full'></div>
+            <h2 class='text-3xl md:text-4xl font-bold text-foreground'>
+              Tech Stack
+            </h2>
+          </div>
+          <p class='text-muted-foreground text-lg pl-7'>
+            The tools I rely on for building software
+          </p>
+        </div>
+        <div class='grid md:grid-cols-2 gap-8 md:gap-12'>
+          {
+            techStack.map((tech, index) => (
+              <div
+                class='group flex gap-6 transition-all duration-300'
+                style={`animation-delay: ${index * 50}ms`}
+              >
+                <div class='relative shrink-0'>
+                  <div class='absolute inset-0 bg-primary/20 blur-xl rounded-full scale-0 group-hover:scale-100 transition-transform duration-500' />
+                  <div class='relative w-12 h-12 flex items-center justify-center rounded-xl p-2'>
+                    <img
+                      src={tech.image}
+                      alt={tech.name}
+                      class='w-full h-full object-contain'
+                    />
+                  </div>
+                </div>
+                <div class='flex flex-col space-y-3 min-w-0'>
+                  <h4 class='text-xl font-bold text-foreground group-hover:text-primary transition-colors'>
+                    {tech.name}
+                  </h4>
+                  <p class='text-sm text-muted-foreground leading-relaxed'>
+                    {tech.description}
+                  </p>
+                  <a
+                    href={tech.link}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    class='inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all w-fit'
+                  >
+                    <span>Learn more</span>
+                    <svg
+                      class='w-4 h-4'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'
+                    >
+                      <path
+                        stroke-linecap='round'
+                        stroke-linejoin='round'
+                        stroke-width='2'
+                        d='M17 8l4 4m0 0l-4 4m4-4H3'
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class='mb-32'>
+        <div class='mb-16 space-y-3'>
+          <div class='flex items-center gap-3'>
+            <div class='h-8 w-1 bg-primary rounded-full'></div>
+            <h2 class='text-3xl md:text-4xl font-bold text-foreground'>
+              My Setup
+            </h2>
+          </div>
+          <p class='text-muted-foreground text-lg pl-7'>
+            The gear that powers my daily workflow
+          </p>
+        </div>
+        <div class='grid md:grid-cols-2 gap-8 md:gap-12'>
+          {
+            desktopSetup.map((item, index) => (
+              <div
+                class='group flex gap-6 transition-all duration-300'
+                style={`animation-delay: ${index * 75}ms`}
+              >
+                <div class='relative w-20 h-20 shrink-0 rounded-xl overflow-hidden'>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    class='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500'
+                  />
+                </div>
+                <div class='flex flex-col space-y-3 min-w-0'>
+                  <h3 class='text-xl font-bold text-foreground group-hover:text-primary transition-colors'>
+                    {item.name}
+                  </h3>
+                  <p class='text-sm text-muted-foreground leading-relaxed'>
+                    {item.description}
+                  </p>
+                  <a
+                    href={item.link}
+                    class='inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all w-fit'
+                  >
+                    <span>Buy here</span>
+                    <svg
+                      class='w-4 h-4'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'
+                    >
+                      <path
+                        stroke-linecap='round'
+                        stroke-linejoin='round'
+                        stroke-width='2'
+                        d='M17 8l4 4m0 0l-4 4m4-4H3'
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class='mb-16'>
+        <div class='mb-16 space-y-3'>
+          <div class='flex items-center gap-3'>
+            <div class='h-8 w-1 bg-secondary rounded-full'></div>
+            <h2 class='text-3xl md:text-4xl font-bold text-foreground'>
+              Sponsors
+            </h2>
+          </div>
+          <p class='text-muted-foreground text-lg pl-7'>
+            Partners who make my content possible
+          </p>
+        </div>
+        <div class='grid md:grid-cols-2 gap-8'>
+          {
+            sponsors.map(async (sponsor, index) => {
+              const { Content } = await sponsor.render();
+              return (
+                <div
+                  class='group flex gap-6 p-8 transition-all duration-300'
+                  style={`animation-delay: ${index * 100}ms`}
+                >
+                  <div class='relative shrink-0'>
+                    <div class='relative w-16 h-16 flex items-center justify-center rounded-xl p-2'>
+                      <img
+                        src={sponsor.data.logo || `https://logo.clearbit.com/${new URL(sponsor.data.url).hostname}`}
+                        alt={sponsor.data.name}
+                        class='w-full h-full object-contain'
+                        onerror={`this.src='https://logo.clearbit.com/${new URL(sponsor.data.url).hostname}'`}
+                      />
+                    </div>
+                  </div>
+                  <div class='flex flex-col space-y-4 min-w-0'>
+                    <div class='space-y-2'>
+                      <h3 class='text-2xl font-bold text-foreground group-hover:text-primary transition-colors'>
+                        {sponsor.data.name}
+                      </h3>
+                      <a
+                        href={sponsor.data.url}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        class='inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all'
+                      >
+                        <span>Visit Website</span>
+                        <svg
+                          class='w-4 h-4'
+                          fill='none'
+                          viewBox='0 0 24 24'
+                          stroke='currentColor'
+                        >
+                          <path
+                            stroke-linecap='round'
+                            stroke-linejoin='round'
+                            stroke-width='2'
+                            d='M17 8l4 4m0 0l-4 4m4-4H3'
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                    <div class='prose prose-sm max-w-none [&_p]:text-muted-foreground [&_p]:leading-relaxed [&_p]:mb-3 [&_a]:text-primary [&_a]:font-semibold [&_a]:no-underline hover:[&_a]:underline [&_strong]:text-foreground [&_strong]:font-bold [&_img]:hidden'>
+                      <Content />
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          }
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>

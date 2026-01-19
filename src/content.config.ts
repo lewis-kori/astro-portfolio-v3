@@ -86,6 +86,7 @@ const sponsors = defineCollection({
     name: z.string(),
     url: z.string().url(),
     twitter: z.string().url().optional(),
+    logo: z.string().optional(),
   }),
 });
 
