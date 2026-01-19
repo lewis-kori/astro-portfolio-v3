@@ -13,9 +13,13 @@ const navLinks = [
   { name: 'Work', href: isHomePage ? '#work' : '/#work' },
   { name: 'Projects', href: isHomePage ? '#projects' : '/projects' },
   { name: 'Blog', href: isHomePage ? '#blogs' : '/blog' },
-  { name: 'Advisory', href: '/advisory' },
-  { name: 'Operating Notes', href: '/operating-notes' },
   { name: 'Contact', href: '/contact' },
+];
+
+const moreLinks = [
+  { name: 'Resources', href: '/resources' },
+  { name: 'Operating Notes', href: '/operating-notes' },
+  { name: 'Advisory', href: '/advisory' },
 ];
 ---
 
@@ -39,7 +43,7 @@ const navLinks = [
     <div
       class='hidden md:flex items-center backdrop-blur-2xl px-6 py-2 rounded-full gap-6 bg-secondary/20'
     >
-      <ul class='flex space-x-6'>
+      <ul class='flex space-x-6 items-center'>
         {
           navLinks.map((link) => (
             <li>
@@ -52,6 +56,43 @@ const navLinks = [
             </li>
           ))
         }
+        <li class='relative group'>
+          <button
+            class='text-foreground hover:text-primary transition-colors flex items-center gap-1'
+            aria-label='More menu'
+          >
+            More
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              class='h-4 w-4'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
+            >
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M19 9l-7 7-7-7'></path>
+            </svg>
+          </button>
+          <ul
+            class='absolute top-full right-0 mt-2 w-48 bg-background border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200'
+          >
+            {
+              moreLinks.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class='block px-4 py-2 text-foreground hover:text-primary hover:bg-secondary/50 transition-colors first:rounded-t-lg last:rounded-b-lg'
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </li>
       </ul>
       <div class='flex items-center gap-2 border-l border-border pl-4'>
         <!-- <LanguageSwitcher /> -->
@@ -59,6 +100,6 @@ const navLinks = [
       </div>
     </div>
 
-    <MobileNav navLinks={navLinks} />
+    <MobileNav navLinks={[...navLinks, ...moreLinks]} />
   </nav>
 </header>
