@@ -4,6 +4,7 @@ import Footer from '@/components/navs/Footer.astro';
 import '../styles/global.css';
 import BackgroundArt from '@/components/shared/BackgroundArt.astro';
 import StickySocials from '@/components/shared/StickySocials.astro';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title?: string;
@@ -72,6 +73,8 @@ const pageTitle = title;
     <!-- Canonical URL -->
     <link rel='canonical' href={Astro.url} />
 
+    <ClientRouter />
+
     <!-- Initialize theme before page renders to prevent flash -->
     <script is:inline>
       const getStoredTheme = () => {
@@ -89,14 +92,30 @@ const pageTitle = title;
       document.documentElement.classList.remove('light', 'dark', 'retro');
       document.documentElement.classList.add(theme);
     </script>
+
+    <script>
+      document.addEventListener('astro:after-swap', () => {
+        const theme =
+          localStorage.getItem('theme') ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light');
+        document.documentElement.classList.remove('light', 'dark', 'retro');
+        document.documentElement.classList.add(theme);
+      });
+    </script>
   </head>
   <body>
     <BackgroundArt />
     <Navbar />
-    <main class='min-h-screen overflow-x-clip'>
+    <main class='min-h-screen overflow-x-clip' transition:animate='fade'>
       <slot />
     </main>
-    <Footer />
-    <StickySocials />
+    <div transition:persist='footer'>
+      <Footer />
+    </div>
+    <div transition:persist='socials'>
+      <StickySocials />
+    </div>
   </body>
 </html>

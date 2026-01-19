@@ -147,11 +147,14 @@ const formattedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
 </Layout>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  function initTableOfContents() {
     const article = document.getElementById('content-article');
     const tocNav = document.getElementById('toc-nav');
 
     if (!article || !tocNav) return;
+
+    // Clear existing TOC items
+    tocNav.innerHTML = '';
 
     const headings = article.querySelectorAll('h2');
 
@@ -212,7 +215,11 @@ const formattedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
     }, observerOptions);
 
     headings.forEach((heading) => observer.observe(heading));
-  });
+  }
+
+  // Initialize on both full page load and view transitions
+  document.addEventListener('DOMContentLoaded', initTableOfContents);
+  document.addEventListener('astro:page-load', initTableOfContents);
 </script>
 
 <style>
