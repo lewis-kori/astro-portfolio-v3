@@ -26,6 +26,17 @@ const operatingNotes = defineCollection({
   }),
 });
 
+const advisory = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string(),
+    description: z.string(),
+    lastUpdated: z.coerce.date(),
+    featuredImage: z.string().optional(),
+  }),
+});
+
 const blog = defineCollection({
   type: 'content',
   schema: z.object({
@@ -82,6 +93,7 @@ export const collections = {
   socials,
   about,
   operatingNotes,
+  advisory,
   experience,
   projects,
   blog,

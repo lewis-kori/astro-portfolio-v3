@@ -1,0 +1,14 @@
+export { default as ArrowIcon } from './ArrowIcon.astro';
+export { default as GitHubIcon } from './GitHubIcon.astro';
+export { default as XIcon } from './XIcon.astro';
+export { default as LinkedInIcon } from './LinkedInIcon.astro';
+export { default as DevToIcon } from './DevToIcon.astro';
+export { default as EmailIcon } from './EmailIcon.astro';
+export { default as FacebookIcon } from './FacebookIcon.astro';
+export { default as RedditIcon } from './RedditIcon.astro';
+export { default as WhatsAppIcon } from './WhatsAppIcon.astro';
+export { default as TelegramIcon } from './TelegramIcon.astro';
+export { default as HackerNewsIcon } from './HackerNewsIcon.astro';
+export { default as PinterestIcon } from './PinterestIcon.astro';
+export { default as CopyIcon } from './CopyIcon.astro';
+export { default as CheckIcon } from './CheckIcon.astro';

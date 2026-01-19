@@ -76,9 +76,7 @@
     setTheme(getTheme());
   }
 
-  // Initialize on page load
   initThemeToggle();
 
-  // Reinitialize after view transitions
   document.addEventListener('astro:after-swap', initThemeToggle);
 </script>

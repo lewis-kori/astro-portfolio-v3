@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { ArrowIcon } from '../ui/icons';
 
 const allProjects = await getCollection('projects');
 // Filter only featured projects and sort by year (descending)
@@ -126,18 +127,7 @@ const projectsWithContent = await Promise.all(
         class='inline-flex items-center gap-2 px-5 text-sm py-2.5 border border-primary text-primary rounded-md font-medium hover:bg-primary hover:text-background transition-all hover:scale-105'
       >
         View All Projects
-        <svg
-          class='w-5 h-5'
-          fill='none'
-          viewBox='0 0 24 24'
-          stroke='currentColor'
-        >
-          <path
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            stroke-width='2'
-            d='M19 9l-7 7-7-7'></path>
-        </svg>
+        <ArrowIcon class='w-4 h-4' />
       </a>
     </div>
   </div>

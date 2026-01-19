@@ -1,16 +1,15 @@
 ---
-import { NewsletterForm } from '@/components/shared';
+import { ArrowIcon } from '@/components/ui/icons';
 import Layout from '@/layouts/Layout.astro';
 import { getEntry } from 'astro:content';
-
-const entry = await getEntry('operatingNotes', 'notes');
+const entry = await getEntry('advisory', 'advisory');
 
 if (!entry) {
   return Astro.redirect('/404');
 }
 
 const { Content } = await entry.render();
-const { title, subtitle, description, lastUpdated } = entry.data;
+const { title, subtitle, description, lastUpdated, featuredImage } = entry.data;
 
 const formattedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
   month: 'long',
@@ -20,20 +19,20 @@ const formattedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
 
 <Layout title={`${title} | Lewis Kori`} description={description}>
   <div class='container-fluid py-16 md:py-20'>
-    <div class='mb-2 md:mb-16 text-center space-y-4'>
+    <div class='mb-16 text-center space-y-4'>
       <div class='inline-block'>
         <span
           class='text-xs uppercase tracking-wider text-primary font-semibold px-4 py-2 rounded-full bg-primary/10 border border-primary/20'
         >
-          Living Document
+          Advisory Services
         </span>
       </div>
       <h1
-        class='text-3xl md:text-4xl font-semibold text-foreground leading-tight tracking-tight first-letter-color'
+        class='text-3xl md:text-4xl font-semibold text-foreground leading-tight first-letter-color tracking-tight'
       >
         {title}
       </h1>
-      <p class='text-lg text-muted-foreground font-light'>
+      <p class='text-lg text-muted-foreground font-light max-w-2xl mx-auto'>
         {subtitle}
       </p>
       <p class='text-sm text-muted-foreground/80 pt-4'>
@@ -41,8 +40,7 @@ const formattedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
       </p>
     </div>
 
-    <div class='relative flex flex-col md:flex-row gap-8'>
-      <!-- Main Content -->
+    <div class='relative max-w-7xl mx-auto flex gap-8'>
       <article
         id='content-article'
         class='flex-1 max-w-4xl
@@ -50,89 +48,105 @@ const formattedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
         [&_h2]:mt-16 [&_h2]:mb-6 [&_h2]:scroll-mt-24
         [&_p]:text-base md:[&_p]:text-lg [&_p]:text-foreground/90
         [&_p]:leading-relaxed [&_p]:mb-4
-        [&_ul]:space-y-3 [&_ul]:my-6 [&_ul]:list-disc [&_ul]:ml-6
+        [&_ul]:space-y-3 [&_ul]:my-6 [&_ul]:list-none [&_ul]:ml-0
         [&_li]:text-base md:[&_li]:text-lg [&_li]:text-foreground/90
-        [&_li]:leading-relaxed [&_li]:pl-2
-        [&_li::marker]:text-primary
+        [&_li]:leading-relaxed [&_li]:pl-0 [&_li]:mb-4
         [&_strong]:text-secondary [&_strong]:font-semibold
         [&_hr]:my-12 [&_hr]:border-border/50
-        [&_em]:text-muted-foreground [&_em]:italic'
+        [&_em]:text-muted-foreground [&_em]:italic
+        [&_img]:rounded-xl [&_img]:my-8 [&_img]:shadow-lg [&_img]:border [&_img]:border-border'
       >
         <Content />
       </article>
 
-      <aside class='w-full md:w-64 shrink-0' id='table-of-contents'>
-        <div class='sticky top-32'>
+      <aside class='hidden xl:block w-64 shrink-0' id='table-of-contents'>
+        <div class='sticky top-32 space-y-6'>
           <div
-            class='rounded-lg hidden xl:block bg-secondary/20 border border-border p-6 backdrop-blur-sm'
+            class='rounded-lg bg-secondary/20 border border-border p-6 backdrop-blur-sm'
           >
             <h3
               class='text-sm font-semibold text-foreground mb-4 uppercase tracking-wider'
             >
               On This Page
             </h3>
-            <nav class='space-y-2' id='toc-nav'>
-              <!-- TOC items will be populated by JavaScript -->
-            </nav>
+            <nav class='space-y-2' id='toc-nav'></nav>
           </div>
 
-          <!-- Newsletter Form -->
-          <div class='mt-6'>
-            <h3
-              class='text-sm font-semibold text-foreground mb-3 uppercase tracking-wider'
-            >
-              Stay Updated
+          <div
+            class='rounded-lg bg-linear-to-br from-primary/5 to-secondary/10 border border-border p-6'
+          >
+            <h3 class='text-sm font-semibold text-foreground mb-3'>
+              Interested in Working Together?
             </h3>
-            <NewsletterForm
-              id='operating-notes-newsletter-form'
-              showTitle={false}
-              description='Get notified when this page updates.'
-              layout='vertical'
-            />
+            <p class='text-xs text-muted-foreground mb-4'>
+              If this resonates with how you think about platform value, let's
+              have a conversation.
+            </p>
+            <a
+              href='/contact'
+              class='block w-full px-4 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium text-sm text-center hover:bg-primary/90 transition-colors'
+            >
+              Get in Touch
+            </a>
           </div>
         </div>
       </aside>
     </div>
-    <div
-      class='mt-20 p-4 py-8 md:p-8 lg:p-12 rounded-lg border-[0.15px] border-border'
-    >
-      <div class='text-center space-y-4'>
-        <h3 class='text-2xl font-semibold text-foreground'>
-          Want to collaborate?
-        </h3>
-        <p class='text-muted-foreground max-w-2xl mx-auto'>
-          If what I'm working on resonates with you, let's talk. I'm always open
-          to meaningful conversations about building, advising, or collaborating
-          on the right projects.
-        </p>
-        <div class='flex flex-wrap gap-4 justify-center pt-4'>
-          <a
-            href='/contact'
-            class='px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors'
-          >
-            Get in Touch
-          </a>
-          <a
-            href='/projects'
-            class='px-6 py-3 bg-secondary text-primary-foreground retro:text-primary-foreground rounded-lg font-medium hover:bg-secondary/80 transition-colors border border-border'
-          >
-            View My Work
-          </a>
-        </div>
-      </div>
-    </div>
 
-    <div class='max-w-4xl mx-auto mt-16 text-center'>
-      <div class='inline-flex items-center gap-2 text-sm text-muted-foreground'>
-        <span class='animate-pulse'>●</span>
-        <span>This page evolves as my work evolves</span>
+    <div
+      class='mt-20 p-8 md:p-12 rounded-lg bg-linear-to-br from-primary/5 to-secondary/10 border border-border'
+    >
+      <div class='space-y-6'>
+        <div class='flex items-start gap-6'>
+          <div
+            class='w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center shrink-0'
+          >
+            <svg
+              class='w-8 h-8 text-primary'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
+            >
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z'
+              ></path>
+            </svg>
+          </div>
+          <div class='flex-1'>
+            <h3 class='text-xl font-semibold text-foreground mb-2'>
+              Let's Talk Strategy
+            </h3>
+            <p class='text-muted-foreground mb-4'>
+              If you're a fund looking to strengthen technical capabilities,
+              improve portfolio support, or refine positioning—reach out.
+              Conversations start simple.
+            </p>
+            <div class='flex flex-wrap gap-3'>
+              <a
+                href='/contact'
+                class='px-6 py-3 bg-primary text-primary-foreground rounded-md font-medium hover:bg-primary/90 transition-colors inline-flex items-center gap-2'
+              >
+                Start a Conversation
+                <ArrowIcon class='w-4 h-4' />
+              </a>
+              <a
+                href='/operating-notes'
+                class='px-6 py-3 bg-secondary/20 text-foreground rounded-md font-medium hover:bg-secondary/30 transition-colors border border-border'
+              >
+                Read Operating Notes
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </Layout>
 
 <script>
-  // Generate Table of Contents and handle active section highlighting
   document.addEventListener('DOMContentLoaded', () => {
     const article = document.getElementById('content-article');
     const tocNav = document.getElementById('toc-nav');
@@ -144,6 +158,7 @@ const formattedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
     headings.forEach((heading, index) => {
       const id = heading.id || `section-${index}`;
       heading.id = id;
+
       const link = document.createElement('a');
       link.href = `#${id}`;
       link.textContent = heading.textContent;

@@ -1,0 +1,38 @@
+---
+import {
+  GitHubIcon,
+  XIcon,
+  LinkedInIcon,
+  DevToIcon,
+  EmailIcon,
+} from '../ui/icons';
+
+interface Props {
+  name: string;
+  url: string;
+  icon: string;
+  ariaLabel: string;
+}
+
+const { name, url, icon, ariaLabel } = Astro.props;
+
+const iconMap = {
+  github: GitHubIcon,
+  twitter: XIcon,
+  linkedin: LinkedInIcon,
+  devto: DevToIcon,
+  email: EmailIcon,
+};
+
+const IconComponent = iconMap[name as keyof typeof iconMap];
+---
+
+<a
+  href={url}
+  target={name !== 'email' ? '_blank' : undefined}
+  rel={name !== 'email' ? 'noopener noreferrer' : undefined}
+  class='p-3 rounded-full bg-card border border-border hover:bg-accent hover:scale-110 transition-all shadow-sm hover:shadow-md'
+  aria-label={ariaLabel}
+>
+  {IconComponent && <IconComponent class='w-6 h-6' />}
+</a>

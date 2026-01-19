@@ -1,9 +1,9 @@
 ---
 import aboutImage from '@/assets/about-image.webp';
-import SocialLink from '@/components/SocialLink.astro';
 import { authorBio } from '@/config';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
+import { SocialLink } from './shared';
 
 const socials = await getCollection('socials');
 ---
