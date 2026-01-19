@@ -30,26 +30,25 @@ const readingTime = Math.ceil(wordCount / 200); // Average reading speed: 200 wo
 // Get sponsors if they exist
 let sponsors: CollectionEntry<'sponsors'>[] = [];
 if (post.data.sponsors && post.data.sponsors.length > 0) {
-  const allSponsors = await getCollection('sponsors');
-  sponsors = allSponsors.filter((sponsor) =>
+  const allSponsors = await getCollection('sponsors', ({ data }) =>
     post.data.sponsors?.some(
-      (sponsorName) =>
-        sponsorName.toLowerCase() === sponsor.data.name.toLowerCase(),
+      (sponsorName) => sponsorName.toLowerCase() === data.name.toLowerCase(),
     ),
   );
+  sponsors = allSponsors;
 }
 
 // Get related blogs from the same series
 let relatedBlogs: CollectionEntry<'blog'>[] = [];
 if (post.data.series) {
-  const allBlogs = await getCollection('blog');
-  relatedBlogs = allBlogs
-    .filter(
-      (blog) => blog.data.series === post.data.series && blog.id !== post.id,
-    )
-    .sort(
-      (a, b) => b.data.dateCreated.getTime() - a.data.dateCreated.getTime(),
-    );
+  relatedBlogs = await getCollection(
+    'blog',
+    ({ data }) =>
+      data.series === post.data.series && data.title !== post.data.title,
+  );
+  relatedBlogs.sort(
+    (a, b) => b.data.dateCreated.getTime() - a.data.dateCreated.getTime(),
+  );
 }
 ---
 
