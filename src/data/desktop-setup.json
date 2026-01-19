@@ -1,0 +1,44 @@
+[
+  {
+    "id": "macbook-pro",
+    "name": "MacBook Pro 16\"",
+    "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=300&fit=crop",
+    "description": "M2 Max chip with 32GB RAM. The powerhouse that handles everything from development to video editing without breaking a sweat.",
+    "link": "#"
+  },
+  {
+    "id": "dell-monitor",
+    "name": "Dell Ultrasharp 27\" 4K Monitor",
+    "image": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&h=300&fit=crop",
+    "description": "Super satisfied with the quality. 27\", 4K resolution with excellent color accuracy. Perfect for long coding sessions.",
+    "link": "#"
+  },
+  {
+    "id": "mechanical-keyboard",
+    "name": "Custom Mechanical Keyboard",
+    "image": "https://images.unsplash.com/photo-1595225476474-87563907a212?w=400&h=300&fit=crop",
+    "description": "Custom build with Cherry MX Brown switches. Tactile feedback that makes typing a pleasure. Hot-swappable keys for endless customization.",
+    "link": "#"
+  },
+  {
+    "id": "mx-master",
+    "name": "Logitech MX Master 3",
+    "image": "https://images.unsplash.com/photo-1527814050087-3793815479db?w=400&h=300&fit=crop",
+    "description": "Ergonomic mouse that fits perfectly in hand. Customizable buttons and smooth scrolling make navigation effortless during long work sessions.",
+    "link": "#"
+  },
+  {
+    "id": "desk-lamp",
+    "name": "Adjustable LED Desk Lamp",
+    "image": "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400&h=300&fit=crop",
+    "description": "Smart LED lamp with adjustable brightness and color temperature. Includes wireless charging pad for my phone. Can be used as a fill light during calls too.",
+    "link": "#"
+  },
+  {
+    "id": "standing-desk",
+    "name": "Electric Standing Desk",
+    "image": "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=400&h=300&fit=crop",
+    "description": "Height-adjustable standing desk with memory presets. Switching between sitting and standing throughout the day keeps me energized and focused.",
+    "link": "#"
+  }
+]

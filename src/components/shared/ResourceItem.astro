@@ -1,0 +1,83 @@
+---
+interface Props {
+  href: string;
+  image: string;
+  title: string;
+  subtitle?: string;
+  description: string;
+  linkText: string;
+  imageSize?: 'small' | 'medium' | 'book';
+  index?: number;
+  target?: string;
+  rel?: string;
+}
+
+const {
+  href,
+  image,
+  title,
+  subtitle,
+  description,
+  linkText,
+  imageSize = 'medium',
+  index = 0,
+  target,
+  rel,
+} = Astro.props;
+
+const sizeClasses = {
+  small: 'w-12 h-12',
+  medium: 'w-20 h-20',
+  book: 'w-20 h-28',
+};
+
+const imageClass = sizeClasses[imageSize];
+---
+
+<a
+  href={href}
+  class='group flex gap-6 transition-all duration-300'
+  style={`animation-delay: ${index * 50}ms`}
+  target={target}
+  rel={rel}
+>
+  <div
+    class={`relative ${imageClass} shrink-0 rounded overflow-hidden ${imageSize === 'book' ? 'shadow-md' : ''}`}
+  >
+    <img
+      src={image}
+      alt={title}
+      class='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500'
+    />
+  </div>
+  <div class='flex flex-col space-y-3 min-w-0'>
+    <div class='space-y-1'>
+      <h3
+        class='text-xl font-semibold text-foreground group-hover:text-primary transition-colors'
+      >
+        {title}
+      </h3>
+      {subtitle && <p class='text-sm text-muted-foreground'>{subtitle}</p>}
+    </div>
+    <p class='text-sm text-muted-foreground leading-relaxed'>
+      {description}
+    </p>
+    <span
+      class='inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all w-fit'
+    >
+      <span>{linkText}</span>
+      <svg
+        class='w-4 h-4'
+        fill='none'
+        viewBox='0 0 24 24'
+        stroke='currentColor'
+      >
+        <path
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          stroke-width='2'
+          d='M17 8l4 4m0 0l-4 4m4-4H3'></path>
+      </svg>
+    </span>
+  </div>
+</a>
