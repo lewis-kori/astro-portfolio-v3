@@ -166,7 +166,6 @@ const publishedTime = dateCreated.toISOString();
         {hasSponsors && <SponsorsSidebar sponsors={sponsors} />}
       </div>
 
-      <!-- Mobile: Tags and Author after content -->
       <div class='mt-12 space-y-8'>
         {
           tags && tags.length > 0 && (
@@ -182,7 +181,6 @@ const publishedTime = dateCreated.toISOString();
             </div>
           )
         }
-        <AuthorSidebar />
       </div>
 
       <div class='mt-12 pt-12 border-t border-border'>

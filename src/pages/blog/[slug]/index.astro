@@ -34,8 +34,8 @@ if (post.data.sponsors && post.data.sponsors.length > 0) {
   sponsors = allSponsors.filter((sponsor) =>
     post.data.sponsors?.some(
       (sponsorName) =>
-        sponsorName.toLowerCase() === sponsor.data.name.toLowerCase()
-    )
+        sponsorName.toLowerCase() === sponsor.data.name.toLowerCase(),
+    ),
   );
 }
 
@@ -45,10 +45,11 @@ if (post.data.series) {
   const allBlogs = await getCollection('blog');
   relatedBlogs = allBlogs
     .filter(
-      (blog) => blog.data.series === post.data.series && blog.id !== post.id
+      (blog) => blog.data.series === post.data.series && blog.id !== post.id,
     )
-    .sort((a, b) => b.data.dateCreated.getTime() - a.data.dateCreated.getTime())
-    .slice(0, 3); // Limit to 3 related posts
+    .sort(
+      (a, b) => b.data.dateCreated.getTime() - a.data.dateCreated.getTime(),
+    );
 }
 ---
 
