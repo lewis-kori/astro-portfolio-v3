@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -11,6 +11,21 @@ const SITE_URL = 'https://lewiskori.com';
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
+  env: {
+    schema: {
+      BEEHIIV_PUBLICATION_ID: envField.string({
+        context: 'server',
+        access: 'secret',
+        default: 'pub_23eaa370-2817-4546-91db-5cd5a4694309',
+      }),
+      BEEHIIV_API_KEY: envField.string({
+        context: 'server',
+        access: 'secret',
+        default:
+          'qGQ2rHds5x6MLLy34PzE1mIy4DjD3zzkqo54MLYFcUgBXq3kKwquvcDnVBYEbRJX',
+      }),
+    },
+  },
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'es', 'fr', 'de'],
@@ -25,7 +40,7 @@ export default defineConfig({
 
   integrations: [
     expressiveCode({
-      themes: ['gruvbox-dark-medium', 'solarized-light'],
+      themes: ['aurora-x', 'solarized-light'],
     }),
     sitemap({
       changefreq: 'weekly',
