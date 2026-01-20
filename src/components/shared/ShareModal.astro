@@ -10,7 +10,13 @@ const { url, title, description = '' } = Astro.props;
 const shareOptions = [
   {
     name: 'X (Twitter)',
-    color: 'sky',
+    bgClass: 'bg-sky-50 dark:bg-sky-950/30',
+    borderClass: 'border-sky-200 dark:border-sky-800',
+    hoverClass:
+      'hover:bg-sky-100 dark:hover:bg-sky-900/40 hover:shadow-sky-500/20',
+    iconClass: 'text-sky-600 dark:text-sky-400',
+    textClass:
+      'text-sky-700 dark:text-sky-300 group-hover:text-sky-600 dark:group-hover:text-sky-200',
     url: `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,
     iconType: 'fill',
     iconPath:
@@ -18,7 +24,13 @@ const shareOptions = [
   },
   {
     name: 'Facebook',
-    color: 'blue',
+    bgClass: 'bg-blue-50 dark:bg-blue-950/30',
+    borderClass: 'border-blue-200 dark:border-blue-800',
+    hoverClass:
+      'hover:bg-blue-100 dark:hover:bg-blue-900/40 hover:shadow-blue-500/20',
+    iconClass: 'text-blue-600 dark:text-blue-400',
+    textClass:
+      'text-blue-700 dark:text-blue-300 group-hover:text-blue-600 dark:group-hover:text-blue-200',
     url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
     iconType: 'fill',
     iconPath:
@@ -26,7 +38,13 @@ const shareOptions = [
   },
   {
     name: 'LinkedIn',
-    color: 'indigo',
+    bgClass: 'bg-indigo-50 dark:bg-indigo-950/30',
+    borderClass: 'border-indigo-200 dark:border-indigo-800',
+    hoverClass:
+      'hover:bg-indigo-100 dark:hover:bg-indigo-900/40 hover:shadow-indigo-500/20',
+    iconClass: 'text-indigo-600 dark:text-indigo-400',
+    textClass:
+      'text-indigo-700 dark:text-indigo-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-200',
     url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
     iconType: 'fill',
     iconPath:
@@ -34,7 +52,13 @@ const shareOptions = [
   },
   {
     name: 'WhatsApp',
-    color: 'emerald',
+    bgClass: 'bg-emerald-50 dark:bg-emerald-950/30',
+    borderClass: 'border-emerald-200 dark:border-emerald-800',
+    hoverClass:
+      'hover:bg-emerald-100 dark:hover:bg-emerald-900/40 hover:shadow-emerald-500/20',
+    iconClass: 'text-emerald-600 dark:text-emerald-400',
+    textClass:
+      'text-emerald-700 dark:text-emerald-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-200',
     url: `https://wa.me/?text=${encodeURIComponent(title)}%20${encodeURIComponent(url)}`,
     iconType: 'fill',
     iconPath:
@@ -42,7 +66,13 @@ const shareOptions = [
   },
   {
     name: 'Reddit',
-    color: 'orange',
+    bgClass: 'bg-orange-50 dark:bg-orange-950/30',
+    borderClass: 'border-orange-200 dark:border-orange-800',
+    hoverClass:
+      'hover:bg-orange-100 dark:hover:bg-orange-900/40 hover:shadow-orange-500/20',
+    iconClass: 'text-orange-600 dark:text-orange-400',
+    textClass:
+      'text-orange-700 dark:text-orange-300 group-hover:text-orange-600 dark:group-hover:text-orange-200',
     url: `https://reddit.com/submit?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`,
     iconType: 'fill',
     iconPath:
@@ -50,7 +80,13 @@ const shareOptions = [
   },
   {
     name: 'Email',
-    color: 'slate',
+    bgClass: 'bg-slate-50 dark:bg-slate-950/30',
+    borderClass: 'border-slate-200 dark:border-slate-800',
+    hoverClass:
+      'hover:bg-slate-100 dark:hover:bg-slate-900/40 hover:shadow-slate-500/20',
+    iconClass: 'text-slate-600 dark:text-slate-400',
+    textClass:
+      'text-slate-700 dark:text-slate-300 group-hover:text-slate-600 dark:group-hover:text-slate-200',
     url: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(description)}%0A%0A${encodeURIComponent(url)}`,
     iconType: 'stroke',
     iconPath: 'M2 4h20v16H2z M22 7l-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7',
@@ -76,13 +112,13 @@ const shareOptions = [
       stroke-linejoin='round'
       class='group-hover:rotate-12 transition-transform duration-300'
     >
-      <circle cx='18' cy='5' r='3'></circle>
-      <circle cx='6' cy='12' r='3'></circle>
-      <circle cx='18' cy='19' r='3'></circle>
-      <line x1='8.59' y1='13.51' x2='15.42' y2='17.49'></line>
-      <line x1='15.41' y1='6.51' x2='8.59' y2='10.49'></line>
+      <polyline points='20 12 20 22 4 22 4 12'></polyline>
+      <rect width='20' height='5' x='2' y='7'></rect>
+      <line x1='12' x2='12' y1='22' y2='7'></line>
+      <path d='M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z'></path>
+      <path d='M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z'></path>
     </svg>
-    <span class='text-sm font-semibold'>Share</span>
+    <span class='text-sm font-semibold'>Share full article</span>
   </button>
 </div>
 
@@ -183,7 +219,7 @@ const shareOptions = [
         </div>
         <p
           id='copy-success'
-          class='text-xs font-medium text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5'
+          class='text-xs font-medium text-emerald-600 dark:text-emerald-400 items-center gap-1.5 flex'
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -216,7 +252,7 @@ const shareOptions = [
                 href={option.url}
                 target='_blank'
                 rel='noopener noreferrer'
-                class={`group flex items-center gap-3 px-4 py-3 bg-${option.color}-50 dark:bg-${option.color}-950/30 border border-${option.color}-200 dark:border-${option.color}-800 rounded-md hover:bg-${option.color}-100 dark:hover:bg-${option.color}-900/40 hover:shadow-lg hover:shadow-${option.color}-500/20 transition-all duration-300`}
+                class={`group flex items-center gap-3 px-4 py-3 ${option.bgClass} border ${option.borderClass} rounded-md ${option.hoverClass} hover:shadow-lg transition-all duration-300`}
               >
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -234,13 +270,11 @@ const shareOptions = [
                   stroke-linejoin={
                     option.iconType === 'stroke' ? 'round' : undefined
                   }
-                  class={`text-${option.color}-600 dark:text-${option.color}-400 group-hover:scale-110 transition-transform duration-300`}
+                  class={`${option.iconClass} group-hover:scale-110 transition-transform duration-300`}
                 >
                   <path d={option.iconPath} />
                 </svg>
-                <span
-                  class={`text-sm font-semibold text-${option.color}-700 dark:text-${option.color}-300 group-hover:text-${option.color}-600 dark:group-hover:text-${option.color}-200`}
-                >
+                <span class={`text-sm font-semibold ${option.textClass}`}>
                   {option.name}
                 </span>
               </a>
@@ -262,6 +296,7 @@ const shareOptions = [
       'share-url-input',
     ) as HTMLInputElement;
     const successMsg = document.getElementById('copy-success');
+    successMsg?.classList.add('hidden');
 
     if (!modal || !trigger || !closeBtn || !copyBtn || !input) return;
 

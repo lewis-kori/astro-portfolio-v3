@@ -12,15 +12,25 @@ const navLinks = [
   { name: 'About', href: isHomePage ? '#about' : '/#about' },
   { name: 'Work', href: isHomePage ? '#work' : '/#work' },
   { name: 'Projects', href: isHomePage ? '#projects' : '/projects' },
-  { name: 'Blog', href: isHomePage ? '#blogs' : '/blog' },
+  { name: 'Advisory', href: '/advisory' },
   { name: 'Contact', href: '/contact' },
 ];
 
 const moreLinks = [
   { name: 'Resources', href: '/resources' },
   { name: 'Operating Notes', href: '/operating-notes' },
-  { name: 'Advisory', href: '/advisory' },
+  { name: 'Blog', href: isHomePage ? '#blogs' : '/blog' },
 ];
+
+// Helper function to check if a link is active
+const isActive = (href: string) => {
+  if (href === '/' && pathname === '/') return true;
+  if (href.startsWith('#') && pathname === '/') return false;
+  if (href.startsWith('/') && !href.includes('#')) {
+    return pathname.startsWith(href) && href !== '/';
+  }
+  return false;
+};
 ---
 
 <header class='sticky top-0 z-50 py-6'>
@@ -28,6 +38,7 @@ const moreLinks = [
     <div class='font-bold'>
       <a
         href='/'
+        data-astro-history='auto | push | replace'
         class='text-foreground flex items-center justify-center hover:text-primary transition-colors'
       >
         <Image
@@ -49,7 +60,8 @@ const moreLinks = [
             <li>
               <a
                 href={link.href}
-                class='text-foreground hover:text-primary transition-colors'
+                data-astro-history='auto | push | replace'
+                class={`text-foreground hover:text-primary transition-colors text-sm ${isActive(link.href) ? 'text-primary font-semibold border-b-2 border-primary' : ''}`}
               >
                 {link.name}
               </a>
@@ -58,13 +70,13 @@ const moreLinks = [
         }
         <li class='relative group'>
           <button
-            class='text-foreground hover:text-primary transition-colors flex items-center gap-1'
+            class='text-foreground hover:text-primary transition-colors text-sm flex items-center gap-1'
             aria-label='More menu'
           >
-            More
+            Writing
             <svg
               xmlns='http://www.w3.org/2000/svg'
-              class='h-4 w-4'
+              class='size-3.5'
               fill='none'
               viewBox='0 0 24 24'
               stroke='currentColor'
@@ -77,15 +89,14 @@ const moreLinks = [
             </svg>
           </button>
           <ul
-            class='absolute top-full right-0 mt-2 w-48 bg-background border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200'
+            class='absolute top-full right-0 mt-2 p-1.5 w-48 bg-background border border-border rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200'
           >
             {
               moreLinks.map((link) => (
-                <li>
-                  <a
-                    href={link.href}
-                    class='block px-4 py-2 text-foreground hover:text-primary hover:bg-secondary/50 transition-colors first:rounded-t-lg last:rounded-b-lg'
-                  >
+                <li
+                  class={` px-4 py-2 text-foreground hover:text-primary hover:bg-secondary/50 transition-colors text-sm first:rounded-t-md last:rounded-b-md ${isActive(link.href) ? 'text-primary font-semibold bg-secondary/20' : ''}`}
+                >
+                  <a class='w-full block' href={link.href}>
                     {link.name}
                   </a>
                 </li>

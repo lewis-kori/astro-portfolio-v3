@@ -8,6 +8,21 @@ interface Props {
 }
 
 const { navLinks } = Astro.props;
+
+const pathname = Astro.url.pathname;
+
+// Helper function to check if a link is active
+const isActive = (href: string) => {
+  // Handle home page
+  if (href === '/' && pathname === '/') return true;
+  // Handle hash links on home page
+  if (href.startsWith('#') && pathname === '/') return false;
+  // Handle non-home pages
+  if (href.startsWith('/') && !href.includes('#')) {
+    return pathname.startsWith(href) && href !== '/';
+  }
+  return false;
+};
 ---
 
 <button
@@ -96,7 +111,7 @@ const { navLinks } = Astro.props;
               >
                 <a
                   href={link.href}
-                  class='mobile-nav-link block px-4 py-3 rounded-lg text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-200 font-medium'
+                  class={`mobile-nav-link block px-4 py-3 rounded-lg text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-200 font-medium ${isActive(link.href) ? 'bg-primary/10 text-primary font-semibold border-l-4 border-primary' : ''}`}
                 >
                   {link.name}
                 </a>

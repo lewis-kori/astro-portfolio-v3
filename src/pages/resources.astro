@@ -109,24 +109,17 @@ const desktopSetup = await getCollection('desktopSetup');
       </section>
 
       <section class='mb-16'>
-        <div class='mb-16 space-y-3'>
-          <div class='flex items-center gap-3'>
-            <div class='h-8 w-1 bg-secondary rounded-full'></div>
-            <h2 class='text-2xl md:text-3xl font-semibold text-foreground'>
-              Sponsors
-            </h2>
-          </div>
-          <p class='text-muted-foreground md:text-lg pl-7'>
-            Partners who make my content possible
-          </p>
-        </div>
+        <SectionHeader
+          title='Sponsors'
+          subtitle='The partners who make my content possible'
+          accentColor='secondary'
+        />
         <div class='grid md:grid-cols-2 gap-6'>
           {
-            sponsors.map(async (sponsor, index) => {
-              const { Content } = await sponsor.render();
+            sponsors.map((sponsor, index) => {
               return (
                 <div
-                  class='group flex gap-6 md:p-8 transition-all duration-300'
+                  class='group flex gap-6 md:gap-8 transition-all duration-300'
                   style={`animation-delay: ${index * 100}ms`}
                 >
                   <div class='relative shrink-0'>
@@ -144,7 +137,7 @@ const desktopSetup = await getCollection('desktopSetup');
                   </div>
                   <div class='flex flex-col space-y-4 min-w-0'>
                     <div class='space-y-2'>
-                      <h3 class='text-2xl font-bold text-foreground group-hover:text-primary transition-colors'>
+                      <h3 class='text-xl font-semibold text-foreground group-hover:text-primary transition-colors'>
                         {sponsor.data.name}
                       </h3>
                       <a
@@ -169,9 +162,9 @@ const desktopSetup = await getCollection('desktopSetup');
                         </svg>
                       </a>
                     </div>
-                    <div class='prose prose-sm max-w-none [&_p]:text-muted-foreground [&_p]:leading-relaxed [&_p]:mb-3 [&_a]:text-primary [&_a]:font-semibold [&_a]:no-underline hover:[&_a]:underline [&_strong]:text-foreground [&_strong]:font-bold [&_img]:hidden'>
-                      <Content />
-                    </div>
+                    <p class='text-sm text-muted-foreground leading-relaxed'>
+                      {sponsor.data.excerpt}
+                    </p>
                   </div>
                 </div>
               );

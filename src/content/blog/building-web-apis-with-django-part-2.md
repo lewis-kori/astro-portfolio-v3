@@ -61,7 +61,7 @@ With this system set up, it's important to register routes for the endpoints tha
 
 Django ships with a default user model with fields like username, passwords and email input, in some cases, however, these fields may not be enough prompting us to extend the model or create your custom user model. In this case, we'll be extending the user model because we need to have a way to differentiate users. There'll be two user types. Those that can organize events and those that just want to attend events.
 
-```python
+```python title="user.py" wrap
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
@@ -81,7 +81,7 @@ class userProfile(models.Model):
 We'll also create a post_save signal to automatically create the user profile for new users that register to the platform.
 For this, create a signals.py file and write the code below.
 
-```python
+```python title="signals.py"
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -98,7 +98,7 @@ def create_profile(sender, instance, created, **kwargs):
 For a detailed explanation on how signals work, [this](https://docs.djangoproject.com/en/2.2/topics/signals/) is a good starting place
 Don't forget to register the signal in your app.py file like so:
 
-```python
+```python title="app.py"
 from django.apps import AppConfig
 
 
@@ -116,7 +116,7 @@ If you are new to django, serializers allow complex data such as querysets and m
 
 Within the app's directory, we'll initiate a serializers.py file and input the code below:
 
-```python
+```python title="serializers.py"
 from rest_framework import serializers
 from .models import userProfile
 class userProfileSerializer(serializers.ModelSerializer):
@@ -142,7 +142,7 @@ Some of these views are CreateAPIView, ListAPIView, ListCreateAPIView, RetrieveU
 
 We'll implement the ListCreateAPIView and RetrieveUpdateDestroyAPIView.
 
-```python
+```python wrap
 from rest_framework.generics import (ListCreateAPIView,RetrieveUpdateDestroyAPIView,)
 from rest_framework.permissions import IsAuthenticated
 from .models import userProfile
@@ -172,7 +172,7 @@ One thing we notice is the `perform_create` method in the _UserProfileListCreate
 
 The views are then linked to a URL endpoint in the app's urls.py file:
 
-```python
+```python title="urls.py" wrap
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
@@ -194,7 +194,7 @@ Django rest framework ships with several. I won't get into those as it's [docume
 
 This is a custom permission implementation. We'll initialize a permission.py file and populate it with the code below:
 
-```python
+```python title="permission.py" wrap
 from rest_framework.permissions import BasePermission,SAFE_METHODS
 
 class IsOwnerProfileOrReadOnly(BasePermission):
@@ -217,7 +217,7 @@ In our custom permission class, we are checking if the requesting user is simila
 
 Almost done now 🤣. We'll write some tests to ensure our endpoints are working as required.
 
-```python
+```python wrap
 class userProfileTestCase(APITestCase):
     profile_list_url=reverse('all-profiles')
     def setUp(self):

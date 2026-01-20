@@ -269,6 +269,7 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
   let currentFilter = 'all';
   let currentFilterValue = '';
   let filteredBlogs = sortedBlogs;
+  let isInitialLoad = true;
 
   function getUrlParams() {
     const params = new URLSearchParams(window.location.search);
@@ -376,8 +377,10 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
 
     updatePagination();
 
-    // Scroll to top of blog grid
-    grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Only scroll on pagination navigation, not initial load
+    if (!isInitialLoad) {
+      grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   function updatePagination() {
@@ -457,6 +460,9 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
     // Initialize from URL params
     initFromUrl();
 
+    // Mark initial load as complete
+    isInitialLoad = false;
+
     // Filter buttons
     document.querySelectorAll('.filter-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -501,5 +507,8 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
     initBlogFilters();
   }
 
-  document.addEventListener('astro:page-load', initBlogFilters);
+  document.addEventListener('astro:page-load', () => {
+    isInitialLoad = true; // Reset flag for view transitions
+    initBlogFilters();
+  });
 </script>
