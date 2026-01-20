@@ -37,7 +37,7 @@ const quickLinks = [
             0
           </div>
 
-          <div class='text-center space-y-4 mt-8'>
+          <div class='text-center relative z-20 space-y-4 mt-8'>
             <span
               class='inline-block text-xs font-mono px-3 py-1.5 rounded-full bg-destructive/10 text-destructive border border-destructive/20 font-semibold uppercase tracking-wider'
             >
@@ -53,7 +53,8 @@ const quickLinks = [
             </p>
           </div>
 
-          <div class='flex flex-col sm:flex-row gap-3 w-full'>
+     
+          <div class='flex flex-col sm:flex-row gap-3 w-full relative z-20'>
             <a
               href='/'
               class='flex-1 inline-flex items-center justify-center gap-2 px-6 py-1.5 rounded-md text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-all font-semibold group'
@@ -74,7 +75,7 @@ const quickLinks = [
           </div>
 
           <!-- Quick Links -->
-          <div class='flex gap-4 text-sm pt-2'>
+          <div class='flex gap-4 text-sm pt-2 relative z-20'>
             {
               quickLinks.map((link, index) => (
                 <>
