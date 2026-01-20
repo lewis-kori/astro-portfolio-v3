@@ -6,6 +6,7 @@ import BackgroundArt from '@/components/shared/BackgroundArt.astro';
 import StickySocials from '@/components/shared/StickySocials.astro';
 import { ClientRouter, fade } from 'astro:transitions';
 import { siteConfig } from '@/config';
+import { SITE_URL } from '@/lib/env';
 
 interface Props {
   title?: string;
@@ -19,7 +20,7 @@ interface Props {
 }
 
 const siteName = 'Lewis Kori – Entrepreneur, Product Builder, Operator';
-const siteUrl = siteConfig.url;
+const siteUrl = SITE_URL;
 const defaultDescription = siteConfig.description;
 const defaultOgTitle = siteConfig.title;
 const defaultOgDescription =
