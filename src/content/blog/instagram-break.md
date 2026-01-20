@@ -35,7 +35,7 @@ The first week off felt strange. I reached for my phone out of habit, flicking m
 
 Without Instagram in the background, my mental space opened up. I was less distracted and more present. My mornings slowed down. I could hear myself think again.
 
-I got more done. Not in a hustle way. Just with a cleaner focus. I restructured things that mattered. I got back into deep work, reflection, [writing]([blog/why-i-haven-t-blogged-in-years-and-how-i-m-overcoming-the-fear/](https://lewiskori.com/blog/why-i-haven-t-blogged-in-years-and-how-i-m-overcoming-the-fear/)), and [systems I’d long wanted to build](https://x.com/lewis_kihiu/status/1908972119414677942). My life became more intentional. Less reactive, more designed.
+I got more done. Not in a hustle way. Just with a cleaner focus. I restructured things that mattered. I got back into deep work, reflection, [writing](/blog/why-i-haven-t-blogged-in-years-and-how-i-m-overcoming-the-fear), and [systems I’d long wanted to build](https://x.com/lewis_kihiu/status/1908972119414677942). My life became more intentional. Less reactive, more designed.
 
 And something else happened: I stopped feeling the need to make moments “shareable.” I let them be just mine. The joy in that privacy was unexpected and powerful.
 

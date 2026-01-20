@@ -22,7 +22,7 @@ In this article, I'll explain how this decision came to be, what I was using bef
 
 As aforementioned, I am primarily a backend developer, so the first version of my website wasn't up to date with the modern web trends. I did this on purpose because at the time my main aim was to perfect my backend skills and so heavily concentrated on that aspect.
 
-I used Django(python web framework), Postgresql, and a template from colorlib which I extended and modified to suit my needs. With time, I wrapped that with docker and redeployed the entire site. I used that project as a learning opportunity. You can read all about the lessons I learned [here](https://lewiskori.com/blog/lessons-learnt-from-building-and-deploying-a-portfolio-website/).
+I used Django(python web framework), Postgresql, and a template from colorlib which I extended and modified to suit my needs. With time, I wrapped that with docker and redeployed the entire site. I used that project as a learning opportunity. You can read all about the lessons I learned [here](/blog/lessons-learnt-from-building-and-deploying-a-portfolio-website/).
 
 [Here's version one of the site](https://v-one.lewiskori.com/) for comparison.
 
