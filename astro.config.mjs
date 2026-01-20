@@ -5,7 +5,6 @@ import tailwindcss from '@tailwindcss/vite';
 import expressiveCode from 'astro-expressive-code';
 
 import sitemap from '@astrojs/sitemap';
-import { BEEHIIV_PUBLICATION_ID } from '@/lib/env';
 
 const SITE_URL = 'https://lewiskori.com';
 
@@ -17,7 +16,13 @@ export default defineConfig({
       BEEHIIV_PUBLICATION_ID: envField.string({
         context: 'server',
         access: 'secret',
-        default: BEEHIIV_PUBLICATION_ID,
+        default: 'pub_23eaa370-2817-4546-91db-5cd5a4694309',
+      }),
+      BEEHIIV_API_KEY: envField.string({
+        context: 'server',
+        access: 'secret',
+        default:
+          'qGQ2rHds5x6MLLy34PzE1mIy4DjD3zzkqo54MLYFcUgBXq3kKwquvcDnVBYEbRJX',
       }),
     },
   },
