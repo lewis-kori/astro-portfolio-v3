@@ -1,12 +1,15 @@
 ---
 import SideNav from '../SideNav.astro';
 import { ArrowIcon } from '../ui/icons';
+import { getEntry } from 'astro:content';
 
-const techStack = {
-  frontend: ['React', 'Vue', 'Javascript (ES6+)', 'HTML & CSS'],
-  backend: ['Python', 'Django', 'Strapi.js', 'Solidity'],
-  devops: ['Docker & Kubernetes', 'AWS'],
-};
+const aboutContent = await getEntry('about', 'about-content');
+if (!aboutContent) {
+  throw new Error('About content not found');
+}
+
+const { Content } = await aboutContent.render();
+const { subtitle } = aboutContent.data;
 ---
 
 <section class='py-20 relative' id='about'>
@@ -34,104 +37,28 @@ const techStack = {
       </div>
 
       <div class='animate-slide-in-right space-y-8 col-span-2'>
-        <div class='space-y-5 text-muted-foreground leading-relaxed text-base'>
-          <p class='text-xl font-medium text-foreground'>Hi there! 👋</p>
-
-          <p>
-            Welcome to my corner of the internet! This site is where I showcase
-            a curated selection of projects, from cutting-edge fintech platforms
-            to scalable multitenant systems. It's also home to my personal blog,
-            where I share insights into software engineering, startups, and life
-            as a developer.
-          </p>
-
-          <p>
-            I specialize in helping startups and non-technical founders
-            transform ambitious ideas into functional, scalable online
-            platforms. With deep experience in the fintech space, I craft
-            solutions that integrate smart contracts, seamless payment
-            processing, and APIs from providers like
-            <span class='text-primary font-medium'>Stripe</span>, <span
-              class='text-primary font-medium'>Google Pay</span
-            >, and <span class='text-primary font-medium'>M-Pesa</span>.
-          </p>
-
-          <p>
-            When I'm not coding, you'll likely find me in the gym or exploring
-            the outdoors through runs and hikes. I'm also an avid reader,
-            constantly seeking new perspectives and ideas.
-          </p>
-
-          <p class='text-lg text-foreground font-medium'>
-            Let's create something extraordinary together! 🚀
-          </p>
-        </div>
-
-        <div class='space-y-6 pt-4'>
-          <h3 class='text-2xl font-bold text-foreground'>Tech Stack</h3>
-
-          <div class='space-y-4'>
-            <div>
-              <p class='text-sm font-medium text-primary mb-2'>Frontend</p>
-              <div class='flex flex-wrap gap-2'>
-                {
-                  techStack.frontend.map((tech, i) => (
-                    <span
-                      class='px-3.5 py-1.5 bg-primary/10 text-primary rounded-full text-xs font-medium border border-primary/20 hover:bg-primary/20 hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-blur-fade'
-                      style={`animation-delay: ${i * 0.1}s`}
-                    >
-                      {tech}
-                    </span>
-                  ))
-                }
-              </div>
-            </div>
-
-            <div>
-              <p class='text-sm font-medium text-secondary mb-2'>Backend</p>
-              <div class='flex flex-wrap gap-2'>
-                {
-                  techStack.backend.map((tech, i) => (
-                    <span
-                      class='px-3.5 py-1.5 bg-secondary/10 text-secondary rounded-full text-xs font-medium border border-secondary/20 hover:bg-secondary/20 hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-blur-fade'
-                      style={`animation-delay: ${i * 0.1}s`}
-                    >
-                      {tech}
-                    </span>
-                  ))
-                }
-              </div>
-            </div>
-
-            <div>
-              <p class='text-sm font-medium text-accent mb-2'>DevOps & Cloud</p>
-              <div class='flex flex-wrap gap-2'>
-                {
-                  techStack.devops.map((tech, i) => (
-                    <span
-                      class='px-3.5 py-1.5 bg-accent/10 text-accent rounded-full text-xs font-medium border border-accent/20 hover:bg-accent/20 hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-blur-fade'
-                      style={`animation-delay: ${i * 0.1}s`}
-                    >
-                      {tech}
-                    </span>
-                  ))
-                }
-              </div>
-            </div>
-          </div>
+        <p
+          class='text-2xl font-medium text-foreground/80 mb-6 first-letter-color'
+        >
+          {subtitle}
+        </p>
+        <div
+          class='max-w-none [&_p]:text-muted-foreground [&_p]:leading-relaxed [&_p]:mb-4 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-foreground [&_h2]:mb-4 [&_h2]:mt-8 retro:[&_h2]:first-letter:text-primary [&_h2]:first-letter:text-secondary [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-foreground [&_h3]:mb-3 [&_h3]:mt-6 [&_ul]:space-y-2 [&_ul]:ml-6 [&_ul]:list-disc [&_ol]:space-y-2 [&_ol]:ml-6 [&_ol]:list-decimal [&_li]:text-muted-foreground [&_strong]:text-foreground [&_strong]:font-semibold [&_a]:text-secondary retro:[&_a]:text-primary [&_a]:text-sm [&_a]:hover:underline [&_a]:inline-flex [&_a]:items-center [&_a]:gap-1 [&_a]:font-medium'
+        >
+          <Content />
         </div>
 
         <div class='flex flex-col md:flex-row gap-y-2 gap-x-4 pt-4'>
           <a
             href='/contact'
-            class='inline-flex items-center gap-2 px-5 text-sm py-2.5 bg-primary text-background rounded-md font-medium hover:bg-primary/90 hover:scale-105 transition-all shadow-lg hover:shadow-xl'
+            class='inline-flex items-center justify-center gap-2 px-5 text-sm py-2.5 bg-primary text-background rounded-md font-medium hover:bg-primary/90 hover:scale-105 transition-all shadow-lg hover:shadow-xl'
           >
-            Let's Work Together
+            Get In Touch
             <ArrowIcon />
           </a>
           <a
             href='#projects'
-            class='inline-flex items-center gap-2 px-5 text-sm py-2.5 border border-primary text-primary rounded-md font-medium hover:bg-primary hover:text-background transition-all'
+            class='inline-flex items-center justify-center gap-2 px-5 text-sm py-2.5 border border-primary text-primary rounded-md font-medium hover:bg-primary hover:text-background transition-all'
           >
             View Projects
           </a>

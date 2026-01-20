@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { siteConfig } from '@/config';
 import { NewsletterForm } from '../shared';
 
 const socials = await getCollection('socials');
@@ -23,8 +24,7 @@ const currentYear = new Date().getFullYear();
           <p
             class='text-lg text-foreground font-medium leading-relaxed max-w-md'
           >
-            Entrepreneur and technologist building trusted platforms and
-            scalable digital products.
+            {siteConfig.tagline}
           </p>
         </div>
 

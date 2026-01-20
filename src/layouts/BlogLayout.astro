@@ -14,6 +14,7 @@ interface Props {
   dateCreated: Date;
   tags?: string[];
   coverImage?: string;
+  ogImage?: string;
   series?: string;
   readingTime: number;
   sponsors?: CollectionEntry<'sponsors'>[];
@@ -27,6 +28,7 @@ const {
   dateCreated,
   tags = [],
   coverImage,
+  ogImage,
   series,
   readingTime,
   sponsors = [],
@@ -51,7 +53,7 @@ const publishedTime = dateCreated.toISOString();
 <Layout
   title={pageTitle}
   description={description}
-  image={coverImage}
+  image={ogImage}
   author={author}
   publishedTime={publishedTime}
   type='article'
@@ -160,7 +162,7 @@ const publishedTime = dateCreated.toISOString();
         <!-- Blog Content -->
         <div
           class:list={[
-            'max-w-none leading-7 [&_h1]:text-4xl [&_h1]:font-bold [&_h1]:mt-8 [&_h1]:mb-4 [&_h2]:text-3xl [&_p]:text-primary retro:[&_p]:text-secondary [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:mt-8 [&_h3]:mb-4 [&_h4]:text-xl [&_h4]:font-bold [&_h4]:mt-8 [&_h4]:mb-4 [&_h5]:text-lg [&_h5]:font-bold [&_h5]:mt-8 [&_h5]:mb-4 [&_h6]:text-base [&_h6]:font-bold [&_h6]:mt-8 [&_h6]:mb-4 [&_p]:mb-4 [&_a]:underline  retro:[&_a]:text-primary [&_a]:text-secondary [&_ul]:mb-4 [&_ul]:ml-6 [&_ul]:list-disc [&_ul]:list-outside [&_ol]:mb-4 [&_ol]:ml-6 [&_ol]:list-decimal [&_ol]:list-outside [&_li]:mb-2 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_pre]:p-4 [&_pre]:rounded-md [&_pre]:overflow-x-auto [&_pre]:mb-4  [&_pre_code]:bg-transparent [&_pre_code]:p-0  [&_blockquote]:border-l-4 [&_blockquote]:border-secondary [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:my-4 [&_img]:rounded-md [&_img]:my-6 [&_hr]:w-1/2  [&_hr]:my-6',
+            'max-w-none leading-7 [&_h1]:text-4xl [&_h1]:font-bold [&_h1]:mt-8 [&_h1]:mb-4 [&_h2]:text-3xl [&_p]:text-primary retro:[&_p]:text-secondary [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:mt-8 [&_h3]:mb-4 [&_h4]:text-xl [&_h4]:font-bold [&_h4]:mt-8 [&_h4]:mb-4 [&_h5]:text-lg [&_h5]:font-bold [&_h5]:mt-8 [&_h5]:mb-4 [&_h6]:text-base [&_h6]:font-bold [&_h6]:mt-8 [&_h6]:mb-4 [&_p]:mb-4 [&_a]:underline  retro:[&_a]:text-primary [&_a]:text-secondary [&_ul]:mb-4 [&_ul]:ml-6 [&_ul]:list-disc [&_ul]:list-outside [&_ol]:mb-4 [&_ol]:ml-6 [&_ol]:list-decimal [&_ol]:list-outside [&_li]:mb-2 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_pre]:p-4 [&_pre]:rounded-md [&_pre]:overflow-x-auto [&_pre]:mb-4  [&_pre_code]:bg-transparent [&_pre_code]:p-0  [&_blockquote]:border-l-4 [&_blockquote]:border-secondary [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:my-4 [&_img]:rounded-md [&_img]:my-6 [&_hr]:w-1/2 [&_hr]:mx-auto  [&_hr]:my-6',
             hasSponsors ? 'lg:col-span-3' : '',
           ]}
         >
@@ -227,3 +229,24 @@ const publishedTime = dateCreated.toISOString();
     </div>
   </article>
 </Layout>
+
+<script>
+  function setupExternalLinks() {
+    const blogContent = document.querySelector('article');
+    if (!blogContent) return;
+
+    const links = blogContent.querySelectorAll('a[href^="http"]');
+    links.forEach((link) => {
+      const href = link.getAttribute('href');
+
+      if (href && !href.includes(window.location.hostname)) {
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
+      }
+    });
+  }
+
+  setupExternalLinks();
+
+  document.addEventListener('astro:page-load', setupExternalLinks);
+</script>

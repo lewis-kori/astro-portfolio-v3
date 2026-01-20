@@ -9,6 +9,8 @@ import { ClientRouter, fade } from 'astro:transitions';
 interface Props {
   title?: string;
   description?: string;
+  ogTitle?: string;
+  ogDescription?: string;
   image?: string;
   author?: string;
   publishedTime?: string;
@@ -19,10 +21,15 @@ const siteName = 'Lewis Kori – Entrepreneur, Product Builder, Operator';
 const siteUrl = 'https://lewiskori.com';
 const defaultDescription =
   'Entrepreneur and product builder working at the intersection of technology, capital, and trust. Building platforms, advising institutions, and exploring how systems scale.';
+const defaultOgTitle = 'Lewis Kori – Building Products, Systems, and Leverage';
+const defaultOgDescription =
+  'Thoughts and work from an entrepreneur building technology platforms and advising institutions on strategy, systems, and scale.';
 
 const {
   title = `Home | ${siteName}`,
   description = defaultDescription,
+  ogTitle = defaultOgTitle,
+  ogDescription = defaultOgDescription,
   image = `${siteUrl}/og-image.jpg`,
   author = 'Lewis Kori',
   publishedTime,
@@ -30,6 +37,8 @@ const {
 } = Astro.props;
 
 const pageTitle = title;
+const openGraphTitle = ogTitle || pageTitle;
+const openGraphDescription = ogDescription || description;
 ---
 
 <!doctype html>
@@ -48,8 +57,8 @@ const pageTitle = title;
     <!-- Open Graph / Facebook -->
     <meta property='og:type' content={type} />
     <meta property='og:url' content={Astro.url} />
-    <meta property='og:title' content={pageTitle} />
-    <meta property='og:description' content={description} />
+    <meta property='og:title' content={openGraphTitle} />
+    <meta property='og:description' content={openGraphDescription} />
     <meta property='og:image' content={image} />
     <meta property='og:site_name' content={siteName} />
     {
@@ -66,8 +75,8 @@ const pageTitle = title;
     <!-- Twitter -->
     <meta name='twitter:card' content='summary_large_image' />
     <meta name='twitter:url' content={Astro.url} />
-    <meta name='twitter:title' content={pageTitle} />
-    <meta name='twitter:description' content={description} />
+    <meta name='twitter:title' content={openGraphTitle} />
+    <meta name='twitter:description' content={openGraphDescription} />
     <meta name='twitter:image' content={image} />
 
     <!-- Canonical URL -->
