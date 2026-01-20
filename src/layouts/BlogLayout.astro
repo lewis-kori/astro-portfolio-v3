@@ -229,3 +229,24 @@ const publishedTime = dateCreated.toISOString();
     </div>
   </article>
 </Layout>
+
+<script>
+  function setupExternalLinks() {
+    const blogContent = document.querySelector('article');
+    if (!blogContent) return;
+
+    const links = blogContent.querySelectorAll('a[href^="http"]');
+    links.forEach((link) => {
+      const href = link.getAttribute('href');
+
+      if (href && !href.includes(window.location.hostname)) {
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
+      }
+    });
+  }
+
+  setupExternalLinks();
+
+  document.addEventListener('astro:page-load', setupExternalLinks);
+</script>

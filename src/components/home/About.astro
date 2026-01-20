@@ -25,9 +25,6 @@ const { subtitle } = aboutContent.data;
       >
         About me
       </h2>
-      <p class='text-2xl font-medium text-foreground/80 text-center mb-6'>
-        {subtitle}
-      </p>
       <div
         class='h-1 w-20 bg-linear-to-r from-primary to-secondary rounded-full mx-auto mb-16'
       >
@@ -40,6 +37,11 @@ const { subtitle } = aboutContent.data;
       </div>
 
       <div class='animate-slide-in-right space-y-8 col-span-2'>
+        <p
+          class='text-2xl font-medium text-foreground/80 mb-6 first-letter-color'
+        >
+          {subtitle}
+        </p>
         <div
           class='max-w-none [&_p]:text-muted-foreground [&_p]:leading-relaxed [&_p]:mb-4 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-foreground [&_h2]:mb-4 [&_h2]:mt-8 retro:[&_h2]:first-letter:text-primary [&_h2]:first-letter:text-secondary [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-foreground [&_h3]:mb-3 [&_h3]:mt-6 [&_ul]:space-y-2 [&_ul]:ml-6 [&_ul]:list-disc [&_ol]:space-y-2 [&_ol]:ml-6 [&_ol]:list-decimal [&_li]:text-muted-foreground [&_strong]:text-foreground [&_strong]:font-semibold [&_a]:text-secondary retro:[&_a]:text-primary [&_a]:text-sm [&_a]:hover:underline [&_a]:inline-flex [&_a]:items-center [&_a]:gap-1 [&_a]:font-medium'
         >
