@@ -1,0 +1,106 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { ArrowIcon } from '@/components/ui/icons';
+
+const quickLinks = [
+  { href: '/projects', label: 'Projects' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+
+<Layout
+  title='404 – Page Not Found'
+  description='The page you are looking for does not exist.'
+  ogTitle='404 – Page Not Found'
+  ogDescription='Looks like you wandered off the beaten path.'
+>
+  <section class='min-h-[80svh] flex items-center justify-center py-8 px-4'>
+    <div class='container-fluid'>
+      <div
+        class='flex items-center flex-col md:flex-row justify-center gap-4 md:gap-5'
+      >
+        <div
+          class='text-[20rem] md:text-[24rem] lg:text-[28rem] xl:text-[36rem] font-black text-secondary/10 retro:text-primary/10 select-none leading-none'
+          aria-hidden='true'
+        >
+          4
+        </div>
+
+        <div
+          class='relative flex flex-col items-center justify-center gap-6 px-4 md:px-8 py-8 md:py-12 bg-card border border-border rounded-3xl w-full h-full'
+        >
+          <div
+            class='absolute -top-16 md:-top-20 lg:-top-24 xl:-top-28 left-1/2 -translate-x-1/2 text-[20rem] md:text-[24rem] lg:text-[28rem] xl:text-[32rem] font-black text-secondary/10 retro:text-primary/10 select-none leading-none'
+            aria-hidden='true'
+          >
+            0
+          </div>
+
+          <div class='text-center relative z-20 space-y-4 mt-8'>
+            <span
+              class='inline-block text-xs font-mono px-3 py-1.5 rounded-full bg-destructive/10 text-destructive border border-destructive/20 font-semibold uppercase tracking-wider'
+            >
+              Error
+            </span>
+
+            <h1 class='text-2xl md:text-3xl font-semibold text-foreground'>
+              Page Not Found
+            </h1>
+
+            <p class='text-sm text-muted-foreground'>
+              The page you're looking for doesn't exist or has been moved.
+            </p>
+          </div>
+
+     
+          <div class='flex flex-col sm:flex-row gap-3 w-full relative z-20'>
+            <a
+              href='/'
+              class='flex-1 inline-flex items-center justify-center gap-2 px-6 py-1.5 rounded-md text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-all font-semibold group'
+            >
+              <ArrowIcon class='w-4 h-4 rotate-180' />
+              Home
+            </a>
+
+            <a
+              href='/blog'
+              class='flex-1 inline-flex items-center justify-center gap-2 px-6 py-1.5 rounded-md text-sm border-2 border-border bg-background hover:bg-muted transition-all font-semibold group'
+            >
+              Blog
+              <ArrowIcon
+                class='w-4 h-4 group-hover:translate-x-1 transition-transform'
+              />
+            </a>
+          </div>
+
+          <!-- Quick Links -->
+          <div class='flex gap-4 text-sm pt-2 relative z-20'>
+            {
+              quickLinks.map((link, index) => (
+                <>
+                  <a
+                    href={link.href}
+                    class='text-secondary hover:text-foreground transition-colors'
+                  >
+                    {link.label}
+                  </a>
+                  {index < quickLinks.length - 1 && (
+                    <span class='text-border'>·</span>
+                  )}
+                </>
+              ))
+            }
+          </div>
+        </div>
+
+        <div
+          class='text-[20rem] md:text-[24rem] lg:text-[28rem] xl:text-[36rem] font-black text-secondary/10 retro:text-primary/10 select-none leading-none'
+          aria-hidden='true'
+        >
+          4
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
