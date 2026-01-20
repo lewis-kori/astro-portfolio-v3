@@ -12,6 +12,7 @@ export interface SiteConfig {
   tagline: string;
   authorDescription: string;
   avatar: string;
+  url: string;
   location: string;
   email: string;
   phone: string;
@@ -20,6 +21,7 @@ export interface SiteConfig {
 export const siteConfig: SiteConfig = {
   name: 'Lewis Kori',
   title: 'Lewis Kori – Building Products, Systems, and Leverage',
+  url: 'https://lewiskori.com',
   description:
     'Entrepreneur and product builder working at the intersection of technology, capital, and trust. Building platforms, advising institutions, and exploring how systems scale.',
   tagline: 'Building Products, Systems and Companies That Endure',

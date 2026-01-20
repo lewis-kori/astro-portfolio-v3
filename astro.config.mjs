@@ -1,12 +1,16 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
 import expressiveCode from 'astro-expressive-code';
 
+import sitemap from '@astrojs/sitemap';
+
+const SITE_URL = 'https://lewiskori.com';
+
 // https://astro.build/config
 export default defineConfig({
+  site: SITE_URL,
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'es', 'fr', 'de'],
@@ -22,6 +26,48 @@ export default defineConfig({
   integrations: [
     expressiveCode({
       themes: ['gruvbox-dark-medium', 'solarized-light'],
+    }),
+    sitemap({
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: new Date(),
+      serialize(item) {
+        if (item.url === SITE_URL + '/' || item.url === SITE_URL) {
+          item.changefreq = 'daily';
+          item.priority = 1.0;
+          item.lastmod = new Date();
+          return item;
+        }
+
+        if (/\/blog\/[^/]+\/?$/.test(item.url)) {
+          item.changefreq = 'weekly';
+          item.priority = 0.8;
+          return item;
+        }
+
+        if (
+          /\/(about|contact|projects|advisory|operating-notes)\/?$/.test(
+            item.url,
+          )
+        ) {
+          item.changefreq = 'monthly';
+          item.priority = 0.9;
+          return item;
+        }
+
+        if (/\/blog\/?$/.test(item.url)) {
+          item.changefreq = 'daily';
+          item.priority = 0.9;
+          return item;
+        }
+        if (/\/resources\/?$/.test(item.url)) {
+          item.changefreq = 'monthly';
+          item.priority = 0.6;
+          return item;
+        }
+
+        return item;
+      },
     }),
   ],
 });

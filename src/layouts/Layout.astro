@@ -5,6 +5,7 @@ import '../styles/global.css';
 import BackgroundArt from '@/components/shared/BackgroundArt.astro';
 import StickySocials from '@/components/shared/StickySocials.astro';
 import { ClientRouter, fade } from 'astro:transitions';
+import { siteConfig } from '@/config';
 
 interface Props {
   title?: string;
@@ -18,10 +19,9 @@ interface Props {
 }
 
 const siteName = 'Lewis Kori – Entrepreneur, Product Builder, Operator';
-const siteUrl = 'https://lewiskori.com';
-const defaultDescription =
-  'Entrepreneur and product builder working at the intersection of technology, capital, and trust. Building platforms, advising institutions, and exploring how systems scale.';
-const defaultOgTitle = 'Lewis Kori – Building Products, Systems, and Leverage';
+const siteUrl = siteConfig.url;
+const defaultDescription = siteConfig.description;
+const defaultOgTitle = siteConfig.title;
 const defaultOgDescription =
   'Thoughts and work from an entrepreneur building technology platforms and advising institutions on strategy, systems, and scale.';
 
@@ -81,6 +81,8 @@ const openGraphDescription = ogDescription || description;
 
     <!-- Canonical URL -->
     <link rel='canonical' href={Astro.url} />
+    <!-- Sitemap -->
+    <link rel='sitemap' href='/sitemap-index.xml' />
 
     <ClientRouter />
 
