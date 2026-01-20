@@ -70,7 +70,7 @@ const isActive = (href: string) => {
         }
         <li class='relative group'>
           <button
-            class='text-foreground hover:text-primary transition-colors flex items-center gap-1'
+            class='text-foreground hover:text-primary transition-colors text-sm flex items-center gap-1'
             aria-label='More menu'
           >
             Writing
@@ -93,11 +93,10 @@ const isActive = (href: string) => {
           >
             {
               moreLinks.map((link) => (
-                <li>
-                  <a
-                    href={link.href}
-                    class={`block px-4 py-2 text-foreground hover:text-primary hover:bg-secondary/50 transition-colors first:rounded-t-lg last:rounded-b-lg ${isActive(link.href) ? 'text-primary font-semibold bg-secondary/50' : ''}`}
-                  >
+                <li
+                  class={` px-4 py-2 text-foreground hover:text-primary hover:bg-secondary/50 transition-colors text-sm first:rounded-t-md last:rounded-b-md ${isActive(link.href) ? 'text-primary font-semibold bg-secondary/20' : ''}`}
+                >
+                  <a class='w-full block' href={link.href}>
                     {link.name}
                   </a>
                 </li>
