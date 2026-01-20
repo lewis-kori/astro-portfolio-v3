@@ -14,6 +14,7 @@ interface Props {
   dateCreated: Date;
   tags?: string[];
   coverImage?: string;
+  ogImage?: string;
   series?: string;
   readingTime: number;
   sponsors?: CollectionEntry<'sponsors'>[];
@@ -27,6 +28,7 @@ const {
   dateCreated,
   tags = [],
   coverImage,
+  ogImage,
   series,
   readingTime,
   sponsors = [],
@@ -51,7 +53,7 @@ const publishedTime = dateCreated.toISOString();
 <Layout
   title={pageTitle}
   description={description}
-  image={coverImage}
+  image={ogImage}
   author={author}
   publishedTime={publishedTime}
   type='article'
