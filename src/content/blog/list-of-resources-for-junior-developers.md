@@ -13,7 +13,7 @@ You shouldn't beat yourself up over this as there's a ton of cool people who tho
 
 This is my list of people who have in one way or another shaped me to not only be a good developer technically but also boosted my social and soft skills.
 
-### Soft skills
+# Soft skills
 
 soft skills can be defined as
 
