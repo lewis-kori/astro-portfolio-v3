@@ -1,12 +1,15 @@
 ---
 import SideNav from '../SideNav.astro';
 import { ArrowIcon } from '../ui/icons';
+import { getEntry } from 'astro:content';
 
-const techStack = {
-  frontend: ['React', 'Vue', 'Javascript (ES6+)', 'HTML & CSS'],
-  backend: ['Python', 'Django', 'Strapi.js', 'Solidity'],
-  devops: ['Docker & Kubernetes', 'AWS'],
-};
+const aboutContent = await getEntry('about', 'about-content');
+if (!aboutContent) {
+  throw new Error('About content not found');
+}
+
+const { Content } = await aboutContent.render();
+const { subtitle } = aboutContent.data;
 ---
 
 <section class='py-20 relative' id='about'>
@@ -23,7 +26,7 @@ const techStack = {
         About me
       </h2>
       <p class='text-2xl font-medium text-foreground/80 text-center mb-6'>
-        Entrepreneur, Operator, and Builder of Systems
+        {subtitle}
       </p>
       <div
         class='h-1 w-20 bg-linear-to-r from-primary to-secondary rounded-full mx-auto mb-16'
@@ -37,91 +40,23 @@ const techStack = {
       </div>
 
       <div class='animate-slide-in-right space-y-8 col-span-2'>
-        <div class='space-y-5 text-muted-foreground leading-relaxed text-base'>
-          <p>
-            I am an entrepreneur focused on building products, platforms, and
-            companies that compound over time. My work sits at the intersection
-            of technology, product, and business strategy, with a bias toward
-            ownership, long-term thinking, and execution.
-          </p>
-
-          <p>
-            I started my career deep in software engineering, where I learned
-            how systems fail, scale, and succeed in the real world. Over time,
-            my role expanded beyond code into product design, infrastructure,
-            analytics, and ultimately company building. That progression shapes
-            how I operate today: I think in systems, but I act through products.
-          </p>
-
-          <p>
-            I currently build and operate multiple ventures, including
-            Inflection Studio and Desturi, while advising founders and
-            leadership teams on critical product and technology decisions. I am
-            selective about where I spend time and energy, preferring problems
-            that require judgment, not just effort.
-          </p>
-
-          <p>
-            I am interested in businesses that value trust, clarity, and
-            durability over speed for its own sake. I optimise for leverage,
-            learning and compounding outcomes rather than short-term wins.
-          </p>
-        </div>
-
-        <div class='space-y-6 pt-4'>
-          <h3 class='text-2xl font-semibold first-letter-color text-foreground'>
-            What I Do
-          </h3>
-
-          <div class='space-y-6'>
-            <div>
-              <p class='text-lg font-semibold text-foreground mb-2'>
-                Venture Building
-              </p>
-              <p class='text-muted-foreground leading-relaxed'>
-                I design, build, and operate digital products from concept to
-                market. This includes defining product strategy, assembling
-                teams, shipping platforms, and iterating based on real-world
-                usage.
-              </p>
-            </div>
-
-            <div>
-              <p class='text-lg font-semibold text-foreground mb-2'>
-                Advisory & Strategy
-              </p>
-              <p class='text-muted-foreground leading-relaxed'>
-                I work with founders and leadership teams navigating product,
-                technology, and growth decisions. Engagements are selective and
-                focused on clarity rather than execution volume.
-              </p>
-            </div>
-
-            <div>
-              <p class='text-lg font-semibold text-foreground mb-2'>
-                Writing & Thought Work
-              </p>
-              <p class='text-muted-foreground leading-relaxed'>
-                Through essays and my newsletter, I explore edge cases in
-                technology, business, and human decision-making. Writing is a
-                tool for thinking clearly and sharing patterns learned through
-                building.
-              </p>
-            </div>
-          </div>
+        <div
+          class='max-w-none [&_p]:text-muted-foreground [&_p]:leading-relaxed [&_p]:mb-4 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-foreground [&_h2]:mb-4 [&_h2]:mt-8 retro:[&_h2]:first-letter:text-primary [&_h2]:first-letter:text-secondary [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-foreground [&_h3]:mb-3 [&_h3]:mt-6 [&_ul]:space-y-2 [&_ul]:ml-6 [&_ul]:list-disc [&_ol]:space-y-2 [&_ol]:ml-6 [&_ol]:list-decimal [&_li]:text-muted-foreground [&_strong]:text-foreground [&_strong]:font-semibold [&_a]:text-secondary retro:[&_a]:text-primary [&_a]:text-sm [&_a]:hover:underline [&_a]:inline-flex [&_a]:items-center [&_a]:gap-1 [&_a]:font-medium'
+        >
+          <Content />
         </div>
 
         <div class='flex flex-col md:flex-row gap-y-2 gap-x-4 pt-4'>
           <a
             href='/contact'
-            class='inline-flex items-center gap-2 px-5 text-sm py-2.5 bg-primary text-background rounded-md font-medium hover:bg-primary/90 hover:scale-105 transition-all shadow-lg hover:shadow-xl'
+            class='inline-flex items-center justify-center gap-2 px-5 text-sm py-2.5 bg-primary text-background rounded-md font-medium hover:bg-primary/90 hover:scale-105 transition-all shadow-lg hover:shadow-xl'
           >
             Get In Touch
             <ArrowIcon />
           </a>
           <a
             href='#projects'
-            class='inline-flex items-center gap-2 px-5 text-sm py-2.5 border border-primary text-primary rounded-md font-medium hover:bg-primary hover:text-background transition-all'
+            class='inline-flex items-center justify-center gap-2 px-5 text-sm py-2.5 border border-primary text-primary rounded-md font-medium hover:bg-primary hover:text-background transition-all'
           >
             View Projects
           </a>
