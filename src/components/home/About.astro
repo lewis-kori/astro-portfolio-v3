@@ -22,6 +22,9 @@ const techStack = {
       >
         About me
       </h2>
+      <p class='text-2xl font-medium text-foreground/80 text-center mb-6'>
+        Entrepreneur, Operator, and Builder of Systems
+      </p>
       <div
         class='h-1 w-20 bg-linear-to-r from-primary to-secondary rounded-full mx-auto mb-16'
       >
@@ -35,88 +38,75 @@ const techStack = {
 
       <div class='animate-slide-in-right space-y-8 col-span-2'>
         <div class='space-y-5 text-muted-foreground leading-relaxed text-base'>
-          <p class='text-xl font-medium text-foreground'>Hi there! 👋</p>
-
           <p>
-            Welcome to my corner of the internet! This site is where I showcase
-            a curated selection of projects, from cutting-edge fintech platforms
-            to scalable multitenant systems. It's also home to my personal blog,
-            where I share insights into software engineering, startups, and life
-            as a developer.
+            I am an entrepreneur focused on building products, platforms, and
+            companies that compound over time. My work sits at the intersection
+            of technology, product, and business strategy, with a bias toward
+            ownership, long-term thinking, and execution.
           </p>
 
           <p>
-            I specialize in helping startups and non-technical founders
-            transform ambitious ideas into functional, scalable online
-            platforms. With deep experience in the fintech space, I craft
-            solutions that integrate smart contracts, seamless payment
-            processing, and APIs from providers like
-            <span class='text-primary font-medium'>Stripe</span>, <span
-              class='text-primary font-medium'>Google Pay</span
-            >, and <span class='text-primary font-medium'>M-Pesa</span>.
+            I started my career deep in software engineering, where I learned
+            how systems fail, scale, and succeed in the real world. Over time,
+            my role expanded beyond code into product design, infrastructure,
+            analytics, and ultimately company building. That progression shapes
+            how I operate today: I think in systems, but I act through products.
           </p>
 
           <p>
-            When I'm not coding, you'll likely find me in the gym or exploring
-            the outdoors through runs and hikes. I'm also an avid reader,
-            constantly seeking new perspectives and ideas.
+            I currently build and operate multiple ventures, including
+            Inflection Studio and Desturi, while advising founders and
+            leadership teams on critical product and technology decisions. I am
+            selective about where I spend time and energy, preferring problems
+            that require judgment, not just effort.
           </p>
 
-          <p class='text-lg text-foreground font-medium'>
-            Let's create something extraordinary together! 🚀
+          <p>
+            I am interested in businesses that value trust, clarity, and
+            durability over speed for its own sake. I optimise for leverage,
+            learning and compounding outcomes rather than short-term wins.
           </p>
         </div>
 
         <div class='space-y-6 pt-4'>
-          <h3 class='text-2xl font-bold text-foreground'>Tech Stack</h3>
+          <h3 class='text-2xl font-semibold first-letter-color text-foreground'>
+            What I Do
+          </h3>
 
-          <div class='space-y-4'>
+          <div class='space-y-6'>
             <div>
-              <p class='text-sm font-medium text-primary mb-2'>Frontend</p>
-              <div class='flex flex-wrap gap-2'>
-                {
-                  techStack.frontend.map((tech, i) => (
-                    <span
-                      class='px-3.5 py-1.5 bg-primary/10 text-primary rounded-full text-xs font-medium border border-primary/20 hover:bg-primary/20 hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-blur-fade'
-                      style={`animation-delay: ${i * 0.1}s`}
-                    >
-                      {tech}
-                    </span>
-                  ))
-                }
-              </div>
+              <p class='text-lg font-semibold text-foreground mb-2'>
+                Venture Building
+              </p>
+              <p class='text-muted-foreground leading-relaxed'>
+                I design, build, and operate digital products from concept to
+                market. This includes defining product strategy, assembling
+                teams, shipping platforms, and iterating based on real-world
+                usage.
+              </p>
             </div>
 
             <div>
-              <p class='text-sm font-medium text-secondary mb-2'>Backend</p>
-              <div class='flex flex-wrap gap-2'>
-                {
-                  techStack.backend.map((tech, i) => (
-                    <span
-                      class='px-3.5 py-1.5 bg-secondary/10 text-secondary rounded-full text-xs font-medium border border-secondary/20 hover:bg-secondary/20 hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-blur-fade'
-                      style={`animation-delay: ${i * 0.1}s`}
-                    >
-                      {tech}
-                    </span>
-                  ))
-                }
-              </div>
+              <p class='text-lg font-semibold text-foreground mb-2'>
+                Advisory & Strategy
+              </p>
+              <p class='text-muted-foreground leading-relaxed'>
+                I work with founders and leadership teams navigating product,
+                technology, and growth decisions. Engagements are selective and
+                focused on clarity rather than execution volume.
+              </p>
             </div>
 
             <div>
-              <p class='text-sm font-medium text-accent mb-2'>DevOps & Cloud</p>
-              <div class='flex flex-wrap gap-2'>
-                {
-                  techStack.devops.map((tech, i) => (
-                    <span
-                      class='px-3.5 py-1.5 bg-accent/10 text-accent rounded-full text-xs font-medium border border-accent/20 hover:bg-accent/20 hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-blur-fade'
-                      style={`animation-delay: ${i * 0.1}s`}
-                    >
-                      {tech}
-                    </span>
-                  ))
-                }
-              </div>
+              <p class='text-lg font-semibold text-foreground mb-2'>
+                Writing & Thought Work
+              </p>
+              <p class='text-muted-foreground leading-relaxed'>
+                Through essays and my newsletter, I explore edge cases in
+                technology, business, and human decision-making. Writing is a
+                tool for thinking clearly and sharing patterns learned through
+                building.
+              </p>
             </div>
           </div>
         </div>
@@ -126,7 +116,7 @@ const techStack = {
             href='/contact'
             class='inline-flex items-center gap-2 px-5 text-sm py-2.5 bg-primary text-background rounded-md font-medium hover:bg-primary/90 hover:scale-105 transition-all shadow-lg hover:shadow-xl'
           >
-            Let's Work Together
+            Get In Touch
             <ArrowIcon />
           </a>
           <a
