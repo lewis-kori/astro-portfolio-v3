@@ -9,6 +9,8 @@ export interface SiteConfig {
   name: string;
   title: string;
   description: string;
+  tagline: string;
+  authorDescription: string;
   avatar: string;
   location: string;
   email: string;
@@ -16,19 +18,15 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  name: 'Lewis Kori – Entrepreneur, Product Builder, Operator',
+  name: 'Lewis Kori',
   title: 'Lewis Kori – Building Products, Systems, and Leverage',
   description:
     'Entrepreneur and product builder working at the intersection of technology, capital, and trust. Building platforms, advising institutions, and exploring how systems scale.',
+  tagline: 'Building Products, Systems and Companies That Endure',
+  authorDescription:
+    'I am an entrepreneur and technologist focused on building scalable digital products, trusted platforms and businesses designed for long-term impact. My work spans product development, venture building and advisory across technology-driven markets.',
   avatar: '/src/assets/about-image.webp',
   location: '  Kenya',
   email: 'hello@lewiskori.com',
   phone: '+254 712 345678',
-};
-
-export const authorBio = {
-  name: 'Lewis Kori',
-  tagline: 'Turning ideas into scalable web solutions',
-  description:
-    "I'm a software engineer specializing in SaaS applications and MVP development for non-technical founders, indiehackers and startups.",
 };

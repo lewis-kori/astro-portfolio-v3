@@ -1,6 +1,6 @@
 ---
 import aboutImage from '@/assets/about-image.webp';
-import { authorBio } from '@/config';
+import { siteConfig } from '@/config';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { SocialLink } from './shared';
@@ -14,20 +14,20 @@ const socials = await getCollection('socials');
       <div class='flex items-center gap-4'>
         <Image
           src={aboutImage}
-          alt={authorBio.name}
+          alt={siteConfig.name}
           width={80}
           height={80}
           class='rounded-full size-16 border-2 border-primary object-cover'
         />
         <div>
-          <h3 class='font-semibold text-lg'>{authorBio.name}</h3>
+          <h3 class='font-semibold text-lg'>{siteConfig.name}</h3>
           <p class='text-sm text-muted-foreground'>
-            {authorBio.tagline}
+            {siteConfig.tagline}
           </p>
         </div>
       </div>
       <p class='text-sm text-muted-foreground leading-relaxed'>
-        {authorBio.description}
+        {siteConfig.authorDescription}
       </p>
 
       <div class='flex gap-3 pt-2'>
