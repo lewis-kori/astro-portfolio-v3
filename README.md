@@ -4,60 +4,103 @@
 [![Built with Astro](https://img.shields.io/badge/Built%20with-Astro-FF5D01?logo=astro)](https://astro.build)
 [![Deployed on Netlify](https://img.shields.io/badge/Deployed%20on-Netlify-00C7B7?logo=netlify)](https://www.netlify.com)
 
-A modern, multilingual personal portfolio built with Astro, showcasing my projects, blog posts, work experience, and more. This site is designed to be fast, accessible, and SEO-friendly.
+A modern, content-rich personal portfolio built with Astro, showcasing projects, blog posts, work experience, advisory services, and operating notes. Designed for entrepreneurs, technologists, and product builders who want a professional, performant web presence.
 
 ## 🌟 Features
 
-- **⚡️ Lightning Fast**: Built with Astro for optimal performance and SEO
-- **🌍 Multilingual Support**: Available in English can expand to Spanish, French, and German etc
-- **📱 Fully Responsive**: Beautiful on all devices
+### Core Functionality
+
+- **⚡️ Lightning Fast**: Built with Astro v5 for optimal performance and SEO
+- **📱 Fully Responsive**: Beautiful on all devices with mobile-first design
 - **🎨 Modern UI**: Styled with Tailwind CSS v4 and custom components
-- **📝 Blog**: Write and share technical articles with markdown
-- **💼 Portfolio**: Showcase projects with detailed descriptions
-- **🎯 About & Experience**: Professional background and work history
-- **🔗 Social Integration**: Connect via various social platforms
-- **🌙 Theme Support**: Light/sepia/dark mode switching
 - **♿️ Accessible**: Built with accessibility best practices
+- **🌙 Multi-Theme Support**: Light, dark, and sepia mode switching
+
+### Content & Pages
+
+- **🏠 Home**: Hero section with about, work experience, featured projects, and latest blog posts
+- **📝 Blog**: Technical articles with markdown, tags, series support, and sponsor integration
+- **💼 Projects**: Portfolio showcase with GitHub links, live demos, and app store integrations
+- **👨‍💼 Advisory**: Information about selective advisory work with venture capital firms
+- **📓 Operating Notes**: Practical reflections on building companies and operating with leverage
+- **📚 Resources**: Curated lists of books, tech stack, desktop setup, and tools
+- **📧 Contact**: Professional contact form with budget ranges and service options
+- **ℹ️ About**: Detailed professional background and bio
+
+### Technical Features
+
+- **🌍 i18n Support**: Multi-language infrastructure (English, Spanish, French, German)
+- **📰 Newsletter Integration**: Email capture with API endpoint
+- **🔗 Social Integration**: Share buttons, sticky social links, and author sidebars
+- **📊 Content Collections**: Organized content with Astro's Content Collections API
+- **🏷️ Dynamic Routing**: SEO-friendly URLs for blog posts and projects
+- **🤖 Sitemap & Robots**: Automatic sitemap generation and robots.txt
 
 ## 🚀 Tech Stack
 
-- **Framework**: [Astro](https://astro.build) v5
-- **Styling**: [Tailwind CSS](https://tailwindcss.com) v4
-- **UI Components**: Custom components with Radix UI primitives
+- **Framework**: [Astro](https://astro.build) v5.16+ (SSG with partial hydration)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com) v4.1+
+- **UI Components**: Custom components inspired by [shadcn/ui](https://ui.shadcn.com) with Radix UI primitives
 - **Icons**: [Lucide React](https://lucide.dev)
+- **Content**: Astro Content Collections with markdown support
+- **TypeScript**: Full type safety across the project
 - **Package Manager**: pnpm
-- **Deployment**: Netlify
+- **Deployment**: Netlify with automatic deployments
 - **Version Control**: Git & GitHub
 
 ## 📁 Project Structure
 
 ```text
 /
-├── .github/              # GitHub configuration and workflows
-├── public/               # Static assets
-│   └── projects/        # Project images and media
+├── .github/                    # GitHub configuration and workflows
+├── public/                     # Static assets
+│   └── projects/              # Project images and media
 ├── src/
-│   ├── assets/          # Image assets
-│   ├── components/      # Astro components
-│   │   ├── hero/       # Hero section components
-│   │   ├── navs/       # Navigation components
-│   │   ├── shared/     # Shared utility components
-│   │   └── ui/         # UI components library
-│   ├── content/         # Content collections
-│   │   ├── about/      # About page content
-│   │   ├── blog/       # Blog posts (markdown)
-│   │   ├── projects/   # Project descriptions
-│   │   └── sponsors/   # Sponsors information
-│   ├── data/            # JSON data files
-│   ├── layouts/         # Page layouts
-│   ├── lib/             # Utility functions
-│   ├── pages/           # Astro pages (routes)
-│   ├── styles/          # Global styles
-│   └── utils/           # Helper utilities (i18n, etc.)
-├── astro.config.mjs     # Astro configuration
-├── components.json      # UI components configuration
-├── tailwind.config.js   # Tailwind configuration
-└── tsconfig.json        # TypeScript configuration
+│   ├── assets/                # Image assets (profile, covers, etc.)
+│   ├── components/            # Astro & React components
+│   │   ├── home/             # Homepage sections (About, Blogs, Projects, etc.)
+│   │   ├── navs/             # Navigation (Navbar, MobileNav, SideNav)
+│   │   ├── shared/           # Reusable components
+│   │   │   ├── NewsletterForm.astro
+│   │   │   ├── ShareModal.astro
+│   │   │   ├── ThemeSwitcher.astro
+│   │   │   └── ...
+│   │   └── ui/               # UI component library
+│   ├── content/              # Content Collections (markdown + frontmatter)
+│   │   ├── about/           # About page content
+│   │   ├── advisory/        # Advisory services content
+│   │   ├── blog/            # Blog posts (30+ articles)
+│   │   ├── operatingNotes/  # Operating notes
+│   │   ├── projects/        # Project case studies
+│   │   └── sponsors/        # Sponsor information
+│   ├── data/                 # JSON data collections
+│   │   ├── books.json       # Reading list
+│   │   ├── desktop-setup.json
+│   │   ├── experience.json  # Work experience
+│   │   ├── socials.json     # Social media links
+│   │   └── tech-stack.json  # Tools and technologies
+│   ├── layouts/              # Page layouts
+│   │   ├── BlogLayout.astro # Blog post layout
+│   │   └── Layout.astro     # Base layout
+│   ├── pages/                # Routes (file-based routing)
+│   │   ├── index.astro      # Homepage
+│   │   ├── about.astro      # About page
+│   │   ├── projects.astro   # Projects page
+│   │   ├── advisory.astro   # Advisory page
+│   │   ├── operating-notes.astro
+│   │   ├── resources.astro  # Resources page
+│   │   ├── contact.astro    # Contact form
+│   │   ├── blog/            # Blog routes
+│   │   │   ├── index.astro  # Blog listing
+│   │   │   └── [slug]/      # Dynamic blog posts
+│   │   └── api/
+│   │       └── newsletter.ts # Newsletter API endpoint
+│   ├── lib/                  # Utility functions
+│   ├── styles/               # Global CSS
+│   └── utils/                # Helper utilities (i18n, etc.)
+├── astro.config.mjs          # Astro configuration
+├── components.json           # shadcn/ui components config
+└── tsconfig.json             # TypeScript configuration
 ```
 
 ## 🧞 Commands
@@ -78,17 +121,46 @@ All commands are run from the root of the project, from a terminal:
 This site is automatically deployed to Netlify:
 
 - **Production**: Deploys automatically when changes are merged to `main`
-- **Preview**: Every pull request gets a preview deployment for testing
+- *📄 Pages Overview
+
+### Public Pages
+
+- **/** - Homepage with hero, about, experience, projects, and blog sections
+- **/about** - Detailed professional background and bio
+- **/projects** - Portfolio of projects with tech stack and links
+- **/blog** - Blog listing with all articles
+- **/blog/[slug]** - Individual blog posts with author sidebar and sponsors
+- **/advisory** - Advisory services and collaboration opportunities
+- **/operating-notes** - Personal operating principles and reflections
+- **/resources** - Books, tech stack, desktop setup, and tools
+- **/contact** - Professional contact form
+- **/404** - Custom 404 error page
+
+### API Routes
+
+- **/api/newsletter** - Newsletter subscription endpoint
 
 ## 🤝 Contributing
 
-This is a personal portfolio project, but suggestions and feedback are welcome! 
+This is a personal portfolio project, but suggestions and feedback are welcome!
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Commit your changes (`git commit -m 'Add some amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+Please read the [branching strategy](.github/branching-strategy.md) before contributing.
+
+## 🎨 Customization
+
+This portfolio is designed to be easily customizable:
+
+1. **Site Configuration**: Update [src/config.ts](src/config.ts) with your personal information
+2. **Content**: Add/edit markdown files in `src/content/` directories
+3. **Data**: Update JSON files in `src/data/` for experience, socials, books, etc.
+4. **Styling**: Customize Tailwind configuration or global styles
+5. **Components**: Modify or create new components as needed
 
 Please read the [branching strategy](.github/branching-strategy.md) before contributing.
 

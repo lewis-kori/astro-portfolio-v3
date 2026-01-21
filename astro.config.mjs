@@ -16,13 +16,13 @@ export default defineConfig({
       BEEHIIV_PUBLICATION_ID: envField.string({
         context: 'server',
         access: 'secret',
-        default: 'pub_23eaa370-2817-4546-91db-5cd5a4694309',
+        default: 'abc',
       }),
       BEEHIIV_API_KEY: envField.string({
         context: 'server',
         access: 'secret',
         default:
-          'qGQ2rHds5x6MLLy34PzE1mIy4DjD3zzkqo54MLYFcUgBXq3kKwquvcDnVBYEbRJX',
+          '',
       }),
     },
   },
