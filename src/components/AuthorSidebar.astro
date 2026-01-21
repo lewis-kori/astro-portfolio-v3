@@ -2,10 +2,6 @@
 import aboutImage from '@/assets/about-image.webp';
 import { siteConfig } from '@/config';
 import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
-import { SocialLink } from './shared';
-
-const socials = await getCollection('socials');
 ---
 
 <aside class='lg:col-span-2'>
@@ -29,10 +25,6 @@ const socials = await getCollection('socials');
       <p class='text-sm text-muted-foreground leading-relaxed'>
         {siteConfig.authorDescription}
       </p>
-
-      <div class='flex gap-3 pt-2'>
-        {socials.map((social) => <SocialLink {...social.data} />)}
-      </div>
     </div>
   </div>
 </aside>
