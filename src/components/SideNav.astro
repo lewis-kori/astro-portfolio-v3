@@ -28,8 +28,7 @@ const navItems = [
     <p class='text-sm text-muted-foreground'>
       👋 <span class='italic'>Quick navigation</span>
     </p>
-    <div class='h-px w-12 bg-gradient-to-r from-primary/50 to-transparent'>
-    </div>
+    <div class='h-px w-12 bg-linear-to-r from-primary/50 to-transparent'></div>
   </div>
 
   <nav class='space-y-2'>
@@ -84,12 +83,20 @@ const navItems = [
           const isInView = rect.top <= 200 && rect.bottom >= 200;
 
           if (isInView) {
-            button.classList.add('!bg-primary/10', '!border-primary');
+            button.classList.add(
+              '!bg-primary/10',
+              'border-secondary!',
+              'retro:border-primary!',
+            );
             button
               .querySelector('p')
               .classList.add('!text-primary', '!font-medium');
           } else {
-            button.classList.remove('!bg-primary/10', '!border-primary');
+            button.classList.remove(
+              '!bg-primary/10',
+              'border-secondary!',
+              'retro:border-primary!',
+            );
             button
               .querySelector('p')
               .classList.remove('!text-primary', '!font-medium');
