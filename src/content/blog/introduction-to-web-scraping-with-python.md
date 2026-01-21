@@ -5,7 +5,9 @@ tags: ["python", "webscraping","tutorial"]
 series: Web scraping techniques with python
 description: An introduction to the beautiful soup python library for web scraping
 dateCreated: 2019-08-23
+sponsors: ["Scraper API"]
 ---
+
 ### What is web scraping
 
 This is the process of extracting information from a webpage by taking advantage of patterns in the web page's underlying code.

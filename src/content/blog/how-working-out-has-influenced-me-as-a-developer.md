@@ -8,7 +8,7 @@ series: soft skills
 dateCreated: 2019-08-14
 ---
 
-In my journey into being a software engineer, nothing had plagued me more than impostor syndrome. Especially at the beginning of my journey and even now, to a certain extent. Thankfully, I am managing to fix that. Some of the [techniques](https://lewiskori.com/post/continuous-improvementcontinuous-growth-as-a-developer) I use are highlighted here in a write up I did earlier on in the year.
+In my journey into being a software engineer, nothing had plagued me more than impostor syndrome. Especially at the beginning of my journey and even now, to a certain extent. Thankfully, I am managing to fix that. Some of the [techniques](/blog/continuous-improvement-continuous-growth-as-a-developer/) I use are highlighted here in a write up I did earlier on in the year.
 
 Of all those, working out has been among the most influential to my life. Starting out, I initially thought that it would all be about pumping the iron and then leave the gym. However, as time passed, I started noticing that working out began changing the way I approach issues and my thinking.
 

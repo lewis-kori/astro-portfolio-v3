@@ -6,6 +6,7 @@ series: Web scraping techniques with python
 description: How to beat CAPTCHA forms while web scraping using the scraper API.
 dateCreated: 2019-09-07
 canonical_url: https://dev.to/lewiskori/web-scraping-managing-proxies-and-captcha-with-scrapy-and-the-scraper-api-2c5b
+sponsors: ["Scraper API"]
 ---
 
 In the first and second part of this series, we've introduced ourselves to web scraping and the techniques one can apply to achieve this task. We did so with BeautifulSoup and selenium python libraries. Check them out if you haven't yet.

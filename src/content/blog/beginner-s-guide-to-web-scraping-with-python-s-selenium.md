@@ -5,6 +5,7 @@ tags: ["python", "webscraping","tutorial"]
 series: Web scraping techniques with python
 description: Beginner's guide to web scraping with python's selenium
 dateCreated: 2019-09-04
+sponsors: ["Scraper API"]
 ---
 In the first part of this series, we introduced ourselves to the concept of web scraping using two python libraries to achieve this task. Namely, requests and BeautifulSoup. The results were then stored in a JSON file. In this walkthrough, we'll tackle web scraping with a slightly different approach using the selenium python library. We'll then store the results in a CSV file using the pandas library.
 
@@ -21,7 +22,7 @@ In addition to this, they provide CAPTCHA handling for you as well as enabling a
 
 If you want more info as well as an intro the scrapy library check out [my post on the topic](/blog/web-scraping-managing-proxies-and-captcha-with-scrapy-and-the-scraper-api/).
 
-Using [this scraper api link](https://www.scraperapi.com?_go=korilewis) and the code
+Using [this scraper api link](https://www.scraperapi.com?_go=lewis93) and the code
 lewis10, you'll get a 10% discount off your first purchase!
 
 For additional resources to understand the selenium library and best practices, [this article by towards datascience](https://towardsdatascience.com/web-scraping-a-simple-way-to-start-scrapy-and-selenium-part-i-10367164c6c0) and [accordbox](https://www.accordbox.com/blog/web-scraping-framework-review-scrapy-vs-selenium/).
@@ -147,7 +148,7 @@ You'll notice that I used the find_elements_by_class method in this walkthrough.
 #### 2. Video
 
 If you prefer to learn using videos this series by Lucid programming was very useful to me.
-<https://www.youtube.com/watch?v=zjo9yFHoUl8>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zjo9yFHoUl8?si=Bl3zq1Zvrcoveguf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 #### 3. [Best practises while using selenium](https://realpython.com/modern-web-automation-with-python-and-selenium/)
 
