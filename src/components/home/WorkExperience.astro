@@ -29,10 +29,10 @@ const sortedExperiences = experiences.sort(
           sortedExperiences.map((exp, index) => (
             <button
               data-tab={exp.data.id}
-              class={`shrink-0 md:w-full text-left text-sm md:text-base border-secondary retro:border-primary px-4 md:px-6 py-1.5 md:py-4 rounded-md md:border-l-4 border-b-4 md:border-b-0 transition-all duration-300 hover:bg-primary/5 ${
+              class={`shrink-0 md:w-full text-left text-sm md:text-base  hover:border-secondary/30 retro:hover:border-primary/30 px-4 md:px-6 py-1.5 md:py-4 rounded-md md:border-l-4 border-b-4 md:border-b-0 transition-all duration-300 hover:bg-primary/5 ${
                 index === 0
                   ? 'bg-primary/10 border-secondary retro:border-primary text-primary font-medium'
-                  : 'border-transparent text-muted-foreground hover:border-secondary/30 retro:hover:border-primary/30'
+                  : 'border-transparent text-muted-foreground '
               }`}
             >
               {exp.data.company}
@@ -126,7 +126,8 @@ const sortedExperiences = experiences.sort(
           if (t.getAttribute('data-tab') === targetId) {
             t.classList.add(
               'bg-primary/10',
-              'border-primary',
+              'border-secondary',
+              'retro:border-primary',
               'text-primary',
               'font-medium',
             );
@@ -134,7 +135,8 @@ const sortedExperiences = experiences.sort(
           } else {
             t.classList.remove(
               'bg-primary/10',
-              'border-primary',
+              'border-secondary',
+              'retro:border-primary',
               'text-primary',
               'font-medium',
             );

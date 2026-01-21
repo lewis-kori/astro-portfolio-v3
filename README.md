@@ -107,21 +107,38 @@ A modern, content-rich personal portfolio built with Astro, showcasing projects,
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`            | Installs dependencies                            |
-| `pnpm dev`                | Starts local dev server at `localhost:4321`      |
-| `pnpm build`              | Build your production site to `./dist/`          |
-| `pnpm preview`            | Preview your build locally, before deploying     |
-| `pnpm astro ...`          | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help`    | Get help using the Astro CLI                     |
+| Command                | Action                                           |
+| :--------------------- | :----------------------------------------------- |
+| `pnpm install`         | Installs dependencies                            |
+| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
+| `pnpm build`           | Build your production site to `./dist/`          |
+| `pnpm preview`         | Preview your build locally, before deploying     |
+| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+
+## ⚙️ Environment Setup
+
+This project uses environment variables for API keys and configuration. To get started:
+
+1. Copy the example environment file:
+
+```bash
+cp .env.example .env
+```
+
+2. Update the `.env` file with your actual values:
+   - `BEEHIIV_PUBLICATION_ID` - Your Beehiiv publication ID for newsletter integration
+   - `BEEHIIV_API_KEY` - Your Beehiiv API key
+   - `GTM_ID` - Your Google Tag Manager ID for analytics
+
+See [.env.example](.env.example) for the complete template.
 
 ## 🚢 Deployment
 
 This site is automatically deployed to Netlify:
 
 - **Production**: Deploys automatically when changes are merged to `main`
-- *📄 Pages Overview
+- \*📄 Pages Overview
 
 ### Public Pages
 

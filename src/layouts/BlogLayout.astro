@@ -3,6 +3,7 @@ import { ArticleCard, ShareModal } from '@/components/shared';
 import AuthorSidebar from '@/components/AuthorSidebar.astro';
 import SocialShare from '@/components/SocialShare.astro';
 import SponsorsSidebar from '@/components/SponsorsSidebar.astro';
+import NewsletterModal from '@/components/shared/NewsletterModal.astro';
 import { Image } from 'astro:assets';
 import { type CollectionEntry } from 'astro:content';
 import Layout from './Layout.astro';
@@ -64,9 +65,9 @@ const publishedTime = dateCreated.toISOString();
   <article class='py-16 md:py-20 min-h-screen'>
     <div class='container-fluid'>
       <div class='mb-8'>
-        <a
-          href='/blog'
-          class='inline-flex items-center gap-2 text-secondary hover:underline'
+        <button
+          id='back-button'
+          class='inline-flex items-center gap-2 text-secondary hover:underline cursor-pointer'
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -82,7 +83,7 @@ const publishedTime = dateCreated.toISOString();
             <path d='m15 18-6-6 6-6'></path>
           </svg>
           Back to all posts
-        </a>
+        </button>
       </div>
 
       <header class='mb-12'>
@@ -231,6 +232,9 @@ const publishedTime = dateCreated.toISOString();
       }
     </div>
   </article>
+
+  <!-- Newsletter Modal Popup -->
+  <NewsletterModal />
 </Layout>
 
 <script>
@@ -249,7 +253,28 @@ const publishedTime = dateCreated.toISOString();
     });
   }
 
-  setupExternalLinks();
+  function setupBackButton() {
+    const backButton = document.getElementById('back-button');
+    if (!backButton) return;
 
-  document.addEventListener('astro:page-load', setupExternalLinks);
+    backButton.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      // Check if we can go back (history state exists)
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        // No history, go to blog index
+        window.location.href = '/blog';
+      }
+    });
+  }
+
+  setupExternalLinks();
+  setupBackButton();
+
+  document.addEventListener('astro:page-load', () => {
+    setupExternalLinks();
+    setupBackButton();
+  });
 </script>
