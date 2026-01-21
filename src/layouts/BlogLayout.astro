@@ -19,6 +19,7 @@ interface Props {
   readingTime: number;
   sponsors?: CollectionEntry<'sponsors'>[];
   relatedBlogs?: CollectionEntry<'blog'>[];
+  canonical?: string;
 }
 
 const {
@@ -33,6 +34,7 @@ const {
   readingTime,
   sponsors = [],
   relatedBlogs = [],
+  canonical,
 } = Astro.props;
 
 const hasSponsors = sponsors.length > 0;
@@ -57,6 +59,7 @@ const publishedTime = dateCreated.toISOString();
   author={author}
   publishedTime={publishedTime}
   type='article'
+  canonical={canonical}
 >
   <article class='py-16 md:py-20 min-h-screen'>
     <div class='container-fluid'>

@@ -82,6 +82,7 @@ const blog = defineCollection({
     cover_image: z.string().optional(),
     series: z.string().optional(),
     sponsors: z.array(z.string()).optional(),
+    canonical_url: z.string().url().optional(),
   }),
 });
 
