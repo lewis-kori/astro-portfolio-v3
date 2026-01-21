@@ -12,7 +12,7 @@ Over the last few months, I've been asking myself what it means to be a great de
 
 It's normal to get very passionate about what we do as developers, I'll admit I was guilty of previously spinning up projects almost every week in the name of practice 😅. While this was admirable, in hindsight, I've come to realize that those projects lacked direction. With real world development, clients and businesses need solutions to a particular problem. Be it helping them to come to the digital age, creating analytics dashboards, building AI systems to ease the business process and a myriad of other reasons. This may seem obvious, but whenever you think of starting a new project, try and think deeply about which problem you're project might solve. Coder foundry couldn't have put it better in their video, the ultimate project guaranteed to get you a job.
 
-<https://www.youtube.com/watch?v=oC483DTjRXU>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oC483DTjRXU?si=e4tLW767vTMRbmlJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Identify a local business or software company of your dreams, then proceed to build your side project around their needs. That way, should you approach them to get a job, the project will win you major points as they'll find you relate to their niche.
 
@@ -36,7 +36,7 @@ If you'd like to see how hobbies can influence your life check out my previous p
 
 To conclude on the same, I'll leave you with this awesome quote by Albert Einstein.
 
-<https://twitter.com/lewis_kihiu/status/1251042711945150465?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1251042711945150465&ref_url=http%3A%2F%2Flocalhost%3A8080%2Fblog%2Fletter-to-aspiring-software-developers%2F>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">&quot;A calm and modest life brings more happiness than the pursuit of success combined with constant restlessness.&quot; - theory of happiness<br>αlвerт eιɴѕтeιɴ</p>&mdash; Lewis Kori (@lewis_kihiu) <a href="https://twitter.com/lewis_kihiu/status/1251042711945150465?ref_src=twsrc%5Etfw">April 17, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 Thanks for reading this post.
 One young dev to another 🤗.

@@ -7,7 +7,7 @@ series: soft skills
 dateCreated: 2019-07-28
 ---
 
-the story was originally posted on my personal [website](https://lewiskori.com/post/continuous-improvementcontinuous-growth-as-a-developer).
+
 This post has been a long time coming and it’s very ironic I made a decision to writing more this [year](https://lewiskori.com/post/staying-true-to-yourself-in-2019), but oh well, better late than never they say.
 
 I started programming well over two years ago. It all began as a casual look at some C language tutorial one afternoon. At the time it all seemed so foreign to me and to be honest kinda challenging. Nonetheless I continued putting in the hours whenever i had free time and eventually managed to build a couple of projects along the various tutorials. The journey hasn’t been easy as some of you programmers reading this post can attest. Along the way I’ve picked up many lessons(some learned the hard way), but all eventually building me to not only be a good software engineer, but also a better human being. This are some of the precious nuggets picked up along the journey.
@@ -47,4 +47,5 @@ Taking a break gives you a chance to step back from the inner workings of the is
 
 Taking breaks also goes a long way in reducing burn out and I’ve found personally, a run or workout has helped in maintaining some balance.
 
-So have any points to add? drop them in the comment section below to help others reading this, and if you enjoyed this post don’t forget to share and [subscribe](https://mailchi.mp/c42286076bd8/lewiskori).
+So have any points to add? drop them in the comment section below to help others reading this, and if you enjoyed this post don’t forget to share and subscribe.
+
