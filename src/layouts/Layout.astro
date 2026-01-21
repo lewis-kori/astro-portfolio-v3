@@ -18,6 +18,7 @@ interface Props {
   author?: string;
   publishedTime?: string;
   type?: 'website' | 'article';
+  canonical?: string;
 }
 
 const siteName = 'Lewis Kori – Entrepreneur, Product Builder, Operator';
@@ -36,11 +37,13 @@ const {
   author = 'Lewis Kori',
   publishedTime,
   type = 'website',
+  canonical,
 } = Astro.props;
 
 const pageTitle = title;
 const openGraphTitle = ogTitle || pageTitle;
 const openGraphDescription = ogDescription || description;
+const canonicalUrl = canonical || Astro.url;
 ---
 
 <!doctype html>
@@ -82,7 +85,7 @@ const openGraphDescription = ogDescription || description;
     <meta name='twitter:image' content={image} />
 
     <!-- Canonical URL -->
-    <link rel='canonical' href={Astro.url} />
+    <link rel='canonical' href={canonicalUrl} />
     <!-- Sitemap -->
     <link rel='sitemap' href='/sitemap-index.xml' />
 
