@@ -26,7 +26,7 @@ export default defineConfig({
       GTM_ID: envField.string({
         context: 'client',
         access: 'public',
-        default: 'GTM-WWKZNJ8N',
+        default: '',
       }),
     },
   },

@@ -3,6 +3,7 @@ import { ArticleCard, ShareModal } from '@/components/shared';
 import AuthorSidebar from '@/components/AuthorSidebar.astro';
 import SocialShare from '@/components/SocialShare.astro';
 import SponsorsSidebar from '@/components/SponsorsSidebar.astro';
+import NewsletterModal from '@/components/shared/NewsletterModal.astro';
 import { Image } from 'astro:assets';
 import { type CollectionEntry } from 'astro:content';
 import Layout from './Layout.astro';
@@ -231,6 +232,9 @@ const publishedTime = dateCreated.toISOString();
       }
     </div>
   </article>
+
+  <!-- Newsletter Modal Popup -->
+  <NewsletterModal />
 </Layout>
 
 <script>

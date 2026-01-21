@@ -1,0 +1,205 @@
+---
+import NewsletterForm from './NewsletterForm.astro';
+
+interface Props {
+  triggerDelay?: number; // in milliseconds, default 7 seconds
+}
+
+const { triggerDelay = 7000 } = Astro.props;
+---
+
+<!-- Newsletter Modal Backdrop -->
+<div
+  id='newsletter-modal-backdrop'
+  class='hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 animate-fade-in'
+  aria-hidden='true'
+>
+  <div
+    id='newsletter-modal'
+    class='fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-4 bg-card border border-border rounded-lg shadow-2xl animate-scale-in'
+    role='dialog'
+    aria-modal='true'
+    aria-labelledby='modal-title'
+  >
+    <button
+      id='close-newsletter-modal'
+      class='absolute top-4 right-4 p-2 rounded-full hover:bg-muted transition-colors group'
+      aria-label='Close newsletter popup'
+    >
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='24'
+        height='24'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        stroke-width='2'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+        class='text-muted-foreground group-hover:text-foreground transition-colors'
+      >
+        <line x1='18' y1='6' x2='6' y2='18'></line>
+        <line x1='6' y1='6' x2='18' y2='18'></line>
+      </svg>
+    </button>
+
+    <div class='p-8'>
+      <div class='text-center mb-6'>
+        <h2
+          id='modal-title'
+          class='text-2xl font-semibold first-letter-color text-foreground mb-2'
+        >
+          Enjoying the read?
+        </h2>
+        <p class='text-muted-foreground'>
+          Join my newsletter for more insights on software engineering,
+          startups, and tech trends.
+        </p>
+      </div>
+
+      <NewsletterForm
+        id='newsletter-modal-form'
+        showTitle={false}
+        layout='horizontal'
+      />
+
+      <p class='text-xs text-muted-foreground text-center mt-4'>
+        You can close this popup anytime.
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.2s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.3s ease-out;
+  }
+</style>
+
+<script define:vars={{ triggerDelay }}>
+  function initNewsletterModal() {
+    const STORAGE_KEY = 'newsletter_subscribed';
+    const DISMISSED_KEY = 'newsletter_modal_dismissed';
+    const backdrop = document.getElementById('newsletter-modal-backdrop');
+    const closeButton = document.getElementById('close-newsletter-modal');
+    const modalForm = document.querySelector(
+      '[data-form-id="newsletter-modal-form"]',
+    );
+
+    if (!backdrop || !closeButton) return;
+
+    // Check if user has already subscribed or dismissed
+    const hasSubscribed = localStorage.getItem(STORAGE_KEY) === 'true';
+    const hasDismissed = localStorage.getItem(DISMISSED_KEY) === 'true';
+
+    if (hasSubscribed || hasDismissed) {
+      return; // Don't show modal
+    }
+
+    let modalShown = false;
+
+    // Show modal after delay
+    const showModalTimer = setTimeout(() => {
+      if (!modalShown) {
+        backdrop.classList.remove('hidden');
+        backdrop.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        modalShown = true;
+      }
+    }, triggerDelay);
+
+    // Close modal function
+    function closeModal() {
+      backdrop.classList.add('hidden');
+      backdrop.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      localStorage.setItem(DISMISSED_KEY, 'true');
+      clearTimeout(showModalTimer);
+    }
+
+    closeButton.addEventListener('click', closeModal);
+
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) {
+        closeModal();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !backdrop.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+
+    // Listen for successful subscription
+    if (modalForm) {
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'childList' || mutation.type === 'attributes') {
+            const successMessage = modalForm.querySelector('#success-message');
+            if (
+              successMessage &&
+              !successMessage.classList.contains('hidden')
+            ) {
+              // User subscribed successfully
+              localStorage.setItem(STORAGE_KEY, 'true');
+              localStorage.removeItem(DISMISSED_KEY);
+
+              // Close modal after showing success for 3 seconds
+              setTimeout(() => {
+                closeModal();
+              }, 3000);
+            }
+          }
+        });
+      });
+
+      observer.observe(modalForm, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class'],
+      });
+    }
+
+    document.addEventListener('astro:before-preparation', () => {
+      clearTimeout(showModalTimer);
+      if (!backdrop.classList.contains('hidden')) {
+        document.body.style.overflow = '';
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNewsletterModal);
+  } else {
+    initNewsletterModal();
+  }
+
+  document.addEventListener('astro:page-load', initNewsletterModal);
+</script>
