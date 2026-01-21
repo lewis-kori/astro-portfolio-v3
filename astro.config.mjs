@@ -21,8 +21,12 @@ export default defineConfig({
       BEEHIIV_API_KEY: envField.string({
         context: 'server',
         access: 'secret',
-        default:
-          '',
+        default: '',
+      }),
+      GTM_ID: envField.string({
+        context: 'client',
+        access: 'public',
+        default: 'GTM-WWKZNJ8N',
       }),
     },
   },
