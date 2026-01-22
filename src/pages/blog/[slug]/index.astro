@@ -4,6 +4,8 @@ import { siteConfig } from '@/config';
 import { render } from 'astro:content';
 import { getEntry } from 'astro:content';
 import { getCollection, type CollectionEntry } from 'astro:content';
+// Prerender all blog posts as static html at build time
+export const prerender = true;
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blog');

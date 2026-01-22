@@ -12,8 +12,9 @@ const SITE_URL = 'https://lewiskori.com';
 
 // https://astro.build/config
 export default defineConfig({
+  output: 'server',
+  adapter: cloudflare(),
   site: SITE_URL,
-
   env: {
     schema: {
       BEEHIIV_PUBLICATION_ID: envField.string({
@@ -33,7 +34,6 @@ export default defineConfig({
       }),
     },
   },
-
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'es', 'fr', 'de'],
@@ -93,6 +93,4 @@ export default defineConfig({
       },
     }),
   ],
-
-  adapter: cloudflare(),
 });
