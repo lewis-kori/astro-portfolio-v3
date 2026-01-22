@@ -16,34 +16,12 @@ const { triggerDelay = 7000 } = Astro.props;
 >
   <div
     id='newsletter-modal'
-    class='fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-4 bg-card border border-border rounded-lg shadow-2xl animate-scale-in'
+    class='fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg md:mx-4 bg-card border border-border rounded-lg shadow-2xl animate-scale-in'
     role='dialog'
     aria-modal='true'
     aria-labelledby='modal-title'
   >
-    <button
-      id='close-newsletter-modal'
-      class='absolute top-4 right-4 p-2 rounded-full hover:bg-muted transition-colors group'
-      aria-label='Close newsletter popup'
-    >
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        width='24'
-        height='24'
-        viewBox='0 0 24 24'
-        fill='none'
-        stroke='currentColor'
-        stroke-width='2'
-        stroke-linecap='round'
-        stroke-linejoin='round'
-        class='text-muted-foreground group-hover:text-foreground transition-colors'
-      >
-        <line x1='18' y1='6' x2='6' y2='18'></line>
-        <line x1='6' y1='6' x2='18' y2='18'></line>
-      </svg>
-    </button>
-
-    <div class='p-8'>
+    <div class='px-4 py-8 md:px-8'>
       <div class='text-center mb-6'>
         <h2
           id='modal-title'
@@ -51,7 +29,7 @@ const { triggerDelay = 7000 } = Astro.props;
         >
           Enjoying the read?
         </h2>
-        <p class='text-muted-foreground'>
+        <p class='text-sm md:text-base text-muted-foreground'>
           Join my newsletter for more insights on software engineering,
           startups, and tech trends.
         </p>
@@ -63,9 +41,23 @@ const { triggerDelay = 7000 } = Astro.props;
         layout='horizontal'
       />
 
-      <p class='text-xs text-muted-foreground text-center mt-4'>
-        You can close this popup anytime.
-      </p>
+      <button
+        id='close-newsletter-modal'
+        aria-label='Close newsletter popup'
+        class='text-sm font-semibold text-muted-foreground w-full justify-center flex items-center group text-center mt-4'
+      >
+        No thanks <svg
+          xmlns='http://www.w3.org/2000/svg'
+          class='inline-block w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
+          stroke-width='2'
+        >
+          <path stroke-linecap='round' stroke-linejoin='round' d='M9 5l7 7-7 7'
+          ></path>
+        </svg>
+      </button>
     </div>
   </div>
 </div>

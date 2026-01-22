@@ -6,14 +6,11 @@ import expressiveCode from 'astro-expressive-code';
 
 import sitemap from '@astrojs/sitemap';
 
-import cloudflare from '@astrojs/cloudflare';
-
 const SITE_URL = 'https://lewiskori.com';
 
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
-
   env: {
     schema: {
       BEEHIIV_PUBLICATION_ID: envField.string({
@@ -33,7 +30,6 @@ export default defineConfig({
       }),
     },
   },
-
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'es', 'fr', 'de'],
@@ -93,6 +89,4 @@ export default defineConfig({
       },
     }),
   ],
-
-  adapter: cloudflare(),
 });
