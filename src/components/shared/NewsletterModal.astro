@@ -40,24 +40,27 @@ const { triggerDelay = 7000 } = Astro.props;
         showTitle={false}
         layout='horizontal'
       />
-
-      <button
-        id='close-newsletter-modal'
-        aria-label='Close newsletter popup'
-        class='text-sm font-semibold text-muted-foreground w-full justify-center flex cursor-pointer items-center group text-center mt-4'
-      >
-        No thanks <svg
-          xmlns='http://www.w3.org/2000/svg'
-          class='inline-block w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1'
-          fill='none'
-          viewBox='0 0 24 24'
-          stroke='currentColor'
-          stroke-width='2'
+      <div class='w-full justify-center flex'>
+        <button
+          id='close-newsletter-modal'
+          aria-label='Close newsletter popup'
+          class='text-sm font-semibold text-muted-foreground justify-center flex cursor-pointer items-center group text-center mt-4'
         >
-          <path stroke-linecap='round' stroke-linejoin='round' d='M9 5l7 7-7 7'
-          ></path>
-        </svg>
-      </button>
+          No thanks <svg
+            xmlns='http://www.w3.org/2000/svg'
+            class='inline-block w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+            stroke-width='2'
+          >
+            <path
+              stroke-linecap='round'
+              stroke-linejoin='round'
+              d='M9 5l7 7-7 7'></path>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 </div>
