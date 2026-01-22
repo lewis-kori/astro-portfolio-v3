@@ -87,14 +87,12 @@ const blog = defineCollection({
 });
 
 const experience = defineCollection({
-  loader: file('src/data/experience.json'),
+  type: 'content',
   schema: z.object({
-    id: z.string(),
     company: z.string(),
     website: z.string().url(),
     role: z.string(),
     period: z.string(),
-    responsibilities: z.array(z.string()),
     order: z.number(),
   }),
 });

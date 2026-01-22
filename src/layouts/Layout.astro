@@ -8,6 +8,7 @@ import { ClientRouter, fade } from 'astro:transitions';
 import { siteConfig } from '@/config';
 import { SITE_URL } from '@/lib/env';
 import { GTM_ID } from 'astro:env/client';
+import { Font } from 'astro:assets';
 
 interface Props {
   title?: string;
@@ -89,6 +90,8 @@ const canonicalUrl = canonical || Astro.url;
     <!-- Sitemap -->
     <link rel='sitemap' href='/sitemap-index.xml' />
 
+    <Font cssVariable='--font-inter' preload />
+
     <ClientRouter />
 
     <!-- Initialize theme before page renders to prevent flash -->
@@ -160,5 +163,9 @@ const canonicalUrl = canonical || Astro.url;
     <div transition:persist='socials'>
       <StickySocials />
     </div>
-  </body>
+  </body><style is:global>
+    body {
+      font-family: var(--font-inter), sans-serif;
+    }
+  </style>
 </html>
