@@ -11,12 +11,12 @@ const { triggerDelay = 7000 } = Astro.props;
 <!-- Newsletter Modal Backdrop -->
 <div
   id='newsletter-modal-backdrop'
-  class='hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 animate-fade-in'
+  class='hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 opacity-0 transition-opacity duration-200 items-center justify-center'
   aria-hidden='true'
 >
   <div
     id='newsletter-modal'
-    class='fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg md:mx-4 bg-card border border-border rounded-lg shadow-2xl animate-scale-in'
+    class='w-full max-w-lg mx-4 bg-card border border-border rounded-lg shadow-2xl opacity-0 scale-95 transition-all duration-300'
     role='dialog'
     aria-modal='true'
     aria-labelledby='modal-title'
@@ -44,7 +44,7 @@ const { triggerDelay = 7000 } = Astro.props;
       <button
         id='close-newsletter-modal'
         aria-label='Close newsletter popup'
-        class='text-sm font-semibold text-muted-foreground w-full justify-center flex items-center group text-center mt-4'
+        class='text-sm font-semibold text-muted-foreground w-full justify-center flex cursor-pointer items-center group text-center mt-4'
       >
         No thanks <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -61,36 +61,6 @@ const { triggerDelay = 7000 } = Astro.props;
     </div>
   </div>
 </div>
-
-<style>
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes scale-in {
-    from {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-  }
-
-  .animate-fade-in {
-    animation: fade-in 0.2s ease-out;
-  }
-
-  .animate-scale-in {
-    animation: scale-in 0.3s ease-out;
-  }
-</style>
 
 <script define:vars={{ triggerDelay }}>
   function initNewsletterModal() {
@@ -117,18 +87,45 @@ const { triggerDelay = 7000 } = Astro.props;
     // Show modal after delay
     const showModalTimer = setTimeout(() => {
       if (!modalShown) {
+        const modal = document.getElementById('newsletter-modal');
         backdrop.classList.remove('hidden');
+        backdrop.classList.add('flex');
         backdrop.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            backdrop.classList.remove('opacity-0');
+            backdrop.classList.add('opacity-100');
+            if (modal) {
+              modal.classList.remove('opacity-0', 'scale-95');
+              modal.classList.add('opacity-100', 'scale-100');
+            }
+          });
+        });
+
         modalShown = true;
       }
     }, triggerDelay);
 
     // Close modal function
     function closeModal() {
-      backdrop.classList.add('hidden');
-      backdrop.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
+      const modal = document.getElementById('newsletter-modal');
+      backdrop.classList.remove('opacity-100');
+      backdrop.classList.add('opacity-0');
+      if (modal) {
+        modal.classList.remove('opacity-100', 'scale-100');
+        modal.classList.add('opacity-0', 'scale-95');
+      }
+
+      // Add hidden class after transition completes
+      setTimeout(() => {
+        backdrop.classList.add('hidden');
+        backdrop.classList.remove('flex');
+        backdrop.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }, 300);
+
       localStorage.setItem(DISMISSED_KEY, 'true');
       clearTimeout(showModalTimer);
     }
