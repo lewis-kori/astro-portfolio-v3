@@ -2,6 +2,7 @@
 title: "From Gridsome to Astro: Rebuilding My Personal Site for the Next Phase"
 author: Lewis Kori
 description: "Why I migrated my personal site from Gridsome to Astro, moved from Netlify to Cloudflare, and open-sourced the entire codebase."
+cover_image: https://res.cloudinary.com/lewiskori/image/upload/v1769197704/blog/Gemini_Generated_Image_1_cbfaby.png
 dateCreated: 2026-01-23
 tags: [astro, personal-website, performance, cloudflare, writing]
 ---
@@ -162,7 +163,7 @@ This matters, not just for SEO, but for reading comfort.
 
 ## Newsletter Support with Beehiiv
 
-Writing is something I am taking seriously again.
+Writing is something [I am taking seriously again](/blog/why-i-haven-t-blogged-in-years-and-how-i-m-overcoming-the-fear).
 
 The new site integrates directly with [Beehiiv](https://www.beehiiv.com?via=Lewis-Kori) for newsletter subscriptions, which allows me to:
 
@@ -230,6 +231,5 @@ If you are curious, the previous version of the site still lives here:
 
 And the new one is live at:  
 👉 **https://lewiskori.com**
-
 
 Here is to rebuilding, again, but this time with much clearer intent.
