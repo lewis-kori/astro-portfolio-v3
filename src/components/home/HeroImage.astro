@@ -1,6 +1,5 @@
 ---
 import { siteConfig } from '@/config';
-import { Image } from 'astro:assets';
 ---
 
 <div class='flex justify-center md:justify-end animate-slide-in-right'>
@@ -13,14 +12,13 @@ import { Image } from 'astro:assets';
     <div
       class='relative w-80 h-80 rounded-full overflow-hidden border-4 border-border shadow-2xl group-hover:scale-105 transition-transform duration-500'
     >
-      <Image
+      <img
         src={siteConfig.avatar}
         alt={siteConfig.name}
-        width={640}
-        height={640}
-        format='avif'
-        sizes='(max-width: 768px) 320px, 640px'
-        priority
+        width='640'
+        height='640'
+        loading='eager'
+        fetchpriority='high'
         class='w-full h-full object-cover'
       />
     </div>
