@@ -190,6 +190,8 @@ If something in the site helps another developer ship their own, that is a win.
 
 The [Open Source Code is available on my Github](https://github.com/lewis-kori/astro-portfolio-v3)
 
+And a special thank you to [Evans Robbie ](https://github.com/EvansRobbie)for all the help with the frontend styling.
+
 ---
 
 ## What This Rebuild Actually Represents
