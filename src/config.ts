@@ -1,3 +1,6 @@
+import aboutImage from '@/assets/about-image.webp';
+import profileImage from '@/assets/lewis-profile-no-bg.png';
+
 export interface SocialData {
   name: string;
   url: string;
@@ -11,8 +14,8 @@ export interface SiteConfig {
   description: string;
   tagline: string;
   authorDescription: string;
-  avatar: string;
-  profileImage: string;
+  avatar: ImageMetadata;
+  profileImage: ImageMetadata;
   url: string;
   location: string;
   email: string;
@@ -28,9 +31,9 @@ export const siteConfig: SiteConfig = {
   tagline: 'Building Products, Systems and Companies That Endure',
   authorDescription:
     'I am an entrepreneur and technologist focused on building scalable digital products, trusted platforms and businesses designed for long-term impact. My work spans product development, venture building and advisory across technology-driven markets.',
-  avatar: '/about-image.webp',
+  avatar: aboutImage,
   location: '  Kenya',
   email: 'n8tocd0jy@mozmail.com',
   phone: '+254 712 345678',
-  profileImage: '/lewis-profile-no-bg.png',
+  profileImage: profileImage,
 };

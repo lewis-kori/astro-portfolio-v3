@@ -1,6 +1,7 @@
 ---
 import ThemeSwitcher from '@/components/shared/ThemeSwitcher.astro';
 import { siteConfig } from '@/config';
+import { Image } from 'astro:assets';
 
 interface Props {
   navLinks: Array<{ name: string; href: string }>;
@@ -70,12 +71,13 @@ const isActive = (href: string) => {
       <!-- Header -->
       <div class='flex items-center justify-between p-6 border-b border-border'>
         <div class='flex flex-col md:items-center gap-3'>
-          <img
+          <Image
             src={siteConfig.avatar}
             alt={siteConfig.name}
-            width='40'
-            height='40'
-            loading='lazy'
+            width={40}
+            height={40}
+            format='avif'
+            quality={60}
             class='size-10 border rounded-full shrink-0 object-cover'
           />
           <span class='font-bold text-lg'>{siteConfig.name}</span>
