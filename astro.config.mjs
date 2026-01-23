@@ -57,7 +57,7 @@ export default defineConfig({
 
   integrations: [
     expressiveCode({
-      themes: ['aurora-x', 'solarized-light'],
+      themes: ['aurora-x'],
     }),
     sitemap({
       changefreq: 'weekly',

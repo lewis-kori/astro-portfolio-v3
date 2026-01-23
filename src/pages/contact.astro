@@ -4,6 +4,7 @@ import EmailIcon from '@/components/ui/icons/EmailIcon.astro';
 import XIcon from '@/components/ui/icons/XIcon.astro';
 import LinkedInIcon from '@/components/ui/icons/LinkedInIcon.astro';
 import Layout from '@/layouts/Layout.astro';
+import { siteConfig } from '@/config';
 
 const lookingForOptions = [
   { value: 'product-development', label: 'Product Development' },
@@ -25,8 +26,8 @@ const contactMethods = [
   {
     icon: EmailIcon,
     label: 'Email',
-    value: 'hello@lewiskori.com',
-    href: 'mailto:hello@lewiskori.com',
+    value: siteConfig.email,
+    href: `mailto:${siteConfig.email}`,
   },
   {
     icon: XIcon,
@@ -234,13 +235,16 @@ const contactMethods = [
 
             <div class='flex flex-col sm:flex-row items-center gap-4'>
               <button
+                id='contact-submit-btn'
                 type='submit'
-                class='w-full sm:w-auto px-8 py-4 rounded-md text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-all font-semibold inline-flex items-center justify-center gap-2 group'
+                class='w-full sm:w-auto px-8 py-4 rounded-md text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-all font-semibold inline-flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed'
               >
-                Get in Touch
-                <ArrowIcon
-                  class='size-4 transition-transform group-hover:-translate-y-1'
-                />
+                <span id='submit-btn-text'>Get in Touch</span>
+                <span id='submit-btn-icon'>
+                  <ArrowIcon
+                    class='size-4 transition-transform group-hover:-translate-y-1'
+                  />
+                </span>
               </button>
             </div>
           </form>
@@ -332,6 +336,8 @@ const contactMethods = [
 </Layout>
 
 <script>
+  import { siteConfig } from '@/config';
+
   function initTabs() {
     const formTabBtn = document.getElementById('form-tab-btn');
     const calendlyTabBtn = document.getElementById('calendly-tab-btn');
@@ -361,23 +367,92 @@ const contactMethods = [
 
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contact-form') as HTMLFormElement;
+    const submitBtn = document.getElementById(
+      'contact-submit-btn',
+    ) as HTMLButtonElement;
+    const submitBtnText = document.getElementById(
+      'submit-btn-text',
+    ) as HTMLSpanElement;
+    const submitBtnIcon = document.getElementById(
+      'submit-btn-icon',
+    ) as HTMLElement;
 
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const formData = new FormData(form);
-      const data = {
-        name: formData.get('name'),
-        company: formData.get('company'),
-        email: formData.get('email'),
-        looking_for: formData.getAll('looking_for'),
-        budget: formData.get('budget'),
-        message: formData.get('message'),
-      };
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtnText.textContent = 'Processing...';
+      submitBtnIcon.style.display = 'none';
 
-      console.log('Form submitted:', data);
-      alert("Thanks for reaching out! I'll get back to you soon. 🚀");
-      form.reset();
+      const formData = new FormData(form);
+      const name = formData.get('name') as string;
+      const company = formData.get('company') as string;
+      const email = formData.get('email') as string;
+      const lookingFor = formData.getAll('looking_for');
+      const budget = formData.get('budget') as string;
+      const message = formData.get('message') as string;
+      const subscribe = formData.get('subscribe') === 'on';
+
+      // If user wants to subscribe, handle newsletter subscription first
+      if (subscribe && email) {
+        try {
+          const response = await fetch('/api/newsletter', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+          });
+   
+          if (response.ok) {
+            console.log('Successfully subscribed to newsletter');
+          }
+        } catch (error) {
+          console.error('Newsletter subscription failed:', error);
+        }
+      }
+
+      // Format looking_for options
+      const services = lookingFor
+        .map((value) => {
+          const option = {
+            'product-development': 'Product Development',
+            'technical-advisory': 'Technical Advisory',
+            consulting: 'Consulting Services',
+            collaboration: 'Collaboration',
+            speaking: 'Speaking Engagement',
+            other: 'Other',
+          }[value as string];
+          return option;
+        })
+        .join(', ');
+
+      // Format budget
+      const budgetLabel = budget
+        ? {
+            'under-10k': 'Under $10k',
+            '10k-50k': '$10k - $50k',
+            '50k-100k': '$50k - $100k',
+            '100k-plus': '$100k+',
+          }[budget]
+        : 'Not specified';
+
+      const subject = `Partnership Inquiry: ${services || 'Collaboration'}`;
+
+      const body = `Hi Lewis,\n\nMy name is ${name}${company ? ` and I work at ${company}` : ''}.\n\nI'm interested in: ${services}\n${budget ? `Budget Range: ${budgetLabel}\n` : ''}\nProject Details:\n${message}\n\nBest regards,\n${name}\n${email}`;
+
+      const mailtoLink = `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      // Open mail client
+      window.location.href = mailtoLink;
+
+      // Reset form and button state
+      setTimeout(() => {
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtnText.textContent = 'Get in Touch';
+        submitBtnIcon.style.display = 'inline';
+      }, 500);
     });
   });
 </script>
