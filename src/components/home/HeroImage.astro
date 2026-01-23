@@ -16,11 +16,10 @@ import { Image } from 'astro:assets';
       <Image
         src={siteConfig.avatar}
         alt={siteConfig.name}
-        width={728}
-        height={728}
-        format='webp'
-        quality={85}
-        sizes='(max-width: 768px) 320px, 728px'
+        width={640}
+        height={640}
+        format='avif'
+        sizes='(max-width: 768px) 320px, 640px'
         priority
         class='w-full h-full object-cover'
       />
