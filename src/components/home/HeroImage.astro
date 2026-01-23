@@ -14,11 +14,9 @@ import { Image } from 'astro:assets';
     <div
       class='relative w-80 h-80 rounded-full overflow-hidden border-4 border-border shadow-2xl group-hover:scale-105 transition-transform duration-500'
     >
-      <Image
-        src={siteConfig.avatar}
+      <img
+        src={siteConfig.avatar.src}
         alt={siteConfig.name}
-        width={320}
-        height={320}
         class='w-full h-full object-cover'
       />
     </div>
