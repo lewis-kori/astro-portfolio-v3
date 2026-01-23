@@ -403,8 +403,7 @@ const contactMethods = [
 
       const body = `Hi Lewis,\n\nMy name is ${name}${company ? ` and I work at ${company}` : ''}.\n\nI'm interested in: ${services}\n${budget ? `Budget Range: ${budgetLabel}\n` : ''}\nProject Details:\n${message}\n\nBest regards,\n${name}\n${email}`;
 
-      const mailtoLink = `mailto:n8tocd0jy@mozmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
+      const mailtoLink = `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       // Open mail client
       window.location.href = mailtoLink;
 
