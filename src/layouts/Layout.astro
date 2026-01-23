@@ -95,6 +95,81 @@ const canonicalUrl = canonical || Astro.url;
     <!-- Sitemap -->
     <link rel='sitemap' href='/sitemap-index.xml' />
 
+    <!-- Structured Data / JSON-LD -->
+    <script
+      type='application/ld+json'
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'WebSite',
+            '@id': `${siteUrl}/#website`,
+            url: siteUrl,
+            name: siteName,
+            description: defaultDescription,
+            publisher: {
+              '@id': `${siteUrl}/#person`,
+            },
+            inLanguage: 'en-US',
+          },
+          {
+            '@type': 'Person',
+            '@id': `${siteUrl}/#person`,
+            name: 'Lewis Kori',
+            url: siteUrl,
+            image: {
+              '@type': 'ImageObject',
+              url: `${siteUrl}/opengraph.png`,
+              width: 1200,
+              height: 630,
+            },
+            description: siteConfig.authorDescription,
+            jobTitle: siteConfig.tagline,
+            sameAs: [
+              'https://twitter.com/lewis_kihiu',
+              'https://github.com/lewis-kori',
+              'https://linkedin.com/in/lewis-kihiu-aba63011b/',
+            ],
+          },
+          type === 'article' && publishedTime
+            ? {
+                '@type': 'Article',
+                '@id': `${Astro.url}#article`,
+                headline: openGraphTitle,
+                description: openGraphDescription,
+                image: image,
+                datePublished: publishedTime,
+                dateModified: publishedTime,
+                author: {
+                  '@id': `${siteUrl}/#person`,
+                },
+                publisher: {
+                  '@id': `${siteUrl}/#person`,
+                },
+                mainEntityOfPage: {
+                  '@type': 'WebPage',
+                  '@id': Astro.url,
+                },
+              }
+            : {
+                '@type': 'WebPage',
+                '@id': `${Astro.url}#webpage`,
+                url: Astro.url,
+                name: openGraphTitle,
+                description: openGraphDescription,
+                isPartOf: {
+                  '@id': `${siteUrl}/#website`,
+                },
+                primaryImageOfPage: {
+                  '@type': 'ImageObject',
+                  url: image,
+                },
+                inLanguage: 'en-US',
+              },
+        ].filter(Boolean),
+      })}
+    />
+
     <Font cssVariable='--font-inter' preload />
 
     <ClientRouter />
