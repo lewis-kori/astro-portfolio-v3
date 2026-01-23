@@ -1,5 +1,4 @@
 ---
-import aboutImage from '@/assets/about-image.webp';
 import { siteConfig } from '@/config';
 ---
 
@@ -8,7 +7,7 @@ import { siteConfig } from '@/config';
     <div class='space-y-4'>
       <div class='flex items-center gap-4'>
         <img
-          src={aboutImage.src}
+          src={siteConfig.profileImage.src}
           alt={siteConfig.name}
           class='rounded-full size-16 border-2 border-primary object-cover'
         />
