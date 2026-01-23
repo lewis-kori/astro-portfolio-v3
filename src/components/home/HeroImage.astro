@@ -1,6 +1,5 @@
 ---
 import { siteConfig } from '@/config';
-import profileImage from '@/assets/about-image.webp';
 import { Image } from 'astro:assets';
 ---
 
@@ -14,9 +13,15 @@ import { Image } from 'astro:assets';
     <div
       class='relative w-80 h-80 rounded-full overflow-hidden border-4 border-border shadow-2xl group-hover:scale-105 transition-transform duration-500'
     >
-      <img
-        src={siteConfig.avatar.src}
+      <Image
+        src={siteConfig.avatar}
         alt={siteConfig.name}
+        width={728}
+        height={728}
+        format='webp'
+        quality={85}
+        sizes='(max-width: 768px) 320px, 728px'
+        priority
         class='w-full h-full object-cover'
       />
     </div>

@@ -1,14 +1,20 @@
 ---
 import { siteConfig } from '@/config';
+import { Image } from 'astro:assets';
 ---
 
 <aside class='lg:col-span-2'>
   <div class='sticky top-24 space-y-6'>
     <div class='space-y-4'>
       <div class='flex items-center gap-4'>
-        <img
-          src={siteConfig.profileImage.src}
+        <Image
+          src={siteConfig.profileImage}
           alt={siteConfig.name}
+          width={64}
+          height={64}
+          format='webp'
+          sizes='(max-width: 1024px) 48px, 64px'
+          quality={80}
           class='rounded-full size-16 border-2 border-primary object-cover'
         />
         <div>
