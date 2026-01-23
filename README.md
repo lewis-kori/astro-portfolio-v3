@@ -2,7 +2,7 @@
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Built with Astro](https://img.shields.io/badge/Built%20with-Astro-FF5D01?logo=astro)](https://astro.build)
-[![Deployed on Netlify](https://img.shields.io/badge/Deployed%20on-Netlify-00C7B7?logo=netlify)](https://www.netlify.com)
+[![Deployed on Cloudflare](https://img.shields.io/badge/Deployed%20on-Cloudflare%20Pages-F38020?logo=cloudflare)](https://pages.cloudflare.com)
 
 A modern, content-rich personal portfolio built with Astro, showcasing projects, blog posts, work experience, advisory services, and operating notes. Designed for entrepreneurs, technologists, and product builders who want a professional, performant web presence.
 
@@ -45,7 +45,7 @@ A modern, content-rich personal portfolio built with Astro, showcasing projects,
 - **Content**: Astro Content Collections with markdown support
 - **TypeScript**: Full type safety across the project
 - **Package Manager**: pnpm
-- **Deployment**: Netlify with automatic deployments
+- **Deployment**: Cloudflare Pages with automatic deployments
 - **Version Control**: Git & GitHub
 
 ## 📁 Project Structure
@@ -135,10 +135,12 @@ See [.env.example](.env.example) for the complete template.
 
 ## 🚢 Deployment
 
-This site is automatically deployed to Netlify:
+This site is automatically deployed to Cloudflare Pages:
 
 - **Production**: Deploys automatically when changes are merged to `main`
-- \*📄 Pages Overview
+- **Preview Deployments**: Automatic preview deployments for all pull requests
+
+📄 Pages Overview
 
 ### Public Pages
 
@@ -167,7 +169,7 @@ This is a personal portfolio project, but suggestions and feedback are welcome!
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-Please read the [branching strategy](.github/branching-strategy.md) before contributing.
+Please read [CONTRIBUTING.rst](CONTRIBUTING.rst) for detailed guidelines and [branching strategy](.github/branching-strategy.md) for workflow information.
 
 ## 🎨 Customization
 
@@ -179,7 +181,7 @@ This portfolio is designed to be easily customizable:
 4. **Styling**: Customize Tailwind configuration or global styles
 5. **Components**: Modify or create new components as needed
 
-Please read the [branching strategy](.github/branching-strategy.md) before contributing.
+For contribution guidelines, see [CONTRIBUTING.rst](CONTRIBUTING.rst).
 
 ## 📝 License
 
@@ -195,7 +197,7 @@ Feel free to reach out or follow my work!
 
 - Built with [Astro](https://astro.build)
 - UI components inspired by [shadcn/ui](https://ui.shadcn.com)
-- Deployed on [Netlify](https://www.netlify.com)
+- Deployed on [Cloudflare Pages](https://pages.cloudflare.com)
 
 ---
 
