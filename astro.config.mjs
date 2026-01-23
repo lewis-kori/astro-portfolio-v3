@@ -21,6 +21,8 @@ export default defineConfig({
         provider: fontProviders.google(),
         name: 'Inter',
         cssVariable: '--font-inter',
+        fallbacks: ['sans-serif'],
+        display: 'swap',
       },
     ],
   },
