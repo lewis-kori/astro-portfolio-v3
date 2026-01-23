@@ -170,26 +170,17 @@ const canonicalUrl = canonical || Astro.url;
       })}
     />
 
-    <Font cssVariable='--font-inter' preload />
+    <Font cssVariable='--font-inter' />
 
     <ClientRouter />
 
     <!-- Initialize theme before page renders to prevent flash -->
     <script is:inline>
-      const getStoredTheme = () => {
-        if (typeof localStorage !== 'undefined') {
-          const stored = localStorage.getItem('theme');
-          if (stored) return stored;
-        }
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          return 'dark';
-        }
-        return 'light';
-      };
-
-      const theme = getStoredTheme();
-      document.documentElement.classList.remove('light', 'dark', 'retro');
-      document.documentElement.classList.add(theme);
+      (function() {
+        const theme = localStorage.getItem('theme') || 
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.className = theme;
+      })();
     </script>
 
     <script>
