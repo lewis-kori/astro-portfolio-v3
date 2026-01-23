@@ -3,7 +3,7 @@ company: 'Acquicent'
 website: 'https://www.acquicent.com'
 role: 'Founding Senior Software Engineer'
 period: 'April 2021 - July 2023'
-order: 3
+order: 4
 ---
 
 - Engineered the organization's MVP, integrating key financial services like **Opensea** and **Circle Financial Services** to enable zero-blockchain payment processing with **USDC**, **Plaid**, and **Templum APIs**.

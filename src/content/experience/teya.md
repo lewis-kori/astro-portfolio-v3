@@ -1,9 +1,9 @@
 ---
 company: 'Teya'
 website: 'https://www.teya.com'
-role: 'Software Engineer'
-period: 'January 2023 - Present'
-order: 1
+role: 'Senior Software Engineer'
+period: 'January 2023 - November 2024'
+order: 2
 ---
 
 - Transitioned to Teya following the acquisition of Yoyo Group and led the migration of Yoyo's legacy systems to Teya's AWS cloud platform.

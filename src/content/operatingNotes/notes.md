@@ -20,7 +20,6 @@ I'm channeling my energy into work that compounds over time. Right now, that mea
 
 These are the projects where I'm spending my time:
 
-- **Desturi**: a premium property discovery and relationship platform
 - **Inflection Studio**: a systems-led digital consultancy
 - **Internal tooling and frameworks** that reduce execution friction
 

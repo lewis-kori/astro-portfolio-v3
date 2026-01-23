@@ -1,34 +1,42 @@
 [
   {
+    "id": "my-robot-gets-me",
+    "title": "My Robot Gets Me",
+    "author": "Carla Diana",
+    "image": "https://images.squarespace-cdn.com/content/v1/5ccee52ff4e5314a513a4c5d/1609480006867-30BAFKQYEIYDZC05X69Q/Diana10192_3D_silo_1000.png?format=2500w",
+    "description": "An insightful exploration of how design principles can transform smart home products from simple programmed devices into intuitive, human-centered companions. Carla Diana examines how designers can use light, sound, and movement to create products that integrate seamlessly into our daily lives, offering practical frameworks for developing the next generation of intelligent consumer products that truly understand and respond to human needs.",
+    "link": "https://www.carladiana.com/my-robot-gets-me"
+  },
+    {
+    "id": "data-intensive-apps",
+    "title": "Designing Data-Intensive Applications",
+    "author": "Martin Kleppmann",
+    "image": "https://www.oreilly.com/covers/urn:orm:book:9781491903063/300w/",
+    "description": "Deep dive into distributed systems, databases, and data processing. Essential reading for building scalable applications.",
+    "link": "https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/"
+  },
+    {
+    "id": "system-design",
+    "title": "System Design Interview",
+    "author": "Alex Xu",
+    "image": "https://m.media-amazon.com/images/I/51vZ6t5W4gL._SY522_.jpg",
+    "description": "Practical guide to tackling system design challenges. Great for interviews and understanding how large-scale systems work.",
+    "link": "https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF"
+  },
+  {
     "id": "pragmatic-programmer",
     "title": "The Pragmatic Programmer",
     "author": "David Thomas & Andrew Hunt",
-    "image": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop",
+    "image": "https://www.oreilly.com/covers/urn:orm:book:9780135956977/300w/",
     "description": "A classic guide to better programming practices. Full of practical tips and timeless advice that every developer should know.",
-    "link": "#"
+    "link": "https://www.oreilly.com/library/view/the-pragmatic-programmer/9780135956977/"
   },
   {
     "id": "clean-code",
     "title": "Clean Code",
     "author": "Robert C. Martin",
-    "image": "https://images.unsplash.com/photo-1589998059171-988d887df646?w=400&h=600&fit=crop",
+    "image": "https://www.oreilly.com/covers/urn:orm:book:9780136083238/300w/",
     "description": "The definitive book on writing maintainable code. Uncle Bob's principles have shaped how I think about software craftsmanship.",
-    "link": "#"
-  },
-  {
-    "id": "data-intensive-apps",
-    "title": "Designing Data-Intensive Applications",
-    "author": "Martin Kleppmann",
-    "image": "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=600&fit=crop",
-    "description": "Deep dive into distributed systems, databases, and data processing. Essential reading for building scalable applications.",
-    "link": "#"
-  },
-  {
-    "id": "system-design",
-    "title": "System Design Interview",
-    "author": "Alex Xu",
-    "image": "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=400&h=600&fit=crop",
-    "description": "Practical guide to tackling system design challenges. Great for interviews and understanding how large-scale systems work.",
-    "link": "#"
+    "link": "https://www.oreilly.com/library/view/clean-code-a/9780136083238/"
   }
 ]

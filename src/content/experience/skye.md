@@ -3,7 +3,7 @@ company: 'Skye Tech Group'
 website: 'https://www.skyetel.com'
 role: 'Software Engineer'
 period: 'October 2019 - October 2021'
-order: 4
+order: 5
 ---
 
 - Delivered tailored software solutions across education, healthcare, eCommerce, and postal services by collaborating with a cross-functional development team.

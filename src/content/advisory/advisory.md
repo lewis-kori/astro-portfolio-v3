@@ -12,8 +12,6 @@ I work with venture capital firms as an operator-informed advisor, helping funds
 
 My work is shaped by hands-on experience building and operating platforms, not abstract frameworks. This allows me to bridge the gap between investment theses and execution realities.
 
-![Platform infrastructure](/projects/cloud.png)
-
 The firms I work with aren't looking for generic consulting—they want someone who's been in the weeds, who understands the messy middle between strategy and shipping, and who can speak both to LPs and portfolio engineering teams.
 
 ---
@@ -25,8 +23,6 @@ Most funds know they need better tech. Few know where to start. I help clarify w
 
 **Evaluation of product and engineering maturity during diligence**  
 When you're writing a check, you need to know if the team can execute. I assess technical depth, product thinking, and organizational readiness—the stuff that doesn't show up in pitch decks.
-
-![Product evaluation](/projects/autointel.jpg)
 
 **Design of platform tooling to support founders post-investment**  
 The best funds don't just deploy capital—they build infrastructure that helps their portfolio win. I design systems, tools, and frameworks that scale across multiple companies.
@@ -46,8 +42,6 @@ This work draws directly from engagements with:
 **Mayfair Capital** — advising on digital modernization, internal tooling, and technology-driven operational clarity  
 Helped the team rethink how they structure their technical operations and communicate value to stakeholders.
 
-![Capital operations](/projects/mgc.jpg)
-
 **Mayfair Consulting** — aligning brand, systems, and communication with institutional expectations  
 Worked on positioning, messaging, and ensuring that external presentation matched internal capability.
 
@@ -65,8 +59,6 @@ I work best with funds that:
 - Take a long-term view on platform value
 - Want to offer meaningful operational support to founders
 - Value clarity over complexity in technology decisions
-
-![Strategic partnership](/projects/circle.png)
 
 Engagements are typically advisory in nature, structured around clear outcomes rather than open-ended commitments.
 
