@@ -4,6 +4,7 @@ import EmailIcon from '@/components/ui/icons/EmailIcon.astro';
 import XIcon from '@/components/ui/icons/XIcon.astro';
 import LinkedInIcon from '@/components/ui/icons/LinkedInIcon.astro';
 import Layout from '@/layouts/Layout.astro';
+import { siteConfig } from '@/config';
 
 const lookingForOptions = [
   { value: 'product-development', label: 'Product Development' },
@@ -25,8 +26,8 @@ const contactMethods = [
   {
     icon: EmailIcon,
     label: 'Email',
-    value: 'hello@lewiskori.com',
-    href: 'mailto:hello@lewiskori.com',
+    value: siteConfig.email,
+    href: `mailto:${siteConfig.email}`,
   },
   {
     icon: XIcon,
@@ -366,18 +367,50 @@ const contactMethods = [
       e.preventDefault();
 
       const formData = new FormData(form);
-      const data = {
-        name: formData.get('name'),
-        company: formData.get('company'),
-        email: formData.get('email'),
-        looking_for: formData.getAll('looking_for'),
-        budget: formData.get('budget'),
-        message: formData.get('message'),
-      };
+      const name = formData.get('name') as string;
+      const company = formData.get('company') as string;
+      const email = formData.get('email') as string;
+      const lookingFor = formData.getAll('looking_for');
+      const budget = formData.get('budget') as string;
+      const message = formData.get('message') as string;
 
-      console.log('Form submitted:', data);
-      alert("Thanks for reaching out! I'll get back to you soon. 🚀");
-      form.reset();
+      // Format looking_for options
+      const services = lookingFor
+        .map((value) => {
+          const option = {
+            'product-development': 'Product Development',
+            'technical-advisory': 'Technical Advisory',
+            consulting: 'Consulting Services',
+            collaboration: 'Collaboration',
+            speaking: 'Speaking Engagement',
+            other: 'Other',
+          }[value as string];
+          return option;
+        })
+        .join(', ');
+
+      // Format budget
+      const budgetLabel = budget
+        ? {
+            'under-10k': 'Under $10k',
+            '10k-50k': '$10k - $50k',
+            '50k-100k': '$50k - $100k',
+            '100k-plus': '$100k+',
+          }[budget]
+        : 'Not specified';
+
+      const subject = `Partnership Inquiry: ${services || 'Collaboration'}`;
+
+      const body = `Hi Lewis,\n\nMy name is ${name}${company ? ` and I work at ${company}` : ''}.\n\nI'm interested in: ${services}\n${budget ? `Budget Range: ${budgetLabel}\n` : ''}\nProject Details:\n${message}\n\nBest regards,\n${name}\n${email}`;
+
+      const mailtoLink = `mailto:n8tocd0jy@mozmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      // Open mail client
+      window.location.href = mailtoLink;
+
+      setTimeout(() => {
+        form.reset();
+      }, 500);
     });
   });
 </script>
