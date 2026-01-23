@@ -4,6 +4,7 @@ url: https://www.scraperapi.com?_go=korilewis
 twitter: https://twitter.com/scraperapi
 logo: https://d2gdx5nv84sdx2.cloudfront.net/uploads/ssvxh57a/marketing_asset/banner/13644/Banner_9_-_1024x512_-_Frame_1.png
 excerpt: Built for developers who need reliable, scalable web scraping without the headache of IP blocks or CAPTCHA walls. With over 20 million IPs, unlimited bandwidth, and built-in support for popular libraries.
+is_featured: true
 ---
 
 <a href="https://www.scraperapi.com?fpr=lewiskori" target="_blank" style="outline:none;border:none;"><img src="https://d2gdx5nv84sdx2.cloudfront.net/uploads/ssvxh57a/marketing_asset/banner/13644/Banner_9_-_1024x512_-_Frame_1.png" alt="scraperapi" border="0"/></a>
