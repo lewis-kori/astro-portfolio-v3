@@ -54,6 +54,7 @@ const isActive = (href: string) => {
   id='mobile-menu'
   class='fixed inset-0 z-50 md:hidden pointer-events-none'
   aria-hidden='true'
+  inert
 >
   <div
     id='mobile-menu-backdrop'
@@ -167,6 +168,7 @@ const isActive = (href: string) => {
       isOpen = true;
       mobileMenu?.classList.remove('pointer-events-none');
       mobileMenu?.setAttribute('aria-hidden', 'false');
+      mobileMenu?.removeAttribute('inert');
       menuButton?.setAttribute('aria-expanded', 'true');
 
       // Show backdrop
@@ -210,6 +212,7 @@ const isActive = (href: string) => {
       setTimeout(() => {
         mobileMenu?.classList.add('pointer-events-none');
         mobileMenu?.setAttribute('aria-hidden', 'true');
+        mobileMenu?.setAttribute('inert', '');
       }, 300);
     }
 
