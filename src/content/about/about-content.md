@@ -7,7 +7,7 @@ I am an entrepreneur focused on building products, platforms, and companies that
 
 I started my career deep in software engineering, where I learned how systems fail, scale, and succeed in the real world. Over time, my role expanded beyond code into product design, infrastructure, analytics, and ultimately company building. That progression shapes how I operate today: I think in systems, but I act through products.
 
-I currently build and operate multiple ventures, including Inflection Studio and Desturi, while advising founders and leadership teams on critical product and technology decisions. I am selective about where I spend time and energy, preferring problems that require judgment, not just effort.
+I currently build and operate multiple ventures, including [Inflection Studio](https://inflectionstudio.io/), while advising founders and leadership teams on critical product and technology decisions. I am selective about where I spend time and energy, preferring problems that require judgment, not just effort.
 
 I am interested in businesses that value trust, clarity, and durability over speed for its own sake. I optimise for leverage, learning and compounding outcomes rather than short-term wins.
 
