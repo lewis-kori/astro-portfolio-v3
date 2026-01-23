@@ -11,10 +11,10 @@ Six years ago, I rebuilt my personal website using Gridsome and Vue.js. At the t
 That rebuild became this article:  
 👉 *[Building my new site with Gridsome & Vue.js](/blog/building-my-new-site-with-gridsome-vue-js/)*
 
-Fast forward to today, that same site still exists at **lewiskori.netlify.app**, but it had started to feel like a time capsule. The tooling had aged, the ecosystem had slowed down, and more importantly, my own work and interests had expanded far beyond what the site was originally designed to represent.
+Fast forward to today, that same site still exists at **[lewiskori.netlify.app](https://lewiskori.netlify.app)**, but it had started to feel like a time capsule. The tooling had aged, the ecosystem had slowed down, and more importantly, my own work and interests had expanded far beyond what the site was originally designed to represent.
 
 So I decided to rebuild again.  
-This time with **Astro**, hosted on **Cloudflare Pages**, with a stronger content model, better performance, and a structure that reflects where I am today as an engineer and advisor.
+This time with **[Astro](https://astro.build/)**, hosted on **[Cloudflare Pages](https://pages.cloudflare.com/)**, with a stronger content model, better performance, and a structure that reflects where I am today as an engineer and advisor.
 
 This post is about why I made that move, what changed, and what I learned along the way.
 
@@ -85,10 +85,10 @@ That no longer reflects what I actually do.
 
 The new structure includes:
 
-- **Advisory** – work with startups and private equity-backed firms
-- **Projects** – long-running technical efforts and experiments
-- **Resources** – books I am reading, tools I use, desk setup, and stack
-- **Operating Notes** – practical reflections on building companies and systems
+- **[Advisory](/advisory)** – work with startups and private equity-backed firms
+- **[Projects](/projects)** – long-running technical efforts and experiments
+- **[Resources](/resources)** – books I am reading, tools I use, desk setup, and stack
+- **[Operating Notes](/operating-notes)** – practical reflections on building companies and systems
 
 This was intentional.
 
