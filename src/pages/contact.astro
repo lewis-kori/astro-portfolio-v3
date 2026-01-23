@@ -235,13 +235,16 @@ const contactMethods = [
 
             <div class='flex flex-col sm:flex-row items-center gap-4'>
               <button
+                id='contact-submit-btn'
                 type='submit'
-                class='w-full sm:w-auto px-8 py-4 rounded-md text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-all font-semibold inline-flex items-center justify-center gap-2 group'
+                class='w-full sm:w-auto px-8 py-4 rounded-md text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-all font-semibold inline-flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed'
               >
-                Get in Touch
-                <ArrowIcon
-                  class='size-4 transition-transform group-hover:-translate-y-1'
-                />
+                <span id='submit-btn-text'>Get in Touch</span>
+                <span id='submit-btn-icon'>
+                  <ArrowIcon
+                    class='size-4 transition-transform group-hover:-translate-y-1'
+                  />
+                </span>
               </button>
             </div>
           </form>
@@ -333,6 +336,8 @@ const contactMethods = [
 </Layout>
 
 <script>
+  import { siteConfig } from '@/config';
+
   function initTabs() {
     const formTabBtn = document.getElementById('form-tab-btn');
     const calendlyTabBtn = document.getElementById('calendly-tab-btn');
@@ -362,9 +367,23 @@ const contactMethods = [
 
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contact-form') as HTMLFormElement;
+    const submitBtn = document.getElementById(
+      'contact-submit-btn',
+    ) as HTMLButtonElement;
+    const submitBtnText = document.getElementById(
+      'submit-btn-text',
+    ) as HTMLSpanElement;
+    const submitBtnIcon = document.getElementById(
+      'submit-btn-icon',
+    ) as HTMLElement;
 
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtnText.textContent = 'Processing...';
+      submitBtnIcon.style.display = 'none';
 
       const formData = new FormData(form);
       const name = formData.get('name') as string;
@@ -373,6 +392,26 @@ const contactMethods = [
       const lookingFor = formData.getAll('looking_for');
       const budget = formData.get('budget') as string;
       const message = formData.get('message') as string;
+      const subscribe = formData.get('subscribe') === 'on';
+
+      // If user wants to subscribe, handle newsletter subscription first
+      if (subscribe && email) {
+        try {
+          const response = await fetch('/api/newsletter', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+          });
+   
+          if (response.ok) {
+            console.log('Successfully subscribed to newsletter');
+          }
+        } catch (error) {
+          console.error('Newsletter subscription failed:', error);
+        }
+      }
 
       // Format looking_for options
       const services = lookingFor
@@ -407,8 +446,12 @@ const contactMethods = [
       // Open mail client
       window.location.href = mailtoLink;
 
+      // Reset form and button state
       setTimeout(() => {
         form.reset();
+        submitBtn.disabled = false;
+        submitBtnText.textContent = 'Get in Touch';
+        submitBtnIcon.style.display = 'inline';
       }, 500);
     });
   });
