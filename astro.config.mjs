@@ -1,4 +1,4 @@
-import { defineConfig, envField } from 'astro/config';
+import { defineConfig, envField, fontProviders } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -15,6 +15,15 @@ export default defineConfig({
   output: 'server',
   adapter: cloudflare(),
   site: SITE_URL,
+  experimental: {
+    fonts: [
+      {
+        provider: fontProviders.google(),
+        name: 'Inter',
+        cssVariable: '--font-inter',
+      },
+    ],
+  },
   env: {
     schema: {
       BEEHIIV_PUBLICATION_ID: envField.string({

@@ -5,6 +5,14 @@ const experiences = await getCollection('experience');
 const sortedExperiences = experiences.sort(
   (a, b) => a.data.order - b.data.order,
 );
+
+// Render markdown content for each experience
+const experiencesWithContent = await Promise.all(
+  sortedExperiences.map(async (exp) => {
+    const { Content } = await exp.render();
+    return { ...exp, Content };
+  }),
+);
 ---
 
 <section class='py-20 relative' id='work'>
@@ -26,9 +34,9 @@ const sortedExperiences = experiences.sort(
         class='flex md:flex-col overflow-x-auto md:overflow-x-visible space-x-1 md:space-x-0 md:space-y-2 pb-4 md:pb-0'
       >
         {
-          sortedExperiences.map((exp, index) => (
+          experiencesWithContent.map((exp, index) => (
             <button
-              data-tab={exp.data.id}
+              data-tab={exp.data.company}
               class={`shrink-0 md:w-full text-left text-sm md:text-base  hover:border-secondary/30 retro:hover:border-primary/30 px-4 md:px-6 py-1.5 md:py-4 rounded-md md:border-l-4 border-b-4 md:border-b-0 transition-all duration-300 hover:bg-primary/5 ${
                 index === 0
                   ? 'bg-primary/10 border-secondary retro:border-primary text-primary font-medium'
@@ -43,9 +51,9 @@ const sortedExperiences = experiences.sort(
 
       <div class='relative min-h-100'>
         {
-          sortedExperiences.map((exp, index) => (
+          experiencesWithContent.map((exp, index) => (
             <div
-              data-content={exp.data.id}
+              data-content={exp.data.company}
               class={`transition-all duration-500 ${
                 index === 0
                   ? 'opacity-100 translate-x-0 relative'
@@ -83,26 +91,9 @@ const sortedExperiences = experiences.sort(
                   </p>
                 </div>
 
-                <ul class='space-y-4'>
-                  {exp.data.responsibilities.map((responsibility) => (
-                    <li class='flex gap-3 text-muted-foreground leading-relaxed items-baseline'>
-                      <svg
-                        class='w-4 h-4  text-secondary shrink-0 mt-1.5'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        stroke='currentColor'
-                      >
-                        <path
-                          stroke-linecap='round'
-                          stroke-linejoin='round'
-                          stroke-width='2'
-                          d='M9 5l7 7-7 7'
-                        />
-                      </svg>
-                      <span>{responsibility}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div class='[&_ul]:list-none [&_ul]:space-y-4 [&_ul]:pl-0 [&_li]:pl-6 [&_li]:relative [&_li]:text-muted-foreground [&_li]:leading-relaxed [&_li]:before:content-["›"] [&_li]:before:absolute [&_li]:before:left-0 [&_li]:before:text-secondary [&_li]:before:text-2xl [&_li]:before:font-normal [&_strong]:text-foreground [&_strong]:font-semibold'>
+                  <exp.Content />
+                </div>
               </div>
             </div>
           ))

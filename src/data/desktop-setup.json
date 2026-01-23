@@ -1,43 +1,29 @@
 [
   {
     "id": "macbook-pro",
-    "name": "MacBook Pro 16\"",
+    "name": "MacBook Pro 14\"",
     "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=300&fit=crop",
-    "description": "M2 Max chip with 32GB RAM. The powerhouse that handles everything from development to video editing without breaking a sweat.",
-    "link": "#"
+    "description": "M3 Max chip with 36GB RAM and 1TB SSD. The powerhouse that handles everything from development to video editing without breaking a sweat.",
+    "link": "https://support.apple.com/en-ke/117736"
   },
   {
-    "id": "dell-monitor",
-    "name": "Dell Ultrasharp 27\" 4K Monitor",
-    "image": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&h=300&fit=crop",
-    "description": "Super satisfied with the quality. 27\", 4K resolution with excellent color accuracy. Perfect for long coding sessions.",
-    "link": "#"
-  },
-  {
-    "id": "mechanical-keyboard",
-    "name": "Custom Mechanical Keyboard",
-    "image": "https://images.unsplash.com/photo-1595225476474-87563907a212?w=400&h=300&fit=crop",
-    "description": "Custom build with Cherry MX Brown switches. Tactile feedback that makes typing a pleasure. Hot-swappable keys for endless customization.",
-    "link": "#"
+    "id": "mx-keys-mini",
+    "name": "Logitech MX Keys Mini",
+    "image": "https://resource.logitech.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/logitech/en/products/keyboards/mx-keys-mini/gallery/deu/mx-keys-mini-top-pale-gray-deu.png",
+    "description": "Minimalist Wireless Illuminated Keyboard. Compact design with comfortable typing experience and smart backlighting that adjusts to my environment.",
+    "link": "https://www.logitech.com/en-eu/shop/p/mx-keys-mini"
   },
   {
     "id": "mx-master",
-    "name": "Logitech MX Master 3",
-    "image": "https://images.unsplash.com/photo-1527814050087-3793815479db?w=400&h=300&fit=crop",
+    "name": "Logitech MX Master 3S",
+    "image": "https://resource.logitech.com/w_544,h_544,ar_1,c_fill,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/logitech/en/products/mice/mx-master-3s/2025-update/mx-master-3s-graphite-sustainability-gallery-4.png",
     "description": "Ergonomic mouse that fits perfectly in hand. Customizable buttons and smooth scrolling make navigation effortless during long work sessions.",
-    "link": "#"
-  },
-  {
-    "id": "desk-lamp",
-    "name": "Adjustable LED Desk Lamp",
-    "image": "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400&h=300&fit=crop",
-    "description": "Smart LED lamp with adjustable brightness and color temperature. Includes wireless charging pad for my phone. Can be used as a fill light during calls too.",
-    "link": "#"
+    "link": "https://www.logitech.com/en-eu/shop/p/mx-master-3s"
   },
   {
     "id": "standing-desk",
     "name": "Electric Standing Desk",
-    "image": "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=400&h=300&fit=crop",
+    "image": "https://images.unsplash.com/photo-1622579522120-85a1669d76b6?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "description": "Height-adjustable standing desk with memory presets. Switching between sitting and standing throughout the day keeps me energized and focused.",
     "link": "#"
   }
