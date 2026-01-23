@@ -205,7 +205,7 @@ const canonicalUrl = canonical || Astro.url;
     </script>
 
     <!-- Google Tag Manager -->
-    <script is:inline>
+    <script is:inline define:vars={{ GTM_ID }}>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
         w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
