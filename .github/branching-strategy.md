@@ -2,7 +2,7 @@
 
 This document outlines the branching strategy and rules for this Astro personal portfolio project. This is an open source project deployed to Netlify. Adhering to this strategy will ensure a clean commit history, prevent integration issues, and streamline the development and deployment process.
 
-We adopt a **Trunk-Based Development** model, where `main` is the single source of truth. Deployments to Netlify are triggered automatically when changes are merged to `main`.
+We adopt a **Trunk-Based Development** model, where `main` is the single source of truth. Deployments to Cloudflare Pages are triggered automatically when changes are merged to `main`.
 
 ---
 
@@ -45,26 +45,26 @@ git checkout -b <branch-name>
 3. **Open a Pull Request**: Push your feature branch and open a PR to merge into `main`.
 4. **Code Review & CI**: All checks must pass before merging.
 5. **Merge**: Squash and merge the PR into `main`.
-6. **Deploy**: Netlify automatically deploys the updated `main` branch to production.
+6. **Deploy**: Cloudflare Pages automatically deploys the updated `main` branch to production.
 7. **Delete Branch**: Remove the feature branch after merging. (Automated)
 
 ---
 
 ## 4. Deployment Workflow
 
-This project is deployed to Netlify with automatic deployments configured.
+This project is deployed to Cloudflare Pages with automatic deployments configured.
 
 ### **Preview Deployments**
 
-- Every pull request automatically gets a preview deployment on Netlify
+- Every pull request automatically gets a preview deployment on Cloudflare Pages
 - Preview URL is posted as a comment on the PR
 - Allows testing changes before merging to production
 
 ### **Production Deployment**
 
-- Merging to `main` triggers an automatic production deployment to Netlify
+- Merging to `main` triggers an automatic production deployment to Cloudflare Pages
 - Production site is updated within minutes
-- Netlify handles build optimization and CDN distribution
+- Cloudflare Pages handles build optimization and global edge distribution
 
 ### **Optional: Version Tagging**
 
