@@ -121,6 +121,7 @@ const sponsors = defineCollection({
     twitter: z.string().url().optional(),
     logo: z.string().optional(),
     excerpt: z.string(),
+    is_featured: z.boolean(),
   }),
 });
 

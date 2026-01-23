@@ -4,7 +4,11 @@ import { getCollection } from 'astro:content';
 import SectionHeader from '@/components/shared/SectionHeader.astro';
 import ResourceItem from '@/components/shared/ResourceItem.astro';
 
-const sponsors = await getCollection('sponsors');
+const allSponsors = await getCollection(
+  'sponsors',
+  ({ data }) => data.is_featured,
+);
+
 const currentBooks = await getCollection('books');
 const techStack = await getCollection('techStack');
 const desktopSetup = await getCollection('desktopSetup');
@@ -116,7 +120,7 @@ const desktopSetup = await getCollection('desktopSetup');
         />
         <div class='grid md:grid-cols-2 gap-6'>
           {
-            sponsors.map((sponsor, index) => {
+            allSponsors.map((sponsor, index) => {
               return (
                 <div
                   class='group flex gap-6 md:gap-8 transition-all duration-300'
