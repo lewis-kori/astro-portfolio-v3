@@ -12,7 +12,7 @@ Six years ago, I rebuilt my personal website using Gridsome and Vue.js. At the t
 That rebuild became this article:  
 👉 *[Building my new site with Gridsome & Vue.js](/blog/building-my-new-site-with-gridsome-vue-js/)*
 
-Fast forward to today, that same site still exists at **[lewiskori.netlify.app](https://lewiskori.netlify.app)**, but it had started to feel like a time capsule. The tooling had aged, the ecosystem had slowed down, and more importantly, my own work and interests had expanded far beyond what the site was originally designed to represent.
+Fast forward to today, that same site still exists at **[v2.lewiskori.com](https://v2.lewiskori.com)**, but it had started to feel like a time capsule. The tooling had aged, the ecosystem had slowed down, and more importantly, my own work and interests had expanded far beyond what the site was originally designed to represent.
 
 So I decided to rebuild again.  
 This time with **[Astro](https://astro.build/)**, hosted on **[Cloudflare Pages](https://pages.cloudflare.com/)**, with a stronger content model, better performance, and a structure that reflects where I am today as an engineer and advisor.
@@ -227,7 +227,7 @@ Now the real work, the thinking and the writing, can take center stage again.
 ---
 
 If you are curious, the previous version of the site still lives here:  
-👉 **https://lewiskori.netlify.app**
+👉 **https://v2.lewiskori.com**
 
 And the new one is live at:  
 👉 **https://lewiskori.com**
