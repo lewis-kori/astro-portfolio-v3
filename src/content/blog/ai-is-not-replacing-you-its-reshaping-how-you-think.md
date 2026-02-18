@@ -8,7 +8,6 @@ dateCreated: 2026-02-17
 sponsors: ["Scraper API"]
 ---
 
-
 When AI started writing decent code, I did not feel excitement.
 
 I felt unsettled.
@@ -38,7 +37,7 @@ The other dismisses it as glorified autocomplete.
 
 Both miss something important.
 
-AI does not think like a human. It does not understand systems in the experiential sense. It does not care about uptime, team velocity, or long term maintainability.
+AI does not think like a human. It does not understand systems in the experiential sense. It does not care about uptime, team velocity, or long-term maintainability.
 
 It predicts patterns.
 
@@ -60,7 +59,7 @@ Will this reduce demand for engineers?
 The second is personal.
 Will this reduce the value of what I bring?
 
-AI absolutely compresses certain types of work. Boilerplate generation, repetitive refactors, scaffolding, documentation drafts. The cost of iteration is dropping fast.
+AI absolutely compresses certain types of work. Boilerplate generation, repetitive refactors, scaffolding, and documentation drafts. The cost of iteration is dropping fast.
 
 But that does not eliminate engineering.
 
@@ -93,13 +92,13 @@ Instead of asking it to “write this feature,” I began asking it to stress te
 
 I would describe a multitenant billing system with evolving discount rules and ask it to critique the domain model. I would have it enumerate failure modes in webhook handling, idempotency guarantees, and concurrency boundaries. I would ask it to propose alternative abstractions and then interrogate them.
 
-Suddenly it was not competing with me.
+Suddenly, it was not competing with me.
 
 It was expanding my cognitive bandwidth.
 
 Instead of spending an hour drafting a single architecture direction, I could explore multiple viable approaches quickly and focus on the harder question:
 
-Which one survives contact with reality?
+*Which one survives contact with reality?*
 
 My job became less about producing code from scratch and more about defining constraints, filtering options, and owning decisions.
 
@@ -113,7 +112,7 @@ While navigating this shift, I started reading [AI 2041: Ten Visions for Our Fut
 
 The book pairs speculative stories set in 2041 with grounded technical analysis of where AI is realistically heading. It does not frame AI as magic. It frames it as infrastructure.
 
-In one story, AI assistants optimize daily decisions so effectively that they begin shaping behavior itself. In another, hyper realistic synthetic media challenges society’s ability to distinguish truth from fabrication. Other chapters explore personalized AI education, autonomous systems, and algorithmic governance.
+In one story, AI assistants optimise daily decisions so effectively that they begin shaping behaviour itself. In another, hyper-realistic synthetic media challenges society’s ability to distinguish truth from fabrication. Other chapters explore personalised AI education, autonomous systems, and algorithmic governance.
 
 The consistent pattern is this:
 
@@ -122,7 +121,7 @@ Humans remain accountable.
 
 The systems amplify us. They do not originate purpose.
 
-That mirrors what I see in engineering. AI can generate options. It cannot decide what is aligned with the product vision, the business model, or long term technical health.
+That mirrors what I see in engineering. AI can generate options. It cannot decide what is aligned with the product vision, the business model, or long-term technical health.
 
 Those decisions remain human.
 
@@ -136,7 +135,7 @@ Here are the tools currently shaping how I work.
 
 ### GitHub Copilot Pro+
 
-[GitHub Copilot Pro+](https://github.com/features/copilot) lives directly in my editor. It handles low level friction extremely well. Boilerplate, repetitive patterns, test scaffolding, interface implementations. It uses local context to generate code that aligns with the file and project structure.
+[GitHub Copilot Pro+](https://github.com/features/copilot) lives directly in my editor. It handles low-level friction extremely well. Boilerplate, repetitive patterns, test scaffolding, and interface implementations. It uses local context to generate code that aligns with the file and project structure.
 
 The fundamental benefit is cognitive offloading.
 
@@ -152,7 +151,7 @@ Instead of focusing on implementation details, Variant accelerates layout genera
 
 For engineers who touch frontend systems, this matters.
 
-It shortens the loop between concept and visual artifact. Instead of manually iterating on layout structures or styling hierarchies, AI can generate structured starting points that you refine.
+It shortens the loop between concept and visual artefact. Instead of manually iterating on layout structures or styling hierarchies, AI can generate structured starting points that you refine.
 
 This shifts attention from pixel pushing to experience reasoning.
 
@@ -160,14 +159,14 @@ This shifts attention from pixel pushing to experience reasoning.
 
 ### ChatGPT Codex
 
-[ChatGPT Codex](https://chatgpt.com/codex) is where I go for higher level reasoning.
+[ChatGPT Codex](https://chatgpt.com/codex) is where I go for higher-level reasoning.
 
 When I need to explore design tradeoffs, simulate adversarial critiques, or prototype alternative abstractions, this is the thinking layer.
 
 I use it to:
 
 * Stress test system boundaries
-* Model edge case behavior
+* Model edge case behaviour
 * Generate multiple architecture directions quickly
 * Challenge assumptions before implementation
 
@@ -201,7 +200,7 @@ That part is not automated.
 
 AI will continue compressing certain tasks.
 
-Entry level work will change. Expectations for productivity will rise. Teams will likely stay leaner.
+Entry-level work will change. Expectations for productivity will rise. Teams will likely stay leaner.
 
 But the demand for people who can define systems, reason about complexity, and own outcomes is not disappearing.
 
@@ -219,7 +218,7 @@ They will be the ones who:
 
 AI is not replacing engineers entirely.
 
-It is reshaping the shape of engineering.
+It is reshaping engineering.
 
 The work becomes less about proving you can produce code alone and more about orchestrating intelligence effectively.
 
