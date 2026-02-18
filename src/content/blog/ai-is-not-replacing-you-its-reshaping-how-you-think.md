@@ -19,7 +19,7 @@ But part of it was practical.
 
 If a model can scaffold refactors, generate tests, reason about edge cases, and produce solid patterns in seconds, then the question becomes unavoidable:
 
-What happens to engineers when parts of their skill set become automated?
+*What happens to engineers when parts of their skill set become automated?*
 
 That fear is not irrational.
 
