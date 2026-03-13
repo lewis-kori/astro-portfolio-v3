@@ -212,7 +212,7 @@ const canonicalUrl = canonical || Astro.url;
             ? [
                 {
                   '@type': 'BreadcrumbList',
-                  '@id': `${Astro.url}#breadcrumb`,
+                  '@id': `${canonical || Astro.url}#breadcrumb`,
                   itemListElement: breadcrumbs.map((crumb, idx) => ({
                     '@type': 'ListItem',
                     position: idx + 1,
