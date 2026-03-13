@@ -21,8 +21,8 @@ importers:
         specifier: ^5.18.1
         version: 5.18.1(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(typescript@5.9.3)
       astro-expressive-code:
-        specifier: ^0.41.6
-        version: 0.41.6(astro@5.18.1(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(typescript@5.9.3))
+        specifier: ^0.41.7
+        version: 0.41.7(astro@5.18.1(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(typescript@5.9.3))
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -815,17 +815,17 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@expressive-code/core@0.41.6':
-    resolution: {integrity: sha512-FvJQP+hG0jWi/FLBSmvHInDqWR7jNANp9PUDjdMqSshHb0y7sxx3vHuoOr6SgXjWw+MGLqorZyPQ0aAlHEok6g==}
+  '@expressive-code/core@0.41.7':
+    resolution: {integrity: sha512-ck92uZYZ9Wba2zxkiZLsZGi9N54pMSAVdrI9uW3Oo9AtLglD5RmrdTwbYPCT2S/jC36JGB2i+pnQtBm/Ib2+dg==}
 
-  '@expressive-code/plugin-frames@0.41.6':
-    resolution: {integrity: sha512-d+hkSYXIQot6fmYnOmWAM+7TNWRv/dhfjMsNq+mIZz8Tb4mPHOcgcfZeEM5dV9TDL0ioQNvtcqQNuzA1sRPjxg==}
+  '@expressive-code/plugin-frames@0.41.7':
+    resolution: {integrity: sha512-diKtxjQw/979cTglRFaMCY/sR6hWF0kSMg8jsKLXaZBSfGS0I/Hoe7Qds3vVEgeoW+GHHQzMcwvgx/MOIXhrTA==}
 
-  '@expressive-code/plugin-shiki@0.41.6':
-    resolution: {integrity: sha512-Y6zmKBmsIUtWTzdefqlzm/h9Zz0Rc4gNdt2GTIH7fhHH2I9+lDYCa27BDwuBhjqcos6uK81Aca9dLUC4wzN+ng==}
+  '@expressive-code/plugin-shiki@0.41.7':
+    resolution: {integrity: sha512-DL605bLrUOgqTdZ0Ot5MlTaWzppRkzzqzeGEu7ODnHF39IkEBbFdsC7pbl3LbUQ1DFtnfx6rD54k/cdofbW6KQ==}
 
-  '@expressive-code/plugin-text-markers@0.41.6':
-    resolution: {integrity: sha512-PBFa1wGyYzRExMDzBmAWC6/kdfG1oLn4pLpBeTfIRrALPjcGA/59HP3e7q9J0Smk4pC7U+lWkA2LHR8FYV8U7Q==}
+  '@expressive-code/plugin-text-markers@0.41.7':
+    resolution: {integrity: sha512-Ewpwuc5t6eFdZmWlFyeuy3e1PTQC0jFvw2Q+2bpcWXbOZhPLsT7+h8lsSIJxb5mS7wZko7cKyQ2RLYDyK6Fpmw==}
 
   '@img/colour@1.0.0':
     resolution: {integrity: sha512-A5P/LfWGFSl6nsckYtjw9da+19jB8hkJ6ACTGcDfEJ0aE+l2n2El7dsVM7UVHZQ9s2lmYMWlrS21YLy2IR1LUw==}
@@ -1428,8 +1428,8 @@ packages:
   array-iterate@2.0.1:
     resolution: {integrity: sha512-I1jXZMjAgCMmxT4qxXfPXa6SthSoE8h6gkSI9BGGNv8mP8G/v0blc+qFnZu6K42vTOiuME596QaLO0TP3Lk0xg==}
 
-  astro-expressive-code@0.41.6:
-    resolution: {integrity: sha512-l47tb1uhmVIebHUkw+HEPtU/av0G4O8Q34g2cbkPvC7/e9ZhANcjUUciKt9Hp6gSVDdIuXBBLwJQn2LkeGMOAw==}
+  astro-expressive-code@0.41.7:
+    resolution: {integrity: sha512-hUpogGc6DdAd+I7pPXsctyYPRBJDK7Q7d06s4cyP0Vz3OcbziP3FNzN0jZci1BpCvLn9675DvS7B9ctKKX64JQ==}
     peerDependencies:
       astro: ^4.0.0-beta || ^5.0.0-beta || ^3.3.0 || ^6.0.0-beta
 
@@ -1683,8 +1683,8 @@ packages:
     resolution: {integrity: sha512-eNTPlAD67BmP31LDINZ3U7HSF8l57TxOY2PmBJ1shpCvpnxBF93mWCE8YHBnXs8qiUZJc9WDcWIeC3a2HIAMfw==}
     engines: {node: '>=6'}
 
-  expressive-code@0.41.6:
-    resolution: {integrity: sha512-W/5+IQbrpCIM5KGLjO35wlp1NCwDOOVQb+PAvzEoGkW1xjGM807ZGfBKptNWH6UECvt6qgmLyWolCMYKh7eQmA==}
+  expressive-code@0.41.7:
+    resolution: {integrity: sha512-2wZjC8OQ3TaVEMcBtYY4Va3lo6J+Ai9jf3d4dbhURMJcU4Pbqe6EcHe424MIZI0VHUA1bR6xdpoHYi3yxokWqA==}
 
   extend@3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
@@ -2181,8 +2181,8 @@ packages:
   regex@6.1.0:
     resolution: {integrity: sha512-6VwtthbV4o/7+OaAF9I5L5V3llLEsoPyq9P1JVXkedTP33c7MfCG0/5NOPcSJn0TzXcG9YUrR0gQSWioew3LDg==}
 
-  rehype-expressive-code@0.41.6:
-    resolution: {integrity: sha512-aBMX8kxPtjmDSFUdZlAWJkMvsQ4ZMASfee90JWIAV8tweltXLzkWC3q++43ToTelI8ac5iC0B3/S/Cl4Ql1y2g==}
+  rehype-expressive-code@0.41.7:
+    resolution: {integrity: sha512-25f8ZMSF1d9CMscX7Cft0TSQIqdwjce2gDOvQ+d/w0FovsMwrSt3ODP4P3Z7wO1jsIJ4eYyaDRnIR/27bd/EMQ==}
 
   rehype-parse@9.0.1:
     resolution: {integrity: sha512-ksCzCD0Fgfh7trPDxr2rSylbwq9iYDkSn8TCDmEJ49ljEUBxDVCzCHv7QNzZOfODanX4+bWQ4WZqLCRWYLfhag==}
@@ -3116,7 +3116,7 @@ snapshots:
   '@esbuild/win32-x64@0.27.4':
     optional: true
 
-  '@expressive-code/core@0.41.6':
+  '@expressive-code/core@0.41.7':
     dependencies:
       '@ctrl/tinycolor': 4.2.0
       hast-util-select: 6.0.4
@@ -3128,18 +3128,18 @@ snapshots:
       unist-util-visit: 5.1.0
       unist-util-visit-parents: 6.0.2
 
-  '@expressive-code/plugin-frames@0.41.6':
+  '@expressive-code/plugin-frames@0.41.7':
     dependencies:
-      '@expressive-code/core': 0.41.6
+      '@expressive-code/core': 0.41.7
 
-  '@expressive-code/plugin-shiki@0.41.6':
+  '@expressive-code/plugin-shiki@0.41.7':
     dependencies:
-      '@expressive-code/core': 0.41.6
+      '@expressive-code/core': 0.41.7
       shiki: 3.23.0
 
-  '@expressive-code/plugin-text-markers@0.41.6':
+  '@expressive-code/plugin-text-markers@0.41.7':
     dependencies:
-      '@expressive-code/core': 0.41.6
+      '@expressive-code/core': 0.41.7
 
   '@img/colour@1.0.0': {}
 
@@ -3597,10 +3597,10 @@ snapshots:
 
   array-iterate@2.0.1: {}
 
-  astro-expressive-code@0.41.6(astro@5.18.1(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(typescript@5.9.3)):
+  astro-expressive-code@0.41.7(astro@5.18.1(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(typescript@5.9.3)):
     dependencies:
       astro: 5.18.1(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(typescript@5.9.3)
-      rehype-expressive-code: 0.41.6
+      rehype-expressive-code: 0.41.7
 
   astro@5.18.1(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(typescript@5.9.3):
     dependencies:
@@ -4003,12 +4003,12 @@ snapshots:
 
   exit-hook@2.2.1: {}
 
-  expressive-code@0.41.6:
+  expressive-code@0.41.7:
     dependencies:
-      '@expressive-code/core': 0.41.6
-      '@expressive-code/plugin-frames': 0.41.6
-      '@expressive-code/plugin-shiki': 0.41.6
-      '@expressive-code/plugin-text-markers': 0.41.6
+      '@expressive-code/core': 0.41.7
+      '@expressive-code/plugin-frames': 0.41.7
+      '@expressive-code/plugin-shiki': 0.41.7
+      '@expressive-code/plugin-text-markers': 0.41.7
 
   extend@3.0.2: {}
 
@@ -4726,9 +4726,9 @@ snapshots:
     dependencies:
       regex-utilities: 2.3.0
 
-  rehype-expressive-code@0.41.6:
+  rehype-expressive-code@0.41.7:
     dependencies:
-      expressive-code: 0.41.6
+      expressive-code: 0.41.7
 
   rehype-parse@9.0.1:
     dependencies:
