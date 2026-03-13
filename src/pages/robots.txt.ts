@@ -14,7 +14,7 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-User-agent: Claude-Web
+User-agent: ClaudeBot
 Allow: /
 
 User-agent: anthropic-ai
@@ -27,6 +27,9 @@ User-agent: Google-Extended
 Allow: /
 
 User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
 Allow: /
 
 Sitemap: ${sitemapURL.href}
