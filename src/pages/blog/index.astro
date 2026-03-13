@@ -2,6 +2,7 @@
 import { ArticleCard, NewsletterForm } from '@/components/shared';
 import Layout from '@/layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { SITE_URL } from '@/lib/env';
 
 // Get all blog posts and sort by date (newest first)
 const allBlogs = await getCollection('blog');
@@ -18,6 +19,50 @@ const allSeries = [
 // Pagination
 const blogsPerPage = 9;
 const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
+
+const siteUrl = SITE_URL;
+
+const breadcrumbs = [
+  { name: 'Home', item: siteUrl },
+  { name: 'Writing', item: `${siteUrl}/blog` },
+];
+
+const collectionPageSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      '@id': `${siteUrl}/blog#collectionpage`,
+      url: `${siteUrl}/blog`,
+      name: 'Writing by Lewis Kori',
+      description: "Essays and notes on technology, entrepreneurship, systems, and decision-making from an operator's perspective.",
+      inLanguage: 'en-US',
+      isPartOf: { '@id': `${siteUrl}/#website` },
+      author: { '@id': `${siteUrl}/#person` },
+      breadcrumb: { '@id': `${siteUrl}/blog#breadcrumb` },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${siteUrl}/blog#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+        { '@type': 'ListItem', position: 2, name: 'Writing', item: `${siteUrl}/blog` },
+      ],
+    },
+    {
+      '@type': 'ItemList',
+      '@id': `${siteUrl}/blog#itemlist`,
+      name: 'All Articles',
+      numberOfItems: sortedBlogs.length,
+      itemListElement: sortedBlogs.slice(0, 20).map((blog, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 1,
+        url: `${siteUrl}/blog/${blog.id.replace(/\.md$/, '')}`,
+        name: blog.data.title,
+      })),
+    },
+  ],
+};
 ---
 
 <Layout
@@ -25,16 +70,25 @@ const totalPages = Math.ceil(sortedBlogs.length / blogsPerPage);
   description="Essays and notes on technology, entrepreneurship, systems, and decision-making from an operator's perspective."
   ogTitle='Writing by Lewis Kori'
   ogDescription='Thoughts on building, operating, and thinking clearly in complex environments.'
+  breadcrumbs={breadcrumbs}
 >
+  <script type='application/ld+json' set:html={JSON.stringify(collectionPageSchema)} />
   <section class='py-16 md:py-20 min-h-screen'>
     <div class='container-fluid'>
       <!-- Hero Section with Newsletter -->
       <div class='mb-16 space-y-8'>
         <div class='text-center space-y-4'>
+          <div class='inline-block'>
+            <span
+              class='text-xs uppercase tracking-wider text-primary font-semibold px-4 py-2 rounded-full bg-primary/10 border border-primary/20'
+            >
+              What the Edge?
+            </span>
+          </div>
           <h1
             class='text-2xl md:text-3xl lg:text-4xl first-letter-color font-semibold'
           >
-            What the Edge?
+            Writing
           </h1>
           <p
             class='text-muted-foreground text-sm md:text-base max-w-xl mx-auto'

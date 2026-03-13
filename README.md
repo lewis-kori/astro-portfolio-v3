@@ -4,6 +4,14 @@
 [![Built with Astro](https://img.shields.io/badge/Built%20with-Astro-FF5D01?logo=astro)](https://astro.build)
 [![Deployed on Cloudflare](https://img.shields.io/badge/Deployed%20on-Cloudflare%20Pages-F38020?logo=cloudflare)](https://pages.cloudflare.com)
 
+## 📚 Documentation
+
+Looking for detailed documentation, guides, and references? Check out the **[official documentation](https://docs.lewiskori.com/)** hosted on Mintlify for comprehensive information about this portfolio, customization guides, content management, and more.
+
+[![View Documentation](https://img.shields.io/badge/View-Documentation-7C3AED?logo=mintlify)](https://docs.lewiskori.com/)
+
+---
+
 A modern, content-rich personal portfolio built with Astro, showcasing projects, blog posts, work experience, advisory services, and operating notes. Designed for entrepreneurs, technologists, and product builders who want a professional, performant web presence.
 
 ## 🌟 Features

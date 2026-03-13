@@ -48,6 +48,10 @@ const desktopSetup = defineCollection({
 
 const about = defineCollection({
   type: 'content',
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string().optional(),
+  }),
 });
 
 const operatingNotes = defineCollection({
@@ -79,6 +83,7 @@ const blog = defineCollection({
     tags: z.array(z.string()),
     description: z.string(),
     dateCreated: z.coerce.date(),
+    dateModified: z.coerce.date().optional(),
     cover_image: z.string().optional(),
     series: z.string().optional(),
     sponsors: z.array(z.string()).optional(),

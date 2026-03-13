@@ -18,8 +18,11 @@ interface Props {
   image?: string;
   author?: string;
   publishedTime?: string;
+  modifiedTime?: string;
   type?: 'website' | 'article';
   canonical?: string;
+  breadcrumbs?: Array<{ name: string; item: string }>;
+  keywords?: string[];
 }
 
 const siteName = 'Lewis Kori – Entrepreneur, Product Builder, Operator';
@@ -37,8 +40,11 @@ const {
   image = `${siteUrl}/opengraph.png`,
   author = 'Lewis Kori',
   publishedTime,
+  modifiedTime,
   type = 'website',
   canonical,
+  breadcrumbs,
+  keywords,
 } = Astro.props;
 
 const pageTitle = title;
@@ -64,6 +70,9 @@ const canonicalUrl = canonical || Astro.url;
     <!-- SEO Meta Tags -->
     <meta name='description' content={description} />
     <meta name='author' content={author} />
+    {keywords && keywords.length > 0 && (
+      <meta name='keywords' content={keywords.join(', ')} />
+    )}
 
     <!-- Open Graph / Facebook -->
     <meta property='og:type' content={type} />
@@ -71,6 +80,11 @@ const canonicalUrl = canonical || Astro.url;
     <meta property='og:title' content={openGraphTitle} />
     <meta property='og:description' content={openGraphDescription} />
     <meta property='og:image' content={image} />
+    <meta property='og:image:secure_url' content={image} />
+    <meta property='og:image:type' content='image/png' />
+    <meta property='og:image:width' content='500' />
+    <meta property='og:image:height' content='500' />
+    <meta property='og:image:alt' content={openGraphTitle} />
     <meta property='og:site_name' content={siteName} />
     {
       publishedTime && (
@@ -85,10 +99,13 @@ const canonicalUrl = canonical || Astro.url;
 
     <!-- Twitter -->
     <meta name='twitter:card' content='summary_large_image' />
+    <meta name='twitter:site' content='@lewis_kihiu' />
+    <meta name='twitter:creator' content='@lewis_kihiu' />
     <meta name='twitter:url' content={Astro.url} />
     <meta name='twitter:title' content={openGraphTitle} />
     <meta name='twitter:description' content={openGraphDescription} />
     <meta name='twitter:image' content={image} />
+    <meta name='twitter:image:alt' content={openGraphTitle} />
 
     <!-- Canonical URL -->
     <link rel='canonical' href={canonicalUrl} />
@@ -116,6 +133,7 @@ const canonicalUrl = canonical || Astro.url;
             '@type': 'Person',
             '@id': `${siteUrl}/#person`,
             name: 'Lewis Kori',
+            alternateName: 'Lewis Kihiu',
             url: siteUrl,
             image: {
               '@type': 'ImageObject',
@@ -124,7 +142,27 @@ const canonicalUrl = canonical || Astro.url;
               height: 630,
             },
             description: siteConfig.authorDescription,
-            jobTitle: siteConfig.tagline,
+            jobTitle: 'Entrepreneur & Product Builder',
+            address: {
+              '@type': 'PostalAddress',
+              addressCountry: 'KE',
+              addressLocality: 'Nairobi',
+            },
+            worksFor: {
+              '@type': 'Organization',
+              name: 'Inflection Studio',
+              url: 'https://inflectionstudio.io/',
+            },
+            knowsAbout: [
+              'Entrepreneurship',
+              'Product Development',
+              'Software Engineering',
+              'Venture Building',
+              'Technology Strategy',
+              'Platform Architecture',
+              'Advisory',
+              'Systems Thinking',
+            ],
             sameAs: [
               'https://twitter.com/lewis_kihiu',
               'https://github.com/lewis-kori',
@@ -139,7 +177,7 @@ const canonicalUrl = canonical || Astro.url;
                 description: openGraphDescription,
                 image: image,
                 datePublished: publishedTime,
-                dateModified: publishedTime,
+                dateModified: modifiedTime || publishedTime,
                 author: {
                   '@id': `${siteUrl}/#person`,
                 },
@@ -150,6 +188,10 @@ const canonicalUrl = canonical || Astro.url;
                   '@type': 'WebPage',
                   '@id': Astro.url,
                 },
+                ...(keywords && keywords.length > 0 && {
+                  keywords: keywords.join(', '),
+                  articleSection: keywords[0],
+                }),
               }
             : {
                 '@type': 'WebPage',
@@ -166,6 +208,20 @@ const canonicalUrl = canonical || Astro.url;
                 },
                 inLanguage: 'en-US',
               },
+          ...(breadcrumbs && breadcrumbs.length > 0
+            ? [
+                {
+                  '@type': 'BreadcrumbList',
+                  '@id': `${canonical || Astro.url}#breadcrumb`,
+                  itemListElement: breadcrumbs.map((crumb, idx) => ({
+                    '@type': 'ListItem',
+                    position: idx + 1,
+                    name: crumb.name,
+                    item: crumb.item,
+                  })),
+                },
+              ]
+            : []),
         ].filter(Boolean),
       })}
     />

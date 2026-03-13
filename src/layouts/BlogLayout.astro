@@ -13,6 +13,7 @@ interface Props {
   description: string;
   author: string;
   dateCreated: Date;
+  dateModified?: Date;
   tags?: string[];
   coverImage?: string;
   ogImage?: string;
@@ -28,6 +29,7 @@ const {
   description,
   author,
   dateCreated,
+  dateModified,
   tags = [],
   coverImage,
   ogImage,
@@ -40,51 +42,70 @@ const {
 
 const hasSponsors = sponsors.length > 0;
 
-// Format date
+// Format dates
 const formattedDate = dateCreated.toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
 });
+const formattedModifiedDate = dateModified?.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+const isUpdated = dateModified && dateModified.getTime() !== dateCreated.getTime();
 
 const seriesSlug = series ? series.toLowerCase().replace(/\s+/g, '-') : null;
 
 const pageTitle = `${title} | Lewis Kori`;
 const publishedTime = dateCreated.toISOString();
+const modifiedTime = dateModified?.toISOString();
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://lewiskori.com';
+const slug = Astro.params.slug as string;
+
+// Fix ogImage: ensure it's always a string URL, never an ImageMetadata object
+const ogImageUrl = typeof ogImage === 'string' ? ogImage : `${siteUrl}/opengraph.png`;
+
+const breadcrumbs = [
+  { name: 'Home', item: siteUrl },
+  { name: 'Writing', item: `${siteUrl}/blog` },
+  { name: title, item: `${siteUrl}/blog/${slug}` },
+];
 ---
 
 <Layout
   title={pageTitle}
   description={description}
-  image={ogImage}
+  ogTitle={title}
+  ogDescription={description}
+  image={ogImageUrl}
   author={author}
   publishedTime={publishedTime}
+  modifiedTime={modifiedTime}
   type='article'
   canonical={canonical}
+  breadcrumbs={breadcrumbs}
+  keywords={tags.length > 0 ? tags : undefined}
 >
   <article class='py-16 md:py-20 min-h-screen'>
     <div class='container-fluid'>
-      <div class='mb-8'>
-        <button
-          id='back-button'
-          class='inline-flex items-center gap-2 text-secondary hover:underline cursor-pointer'
-        >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='20'
-            height='20'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-          >
-            <path d='m15 18-6-6 6-6'></path>
-          </svg>
-          Back to all posts
-        </button>
-      </div>
+      <!-- Breadcrumb navigation -->
+      <nav aria-label='Breadcrumb' class='mb-6'>
+        <ol class='flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground'>
+          <li>
+            <a href='/' class='hover:text-primary transition-colors'>Home</a>
+          </li>
+          <li aria-hidden='true'>/</li>
+          <li>
+            <a href='/blog' class='hover:text-primary transition-colors'>Writing</a>
+          </li>
+          <li aria-hidden='true'>/</li>
+          <li class='text-foreground font-medium truncate max-w-[200px] sm:max-w-xs' aria-current='page'>
+            {title}
+          </li>
+        </ol>
+      </nav>
 
       <header class='mb-12'>
         <div class='grid lg:grid-cols-5 gap-8'>
@@ -101,6 +122,14 @@ const publishedTime = dateCreated.toISOString();
               <time datetime={dateCreated.toISOString()}>
                 Posted {formattedDate}
               </time>
+              {isUpdated && (
+                <>
+                  <span>•</span>
+                  <time datetime={dateModified!.toISOString()} class='italic'>
+                    Updated {formattedModifiedDate}
+                  </time>
+                </>
+              )}
               <span>•</span>
               <span>By {author}</span>
               <span>•</span>
@@ -183,9 +212,13 @@ const publishedTime = dateCreated.toISOString();
               <h3 class='text-lg font-semibold mb-3'>Tags</h3>
               <div class='flex flex-wrap gap-2'>
                 {tags.map((tag) => (
-                  <span class='px-3 py-1 text-xs rounded-full bg-primary/10 text-primary'>
+                  <a
+                    href={`/blog?tag=${encodeURIComponent(tag)}`}
+                    class='px-3 py-1 text-xs rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors'
+                    rel='tag'
+                  >
                     #{tag}
-                  </span>
+                  </a>
                 ))}
               </div>
             </div>
@@ -253,28 +286,9 @@ const publishedTime = dateCreated.toISOString();
     });
   }
 
-  function setupBackButton() {
-    const backButton = document.getElementById('back-button');
-    if (!backButton) return;
-
-    backButton.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      // Check if we can go back (history state exists)
-      if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        // No history, go to blog index
-        window.location.href = '/blog';
-      }
-    });
-  }
-
   setupExternalLinks();
-  setupBackButton();
 
   document.addEventListener('astro:page-load', () => {
     setupExternalLinks();
-    setupBackButton();
   });
 </script>
