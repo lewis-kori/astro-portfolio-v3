@@ -22,6 +22,7 @@ interface Props {
   type?: 'website' | 'article';
   canonical?: string;
   breadcrumbs?: Array<{ name: string; item: string }>;
+  keywords?: string[];
 }
 
 const siteName = 'Lewis Kori – Entrepreneur, Product Builder, Operator';
@@ -43,6 +44,7 @@ const {
   type = 'website',
   canonical,
   breadcrumbs,
+  keywords,
 } = Astro.props;
 
 const pageTitle = title;
@@ -68,6 +70,9 @@ const canonicalUrl = canonical || Astro.url;
     <!-- SEO Meta Tags -->
     <meta name='description' content={description} />
     <meta name='author' content={author} />
+    {keywords && keywords.length > 0 && (
+      <meta name='keywords' content={keywords.join(', ')} />
+    )}
 
     <!-- Open Graph / Facebook -->
     <meta property='og:type' content={type} />
@@ -177,6 +182,10 @@ const canonicalUrl = canonical || Astro.url;
                   '@type': 'WebPage',
                   '@id': Astro.url,
                 },
+                ...(keywords && keywords.length > 0 && {
+                  keywords: keywords.join(', '),
+                  articleSection: keywords[0],
+                }),
               }
             : {
                 '@type': 'WebPage',

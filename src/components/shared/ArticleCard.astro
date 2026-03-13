@@ -36,6 +36,8 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
         <img
           src={cover_image}
           alt={title}
+          loading='lazy'
+          decoding='async'
           class='w-full h-full object-cover group-hover:scale-105 transition-transform duration-300'
           transition:name={`blog-image-${slug}`}
         />
