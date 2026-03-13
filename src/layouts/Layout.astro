@@ -18,8 +18,10 @@ interface Props {
   image?: string;
   author?: string;
   publishedTime?: string;
+  modifiedTime?: string;
   type?: 'website' | 'article';
   canonical?: string;
+  breadcrumbs?: Array<{ name: string; item: string }>;
 }
 
 const siteName = 'Lewis Kori – Entrepreneur, Product Builder, Operator';
@@ -37,8 +39,10 @@ const {
   image = `${siteUrl}/opengraph.png`,
   author = 'Lewis Kori',
   publishedTime,
+  modifiedTime,
   type = 'website',
   canonical,
+  breadcrumbs,
 } = Astro.props;
 
 const pageTitle = title;
@@ -85,6 +89,8 @@ const canonicalUrl = canonical || Astro.url;
 
     <!-- Twitter -->
     <meta name='twitter:card' content='summary_large_image' />
+    <meta name='twitter:site' content='@lewis_kihiu' />
+    <meta name='twitter:creator' content='@lewis_kihiu' />
     <meta name='twitter:url' content={Astro.url} />
     <meta name='twitter:title' content={openGraphTitle} />
     <meta name='twitter:description' content={openGraphDescription} />
@@ -116,6 +122,7 @@ const canonicalUrl = canonical || Astro.url;
             '@type': 'Person',
             '@id': `${siteUrl}/#person`,
             name: 'Lewis Kori',
+            alternateName: 'Lewis Kihiu',
             url: siteUrl,
             image: {
               '@type': 'ImageObject',
@@ -124,7 +131,27 @@ const canonicalUrl = canonical || Astro.url;
               height: 630,
             },
             description: siteConfig.authorDescription,
-            jobTitle: siteConfig.tagline,
+            jobTitle: 'Entrepreneur & Product Builder',
+            address: {
+              '@type': 'PostalAddress',
+              addressCountry: 'KE',
+              addressLocality: 'Nairobi',
+            },
+            worksFor: {
+              '@type': 'Organization',
+              name: 'Inflection Studio',
+              url: 'https://inflectionstudio.io/',
+            },
+            knowsAbout: [
+              'Entrepreneurship',
+              'Product Development',
+              'Software Engineering',
+              'Venture Building',
+              'Technology Strategy',
+              'Platform Architecture',
+              'Advisory',
+              'Systems Thinking',
+            ],
             sameAs: [
               'https://twitter.com/lewis_kihiu',
               'https://github.com/lewis-kori',
@@ -139,7 +166,7 @@ const canonicalUrl = canonical || Astro.url;
                 description: openGraphDescription,
                 image: image,
                 datePublished: publishedTime,
-                dateModified: publishedTime,
+                dateModified: modifiedTime || publishedTime,
                 author: {
                   '@id': `${siteUrl}/#person`,
                 },
@@ -166,6 +193,20 @@ const canonicalUrl = canonical || Astro.url;
                 },
                 inLanguage: 'en-US',
               },
+          ...(breadcrumbs && breadcrumbs.length > 0
+            ? [
+                {
+                  '@type': 'BreadcrumbList',
+                  '@id': `${Astro.url}#breadcrumb`,
+                  itemListElement: breadcrumbs.map((crumb, idx) => ({
+                    '@type': 'ListItem',
+                    position: idx + 1,
+                    name: crumb.name,
+                    item: crumb.item,
+                  })),
+                },
+              ]
+            : []),
         ].filter(Boolean),
       })}
     />

@@ -13,6 +13,7 @@ interface Props {
   description: string;
   author: string;
   dateCreated: Date;
+  dateModified?: Date;
   tags?: string[];
   coverImage?: string;
   ogImage?: string;
@@ -28,6 +29,7 @@ const {
   description,
   author,
   dateCreated,
+  dateModified,
   tags = [],
   coverImage,
   ogImage,
@@ -51,6 +53,15 @@ const seriesSlug = series ? series.toLowerCase().replace(/\s+/g, '-') : null;
 
 const pageTitle = `${title} | Lewis Kori`;
 const publishedTime = dateCreated.toISOString();
+const modifiedTime = dateModified?.toISOString();
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://lewiskori.com';
+const slug = Astro.params.slug as string;
+const breadcrumbs = [
+  { name: 'Home', item: siteUrl },
+  { name: 'Writing', item: `${siteUrl}/blog` },
+  { name: title, item: `${siteUrl}/blog/${slug}` },
+];
 ---
 
 <Layout
@@ -59,8 +70,10 @@ const publishedTime = dateCreated.toISOString();
   image={ogImage}
   author={author}
   publishedTime={publishedTime}
+  modifiedTime={modifiedTime}
   type='article'
   canonical={canonical}
+  breadcrumbs={breadcrumbs}
 >
   <article class='py-16 md:py-20 min-h-screen'>
     <div class='container-fluid'>
