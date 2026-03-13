@@ -55,7 +55,27 @@ if (post.data.series) {
 }
 
 // Use blog cover image if it exists, otherwise fall back to avatar
-const blogImage = post.data.cover_image || siteConfig.avatar;
+const resolveImageSrc = (image: unknown): string | undefined => {
+  if (typeof image === 'string') {
+    return image;
+  }
+
+  if (
+    image &&
+    typeof image === 'object' &&
+    'src' in image &&
+    typeof image.src === 'string'
+  ) {
+    return image.src;
+  }
+
+  return undefined;
+};
+
+const coverImageSrc = resolveImageSrc(post.data.cover_image);
+const avatarSrc = resolveImageSrc(siteConfig.avatar);
+
+const blogImage = coverImageSrc ?? avatarSrc;
 ---
 
 <BlogLayout
