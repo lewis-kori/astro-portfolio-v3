@@ -303,9 +303,6 @@ Next, I’ll be diving deeper into:
 
 ## Further Reading
 
-- [AI Is Not Replacing You. It’s Reshaping How You Think](https://lewiskori.com/blog/ai-is-not-replacing-you-its-reshaping-how-you-think/)  
-- [Why I Write](https://lewiskori.com/blog/why-i-write/)  
-- [Building Better: Looking Back on 2025](https://lewiskori.com/blog/building-better-looking-back-on-2025/)  
 - [What Are Agent Skills and How To Use Them](https://strapi.io/blog/what-are-agent-skills-and-how-to-use-them)  
 - [Anthropic: Agent Skills Overview](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)  
 - [Model Context Protocol: Introduction](https://modelcontextprotocol.io/docs/getting-started/intro)  
