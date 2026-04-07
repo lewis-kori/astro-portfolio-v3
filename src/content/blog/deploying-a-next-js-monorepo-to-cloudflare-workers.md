@@ -1,11 +1,12 @@
 ---
+
 title: "Deploying a Next.js Monorepo to Cloudflare Workers: Lessons from the Trenches"
 author: Lewis Kori
 tags: ["nextjs", "cloudflare", "monorepo", "nx", "deployment", "workers", "edge computing", "devops"]
 description: A real-world walkthrough of migrating a multi-app Next.js monorepo from Firebase Hosting to Cloudflare Workers. Why we did it, the gotchas nobody warned us about, and whether it was worth it.
 dateCreated: 2026-04-07
 sponsors: []
----
+------------
 
 Earlier this year, I migrated my [personal site from Netlify to Cloudflare Pages](/blog/from-gridsome-to-astro-rebuilding-my-personal-site-for-the-next-phase/). The experience was smooth enough that it got me thinking about what Cloudflare could do for a more demanding workload.
 
