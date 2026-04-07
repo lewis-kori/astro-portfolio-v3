@@ -8,6 +8,24 @@ import sitemap from '@astrojs/sitemap';
 
 import cloudflare from '@astrojs/cloudflare';
 
+import { visit } from 'unist-util-visit';
+
+function rehypeWrapTables() {
+  return (tree) => {
+    visit(tree, 'element', (node, index, parent) => {
+      if (node.tagName === 'table' && parent && typeof index === 'number') {
+        const wrapper = {
+          type: 'element',
+          tagName: 'div',
+          properties: { className: ['overflow-x-auto'] },
+          children: [node],
+        };
+        parent.children.splice(index, 1, wrapper);
+      }
+    });
+  };
+}
+
 const SITE_URL = 'https://lewiskori.com';
 
 // https://astro.build/config
@@ -15,6 +33,9 @@ export default defineConfig({
   output: 'server',
   adapter: cloudflare(),
   site: SITE_URL,
+  markdown: {
+    rehypePlugins: [rehypeWrapTables],
+  },
   experimental: {
     fonts: [
       {
