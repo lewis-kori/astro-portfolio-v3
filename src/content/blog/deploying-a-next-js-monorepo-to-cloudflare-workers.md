@@ -35,14 +35,16 @@ Until it didn’t.
 
 This was not a single decision. It was a slow accumulation of friction.
 
-**The CI/CD pipeline became a liability.**
+#### The CI/CD pipeline became a liability
+
 We built a fairly involved GitHub Actions workflow to handle building and deploying each app independently from the monorepo. Over time, it became fragile. Deploys were flaky. Build ordering introduced hidden dependencies. Silent failures made debugging painful.
 
 At some point, the pipeline stopped feeling like infrastructure and started feeling like something we had to constantly babysit.
 
 And it was quietly burning through our GitHub Actions minutes.
 
-**Firebase's Next.js support had not kept up.**
+#### Firebase's Next.js support had not kept up
+
 Firebase Hosting’s native Next.js integration works reasonably well for older versions of the framework, but [support for newer App Router features, React Server Components, and server actions is limited](https://firebase.google.com/docs/hosting/frameworks/nextjs).
 
 Every time we wanted to use something current, we had to check whether Firebase could handle it.
@@ -51,7 +53,8 @@ Usually the answer was *sort of, with caveats*.
 
 That is not a position you want to be in.
 
-**Cost unpredictability.**
+#### Cost unpredictability
+
 Firebase pricing scales with function invocations, bandwidth, and compute. It is predictable at low traffic, but becomes harder to reason about as you grow.
 
 For SSR workloads, it adds up faster than expected.
