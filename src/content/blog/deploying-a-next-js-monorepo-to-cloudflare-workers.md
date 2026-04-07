@@ -8,7 +8,7 @@ dateCreated: 2026-04-07
 sponsors: ["Scraper API"]
 ---
 
-Earlier this year, I migrated my [personal site from Netlify to Cloudflare Pages](/blog/from-gridsome-to-astro-rebuilding-my-personal-site-for-the-next-phase/). The experience was smooth enough that it got me thinking about what Cloudflare could do for a more demanding workload.
+Earlier this year, I migrated my [personal site from Netlify to Cloudflare Pages](/blog/from-gridsome-to-astro-rebuilding-my-personal-site-for-the-next-phase/). The experience was smooth enough to get me thinking about what Cloudflare could do for a more demanding workload.
 
 A real production monorepo. Multiple Next.js apps. Shared packages. Real users.
 
@@ -20,7 +20,7 @@ This post is the story of how we got there.
 
 ## The Setup
 
-The monorepo contains three Next.js 16 apps and a set of shared packages, all managed with **Nx 22** and **pnpm workspaces**. Shared code such as components, utilities, types, hooks, and config lives in `packages/` and is consumed by each app via TypeScript path aliases.
+The monorepo contains three Next.js 16 apps and a set of shared packages, all managed with **Nx 22** and **pnpm workspaces**. Shared code, such as components, utilities, types, hooks, and config, lives in `packages/` and is consumed by each app via TypeScript path aliases.
 
 The apps range from a lightweight customer-facing site to a heavier dashboard with auth middleware, i18n, and Sentry.
 
@@ -35,21 +35,21 @@ Until it didn’t.
 
 This was not a single decision. It was a slow accumulation of friction.
 
-#### The CI/CD pipeline became a liability
+### The CI/CD pipeline became a liability
 
-We built a fairly involved GitHub Actions workflow to handle building and deploying each app independently from the monorepo. Over time, it became fragile. Deploys were flaky. Build ordering introduced hidden dependencies. Silent failures made debugging painful.
+We built a fairly complex GitHub Actions workflow to build and deploy each app independently of the monorepo. Over time, it became fragile. Deploys were flaky. Build ordering introduced hidden dependencies. Silent failures made debugging painful.
 
 At some point, the pipeline stopped feeling like infrastructure and started feeling like something we had to constantly babysit.
 
 And it was quietly burning through our GitHub Actions minutes.
 
-#### Firebase's Next.js support had not kept up
+### Firebase's Next.js support had not kept up
 
 Firebase Hosting’s native Next.js integration works reasonably well for older versions of the framework, but [support for newer App Router features, React Server Components, and server actions is limited](https://firebase.google.com/docs/hosting/frameworks/nextjs).
 
-Every time we wanted to use something current, we had to check whether Firebase could handle it.
+Every time we wanted to use something up to date, we had to check whether Firebase could handle it.
 
-Usually the answer was *sort of, with caveats*.
+Usually, the answer was *sort of, with caveats*.
 
 That is not a position you want to be in.
 
@@ -125,7 +125,7 @@ Deploying from the monorepo root looks like this:
 cd apps/my-app && npx opennextjs-cloudflare build && npx opennextjs-cloudflare deploy
 ```
 
-We wrapped this in a `Makefile` so the commands stay short and consistent across all apps.
+We wrapped this in a `Makefile`, so the commands stay short and consistent across all apps.
 
 ---
 
@@ -192,7 +192,7 @@ This is easy to miss because `next dev` runs fine locally. The break only surfac
 
 ### 4. The 3 MiB free plan limit
 
-Cloudflare’s free plan has a 3 MiB gzip limit per worker. For simple apps this is fine. For anything with heavy dependencies such as Sentry server-side, complex auth libraries, or i18n, you will likely hit it.
+Cloudflare’s free plan has a 3 MiB gzip limit per worker. For simple apps, this is fine. For anything with heavy dependencies such as Sentry server-side, complex auth libraries, or i18n, you will likely hit it.
 
 The paid plan at $5 per month raises the limit to 10 MiB.
 
@@ -342,10 +342,10 @@ It gives every platform the same contract: a typed, versioned description of the
 
 Crucially, Vercel’s own adapter is built on this same public API. No private hooks. No undocumented behaviour.
 
-The [Next.js Across Platforms blog post](https://nextjs.org/blog/nextjs-across-platforms) is worth reading if you want the broader context.
+The [Next.js Across Platforms blog post](https://nextjs.org/blog/nextjs-across-platforms) is worth reading for the broader context.
 
 For Cloudflare specifically, a verified adapter built on this API is already in active development. Once it ships, the `@opennextjs/cloudflare` integration will sit on a stable, tested foundation that evolves with Next.js rather than chasing it.
 
-For developers, that means first-class Next.js features such as Partial Prerendering, Cache Components, and on-demand revalidation should eventually work consistently on Cloudflare Workers, documented and tested upstream.
+For developers, that means first-class Next.js features such as Partial Prerendering, Cache Components, and on-demand revalidation should eventually work consistently on Cloudflare Workers, with documentation and testing upstream.
 
 We are already on the platform. When the official adapter lands, migrating to it should be straightforward.
