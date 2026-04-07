@@ -8,7 +8,7 @@ import sitemap from '@astrojs/sitemap';
 
 import cloudflare from '@astrojs/cloudflare';
 
-import { visit } from 'unist-util-visit';
+import { visit, SKIP } from 'unist-util-visit';
 
 function rehypeWrapTables() {
   return (tree) => {
@@ -21,6 +21,7 @@ function rehypeWrapTables() {
           children: [node],
         };
         parent.children.splice(index, 1, wrapper);
+        return [SKIP, index];
       }
     });
   };
