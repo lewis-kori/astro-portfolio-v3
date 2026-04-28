@@ -50,7 +50,7 @@ That is practice.
 
 ---
 
-## "Gifted" Still Required Work
+## "Gifted" Still Requires Work
 
 I grew up being labeled the "gifted kid."
 
