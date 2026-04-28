@@ -72,7 +72,7 @@ Across my career, I have had to relearn how to work multiple times.
 
 I had to learn blockchain and ride the NFT wave when that became relevant to the market.  
 I had to learn Docker and Kubernetes during a major company migration when the stakes were real.  
-Now I am actively learning AI, not as a spectator, but as part of how modern engineering work is done.
+Now I am actively learning AI, not as a spectator, but as part of how modern engineering work gets done.
 
 None of those transitions felt effortless in real time.
 
