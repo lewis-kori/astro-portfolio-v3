@@ -1,5 +1,4 @@
 ---
-
 title: What Mentoring Keeps Teaching Me
 author: Lewis Kori
 tags: ["mentoring", "software engineering", "career development", "continuous learning", "technology"]
@@ -7,7 +6,7 @@ series: Building Better
 description: Reflections from mentoring young technologists on careers, fundamentals, uncertainty, building meaningful projects, and finding your own path in technology.
 dateCreated: 2026-08-27
 sponsors: []
-------------
+---
 
 ## What Mentoring Keeps Teaching Me
 
