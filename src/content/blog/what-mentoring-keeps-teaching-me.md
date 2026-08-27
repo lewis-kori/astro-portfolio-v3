@@ -8,8 +8,6 @@ dateCreated: 2026-08-27
 sponsors: []
 ---
 
-## What Mentoring Keeps Teaching Me
-
 Over the past year, mentoring students through [KamiLimu](https://www.kamilimu.org/) has put me in a lot of conversations with young people trying to find their place in technology.
 
 KamiLimu works with university students in Kenya, complementing what they learn in the classroom with mentorship, practical skills and exposure to people already working in the industry. I have had the privilege of helping lead its Software Engineering Foundations cohort and being a professional mentor, which has meant teaching technical concepts, reviewing projects and helping students think through what comes after university.
