@@ -8,7 +8,7 @@ tags: [photography, travel, creativity, personal-website, astro, DJI Osmo Pocket
 
 <figure class="my-10 overflow-hidden rounded-2xl border border-border bg-card">
   <video controls playsinline preload="metadata" poster="/videos/photography-journal-release-poster.png" class="block aspect-video w-full bg-black">
-    <source src="/videos/photography-journal-release.mp4" type="video/mp4" />
+    <source src="https://res.cloudinary.com/lewiskori/video/upload/v1790596095/blog/photography-journal-release_zqpzgp.mp4" type="video/mp4" />
     Your browser does not support embedded video.
   </video>
   <figcaption class="px-5 py-4 text-sm text-muted-foreground">
@@ -16,84 +16,164 @@ tags: [photography, travel, creativity, personal-website, astro, DJI Osmo Pocket
   </figcaption>
 </figure>
 
-I recently bought a **DJI Osmo Pocket 4P**.
+I recently bought a [DJI Osmo Pocket 4P](https://www.dji.com/global/osmo-pocket-4p).
 
-On the surface, it was simply a new camera. Something small enough to carry almost everywhere, capable enough to capture more than the occasional clip, and discreet enough not to turn every moment into a production.
+Part of the reason was pretty simple. I wanted something small enough to carry with me when I travel, but capable enough to shoot more intentionally than I normally would with my phone.
 
-But buying it made me think about something larger.
+I have always taken photos, mostly on my Google Pixel 9, but I have never really had a proper home for them.
 
-I have spent years using my website as a place for words. It holds technical articles, personal reflections, projects and the ideas I want to understand more clearly. Photography and video, however, have mostly lived elsewhere: on phones, hard drives, camera rolls and social platforms that are designed around the feed rather than the story.
+They end up on my phone, on hard drives, in camera rolls, or occasionally on social media.
 
-The Osmo made me want to change that.
+Buying the Osmo got me thinking about that.
+
+I have spent years using my website as a place for words. It holds technical articles, personal reflections, projects and ideas I am trying to understand more clearly.
+
+But photography and video have mostly lived somewhere else.
+
+I wanted to change that.
 
 ## A Reason to Look More Closely
 
-There is a difference between travelling somewhere and paying attention to it.
+One thing I like about carrying a camera is that it gives you a reason to pay attention.
 
-A camera can create that difference. It makes you notice how light moves across a building, how a street changes during the day, or how much of a place exists in the small moments between the obvious landmarks.
+You start noticing things you might otherwise walk past.
 
-I still use my **Google Pixel 9**, and I expect it will remain one of the cameras I reach for most often. The best camera is usually the one already in your hand. The Osmo adds something different: movement, intention and the ability to tell a story through more than a single frame.
+How the light hits a building.
 
-That combination made visual creativity feel more accessible to me. I did not need to become a professional filmmaker before I started. I only needed somewhere to practise, collect the work and let it improve over time.
+How a street changes at different times of the day.
+
+People going about their lives.
+
+Small details that probably would not make it into a list of places to visit, but somehow become the things you remember.
+
+I still expect my Pixel to be one of the cameras I use most often. The best camera is usually the one you already have with you.
+
+The Osmo gives me something slightly different.
+
+Movement. A little more intention. Another way of capturing what a place felt like rather than only what it looked like.
+
+More importantly, it made video feel accessible enough for me to actually practise it.
+
+I do not need to suddenly become a filmmaker.
+
+I can just start.
 
 ## The Website That Shifted My Thinking
 
-Paul Stamatiou's [photography archive](https://paulstamatiou.com/photos) was a huge inspiration for this project.
+A big inspiration for this was Paul Stamatiou's [photography archive](https://paulstamatiou.com/photos).
 
-What stayed with me was not only the quality of the photography. It was the way the work had been given structure. Continents became collections. Individual trips became chapters. Photographs could stand on their own, but they could also sit beside writing, location details and the story behind the journey.
+What I liked was not just the quality of the photography.
 
-His [Grand Cayman journal](https://paulstamatiou.com/photos/grand-cayman-island) especially helped me see the possibility of treating a travel entry like an essay rather than a gallery. The images do not merely illustrate the writing, and the writing does not simply explain the images. They move together.
+It was that he had actually given the work a home.
 
-I wanted that freedom on my own site.
+Trips were not buried somewhere in an Instagram feed. They had their own collections, pages, writing, location information and context.
 
-Not a replica, but a space shaped by the same idea: that visual work deserves more than an endless grid.
+His [Grand Cayman journal](https://paulstamatiou.com/photos/grand-cayman-island) especially made me think differently about what a travel journal on the web could be.
+
+It was not simply a gallery with some text underneath it.
+
+The photographs and the writing were part of the same story.
+
+I realised I wanted something similar on my own site.
+
+Not a copy of what he had built, but the same general idea that photography deserves more than an endless grid of images.
 
 ## Building Journeys, Not Albums
 
-The new photography section begins with collections. Africa is the first and most developed, with room for journals from **Namibia, Zanzibar and Cape Town**. Asia begins with the **United Arab Emirates**. The structure can grow slowly as the experiences and the work catch up with it.
+The photography section on my site starts with collections.
 
-Each trip is written in MDX, the same content-first approach I use elsewhere on the site. That means a journal can move naturally between:
+Africa is the first one I have spent time structuring, with room for journals from Namibia, Zanzibar and Cape Town. Asia currently begins with the United Arab Emirates.
+
+The nice thing is that there is no pressure for the archive to feel complete.
+
+It can grow as I travel, take more photos and get better at the craft.
+
+Each trip is written in MDX, which is the same content-first approach I already use elsewhere on the site.
+
+That gives me enough flexibility to combine things like:
 
 - Long-form writing
 - Full-width photographs
-- Two images placed beside each other
+- Images placed beside each other
 - Small editorial grids
 - Video
-- Captions and camera metadata
+- Captions and camera information
 
-Dates are optional. So are the technical details. A photograph can include its camera, lens, location and the day it was made when that context adds something. When it does not, the image can simply breathe.
+The technical details are optional.
 
-The photos also open into a lightbox with keyboard, button and swipe navigation. I wanted browsing to feel considered on a large screen without becoming awkward on a phone.
+A photograph can include the camera, lens, location or date when that information adds something.
 
-For photographs that do not belong to a particular journey, there is a separate photostream. Some images are part of a story. Others are simply moments worth keeping.
+When it does not, it can just be a photograph.
+
+Images also open into a lightbox with keyboard, button and swipe navigation. I wanted the experience to feel considered on a large screen while still working naturally on a phone.
+
+There is also a separate photostream for images that do not belong to a specific journey.
+
+Some photos are part of a larger story.
+
+Others are just moments I wanted to keep.
 
 ## Owning the Creative Space
 
-Social platforms are useful for discovery, but they are poor archives.
+I still enjoy social media, and I will probably continue sharing photographs there.
 
-They compress the work, flatten its context and place every image inside the same template. More importantly, they encourage speed. Post it, watch it move through the feed, then replace it with the next thing.
+But I do not think social platforms are particularly good archives.
 
-I want this section to operate at a different pace.
+Everything eventually becomes another item in a feed.
 
-There is no requirement for every trip to become content immediately. A journal can take shape after I have returned home, reviewed the images and understood what the experience meant to me. It can combine photographs from the Pixel with moving images from the Osmo. It can be updated when I find a better frame or remember a detail I initially missed.
+You post something, people see it for a while, and then everyone moves on to the next thing.
 
-That is the advantage of building on a space I own. The work does not have to be finished before it is allowed to exist, and it does not become irrelevant after a day.
+A website can move at a different pace.
+
+A trip does not have to become content while I am still on it.
+
+I can come home, look through the photographs again, think about what I actually want to say, and build the journal afterwards.
+
+I can mix photos from my Pixel with video from the Osmo.
+
+I can come back months later and add an image I initially overlooked.
+
+I can rewrite something after understanding the experience differently.
+
+That is probably what I like most about having a space I own.
+
+The work does not need to disappear simply because the feed has moved on.
 
 ## Another Way of Remembering
 
 I have always used writing to make sense of my experiences.
 
-This is an attempt to widen that practice.
+This feels like an extension of that.
 
-Some memories arrive as sentences. Others return as colour, movement, weather, faces and the particular quality of light in a place you may never see in quite the same way again.
+Sometimes the thing I remember about a trip is a conversation or an idea that eventually becomes something I write about.
 
-The new journal gives both forms somewhere to meet.
+Other times it is much simpler.
 
-I am starting with a few collections and plenty of empty space. That feels right. The point is not to manufacture a catalogue of places I have been. It is to become more attentive while I am there, more deliberate about what I make, and better at preserving the feeling of a journey once it is over.
+A road.
 
-The Osmo may have prompted the idea, but the camera is only the beginning.
+A building.
 
-The real project is learning to see.
+The weather.
+
+A particular view.
+
+A random moment that would be difficult to explain properly with words.
+
+Photography gives me another way to keep those things.
+
+The Osmo might have been what pushed me to finally build this, but I think the more interesting part will be what happens after.
+
+Taking more photos.
+
+Shooting more video.
+
+Paying closer attention when I travel.
+
+And having somewhere of my own to keep all of it.
+
+For now, there are only a few collections and quite a lot of empty space.
+
+I like that.
 
 ---
 
