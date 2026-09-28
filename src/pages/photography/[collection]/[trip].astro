@@ -12,7 +12,7 @@ export async function getStaticPaths() {
   const activeCollectionSlugs = new Set(collections.map((collection) => collection.slug));
   const journals = await getCollection(
     'photoJournals',
-    ({ data }) => activeCollectionSlugs.has(data.collection),
+    ({ data }) => activeCollectionSlugs.has(data.collection) && !data.draft,
   );
   return journals.map((journal) => ({
     params: {

@@ -16,7 +16,7 @@ export function getStaticPaths() {
 const { collection } = Astro.props;
 const journals = (await getCollection(
   'photoJournals',
-  ({ data }) => data.collection === collection.slug,
+  ({ data }) => data.collection === collection.slug && !data.draft,
 )).sort((a, b) => {
   const aTime = a.data.startDate?.getTime() || 0;
   const bTime = b.data.startDate?.getTime() || 0;

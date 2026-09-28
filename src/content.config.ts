@@ -124,6 +124,7 @@ const photoJournals = defineCollection({
     canonicalUrl: z.string().url().optional(),
     noindex: z.boolean().default(false),
     featured: z.boolean().default(false),
+    draft: z.boolean().default(false),
   }),
 });
 

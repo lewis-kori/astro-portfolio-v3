@@ -8,7 +8,7 @@ const featured = collections[0];
 const activeCollectionSlugs = new Set(collections.map((collection) => collection.slug));
 const journals = await getCollection(
   'photoJournals',
-  ({ data }) => activeCollectionSlugs.has(data.collection),
+  ({ data }) => activeCollectionSlugs.has(data.collection) && !data.draft,
 );
 const tripCount = journals.length;
 const journalCount = (slug: string) => journals.filter((journal) => journal.data.collection === slug).length;
@@ -34,7 +34,7 @@ const journalCount = (slug: string) => journals.filter((journal) => journal.data
         </div>
         <div class='md:pb-2'>
           <p class='max-w-md text-base leading-relaxed text-muted-foreground md:text-lg'>
-            A home for photographs made while moving and while standing still—organized as journeys, remembered as light.
+            A home for photographs from the places I go and the moments I want to remember.
           </p>
           <div class='mt-8 flex gap-8 border-t border-border/80 pt-5 text-xs uppercase tracking-[0.16em] text-muted-foreground'>
             <span><strong class='mr-2 text-foreground'>{collections.length}</strong> Collections</span>
