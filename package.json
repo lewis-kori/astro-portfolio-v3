@@ -12,7 +12,7 @@
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.13",
     "@astrojs/mdx": "^4.3.14",
-    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^5.18.2",
     "astro-expressive-code": "^0.44.1",
