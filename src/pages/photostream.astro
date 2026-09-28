@@ -1,0 +1,72 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PhotographyHeader from '@/components/photography/PhotographyHeader.astro';
+import PhotoLightbox from '@/components/photography/PhotoLightbox.astro';
+import { photostream } from '@/data/photography';
+---
+
+<Layout
+  title='Photostream – Lewis Kori'
+  description='Unassigned frames, visual studies and passing moments photographed by Lewis Kori.'
+  ogTitle='Photostream — Photography by Lewis Kori'
+  image={photostream[0].src}
+>
+  <div class='container-fluid pb-24 pt-4'>
+    <PhotographyHeader active='stream' />
+
+    <header class='grid gap-8 py-14 md:grid-cols-[1.2fr_.8fr] md:items-end md:py-24'>
+      <div>
+        <p class='mb-5 text-[.67rem] font-bold uppercase tracking-[.2em] text-muted-foreground'>Unsorted / Unhurried / Ongoing</p>
+        <h1 class='text-5xl font-semibold leading-[.95] tracking-[-.055em] sm:text-7xl lg:text-[6.5rem]'>Photostream.</h1>
+      </div>
+      <p class='max-w-md text-base leading-relaxed text-muted-foreground md:pb-2 md:text-lg'>
+        Images without an itinerary. A living wall of colour, texture and moments that asked to be remembered.
+      </p>
+    </header>
+
+    <section class='photo-masonry' aria-label='Photostream gallery'>
+      {photostream.map((photo, index) => (
+        <button
+          data-lightbox
+          data-full={photo.src}
+          data-alt={photo.alt}
+          data-caption={photo.caption || photo.location || photo.alt}
+          data-title={photo.title || photo.caption || photo.alt}
+          data-date={photo.takenAt}
+          data-camera={photo.camera}
+          data-lens={photo.lens}
+          data-location={photo.location}
+          class='photo-tile group mb-3 w-full cursor-zoom-in overflow-hidden rounded-xl bg-muted text-left md:mb-4 md:rounded-2xl'
+        >
+          <img
+            src={photo.src}
+            alt={photo.alt}
+            loading={index < 4 ? 'eager' : 'lazy'}
+            class:list={[
+              'w-full object-cover transition duration-700 group-hover:scale-[1.025]',
+              photo.aspect === 'portrait' ? 'aspect-[4/5]' : photo.aspect === 'square' ? 'aspect-square' : photo.aspect === 'wide' ? 'aspect-[16/9]' : 'aspect-[4/3]',
+            ]}
+          />
+          <span class='pointer-events-none absolute bottom-3 left-3 right-3 flex translate-y-2 items-center justify-between rounded-xl bg-black/45 px-3 py-2 text-[.68rem] text-white opacity-0 backdrop-blur-md transition duration-300 group-hover:translate-y-0 group-hover:opacity-100'>
+            <span>{photo.location || photo.alt}</span><span>Expand ↗</span>
+          </span>
+        </button>
+      ))}
+    </section>
+
+    <div class='mt-16 border-t border-border pt-8 text-center'>
+      <p class='text-sm text-muted-foreground'>The stream grows one frame at a time.</p>
+      <a href='/photography' class='mt-4 inline-flex items-center gap-2 text-sm font-semibold hover:text-secondary'>Explore the journeys <span>→</span></a>
+    </div>
+  </div>
+
+  <PhotoLightbox />
+</Layout>
+
+<style>
+  .photo-masonry { columns: 1; column-gap: .75rem; }
+  .photo-tile { position: relative; display: inline-block; break-inside: avoid; }
+  @media (min-width: 640px) { .photo-masonry { columns: 2; column-gap: 1rem; } }
+  @media (min-width: 1024px) { .photo-masonry { columns: 3; } }
+  @media (prefers-reduced-motion: reduce) { .photo-tile img { transition: none; } }
+</style>

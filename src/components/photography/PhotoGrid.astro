@@ -1,0 +1,45 @@
+---
+import type { Photo } from '@/data/photography';
+
+interface Props {
+  photos: Photo[];
+  layout?: 'mosaic' | 'equal';
+  caption?: string;
+}
+
+const { photos, layout = 'mosaic', caption } = Astro.props;
+---
+
+<figure class:list={['journal-media my-10 md:my-16', layout === 'mosaic' ? 'photo-mosaic' : 'photo-equal']}>
+  <div class='photo-grid'>
+    {photos.map((photo, index) => (
+      <button
+        data-lightbox
+        data-full={photo.src}
+        data-alt={photo.alt}
+        data-caption={photo.caption || photo.location || photo.alt}
+        data-title={photo.title || photo.caption || photo.alt}
+        data-date={photo.takenAt}
+        data-camera={photo.camera}
+        data-lens={photo.lens}
+        data-location={photo.location}
+        class={`photo-grid-item photo-grid-item-${index + 1} group relative min-h-64 cursor-zoom-in overflow-hidden bg-muted text-left`}
+      >
+        <img src={photo.src} alt={photo.alt} loading='lazy' class='size-full object-cover transition duration-700 group-hover:scale-[1.025]' />
+        <span class='absolute bottom-3 right-3 grid size-8 place-items-center rounded-full bg-black/35 text-xs text-white opacity-0 backdrop-blur-md transition group-hover:opacity-100'>↗</span>
+      </button>
+    ))}
+  </div>
+  {caption && <figcaption class='mt-3 text-xs text-muted-foreground'>{caption}</figcaption>}
+</figure>
+
+<style>
+  .photo-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: .25rem; overflow: hidden; border-radius: 1rem; }
+  .photo-grid-item { grid-column: span 6; height: clamp(18rem, 34vw, 31rem); }
+  .photo-mosaic .photo-grid-item:nth-child(4n + 1), .photo-mosaic .photo-grid-item:nth-child(4n + 4) { grid-column: span 7; }
+  .photo-mosaic .photo-grid-item:nth-child(4n + 2), .photo-mosaic .photo-grid-item:nth-child(4n + 3) { grid-column: span 5; }
+  @media (max-width: 639px) {
+    .photo-grid { grid-template-columns: 1fr; }
+    .photo-grid-item, .photo-mosaic .photo-grid-item:nth-child(n) { grid-column: 1; height: 20rem; }
+  }
+</style>

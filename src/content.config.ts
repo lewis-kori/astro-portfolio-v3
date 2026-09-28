@@ -91,6 +91,43 @@ const blog = defineCollection({
   }),
 });
 
+const photoJournals = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string(),
+    description: z.string(),
+    collection: z.string(),
+    place: z.string(),
+    days: z.number().optional(),
+    nights: z.number().optional(),
+    startDate: z.coerce.date().optional(),
+    endDate: z.coerce.date().optional(),
+    dateLabel: z.string().optional(),
+    dateModified: z.coerce.date().optional(),
+    author: z.string().default('Lewis Kori'),
+    tags: z.array(z.string()).default([]),
+    cover: z.object({
+      src: z.string(),
+      alt: z.string(),
+      title: z.string().optional(),
+      caption: z.string().optional(),
+      location: z.string().optional(),
+      takenAt: z.string().optional(),
+      camera: z.string().optional(),
+      lens: z.string().optional(),
+      aspect: z.enum(['portrait', 'landscape', 'square', 'wide']).optional(),
+    }),
+    galleryImages: z.array(z.string()).default([]),
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
+    canonicalUrl: z.string().url().optional(),
+    noindex: z.boolean().default(false),
+    featured: z.boolean().default(false),
+    draft: z.boolean().default(false),
+  }),
+});
+
 const experience = defineCollection({
   type: 'content',
   schema: z.object({
@@ -141,5 +178,6 @@ export const collections = {
   experience,
   projects,
   blog,
+  photoJournals,
   sponsors,
 };
