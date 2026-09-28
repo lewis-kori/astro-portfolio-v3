@@ -1,0 +1,100 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PhotographyHeader from '@/components/photography/PhotographyHeader.astro';
+import { collections } from '@/data/photography';
+import { getCollection } from 'astro:content';
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  return collections.map((collection) => ({
+    params: { collection: collection.slug },
+    props: { collection },
+  }));
+}
+
+const { collection } = Astro.props;
+const journals = (await getCollection(
+  'photoJournals',
+  ({ data }) => data.collection === collection.slug,
+)).sort((a, b) => {
+  const aTime = a.data.startDate?.getTime() || 0;
+  const bTime = b.data.startDate?.getTime() || 0;
+  return bTime - aTime || a.data.title.localeCompare(b.data.title);
+});
+const journalSlug = (id: string) => id.replace(/\.mdx?$/, '');
+const formatCardDate = (journal: (typeof journals)[number]) => {
+  if (journal.data.dateLabel) return journal.data.dateLabel;
+  if (!journal.data.startDate) return '';
+
+  const format = (date: Date) =>
+    new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric' }).format(date);
+
+  return journal.data.endDate
+    ? `${format(journal.data.startDate)} — ${format(journal.data.endDate)}`
+    : format(journal.data.startDate);
+};
+---
+
+<Layout
+  title={`${collection.title} Photography – Lewis Kori`}
+  description={collection.description}
+  image={collection.cover.src}
+  breadcrumbs={[
+    { name: 'Photography', item: new URL('/photography', Astro.url).href },
+    { name: collection.title, item: Astro.url.href },
+  ]}
+>
+  <div class='container-fluid pt-4'>
+    <PhotographyHeader />
+
+    <section class='py-8 md:py-14'>
+      <a href='/photography' class='mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[.16em] text-muted-foreground hover:text-foreground'>
+        <span>←</span> All journeys
+      </a>
+      <div class='relative min-h-[36rem] overflow-hidden rounded-[1.75rem] bg-card md:min-h-[48rem]'>
+        <img src={collection.cover.src} alt={collection.cover.alt} class='absolute inset-0 size-full object-cover' fetchpriority='high' />
+        <div class='absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-black/15'></div>
+        <div class='absolute inset-x-0 bottom-0 p-7 text-white sm:p-10 md:p-14'>
+          <p class='mb-3 text-xs font-semibold uppercase tracking-[.2em] text-white/65'>{collection.eyebrow}</p>
+          <h1 class='text-5xl font-semibold tracking-[-.05em] sm:text-7xl md:text-8xl'>{collection.title}</h1>
+          <div class='mt-7 grid gap-5 border-t border-white/25 pt-6 md:grid-cols-[1fr_auto] md:items-end'>
+            <p class='max-w-2xl text-sm leading-relaxed text-white/75 sm:text-base'>{collection.description}</p>
+            <div class='flex gap-6 text-xs uppercase tracking-[.14em] text-white/65'>
+              <span>{journals.length} journals</span>
+              <span>{collection.cover.location}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class='pb-20 md:pb-28' aria-labelledby='journal-title'>
+      <div class='mb-7 flex items-end justify-between gap-4'>
+        <div>
+          <p class='mb-2 text-[.67rem] font-bold uppercase tracking-[.2em] text-muted-foreground'>Inside the collection</p>
+          <h2 id='journal-title' class='text-2xl font-semibold tracking-tight md:text-3xl'>Travel journals</h2>
+        </div>
+        <span class='text-xs text-muted-foreground'>Select a chapter</span>
+      </div>
+      <div class='overflow-hidden rounded-[1.5rem] border border-border/70 bg-card'>
+        {journals.map((journal, index) => (
+          <a href={`/photography/${collection.slug}/${journalSlug(journal.id)}`} class='trip-row group relative grid min-h-56 overflow-hidden border-b border-white/10 last:border-0 md:min-h-64'>
+            <img src={journal.data.cover.src} alt='' loading='lazy' class='absolute inset-0 size-full object-cover transition duration-700 group-hover:scale-[1.025]' />
+            <div class='absolute inset-0 bg-gradient-to-r from-black/85 via-black/40 to-black/10 transition duration-500 group-hover:from-black/75'></div>
+            <div class='relative flex items-end justify-between gap-6 p-7 text-white md:p-10'>
+              <div>
+                <p class='mb-3 text-[.65rem] font-semibold uppercase tracking-[.2em] text-white/55'>
+                  Chapter {String(index + 1).padStart(2, '0')} · {journal.data.place}{formatCardDate(journal) && ` · ${formatCardDate(journal)}`}
+                </p>
+                <h3 class='text-3xl font-semibold tracking-[-.035em] md:text-5xl'>{journal.data.title}</h3>
+                <p class='mt-2 max-w-xl text-sm text-white/70 md:text-base'>{journal.data.subtitle}</p>
+              </div>
+              <span class='grid size-11 shrink-0 place-items-center rounded-full border border-white/30 bg-black/10 text-lg backdrop-blur-sm transition group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:bg-white group-hover:text-black'>↗</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+</Layout>

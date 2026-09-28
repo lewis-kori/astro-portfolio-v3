@@ -1,0 +1,31 @@
+---
+title: United Arab Emirates
+subtitle: Glass, desert light and cities built toward the future.
+description: City geometry, desert light and the contrast between Dubai and Abu Dhabi.
+collection: asia
+place: United Arab Emirates
+dateLabel: City & desert
+author: Lewis Kori
+tags: [United Arab Emirates, Dubai, Abu Dhabi, Asia, Travel Photography]
+cover:
+  src: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2200&q=88"
+  alt: Dubai skyline at dusk
+  location: Dubai, UAE
+  camera: DJI Osmo Pocket 4P
+  aspect: wide
+galleryImages:
+  - "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1800&q=88"
+  - "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1800&q=88"
+noindex: true
+---
+
+import PhotoGrid from '@/components/photography/PhotoGrid.astro';
+
+A visual journal moving between Dubai, Abu Dhabi and the desert landscapes that connect them.
+
+## City and desert
+
+<PhotoGrid layout="mosaic" photos={[
+  { src: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1800&q=88', alt: 'Dubai skyline in evening light', camera: 'DJI Osmo Pocket 4P', location: 'Dubai, UAE' },
+  { src: 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1800&q=88', alt: 'Desert dunes beyond the city', camera: 'Google Pixel 9', location: 'United Arab Emirates' },
+]} />

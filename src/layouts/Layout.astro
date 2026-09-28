@@ -23,6 +23,11 @@ interface Props {
   canonical?: string;
   breadcrumbs?: Array<{ name: string; item: string }>;
   keywords?: string[];
+  articleType?: 'Article' | 'BlogPosting';
+  galleryImages?: string[];
+  contentLocation?: string;
+  temporalCoverage?: string;
+  noindex?: boolean;
 }
 
 const siteName = 'Lewis Kori – Entrepreneur, Product Builder, Operator';
@@ -45,6 +50,11 @@ const {
   canonical,
   breadcrumbs,
   keywords,
+  articleType = 'Article',
+  galleryImages = [],
+  contentLocation,
+  temporalCoverage,
+  noindex = false,
 } = Astro.props;
 
 const pageTitle = title;
@@ -72,6 +82,7 @@ const isDefaultOgImage = image === defaultOgImage;
     <!-- SEO Meta Tags -->
     <meta name='description' content={description} />
     <meta name='author' content={author} />
+    {noindex && <meta name='robots' content='noindex, nofollow' />}
     {keywords && keywords.length > 0 && (
       <meta name='keywords' content={keywords.join(', ')} />
     )}
@@ -79,7 +90,7 @@ const isDefaultOgImage = image === defaultOgImage;
     <!-- Open Graph / Facebook -->
     <meta property='og:type' content={type} />
     <meta property='og:locale' content='en_US' />
-    <meta property='og:url' content={Astro.url} />
+    <meta property='og:url' content={canonicalUrl} />
     <meta property='og:title' content={openGraphTitle} />
     <meta property='og:description' content={openGraphDescription} />
     <meta property='og:image' content={image} />
@@ -104,7 +115,7 @@ const isDefaultOgImage = image === defaultOgImage;
     <meta name='twitter:card' content='summary_large_image' />
     <meta name='twitter:site' content='@lewis_kihiu' />
     <meta name='twitter:creator' content='@lewis_kihiu' />
-    <meta name='twitter:url' content={Astro.url} />
+    <meta name='twitter:url' content={canonicalUrl} />
     <meta name='twitter:title' content={openGraphTitle} />
     <meta name='twitter:description' content={openGraphDescription} />
     <meta name='twitter:image' content={image} />
@@ -174,11 +185,11 @@ const isDefaultOgImage = image === defaultOgImage;
           },
           type === 'article' && publishedTime
             ? {
-                '@type': 'Article',
+                '@type': articleType,
                 '@id': `${Astro.url}#article`,
                 headline: openGraphTitle,
                 description: openGraphDescription,
-                image: image,
+                image: galleryImages.length > 0 ? galleryImages : image,
                 datePublished: publishedTime,
                 dateModified: modifiedTime || publishedTime,
                 author: {
@@ -191,6 +202,13 @@ const isDefaultOgImage = image === defaultOgImage;
                   '@type': 'WebPage',
                   '@id': Astro.url,
                 },
+                ...(contentLocation && {
+                  contentLocation: {
+                    '@type': 'Place',
+                    name: contentLocation,
+                  },
+                }),
+                ...(temporalCoverage && { temporalCoverage }),
                 ...(keywords && keywords.length > 0 && {
                   keywords: keywords.join(', '),
                   articleSection: keywords[0],
@@ -211,6 +229,25 @@ const isDefaultOgImage = image === defaultOgImage;
                 },
                 inLanguage: 'en-US',
               },
+          ...(galleryImages.length > 0
+            ? [
+                {
+                  '@type': 'ImageGallery',
+                  '@id': `${canonical || Astro.url}#gallery`,
+                  name: `${openGraphTitle} photo gallery`,
+                  description: openGraphDescription,
+                  image: galleryImages.map((url) => ({
+                    '@type': 'ImageObject',
+                    contentUrl: url,
+                  })),
+                  isPartOf: {
+                    '@id': type === 'article' && publishedTime
+                      ? `${Astro.url}#article`
+                      : `${Astro.url}#webpage`,
+                  },
+                },
+              ]
+            : []),
           ...(breadcrumbs && breadcrumbs.length > 0
             ? [
                 {

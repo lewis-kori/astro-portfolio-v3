@@ -1,0 +1,143 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PhotographyHeader from '@/components/photography/PhotographyHeader.astro';
+import PhotoLightbox from '@/components/photography/PhotoLightbox.astro';
+import { collections, getCollectionBySlug } from '@/data/photography';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { SITE_URL } from '@/lib/env';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const activeCollectionSlugs = new Set(collections.map((collection) => collection.slug));
+  const journals = await getCollection(
+    'photoJournals',
+    ({ data }) => activeCollectionSlugs.has(data.collection),
+  );
+  return journals.map((journal) => ({
+    params: {
+      collection: journal.data.collection,
+      trip: journal.id.replace(/\.mdx?$/, ''),
+    },
+    props: { journal },
+  }));
+}
+
+interface Props {
+  journal: CollectionEntry<'photoJournals'>;
+}
+
+const { journal } = Astro.props;
+const collection = getCollectionBySlug(journal.data.collection);
+if (!collection) return Astro.redirect('/404');
+
+const { Content } = await render(journal);
+const data = journal.data;
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat('en', { day: 'numeric', month: 'short', year: 'numeric' }).format(date);
+const dateRange = data.dateLabel || (
+  data.startDate && data.endDate
+    ? `${formatDate(data.startDate)} — ${formatDate(data.endDate)}`
+    : data.startDate
+      ? formatDate(data.startDate)
+      : 'Undated journal'
+);
+const absoluteImage = (src: string) => src.startsWith('http') ? src : new URL(src, SITE_URL).href;
+const galleryImages = [data.cover.src, ...data.galleryImages].map(absoluteImage);
+const temporalCoverage = data.startDate
+  ? `${data.startDate.toISOString().slice(0, 10)}/${(data.endDate || data.startDate).toISOString().slice(0, 10)}`
+  : undefined;
+---
+
+<Layout
+  title={data.seoTitle || `${data.title} – ${collection.title} Photography`}
+  description={data.seoDescription || data.description}
+  ogTitle={data.title}
+  ogDescription={data.seoDescription || data.description}
+  image={absoluteImage(data.cover.src)}
+  type='article'
+  articleType='BlogPosting'
+  author={data.author}
+  publishedTime={data.startDate?.toISOString()}
+  modifiedTime={data.dateModified?.toISOString()}
+  canonical={data.canonicalUrl}
+  keywords={data.tags}
+  galleryImages={galleryImages}
+  contentLocation={data.place}
+  temporalCoverage={temporalCoverage}
+  noindex={data.noindex}
+  breadcrumbs={[
+    { name: 'Photography', item: new URL('/photography', Astro.url).href },
+    { name: collection.title, item: new URL(`/photography/${collection.slug}`, Astro.url).href },
+    { name: data.title, item: Astro.url.href },
+  ]}
+>
+  <div class='container-fluid pt-4'>
+    <PhotographyHeader />
+  </div>
+
+  <article class='pb-24'>
+    <header class='container-fluid py-8 md:py-14'>
+      <a href={`/photography/${collection.slug}`} class='mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[.16em] text-muted-foreground hover:text-foreground'>
+        <span>←</span> {collection.title}
+      </a>
+      <button
+        data-lightbox
+        data-full={data.cover.src}
+        data-alt={data.cover.alt}
+        data-caption={data.cover.caption || data.cover.location}
+        data-title={data.cover.title || data.title}
+        data-date={data.cover.takenAt || dateRange}
+        data-camera={data.cover.camera}
+        data-lens={data.cover.lens}
+        data-location={data.cover.location || data.place}
+        class='group relative block min-h-[35rem] w-full cursor-zoom-in overflow-hidden rounded-[1.75rem] text-left md:min-h-[50rem]'
+      >
+        <img src={data.cover.src} alt={data.cover.alt} class='absolute inset-0 size-full object-cover transition duration-1000 group-hover:scale-[1.02]' fetchpriority='high' />
+        <div class='absolute inset-0 bg-gradient-to-t from-black/90 via-black/5 to-black/10'></div>
+        <div class='absolute inset-x-0 bottom-0 p-7 text-white sm:p-10 md:p-14'>
+          <p class='mb-4 text-xs font-semibold uppercase tracking-[.2em] text-white/60'>{data.place} · {dateRange}</p>
+          <h1 class='max-w-5xl text-5xl font-semibold leading-[.95] tracking-[-.055em] sm:text-7xl md:text-8xl'>{data.title}</h1>
+          <p class='mt-5 max-w-2xl text-base leading-relaxed text-white/75 md:text-lg'>{data.subtitle}</p>
+          <div class='mt-8 flex flex-wrap gap-7 border-t border-white/25 pt-5 text-xs uppercase tracking-[.15em] text-white/65'>
+            {data.days && <span>{data.days} days</span>}
+            {data.nights && <span>{data.nights} nights</span>}
+            {galleryImages.length > 1 && <span>{galleryImages.length} frames</span>}
+            <span class='hidden sm:inline'>Tap images to expand</span>
+          </div>
+        </div>
+      </button>
+    </header>
+
+    <div class='photo-journal-copy'>
+      <Content />
+    </div>
+
+    <footer class='container-fluid mt-16 md:mt-24'>
+      <a href={`/photography/${collection.slug}`} class='group grid gap-4 rounded-2xl border border-border bg-card p-6 transition hover:border-foreground/30 sm:grid-cols-[1fr_auto] sm:items-center md:p-9'>
+        <div>
+          <p class='mb-2 text-[.67rem] font-bold uppercase tracking-[.2em] text-muted-foreground'>Back to collection</p>
+          <h2 class='text-3xl font-semibold tracking-[-.04em]'>{collection.title}</h2>
+        </div>
+        <span class='text-2xl transition group-hover:translate-x-1'>→</span>
+      </a>
+    </footer>
+  </article>
+
+  <PhotoLightbox />
+</Layout>
+
+<style is:global>
+  .photo-journal-copy > :not(.journal-media) { width: min(calc(100% - 2rem), 46rem); margin-inline: auto; }
+  .photo-journal-copy > .journal-media { width: min(calc(100% - 2rem), 72rem); margin-inline: auto; }
+  .photo-journal-copy > .journal-content-media { width: min(calc(100% - 2rem), 46rem); }
+  .photo-journal-copy > .journal-full-media { width: 100%; max-width: none; }
+  .photo-journal-copy h2 { margin-top: 6rem; margin-bottom: 1.5rem; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 650; line-height: 1.05; letter-spacing: -.04em; }
+  .photo-journal-copy h3 { margin-top: 3.5rem; margin-bottom: 1rem; font-size: clamp(1.35rem, 2.2vw, 2rem); font-weight: 650; letter-spacing: -.025em; }
+  .photo-journal-copy p { margin-block: 1.35rem; color: var(--muted-foreground); font-size: clamp(1.05rem, 1.5vw, 1.2rem); line-height: 1.9; }
+  .photo-journal-copy > p:first-child { margin-top: 3rem; color: var(--foreground); font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 500; line-height: 1.4; letter-spacing: -.025em; }
+  .photo-journal-copy blockquote { margin-block: 4rem; border-left: 3px solid var(--secondary); padding: 1rem 0 1rem 2rem; }
+  .photo-journal-copy blockquote p { color: var(--foreground); font-size: clamp(1.35rem, 2.5vw, 2rem); line-height: 1.45; }
+  .photo-journal-copy a { color: var(--secondary); text-decoration: underline; text-underline-offset: .2em; }
+  .photo-journal-copy hr { margin-block: 5rem; border-color: var(--border); }
+</style>

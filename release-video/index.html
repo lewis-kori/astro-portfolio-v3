@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #000;
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #FFFFFF;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-la9c" id="root" data-composition-id="main" data-start="0" data-duration="42" data-width="1920" data-height="1080">
+      <div data-hf-id="hf-2al7" id="el-01-some-journeys-stay" class="scene" data-composition-id="01-some-journeys-stay" data-composition-src="compositions/frames/01-some-journeys-stay.html" data-start="0" data-duration="5.5" data-track-index="0"></div>
+
+      <div data-hf-id="hf-5swi" id="el-02-a-space-of-my-own" class="scene" data-composition-id="02-a-space-of-my-own" data-composition-src="compositions/frames/02-a-space-of-my-own.html" data-start="5" data-duration="6.6" data-track-index="1"></div>
+
+      <div data-hf-id="hf-90d7" id="el-03-journeys-become-chapters" class="scene" data-composition-id="03-journeys-become-chapters" data-composition-src="compositions/frames/03-journeys-become-chapters.html" data-start="11" data-duration="8.55" data-track-index="0"></div>
+
+      <div data-hf-id="hf-l4wp" id="el-04-more-than-a-gallery" class="scene" data-composition-id="04-more-than-a-gallery" data-composition-src="compositions/frames/04-more-than-a-gallery.html" data-start="19" data-duration="9.45" data-track-index="1"></div>
+
+      <div data-hf-id="hf-c0y0" id="el-05-no-itinerary-required" class="scene" data-composition-id="05-no-itinerary-required" data-composition-src="compositions/frames/05-no-itinerary-required.html" data-start="28" data-duration="7.65" data-track-index="0"></div>
+
+      <div data-hf-id="hf-9yvk" id="el-06-remember-how-it-felt" class="scene" data-composition-id="06-remember-how-it-felt" data-composition-src="compositions/frames/06-remember-how-it-felt.html" data-start="35" data-duration="7" data-track-index="1"></div>
+
+      <audio
+        id="travel-film-score"
+        class="clip"
+        src=".media/audio/bgm/bgm_001.mp3"
+        data-start="0"
+        data-duration="42"
+        data-track-index="10"
+        data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0},{"t":1.8,"v":0.2},{"t":35,"v":0.2},{"t":39,"v":0.16},{"t":42,"v":0}]}]}'
+      ></audio>
+
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+      // ── frame transitions (injected by transitions.mjs) ──
+      (function () { var tl = window.__timelines["main"];
+        tl.to("#el-01-some-journeys-stay", { filter: "blur(10px)", scale: 1.03, opacity: 0, duration: 0.5, ease: "power2.inOut" }, 5);
+        tl.fromTo("#el-02-a-space-of-my-own", { filter: "blur(10px)", scale: 0.97, opacity: 0 }, { filter: "blur(0px)", scale: 1, opacity: 1, duration: 0.5, ease: "power2.inOut" }, 5);
+        tl.to("#el-02-a-space-of-my-own", { scale: 2.5, opacity: 0, filter: "blur(8px)", duration: 0.6, ease: "power3.in" }, 11);
+        tl.fromTo("#el-03-journeys-become-chapters", { scale: 0.5, opacity: 0, filter: "blur(8px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.6, ease: "power3.out" }, 11);
+        tl.to("#el-03-journeys-become-chapters", { y: -1080, duration: 0.55, ease: "power3.inOut" }, 19);
+        tl.fromTo("#el-04-more-than-a-gallery", { y: 1080, opacity: 1 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.inOut" }, 19);
+        tl.to("#el-04-more-than-a-gallery", { opacity: 0, duration: 0.45, ease: "power2.inOut" }, 28);
+        tl.fromTo("#el-05-no-itinerary-required", { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.inOut" }, 28);
+        tl.to("#el-05-no-itinerary-required", { filter: "blur(10px)", scale: 1.03, opacity: 0, duration: 0.65, ease: "power2.inOut" }, 35);
+        tl.fromTo("#el-06-remember-how-it-felt", { filter: "blur(10px)", scale: 0.97, opacity: 0 }, { filter: "blur(0px)", scale: 1, opacity: 1, duration: 0.65, ease: "power2.inOut" }, 35);
+        tl.to({}, { duration: 42 }, 0); // full-span anchor — main.duration() == composition total (Studio master duration)
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+---
+interface Props {
+  src: string;
+  title: string;
+  poster?: string;
+  caption?: string;
+  muted?: boolean;
+  loop?: boolean;
+}
+
+const { src, title, poster, caption, muted = false, loop = false } = Astro.props;
+---
+
+<figure class='journal-media my-10 md:my-16'>
+  <div class='overflow-hidden rounded-xl bg-black md:rounded-2xl'>
+    <video controls playsinline preload='metadata' {poster} {muted} {loop} aria-label={title} class='aspect-video w-full bg-black object-contain'>
+      <source {src} />
+      Your browser does not support HTML video.
+    </video>
+  </div>
+  {(caption || title) && <figcaption class='mt-3 text-xs text-muted-foreground'>{caption || title}</figcaption>}
+</figure>

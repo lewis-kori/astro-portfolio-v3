@@ -1,0 +1,125 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PhotographyHeader from '@/components/photography/PhotographyHeader.astro';
+import { collections, photostream } from '@/data/photography';
+import { getCollection } from 'astro:content';
+
+const featured = collections[0];
+const activeCollectionSlugs = new Set(collections.map((collection) => collection.slug));
+const journals = await getCollection(
+  'photoJournals',
+  ({ data }) => activeCollectionSlugs.has(data.collection),
+);
+const tripCount = journals.length;
+const journalCount = (slug: string) => journals.filter((journal) => journal.data.collection === slug).length;
+---
+
+<Layout
+  title='Photography & Travel – Lewis Kori'
+  description='Visual journals, travel stories and quiet observations from Lewis Kori.'
+  ogTitle='Field of view — Photography by Lewis Kori'
+  ogDescription='A collection of visual journals from near and far.'
+  image={featured.cover.src}
+>
+  <div class='photography-shell'>
+    <div class='container-fluid'>
+      <PhotographyHeader />
+
+      <section class='grid gap-10 py-14 md:grid-cols-[1.15fr_0.85fr] md:items-end md:py-24'>
+        <div>
+          <p class='photo-kicker mb-5'>Photography / Travel / Observation</p>
+          <h1 class='max-w-4xl text-5xl font-semibold leading-[0.95] tracking-[-0.055em] sm:text-7xl lg:text-[6.5rem]'>
+            Stories found<br />between places.
+          </h1>
+        </div>
+        <div class='md:pb-2'>
+          <p class='max-w-md text-base leading-relaxed text-muted-foreground md:text-lg'>
+            A home for photographs made while moving and while standing still—organized as journeys, remembered as light.
+          </p>
+          <div class='mt-8 flex gap-8 border-t border-border/80 pt-5 text-xs uppercase tracking-[0.16em] text-muted-foreground'>
+            <span><strong class='mr-2 text-foreground'>{collections.length}</strong> Collections</span>
+            <span><strong class='mr-2 text-foreground'>{tripCount}</strong> Journals</span>
+          </div>
+        </div>
+      </section>
+
+      <section class='pb-16 md:pb-28' aria-labelledby='collections-title'>
+        <div class='mb-6 flex items-end justify-between gap-4'>
+          <div>
+            <p class='photo-kicker mb-2'>The long way around</p>
+            <h2 id='collections-title' class='text-2xl font-semibold tracking-tight md:text-3xl'>Journeys</h2>
+          </div>
+          <a href='/photostream' class='photo-text-link'>Skip to the stream <span>↗</span></a>
+        </div>
+
+        <div class='space-y-6 md:space-y-8'>
+          {
+            collections.map((collection, index) => (
+              <a
+                href={`/photography/${collection.slug}`}
+                class='collection-card group relative block min-h-[34rem] overflow-hidden rounded-[1.75rem] bg-card md:min-h-[42rem]'
+              >
+                <img
+                  src={collection.cover.src}
+                  alt={collection.cover.alt}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  fetchpriority={index === 0 ? 'high' : 'auto'}
+                  class='absolute inset-0 size-full object-cover transition duration-1000 ease-out group-hover:scale-[1.035]'
+                />
+                <div class='absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/15' />
+                <div class='absolute inset-x-0 bottom-0 flex flex-col justify-end p-6 text-white sm:p-9 md:p-12'>
+                  <div class='mb-5 flex items-center justify-between gap-4'>
+                    <span class='rounded-full border border-white/30 bg-black/15 px-3 py-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.2em] backdrop-blur-sm'>
+                      Collection {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span class='grid size-11 place-items-center rounded-full border border-white/30 bg-black/15 text-lg backdrop-blur-sm transition duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:bg-white group-hover:text-black'>↗</span>
+                  </div>
+                  <div class='grid gap-5 border-t border-white/25 pt-6 md:grid-cols-[1fr_auto] md:items-end'>
+                    <div>
+                      <h3 class='text-4xl font-semibold tracking-[-0.04em] sm:text-6xl'>{collection.title}</h3>
+                      <p class='mt-3 max-w-xl text-sm leading-relaxed text-white/75 sm:text-base'>{collection.description}</p>
+                    </div>
+                    <div class='flex gap-5 text-xs uppercase tracking-[0.16em] text-white/70'>
+                      <span>{journalCount(collection.slug)} {journalCount(collection.slug) === 1 ? 'journal' : 'journals'}</span>
+                      <span>{collection.cover.location}</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class='border-t border-border/80 py-16 md:py-24'>
+        <div class='mb-8 grid gap-4 md:grid-cols-2 md:items-end'>
+          <div>
+            <p class='photo-kicker mb-3'>Loose frames</p>
+            <h2 class='text-3xl font-semibold tracking-[-0.04em] md:text-5xl'>No itinerary required.</h2>
+          </div>
+          <div class='md:text-right'>
+            <p class='mb-4 text-sm text-muted-foreground'>Single images, passing moments and everything that lives outside a trip.</p>
+            <a href='/photostream' class='photo-text-link'>Open photostream <span>↗</span></a>
+          </div>
+        </div>
+        <a href='/photostream' class='group grid h-56 grid-cols-4 gap-1 overflow-hidden rounded-2xl sm:h-72 md:h-96'>
+          {photostream.slice(0, 4).map((photo, index) => (
+            <div class:list={['overflow-hidden', index === 0 || index === 3 ? 'hidden sm:block' : '']}>
+              <img src={photo.src} alt={photo.alt} loading='lazy' class='size-full object-cover transition duration-700 group-hover:scale-105' />
+            </div>
+          ))}
+        </a>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .photography-shell { padding-top: 1rem; }
+  .photo-kicker { font-size: .67rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--muted-foreground); }
+  .photo-text-link { display: inline-flex; align-items: center; gap: .5rem; font-size: .78rem; font-weight: 650; }
+  .photo-text-link span { transition: transform .25s ease; }
+  .photo-text-link:hover span { transform: translate(.2rem, -.2rem); }
+  .collection-card { isolation: isolate; }
+  @media (prefers-reduced-motion: reduce) { .collection-card img { transition: none; } }
+</style>
