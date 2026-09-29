@@ -1,0 +1,196 @@
+---
+interface Props {
+  id?: string;
+}
+
+const { id = 'photo-lightbox' } = Astro.props;
+---
+
+<dialog
+  id={id}
+  class='photo-lightbox m-0 h-dvh w-dvw max-h-none max-w-none bg-black/96 p-0 text-white backdrop:bg-black/85'
+>
+  <div class='lightbox-stage relative grid h-full w-full place-items-center overflow-hidden p-3 sm:p-6 md:p-10'>
+    <img class='lightbox-image h-full w-full min-h-0 min-w-0 select-none object-contain transition duration-200' alt='' />
+
+    <button
+      class='lightbox-close absolute right-3 top-3 z-30 grid size-11 place-items-center rounded-full border border-white/20 bg-black/45 text-2xl backdrop-blur-xl transition hover:bg-white hover:text-black md:right-5 md:top-5'
+      aria-label='Close image viewer'
+    >×</button>
+
+    <button
+      class='lightbox-previous absolute left-3 top-1/2 z-20 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/45 text-xl backdrop-blur-xl transition hover:bg-white hover:text-black md:left-6 md:size-12'
+      aria-label='Previous photo'
+    >←</button>
+    <button
+      class='lightbox-next absolute right-3 top-1/2 z-20 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/45 text-xl backdrop-blur-xl transition hover:bg-white hover:text-black md:right-6 md:size-12'
+      aria-label='Next photo'
+    >→</button>
+
+    <aside class='lightbox-metadata absolute left-3 top-3 z-20 w-[min(23rem,calc(100vw-5rem))] overflow-hidden rounded-2xl border border-white/15 bg-black/45 shadow-2xl backdrop-blur-2xl transition md:left-6 md:top-6'>
+      <button class='metadata-toggle flex w-full items-center justify-between gap-4 px-5 py-4 text-left' aria-expanded='true'>
+        <span class='metadata-date text-sm font-semibold tracking-wide text-white/90'></span>
+        <span class='metadata-caret text-sm text-white/55 transition'>⌃</span>
+      </button>
+      <div class='metadata-body border-t border-white/15 px-5 pb-5 pt-4'>
+        <p class='metadata-title mb-4 text-lg font-semibold'></p>
+        <dl class='space-y-3 text-sm text-white/72'>
+          <div class='metadata-camera-row flex items-start gap-3'>
+            <dt class='mt-0.5 text-white/45' aria-label='Camera'>▣</dt>
+            <dd class='metadata-camera'></dd>
+          </div>
+          <div class='metadata-lens-row flex items-start gap-3'>
+            <dt class='mt-0.5 text-white/45' aria-label='Lens'>◎</dt>
+            <dd class='metadata-lens'></dd>
+          </div>
+          <div class='metadata-location-row flex items-start gap-3'>
+            <dt class='mt-0.5 text-white/45' aria-label='Location'>⌖</dt>
+            <dd class='metadata-location'></dd>
+          </div>
+        </dl>
+      </div>
+    </aside>
+
+    <div class='absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 items-center gap-3 rounded-full border border-white/15 bg-black/45 px-4 py-2 text-xs text-white/75 backdrop-blur-xl md:bottom-5'>
+      <span class='lightbox-counter tabular-nums'></span>
+      <span class='hidden h-3 w-px bg-white/25 sm:block'></span>
+      <span class='lightbox-caption hidden max-w-[40vw] truncate sm:block'></span>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  type LightboxItem = HTMLElement & { dataset: DOMStringMap };
+
+  function initPhotoLightbox() {
+    const dialogs = document.querySelectorAll<HTMLDialogElement>('.photo-lightbox');
+
+    dialogs.forEach((dialog) => {
+      if (dialog.dataset.ready === 'true') return;
+      dialog.dataset.ready = 'true';
+
+      const items = Array.from(document.querySelectorAll<LightboxItem>('[data-lightbox]'));
+      const image = dialog.querySelector<HTMLImageElement>('.lightbox-image');
+      const caption = dialog.querySelector<HTMLElement>('.lightbox-caption');
+      const counter = dialog.querySelector<HTMLElement>('.lightbox-counter');
+      const metadata = dialog.querySelector<HTMLElement>('.lightbox-metadata');
+      const metadataDate = dialog.querySelector<HTMLElement>('.metadata-date');
+      const metadataTitle = dialog.querySelector<HTMLElement>('.metadata-title');
+      const metadataCamera = dialog.querySelector<HTMLElement>('.metadata-camera');
+      const metadataLens = dialog.querySelector<HTMLElement>('.metadata-lens');
+      const metadataLocation = dialog.querySelector<HTMLElement>('.metadata-location');
+      const cameraRow = dialog.querySelector<HTMLElement>('.metadata-camera-row');
+      const lensRow = dialog.querySelector<HTMLElement>('.metadata-lens-row');
+      const locationRow = dialog.querySelector<HTMLElement>('.metadata-location-row');
+      const metadataToggle = dialog.querySelector<HTMLButtonElement>('.metadata-toggle');
+      const metadataBody = dialog.querySelector<HTMLElement>('.metadata-body');
+      const metadataCaret = dialog.querySelector<HTMLElement>('.metadata-caret');
+      const close = dialog.querySelector<HTMLButtonElement>('.lightbox-close');
+      const previous = dialog.querySelector<HTMLButtonElement>('.lightbox-previous');
+      const next = dialog.querySelector<HTMLButtonElement>('.lightbox-next');
+      const stage = dialog.querySelector<HTMLElement>('.lightbox-stage');
+      let currentIndex = 0;
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      const setText = (element: HTMLElement | null, value?: string) => {
+        if (element) element.textContent = value || '';
+      };
+
+      const renderItem = (index: number, direction = 0) => {
+        if (!items.length || !image) return;
+        currentIndex = (index + items.length) % items.length;
+        const item = items[currentIndex];
+        const data = item.dataset;
+
+        image.classList.add('opacity-0');
+        image.style.transform = `translateX(${direction * 12}px)`;
+        image.src = data.full || '';
+        image.alt = data.alt || '';
+        requestAnimationFrame(() => {
+          image.classList.remove('opacity-0');
+          image.style.transform = 'translateX(0)';
+        });
+
+        setText(caption, data.caption || data.alt);
+        setText(counter, `${currentIndex + 1} / ${items.length}`);
+        setText(metadataDate, data.date || 'Photo details');
+        setText(metadataTitle, data.title || data.alt);
+        setText(metadataCamera, data.camera);
+        setText(metadataLens, data.lens);
+        setText(metadataLocation, data.location);
+        cameraRow?.toggleAttribute('hidden', !data.camera);
+        lensRow?.toggleAttribute('hidden', !data.lens);
+        locationRow?.toggleAttribute('hidden', !data.location);
+        metadata?.toggleAttribute(
+          'hidden',
+          !(data.date || data.title || data.camera || data.lens || data.location),
+        );
+      };
+
+      const showPrevious = () => renderItem(currentIndex - 1, -1);
+      const showNext = () => renderItem(currentIndex + 1, 1);
+      const closeDialog = () => {
+        dialog.close();
+        document.body.style.overflow = '';
+      };
+
+      items.forEach((item, index) => {
+        item.addEventListener('click', () => {
+          renderItem(index);
+          dialog.showModal();
+          document.body.style.overflow = 'hidden';
+          close?.focus();
+        });
+      });
+
+      previous?.addEventListener('click', showPrevious);
+      next?.addEventListener('click', showNext);
+      close?.addEventListener('click', closeDialog);
+
+      metadataToggle?.addEventListener('click', () => {
+        const expanded = metadataToggle.getAttribute('aria-expanded') === 'true';
+        metadataToggle.setAttribute('aria-expanded', String(!expanded));
+        metadataBody?.toggleAttribute('hidden', expanded);
+        metadataCaret?.classList.toggle('rotate-180', expanded);
+      });
+
+      dialog.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') showPrevious();
+        if (event.key === 'ArrowRight') showNext();
+      });
+
+      stage?.addEventListener('touchstart', (event) => {
+        touchStartX = event.changedTouches[0].clientX;
+        touchStartY = event.changedTouches[0].clientY;
+      }, { passive: true });
+
+      stage?.addEventListener('touchend', (event) => {
+        const deltaX = event.changedTouches[0].clientX - touchStartX;
+        const deltaY = event.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY)) {
+          deltaX > 0 ? showPrevious() : showNext();
+        }
+      }, { passive: true });
+
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) closeDialog();
+      });
+      dialog.addEventListener('close', () => {
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  initPhotoLightbox();
+  document.addEventListener('astro:page-load', initPhotoLightbox);
+</script>
+
+<style>
+  [hidden] { display: none !important; }
+  .lightbox-image { will-change: opacity, transform; }
+  @media (max-width: 639px) {
+    .lightbox-metadata { top: auto; bottom: 4rem; }
+    .lightbox-previous, .lightbox-next { opacity: .8; }
+  }
+</style>

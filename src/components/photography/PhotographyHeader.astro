@@ -1,0 +1,41 @@
+---
+interface Props {
+  active?: 'collections' | 'stream';
+}
+
+const { active = 'collections' } = Astro.props;
+---
+
+<div class='flex items-center justify-between gap-4 border-b border-border/70 pb-5'>
+  <a href='/photography' class='group flex items-center gap-3'>
+    <span
+      class='grid size-9 place-items-center rounded-full bg-secondary text-secondary-foreground transition-transform duration-300 group-hover:rotate-6'
+    >
+      <svg viewBox='0 0 24 24' class='size-4.5' fill='none' stroke='currentColor' stroke-width='1.8'>
+        <path d='M4 7.5h3l1.2-2h7.6l1.2 2h3v11H4z'></path>
+        <circle cx='12' cy='13' r='3.5'></circle>
+      </svg>
+    </span>
+    <span class='text-sm font-semibold tracking-tight'>Field of view</span>
+  </a>
+  <nav aria-label='Photography navigation' class='flex items-center gap-1 rounded-full bg-muted/70 p-1'>
+    <a
+      href='/photography'
+      class:list={[
+        'rounded-full px-3 py-1.5 text-xs font-medium transition',
+        active === 'collections' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground',
+      ]}
+    >
+      Journeys
+    </a>
+    <a
+      href='/photostream'
+      class:list={[
+        'rounded-full px-3 py-1.5 text-xs font-medium transition',
+        active === 'stream' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground',
+      ]}
+    >
+      Photostream
+    </a>
+  </nav>
+</div>

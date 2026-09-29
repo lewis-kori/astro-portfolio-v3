@@ -7,6 +7,7 @@ import expressiveCode from 'astro-expressive-code';
 import sitemap from '@astrojs/sitemap';
 
 import cloudflare from '@astrojs/cloudflare';
+import mdx from '@astrojs/mdx';
 
 const SITE_URL = 'https://lewiskori.com';
 
@@ -61,6 +62,7 @@ export default defineConfig({
     expressiveCode({
       themes: ['aurora-x'],
     }),
+    mdx(),
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,
@@ -80,7 +82,7 @@ export default defineConfig({
         }
 
         if (
-          /\/(about|contact|projects|advisory|operating-notes)\/?$/.test(
+          /\/(about|contact|projects|advisory|operating-notes|photography|photostream)\/?$/.test(
             item.url,
           )
         ) {
