@@ -82,26 +82,47 @@ export const collections: PhotoCollection[] = [
 
 export const photostream: Photo[] = [
   {
-    src: unsplash('photo-1464822759023-fed622ff2c3b'),
-    alt: 'Mountain ridge catching soft afternoon light',
-    title: 'First light above the valley',
-    takenAt: 'January 18, 2026',
-    camera: 'DJI Osmo Pocket 4P',
-    lens: 'Built-in wide camera',
-    location: 'Great Rift Valley, Kenya',
-    aspect: 'portrait',
+    src: 'https://res.cloudinary.com/lewiskori/image/upload/v1790601471/Travel/Random/IMG_20221112_121527_ztjfyn.jpg',
+    alt: "Dragon's Teeth in the Aberdares",
+    title: "Dragon's Teeth",
+    camera: 'Google Pixel 7',
+    location: 'Aberdares, Kenya',
   },
-  { src: unsplash('photo-1499856871958-5b9627545d1a'), alt: 'Classic Parisian street view', aspect: 'portrait' },
-  { src: unsplash('photo-1498623116890-37e912163d5d'), alt: 'Palm trees against a warm evening sky', aspect: 'portrait' },
-  { src: unsplash('photo-1500534623283-312aade485b7'), alt: 'Mountain landscape at dusk', aspect: 'landscape' },
-  { src: unsplash('photo-1472214103451-9374bd1c798e'), alt: 'Green landscape under a luminous sky', aspect: 'landscape' },
-  // Europe collection is paused for now.
-  { src: unsplash('photo-1510414842594-a61c69b5ae57'), alt: 'Ocean and tropical shore from above', aspect: 'landscape' },
-  { src: unsplash('photo-1469474968028-56623f02e42e'), alt: 'Road leading into the mountains', aspect: 'portrait' },
-  { src: unsplash('photo-1441974231531-c6227db76b6e'), alt: 'Light passing through a dense forest', aspect: 'portrait' },
-  { src: unsplash('photo-1477959858617-67f85cf4f1df'), alt: 'Dense city architecture viewed from above', aspect: 'landscape' },
-  { src: unsplash('photo-1507525428034-b723cf961d3e'), alt: 'Turquoise water meeting a pale sandy beach', aspect: 'square' },
-  { src: unsplash('photo-1470770841072-f978cf4d019e'), alt: 'Still lake beneath misty mountains', aspect: 'wide' },
+  {
+    src: 'https://res.cloudinary.com/lewiskori/image/upload/v1790601325/Travel/Random/PXL_20260905_092057243_cjew4g.jpg',
+    alt: 'Elephant Hill in the Aberdares',
+    title: 'Elephant Hill',
+    camera: 'Google Pixel 9',
+    location: 'Aberdares, Kenya',
+  },
+  {
+    src: 'https://res.cloudinary.com/lewiskori/image/upload/v1790601465/Travel/Random/PXL_20251230_131055360_je2axb.jpg',
+    alt: 'A travel photograph from Rusinga Island',
+    title: 'Rusinga Island',
+    camera: 'iPhone 15 Pro',
+    location: 'Rusinga Island, Kenya',
+  },
+  {
+    src: 'https://res.cloudinary.com/lewiskori/image/upload/v1790601345/Travel/Random/PXL_20241019_074451728.MP_n3c0h4.jpg',
+    alt: 'A travel photograph from Lake Turkana',
+    title: 'Lake Turkana',
+    camera: 'Google Pixel 9',
+    location: 'Lake Turkana, Kenya',
+  },
+  {
+    src: 'https://res.cloudinary.com/lewiskori/image/upload/v1790601225/Travel/Random/PXL_20260725_132942897.MP_mqwtni.jpg',
+    alt: 'A travel photograph from Lake Ellis',
+    title: 'Lake Ellis',
+    camera: 'Google Pixel 9',
+    location: 'Lake Ellis, Kenya',
+  },
+  {
+    src: 'https://res.cloudinary.com/lewiskori/image/upload/v1790601697/Travel/Random/PXL_20260905_040327444.MP_wi3zlz.jpg',
+    alt: 'A travel photograph from Njambini',
+    title: 'Njambini',
+    camera: 'Google Pixel 9',
+    location: 'Njambini, Kenya',
+  },
 ];
 
 export const getCollectionBySlug = (slug: string) =>
