@@ -9,9 +9,15 @@ import {
   WorkExperience,
 } from '@/components/home';
 import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '@/config';
 ---
 
-<Layout>
+<Layout
+  title={siteConfig.title}
+  description={siteConfig.description}
+  ogTitle={siteConfig.title}
+  ogDescription={siteConfig.description}
+>
   <section
     class='min-h-full lg:min-h-[80svh] flex items-center justify-center py-16 md:py-20'
   >

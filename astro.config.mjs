@@ -11,6 +11,16 @@ import mdx from '@astrojs/mdx';
 
 const SITE_URL = 'https://lewiskori.com';
 
+// These journals remain available as previews, but their frontmatter marks them
+// as noindex. Keep them out of the sitemap until they are ready to be indexed.
+const NOINDEX_PATHS = new Set([
+  '/photography/africa/cape-town',
+  '/photography/africa/namibia',
+  '/photography/africa/zanzibar',
+  '/photography/asia/united-arab-emirates',
+  '/photography/africa/indian-ocean',
+]);
+
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
@@ -66,12 +76,14 @@ export default defineConfig({
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,
-      lastmod: new Date(),
+      filter(page) {
+        const pathname = new URL(page).pathname.replace(/\/$/, '') || '/';
+        return !NOINDEX_PATHS.has(pathname);
+      },
       serialize(item) {
         if (item.url === SITE_URL + '/' || item.url === SITE_URL) {
           item.changefreq = 'daily';
           item.priority = 1.0;
-          item.lastmod = new Date();
           return item;
         }
 

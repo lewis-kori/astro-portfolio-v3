@@ -30,15 +30,14 @@ interface Props {
   noindex?: boolean;
 }
 
-const siteName = 'Lewis Kori – Entrepreneur, Product Builder, Operator';
+const siteName = siteConfig.name;
 const siteUrl = SITE_URL;
 const defaultDescription = siteConfig.description;
 const defaultOgTitle = siteConfig.title;
-const defaultOgDescription =
-  'Thoughts and work from an entrepreneur building technology platforms and advising institutions on strategy, systems, and scale.';
+const defaultOgDescription = siteConfig.description;
 
 const {
-  title = `Home | ${siteName}`,
+  title = siteConfig.title,
   description = defaultDescription,
   ogTitle = defaultOgTitle,
   ogDescription = defaultOgDescription,
@@ -125,6 +124,12 @@ const isDefaultOgImage = image === defaultOgImage;
     <link rel='canonical' href={canonicalUrl} />
     <!-- Sitemap -->
     <link rel='sitemap' href='/sitemap-index.xml' />
+    <link
+      rel='alternate'
+      type='application/rss+xml'
+      title='Lewis Kori — Articles'
+      href='/rss.xml'
+    />
 
     <!-- Structured Data / JSON-LD -->
     <script
@@ -156,7 +161,25 @@ const isDefaultOgImage = image === defaultOgImage;
               height: 630,
             },
             description: siteConfig.authorDescription,
-            jobTitle: 'Entrepreneur & Product Builder',
+            jobTitle: 'Software Engineer, Product Builder and Business Operator',
+            hasOccupation: [
+              {
+                '@type': 'Occupation',
+                name: 'Software Engineer',
+                occupationLocation: {
+                  '@type': 'City',
+                  name: 'Nairobi',
+                },
+              },
+              {
+                '@type': 'Occupation',
+                name: 'Product Builder and Business Operator',
+              },
+              {
+                '@type': 'Occupation',
+                name: 'Technology Advisor',
+              },
+            ],
             address: {
               '@type': 'PostalAddress',
               addressCountry: 'KE',
@@ -171,6 +194,7 @@ const isDefaultOgImage = image === defaultOgImage;
               'Entrepreneurship',
               'Product Development',
               'Software Engineering',
+              'Technical Leadership',
               'Venture Building',
               'Technology Strategy',
               'Platform Architecture',
@@ -181,6 +205,7 @@ const isDefaultOgImage = image === defaultOgImage;
               'https://twitter.com/lewis_kihiu',
               'https://github.com/lewis-kori',
               'https://linkedin.com/in/lewis-kihiu-aba63011b/',
+              'https://inflectionstudio.io/team/lewis-kori/',
             ],
           },
           type === 'article' && publishedTime

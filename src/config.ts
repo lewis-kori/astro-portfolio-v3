@@ -24,15 +24,15 @@ export interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
   name: 'Lewis Kori',
-  title: 'Lewis Kori – Building Products, Systems, and Leverage',
+  title: 'Lewis Kori — Software Engineer, Product Builder & Operator',
   url: 'https://lewiskori.com',
   description:
-    'Entrepreneur and product builder working at the intersection of technology, capital, and trust. Building platforms, advising institutions, and exploring how systems scale.',
+    'Software engineer, product builder and business operator in Nairobi, Kenya, building scalable platforms and advising teams on product and technology strategy.',
   tagline: 'Building Products, Systems and Companies That Endure',
   authorDescription:
-    'I am an entrepreneur and technologist focused on building scalable digital products, trusted platforms and businesses designed for long-term impact. My work spans product development, venture building and advisory across technology-driven markets.',
+    'I’m a software engineer, product builder and business operator based in Nairobi, Kenya. I build scalable digital products and platforms, lead teams through complex technical decisions, and advise founders on product and technology strategy.',
   avatar: aboutImage,
-  location: '  Kenya',
+  location: 'Nairobi, Kenya',
   email: 'n8tocd0jy@mozmail.com',
   phone: '+254 712 345678',
   profileImage: profileImage,
