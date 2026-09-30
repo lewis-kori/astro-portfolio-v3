@@ -22,7 +22,7 @@ export const GET: APIRoute = async ({ site }) => {
 
 > ${siteConfig.description}
 
-Lewis Kori is a software engineer, product builder and business operator based in Nairobi, Kenya. He writes from first-hand experience building digital products, leading technical work, advising founders and operating technology businesses.
+Lewis Kori is a software engineer, product builder and business operator based in Nairobi, Kenya. He writes from first-hand experience building digital products, leading technical work, advising founders and operating technology businesses for an international audience.
 
 ## Core pages
 

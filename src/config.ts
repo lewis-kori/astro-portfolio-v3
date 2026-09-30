@@ -27,10 +27,10 @@ export const siteConfig: SiteConfig = {
   title: 'Lewis Kori — Software Engineer, Product Builder & Operator',
   url: 'https://lewiskori.com',
   description:
-    'Software engineer, product builder and business operator in Nairobi, Kenya, building scalable platforms and advising teams on product and technology strategy.',
+    'Software engineer, product builder and business operator in Nairobi, Kenya, building scalable platforms and advising teams on product, technology and business strategy.',
   tagline: 'Building Products, Systems and Companies That Endure',
   authorDescription:
-    'I’m a software engineer, product builder and business operator based in Nairobi, Kenya. I build scalable digital products and platforms, lead teams through complex technical decisions, and advise founders on product and technology strategy.',
+    'I’m a software engineer, product builder and business operator. I build scalable digital products and platforms, lead teams through complex technical decisions, and advise founders on product, technology and business strategy.',
   avatar: aboutImage,
   location: 'Nairobi, Kenya',
   email: 'n8tocd0jy@mozmail.com',
