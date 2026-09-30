@@ -55,6 +55,13 @@ noindex: false
 
 Set `noindex: true` while a placeholder should stay out of search results.
 
+For a standalone trip that should not belong to a collection, omit `collection`. It will appear alongside the collection cards and use a top-level journal route:
+
+```text
+src/content/photoJournals/vancouver.mdx
+→ /photography/trips/vancouver
+```
+
 ## Write between images
 
 After the frontmatter and component imports, write normal Markdown:
@@ -70,7 +77,7 @@ Opening paragraph for the journal.
 
 Write as many paragraphs, lists, links and headings as you need.
 
-<PhotoGrid photos={[/* photos */]} />
+<PhotoGrid items={[/* photos and videos */]} />
 
 Continue writing directly below the gallery.
 ```
@@ -106,6 +113,36 @@ The mosaic layout recreates the uneven two-column editorial grid from the refere
 ```
 
 Use `layout="equal"` when every image should occupy the same width.
+
+## Mix photos and video in a grid
+
+Use the `items` prop when a grid should contain both photographs and video. Videos can use ordinary playback controls or a muted looping preview.
+
+```mdx
+<PhotoGrid
+  layout="mosaic"
+  items={[
+    {
+      type: 'photo',
+      src: '/photography/zanzibar/beach-01.webp',
+      alt: 'Morning light on the beach',
+      location: 'Zanzibar, Tanzania',
+    },
+    {
+      type: 'video',
+      src: 'https://res.cloudinary.com/example/video/upload/stone-town.mp4',
+      poster: '/photography/zanzibar/stone-town-poster.webp',
+      title: 'Walking through Stone Town',
+      caption: 'A short walk before the streets became busy.',
+      muted: true,
+      loop: true,
+      autoplay: true,
+    },
+  ]}
+/>
+```
+
+Omit `autoplay` for a click-to-play video with controls. Cloudinary MP4 URLs can be used directly.
 
 ## Add one image
 
