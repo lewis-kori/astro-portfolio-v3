@@ -1,31 +1,74 @@
 ---
 import type { Photo } from '@/data/photography';
 
+type GridPhoto = Photo & {
+  type?: 'photo';
+};
+
+type GridVideo = {
+  type: 'video';
+  src: string;
+  title: string;
+  poster?: string;
+  caption?: string;
+  location?: string;
+  mimeType?: string;
+  autoplay?: boolean;
+  muted?: boolean;
+  loop?: boolean;
+  controls?: boolean;
+};
+
 interface Props {
-  photos: Photo[];
+  photos?: GridPhoto[];
+  items?: Array<GridPhoto | GridVideo>;
   layout?: 'mosaic' | 'equal';
   caption?: string;
 }
 
-const { photos, layout = 'mosaic', caption } = Astro.props;
+const { photos = [], items, layout = 'mosaic', caption } = Astro.props;
+const media = items || photos;
 ---
 
 <figure class:list={['journal-media my-10 md:my-16', layout === 'mosaic' ? 'photo-mosaic' : 'photo-equal']}>
   <div class='photo-grid'>
-    {photos.map((photo, index) => (
+    {media.map((item, index) => item.type === 'video' ? (
+      <div class={`photo-grid-item photo-grid-item-${index + 1} group relative min-h-64 overflow-hidden bg-black`}>
+        <video
+          controls={item.controls ?? !item.autoplay}
+          autoplay={item.autoplay}
+          muted={item.muted ?? item.autoplay ?? false}
+          loop={item.loop}
+          playsinline
+          preload='metadata'
+          poster={item.poster}
+          aria-label={item.title}
+          class='size-full object-cover'
+        >
+          <source src={item.src} type={item.mimeType} />
+          Your browser does not support embedded video.
+        </video>
+        <span class='pointer-events-none absolute left-3 top-3 rounded-full border border-white/20 bg-black/45 px-2.5 py-1 text-[.62rem] font-semibold uppercase tracking-[.16em] text-white backdrop-blur-md'>Video</span>
+        {(item.caption || item.location) && (
+          <span class='pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent px-4 pb-4 pt-10 text-xs text-white/85'>
+            {item.caption || item.location}
+          </span>
+        )}
+      </div>
+    ) : (
       <button
         data-lightbox
-        data-full={photo.src}
-        data-alt={photo.alt}
-        data-caption={photo.caption || photo.location || photo.alt}
-        data-title={photo.title || photo.caption || photo.alt}
-        data-date={photo.takenAt}
-        data-camera={photo.camera}
-        data-lens={photo.lens}
-        data-location={photo.location}
+        data-full={item.src}
+        data-alt={item.alt}
+        data-caption={item.caption || item.location || item.alt}
+        data-title={item.title || item.caption || item.alt}
+        data-date={item.takenAt}
+        data-camera={item.camera}
+        data-lens={item.lens}
+        data-location={item.location}
         class={`photo-grid-item photo-grid-item-${index + 1} group relative min-h-64 cursor-zoom-in overflow-hidden bg-muted text-left`}
       >
-        <img src={photo.src} alt={photo.alt} loading='lazy' class='size-full object-cover transition duration-700 group-hover:scale-[1.025]' />
+        <img src={item.src} alt={item.alt} loading='lazy' class='size-full object-cover transition duration-500 group-hover:scale-[1.02]' />
         <span class='absolute bottom-3 right-3 grid size-8 place-items-center rounded-full bg-black/35 text-xs text-white opacity-0 backdrop-blur-md transition group-hover:opacity-100'>↗</span>
       </button>
     ))}

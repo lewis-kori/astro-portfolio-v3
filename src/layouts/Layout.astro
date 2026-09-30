@@ -4,7 +4,7 @@ import Footer from '@/components/navs/Footer.astro';
 import '../styles/global.css';
 import BackgroundArt from '@/components/shared/BackgroundArt.astro';
 import StickySocials from '@/components/shared/StickySocials.astro';
-import { ClientRouter, fade } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import { siteConfig } from '@/config';
 import { SITE_URL } from '@/lib/env';
 import { GTM_ID } from 'astro:env/client';
@@ -346,10 +346,7 @@ const isDefaultOgImage = image === defaultOgImage;
     <!-- End Google Tag Manager (noscript) -->
     <BackgroundArt />
     <Navbar />
-    <main
-      class='min-h-screen overflow-x-clip'
-      transition:animate={fade({ duration: '0.5s' })}
-    >
+    <main class='min-h-screen overflow-x-clip' transition:animate='none'>
       <slot />
     </main>
     <div transition:persist='footer'>

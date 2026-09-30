@@ -2,23 +2,19 @@
 import Layout from '@/layouts/Layout.astro';
 import PhotographyHeader from '@/components/photography/PhotographyHeader.astro';
 import PhotoLightbox from '@/components/photography/PhotoLightbox.astro';
-import { collections, getCollectionBySlug } from '@/data/photography';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { SITE_URL } from '@/lib/env';
 
 export const prerender = true;
 
 export async function getStaticPaths() {
-  const activeCollectionSlugs = new Set(collections.map((collection) => collection.slug));
   const journals = await getCollection(
     'photoJournals',
-    ({ data }) => Boolean(data.collection) && activeCollectionSlugs.has(data.collection!) && !data.draft,
+    ({ data }) => !data.collection && !data.draft,
   );
+
   return journals.map((journal) => ({
-    params: {
-      collection: journal.data.collection!,
-      trip: journal.id.replace(/\.mdx?$/, ''),
-    },
+    params: { trip: journal.id.replace(/\.mdx?$/, '') },
     props: { journal },
   }));
 }
@@ -28,9 +24,6 @@ interface Props {
 }
 
 const { journal } = Astro.props;
-const collection = getCollectionBySlug(journal.data.collection!);
-if (!collection) return Astro.redirect('/404');
-
 const { Content } = await render(journal);
 const data = journal.data;
 const formatDate = (date: Date) =>
@@ -50,7 +43,7 @@ const temporalCoverage = data.startDate
 ---
 
 <Layout
-  title={data.seoTitle || `${data.title} – ${collection.title} Photography`}
+  title={data.seoTitle || `${data.title} – Photography Journal`}
   description={data.seoDescription || data.description}
   ogTitle={data.title}
   ogDescription={data.seoDescription || data.description}
@@ -68,7 +61,6 @@ const temporalCoverage = data.startDate
   noindex={data.noindex}
   breadcrumbs={[
     { name: 'Photography', item: new URL('/photography', Astro.url).href },
-    { name: collection.title, item: new URL(`/photography/${collection.slug}`, Astro.url).href },
     { name: data.title, item: Astro.url.href },
   ]}
 >
@@ -78,8 +70,8 @@ const temporalCoverage = data.startDate
 
   <article class='pb-24'>
     <header class='container-fluid py-8 md:py-14'>
-      <a href={`/photography/${collection.slug}`} class='mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[.16em] text-muted-foreground hover:text-foreground'>
-        <span>←</span> {collection.title}
+      <a href='/photography' class='mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[.16em] text-muted-foreground hover:text-foreground'>
+        <span>←</span> All journeys
       </a>
       <button
         data-lightbox
@@ -93,13 +85,13 @@ const temporalCoverage = data.startDate
         data-location={data.cover.location || data.place}
         class='group relative block min-h-[28rem] w-full cursor-zoom-in overflow-hidden rounded-[1.5rem] text-left md:min-h-[38rem] md:rounded-[1.75rem]'
       >
-        <img src={data.cover.src} alt={data.cover.alt} class='absolute inset-0 size-full object-cover transition duration-1000 group-hover:scale-[1.02]' fetchpriority='high' />
+        <img src={data.cover.src} alt={data.cover.alt} class='absolute inset-0 size-full object-cover transition duration-500 group-hover:scale-[1.015]' fetchpriority='high' />
         <div class='absolute inset-0 bg-gradient-to-t from-black/90 via-black/5 to-black/10'></div>
-        <div class='absolute inset-x-0 bottom-0 p-7 text-white sm:p-10 md:p-14'>
+        <div class='absolute inset-x-0 bottom-0 p-7 text-white sm:p-10 md:p-12'>
           <p class='mb-4 text-xs font-semibold uppercase tracking-[.2em] text-white/60'>{data.place} · {dateRange}</p>
-          <h1 class='max-w-5xl text-5xl font-semibold leading-[.95] tracking-[-.055em] sm:text-7xl md:text-8xl'>{data.title}</h1>
+          <h1 class='max-w-5xl text-5xl font-semibold leading-[.95] tracking-[-.055em] sm:text-7xl'>{data.title}</h1>
           <p class='mt-5 max-w-2xl text-base leading-relaxed text-white/75 md:text-lg'>{data.subtitle}</p>
-          <div class='mt-8 flex flex-wrap gap-7 border-t border-white/25 pt-5 text-xs uppercase tracking-[.15em] text-white/65'>
+          <div class='mt-7 flex flex-wrap gap-7 border-t border-white/25 pt-5 text-xs uppercase tracking-[.15em] text-white/65'>
             {data.days && <span>{data.days} days</span>}
             {data.nights && <span>{data.nights} nights</span>}
             {galleryImages.length > 1 && <span>{galleryImages.length} frames</span>}
@@ -114,10 +106,10 @@ const temporalCoverage = data.startDate
     </div>
 
     <footer class='container-fluid mt-16 md:mt-24'>
-      <a href={`/photography/${collection.slug}`} class='group grid gap-4 rounded-2xl border border-border bg-card p-6 transition hover:border-foreground/30 sm:grid-cols-[1fr_auto] sm:items-center md:p-9'>
+      <a href='/photography' class='group grid gap-4 rounded-2xl border border-border bg-card p-6 transition hover:border-foreground/30 sm:grid-cols-[1fr_auto] sm:items-center md:p-9'>
         <div>
-          <p class='mb-2 text-[.67rem] font-bold uppercase tracking-[.2em] text-muted-foreground'>Back to collection</p>
-          <h2 class='text-3xl font-semibold tracking-[-.04em]'>{collection.title}</h2>
+          <p class='mb-2 text-[.67rem] font-bold uppercase tracking-[.2em] text-muted-foreground'>Back to photography</p>
+          <h2 class='text-3xl font-semibold tracking-[-.04em]'>All journeys</h2>
         </div>
         <span class='text-2xl transition group-hover:translate-x-1'>→</span>
       </a>
