@@ -11,6 +11,8 @@ I currently build and operate multiple ventures, including [Inflection Studio](h
 
 I am interested in businesses that value trust, clarity, and durability over speed for its own sake. I optimise for leverage, learning and compounding outcomes rather than short-term wins.
 
+Photography is the creative counterweight to that work. It gives me a reason to slow down and pay attention to light, place, and movement. I use this site to document journeys, collect loose frames, and remember the world beyond products and systems. [Explore the photography journal ↗](/photography)
+
 ## What I Do
 
 ### Venture Building

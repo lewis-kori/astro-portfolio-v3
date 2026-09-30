@@ -97,7 +97,7 @@ const photoJournals = defineCollection({
     title: z.string(),
     subtitle: z.string(),
     description: z.string(),
-    collection: z.string(),
+    collection: z.string().optional(),
     place: z.string(),
     days: z.number().optional(),
     nights: z.number().optional(),
