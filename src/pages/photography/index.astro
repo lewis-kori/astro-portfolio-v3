@@ -31,7 +31,7 @@ const journalSlug = (id: string) => id.replace(/\.mdx?$/, '');
     <div class='container-fluid'>
       <PhotographyHeader />
 
-      <section class='grid gap-10 py-14 md:grid-cols-[1.15fr_0.85fr] md:items-end md:py-24'>
+      <section data-photo-reveal class='grid gap-10 py-14 md:grid-cols-[1.15fr_0.85fr] md:items-end md:py-24'>
         <div>
           <p class='photo-kicker mb-5'>Photography / Travel / Observation</p>
           <h1 class='max-w-4xl text-5xl font-semibold leading-[0.95] tracking-[-0.055em] sm:text-7xl lg:text-[6.5rem]'>
@@ -55,14 +55,14 @@ const journalSlug = (id: string) => id.replace(/\.mdx?$/, '');
             <p class='photo-kicker mb-2'>The long way around</p>
             <h2 id='collections-title' class='text-2xl font-semibold tracking-tight md:text-3xl'>Journeys</h2>
           </div>
-          <a href='/photostream' class='photo-text-link'>Skip to the stream <span>↗</span></a>
+          <a href='/photostream' data-astro-prefetch='viewport' class='photo-text-link'>Skip to the stream <span>↗</span></a>
         </div>
 
         <div class='space-y-8 md:space-y-12'>
           {
             collections.map((collection, index) => (
-              <article class='collection-card overflow-hidden rounded-[1.5rem] border border-border/70 bg-card shadow-sm md:rounded-[1.75rem]'>
-                <a href={`/photography/${collection.slug}`} class='collection-cover group relative block h-[24rem] overflow-hidden sm:h-[28rem] md:h-[32rem]'>
+              <article data-photo-reveal class='collection-card overflow-hidden rounded-[1.5rem] border border-border/70 bg-card shadow-sm md:rounded-[1.75rem]'>
+                <a href={`/photography/${collection.slug}`} data-astro-prefetch='viewport' class='collection-cover group relative block h-[24rem] overflow-hidden sm:h-[28rem] md:h-[32rem]'>
                   <img
                     src={collection.cover.src}
                     alt={collection.cover.alt}
@@ -94,7 +94,7 @@ const journalSlug = (id: string) => id.replace(/\.mdx?$/, '');
                 {journalsForCollection(collection.slug).length > 0 && (
                   <div class='divide-y divide-white/10 bg-black'>
                     {journalsForCollection(collection.slug).map((journal, journalIndex) => (
-                      <a href={`/photography/${collection.slug}/${journalSlug(journal.id)}`} class='trip-preview group relative grid min-h-36 overflow-hidden sm:min-h-40'>
+                      <a href={`/photography/${collection.slug}/${journalSlug(journal.id)}`} data-astro-prefetch='viewport' class='trip-preview group relative grid min-h-36 overflow-hidden sm:min-h-40'>
                         <img src={journal.data.cover.src} alt='' loading='lazy' class='absolute inset-0 size-full object-cover transition duration-500 ease-out group-hover:scale-[1.02]' />
                         <div class='absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-black/20 transition duration-300 group-hover:via-black/45' />
                         <div class='relative flex items-end justify-between gap-5 p-5 text-white sm:p-7'>
@@ -118,7 +118,7 @@ const journalSlug = (id: string) => id.replace(/\.mdx?$/, '');
 
           {
             standaloneJournals.map((journal) => (
-              <a href={`/photography/trips/${journalSlug(journal.id)}`} class='collection-card group relative block h-[24rem] overflow-hidden rounded-[1.5rem] border border-border/70 bg-card shadow-sm sm:h-[28rem] md:h-[32rem] md:rounded-[1.75rem]'>
+              <a data-photo-reveal href={`/photography/trips/${journalSlug(journal.id)}`} data-astro-prefetch='viewport' class='collection-card group relative block h-[24rem] overflow-hidden rounded-[1.5rem] border border-border/70 bg-card shadow-sm sm:h-[28rem] md:h-[32rem] md:rounded-[1.75rem]'>
                 <img src={journal.data.cover.src} alt={journal.data.cover.alt} loading='lazy' class='absolute inset-0 size-full object-cover transition duration-500 ease-out group-hover:scale-[1.02]' />
                 <div class='absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-black/20' />
                 <div class='absolute inset-0 flex flex-col justify-between p-6 text-white sm:p-8 md:p-10'>
@@ -141,7 +141,7 @@ const journalSlug = (id: string) => id.replace(/\.mdx?$/, '');
         </div>
       </section>
 
-      <section class='border-t border-border/80 py-16 md:py-24'>
+      <section data-photo-reveal class='border-t border-border/80 py-16 md:py-24'>
         <div class='mb-8 flex flex-wrap items-end justify-between gap-5'>
           <div>
             <p class='photo-kicker mb-3'>Loose frames</p>
@@ -149,7 +149,7 @@ const journalSlug = (id: string) => id.replace(/\.mdx?$/, '');
             <p class='mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground'>Single images, passing moments and everything that lives outside a trip.</p>
           </div>
           <div class='flex items-center gap-2'>
-            <a href='/photostream' class='mr-2 text-sm font-semibold hover:text-secondary'>View all</a>
+            <a href='/photostream' data-astro-prefetch='viewport' class='mr-2 text-sm font-semibold hover:text-secondary'>View all</a>
             <button type='button' data-stream-previous aria-label='Previous photostream images' class='stream-control grid size-10 place-items-center rounded-full border border-border bg-card text-lg transition hover:border-foreground/30 hover:bg-foreground hover:text-background disabled:cursor-not-allowed disabled:opacity-30'>←</button>
             <button type='button' data-stream-next aria-label='Next photostream images' class='stream-control grid size-10 place-items-center rounded-full border border-border bg-card text-lg transition hover:border-foreground/30 hover:bg-foreground hover:text-background disabled:cursor-not-allowed disabled:opacity-30'>→</button>
           </div>

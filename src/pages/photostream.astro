@@ -14,7 +14,7 @@ import { photostream } from '@/data/photography';
   <div class='container-fluid pb-24 pt-4'>
     <PhotographyHeader active='stream' />
 
-    <header class='grid gap-8 py-14 md:grid-cols-[1.2fr_.8fr] md:items-end md:py-24'>
+    <header data-photo-reveal class='grid gap-8 py-14 md:grid-cols-[1.2fr_.8fr] md:items-end md:py-24'>
       <div>
         <p class='mb-5 text-[.67rem] font-bold uppercase tracking-[.2em] text-muted-foreground'>Unsorted / Unhurried / Ongoing</p>
         <h1 class='text-5xl font-semibold leading-[.95] tracking-[-.055em] sm:text-7xl lg:text-[6.5rem]'>Photostream.</h1>
@@ -27,6 +27,7 @@ import { photostream } from '@/data/photography';
     <section class='photo-masonry' aria-label='Photostream gallery'>
       {photostream.map((photo, index) => (
         <button
+          data-photo-reveal
           data-lightbox
           data-full={photo.src}
           data-alt={photo.alt}
@@ -54,9 +55,9 @@ import { photostream } from '@/data/photography';
       ))}
     </section>
 
-    <div class='mt-16 border-t border-border pt-8 text-center'>
+    <div data-photo-reveal class='mt-16 border-t border-border pt-8 text-center'>
       <p class='text-sm text-muted-foreground'>The stream grows one frame at a time.</p>
-      <a href='/photography' class='mt-4 inline-flex items-center gap-2 text-sm font-semibold hover:text-secondary'>Explore the journeys <span>→</span></a>
+      <a href='/photography' data-astro-prefetch='viewport' class='mt-4 inline-flex items-center gap-2 text-sm font-semibold hover:text-secondary'>Explore the journeys <span>→</span></a>
     </div>
   </div>
 
