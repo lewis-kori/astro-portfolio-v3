@@ -3,32 +3,18 @@ title: About Lewis Kori
 subtitle: Entrepreneur, Operator, and Builder of Systems
 ---
 
-I am an entrepreneur focused on building products, platforms, and companies that compound over time. My work sits at the intersection of technology, product, and business strategy, with a bias toward ownership, long-term thinking, and execution.
+I'm a software engineer, entrepreneur and writer. I enjoy building things, understanding how they work and exploring the ideas that shape them.
 
-I started my career deep in software engineering, where I learned how systems fail, scale, and succeed in the real world. Over time, my role expanded beyond code into product design, infrastructure, analytics, and ultimately company building. That progression shapes how I operate today: I think in systems, but I act through products.
+I started my career in software engineering, working on complex systems, particularly in fintech and payments. Over time, my interests grew beyond writing code into product development, infrastructure, business strategy and eventually building companies of my own.
 
-I currently build and operate multiple ventures, including [Inflection Studio](https://inflectionstudio.io/), while advising founders and leadership teams on critical product and technology decisions. I am selective about where I spend time and energy, preferring problems that require judgment, not just effort.
+Today, I'm the co-founder of [**Inflection Studio**](https://inflectionstudio.io/), where we build digital products, work with businesses on technology and product strategy, and advise founders and investors. I also spend time building and exploring ventures of my own.
 
-I am interested in businesses that value trust, clarity, and durability over speed for its own sake. I optimise for leverage, learning and compounding outcomes rather than short-term wins.
+My approach to work is shaped by a belief in ownership, good judgement and long-term thinking. I enjoy understanding problems from different perspectives, connecting ideas across disciplines and turning those ideas into something useful. I tend to think in systems, but I like seeing those ideas come to life through products.
 
-Photography is the creative counterweight to that work. It gives me a reason to slow down and pay attention to light, place, and movement. I use this site to document journeys, collect loose frames, and remember the world beyond products and systems. [Explore the photography journal ↗](/photography)
+Outside of that, I write quite a bit. About software, AI, entrepreneurship, leadership and sometimes life more generally. Writing helps me make sense of what I'm learning, question my assumptions and document how my thinking evolves. I don't always have the answers, and increasingly, I've come to appreciate the value of being curious enough to keep asking questions.
 
-## What I Do
+I'm also involved in mentoring emerging engineers through [**KamiLimu**](https://www.kamilimu.org/), something that continues to shape how I think about learning, opportunity and the responsibility that comes with experience.
 
-### Venture Building
+Photography and travel offer a different kind of exploration. They give me a reason to slow down, pay attention and experience places beyond the routines of work. I've started documenting some of those experiences here, collecting photographs, videos and stories from places I've been and moments I want to remember.
 
-I design, build, and operate digital products from concept to market. This includes defining product strategy, assembling teams, shipping platforms, and iterating based on real-world usage.
-
-[View Projects ↗](/projects)
-
-### Advisory & Strategy
-
-I work with founders and leadership teams navigating product, technology, and growth decisions. Engagements are selective and focused on clarity rather than execution volume.
-
-[Learn More ↗](/advisory)
-
-### Writing & Thought Work
-
-Through essays and my newsletter, I explore edge cases in technology, business, and human decision-making. Writing is a tool for thinking clearly and sharing patterns learned through building.
-
-[Read Articles ↗](/blog)
+[**Explore my photography journal ↗**](/photography)
