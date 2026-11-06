@@ -48,8 +48,8 @@ const formatCardDate = (journal: (typeof journals)[number]) => {
   <div class='container-fluid pt-4'>
     <PhotographyHeader />
 
-    <section class='py-8 md:py-14'>
-      <a href='/photography' class='mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[.16em] text-muted-foreground hover:text-foreground'>
+    <section data-photo-reveal class='py-8 md:py-14'>
+      <a href='/photography' data-astro-prefetch='viewport' class='mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[.16em] text-muted-foreground hover:text-foreground'>
         <span>←</span> All journeys
       </a>
       <div class='relative min-h-[28rem] overflow-hidden rounded-[1.5rem] bg-card md:min-h-[36rem] md:rounded-[1.75rem]'>
@@ -79,7 +79,7 @@ const formatCardDate = (journal: (typeof journals)[number]) => {
       </div>
       <div class='overflow-hidden rounded-[1.5rem] border border-border/70 bg-card'>
         {journals.map((journal, index) => (
-          <a href={`/photography/${collection.slug}/${journalSlug(journal.id)}`} class='trip-row group relative grid min-h-44 overflow-hidden border-b border-white/10 last:border-0 md:min-h-48'>
+          <a data-photo-reveal href={`/photography/${collection.slug}/${journalSlug(journal.id)}`} data-astro-prefetch='viewport' class='trip-row group relative grid min-h-44 overflow-hidden border-b border-white/10 last:border-0 md:min-h-48'>
             <img src={journal.data.cover.src} alt='' loading='lazy' class='absolute inset-0 size-full object-cover transition duration-700 group-hover:scale-[1.025]' />
             <div class='absolute inset-0 bg-gradient-to-r from-black/85 via-black/40 to-black/10 transition duration-500 group-hover:from-black/75'></div>
             <div class='relative flex items-end justify-between gap-6 p-7 text-white md:p-10'>

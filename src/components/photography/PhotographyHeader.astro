@@ -7,7 +7,7 @@ const { active = 'collections' } = Astro.props;
 ---
 
 <div class='flex items-center justify-between gap-4 border-b border-border/70 pb-5'>
-  <a href='/photography' class='group flex items-center gap-3'>
+  <a href='/photography' data-astro-prefetch='viewport' class='group flex items-center gap-3'>
     <span
       class='grid size-9 place-items-center rounded-full bg-secondary text-secondary-foreground transition-transform duration-300 group-hover:rotate-6'
     >
@@ -21,6 +21,7 @@ const { active = 'collections' } = Astro.props;
   <nav aria-label='Photography navigation' class='flex items-center gap-1 rounded-full bg-muted/70 p-1'>
     <a
       href='/photography'
+      data-astro-prefetch='viewport'
       class:list={[
         'rounded-full px-3 py-1.5 text-xs font-medium transition',
         active === 'collections' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground',
@@ -30,6 +31,7 @@ const { active = 'collections' } = Astro.props;
     </a>
     <a
       href='/photostream'
+      data-astro-prefetch='viewport'
       class:list={[
         'rounded-full px-3 py-1.5 text-xs font-medium transition',
         active === 'stream' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground',

@@ -26,6 +26,7 @@ export default defineConfig({
   output: 'server',
   adapter: cloudflare(),
   site: SITE_URL,
+  prefetch: { prefetchAll: false },
   experimental: {
     fonts: [
       {

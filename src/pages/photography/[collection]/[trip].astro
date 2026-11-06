@@ -78,10 +78,10 @@ const temporalCoverage = data.startDate
 
   <article class='pb-24'>
     <header class='container-fluid py-8 md:py-14'>
-      <a href={`/photography/${collection.slug}`} class='mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[.16em] text-muted-foreground hover:text-foreground'>
+      <a href={`/photography/${collection.slug}`} data-astro-prefetch='viewport' class='mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[.16em] text-muted-foreground hover:text-foreground'>
         <span>←</span> {collection.title}
       </a>
-      <button
+      <button data-photo-reveal
         data-lightbox
         data-full={data.cover.src}
         data-alt={data.cover.alt}
@@ -114,7 +114,7 @@ const temporalCoverage = data.startDate
     </div>
 
     <footer class='container-fluid mt-16 md:mt-24'>
-      <a href={`/photography/${collection.slug}`} class='group grid gap-4 rounded-2xl border border-border bg-card p-6 transition hover:border-foreground/30 sm:grid-cols-[1fr_auto] sm:items-center md:p-9'>
+      <a data-photo-reveal href={`/photography/${collection.slug}`} data-astro-prefetch='viewport' class='group grid gap-4 rounded-2xl border border-border bg-card p-6 transition hover:border-foreground/30 sm:grid-cols-[1fr_auto] sm:items-center md:p-9'>
         <div>
           <p class='mb-2 text-[.67rem] font-bold uppercase tracking-[.2em] text-muted-foreground'>Back to collection</p>
           <h2 class='text-3xl font-semibold tracking-[-.04em]'>{collection.title}</h2>
